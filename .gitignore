@@ -1,0 +1,21 @@
+__pycache__/
+*.pyc
+.venv/
+venv/
+.DS_Store
+.ipynb_checkpoints/
+# LaTeX build
+thesis/**/*.aux
+thesis/**/*.log
+thesis/**/*.out
+thesis/**/*.toc
+thesis/**/*.lof
+thesis/**/*.lot
+thesis/**/*.bbl
+thesis/**/*.blg
+thesis/**/*.dvi
+thesis/**/*.synctex.gz
+thesis/**/*.fdb_latexmk
+thesis/**/*.fls
+# secrets
+.env
