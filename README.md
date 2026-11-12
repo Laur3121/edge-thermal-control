@@ -21,7 +21,7 @@ Raspberry Pi マイクロクラスタにおける、空間熱干渉を考慮し�
 | `scripts/` | 解析・図の作成・実験実行用スクリプト |
 | `experiments/` | 実験ごとの設定・ログ・結果(1実験 = 1ディレクトリ) |
 | `data/legacy/` | IPSJ 時点の生データ(出どころは `data/legacy/README.md`) |
-| `legacy/ipsj2026/` | IPSJ 予稿の LaTeX と当時の解析スクリプト(参照用。編集しない) |
+| `legacy/ipsj2026/` | IPSJ 予稿の LaTeX、提出版PDF(`LeoSuzuki_2354_submitted.pdf`)、当時の解析スクリプト(参照用。編集しない) |
 | `thesis/` | 特研II 論文(LaTeX) |
 | `docs/` | 設計メモ |
 
