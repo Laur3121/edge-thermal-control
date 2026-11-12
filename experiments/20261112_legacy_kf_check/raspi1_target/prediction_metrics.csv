@@ -1,0 +1,9 @@
+method,part,n,bias,MAE,RMSE,R2,P97.7_err
+Self-only,identify,142,0.6315,2.3686,2.8779,0.6273,5.3671
+Self-only,evaluate,90,1.5772,1.9145,2.3088,-4.9597,4.7609
+Sakamoto-like,identify,142,0.2343,2.0806,2.6460,0.6849,5.3786
+Sakamoto-like,evaluate,90,-0.1379,1.3149,1.7155,-2.2904,3.0600
+KF (no H),identify,142,0.6441,2.3850,2.8885,0.6245,5.3504
+KF (no H),evaluate,90,1.6063,1.9388,2.3385,-5.1138,4.8106
+KF + H (proposed),identify,142,-0.9579,2.5920,3.1661,0.5488,5.7511
+KF + H (proposed),evaluate,90,-1.7445,2.1056,2.6198,-6.6733,1.3610

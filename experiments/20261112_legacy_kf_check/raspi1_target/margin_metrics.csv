@@ -1,0 +1,9 @@
+method,part,n,mean_margin,max_margin,min_margin,exceed_rate,trigger_ratio,over_limit_count,miss
+Self-only + fixed,identify,142,5.3671,5.3671,5.3671,0.0282,0.7958,75,0
+Self-only + fixed,evaluate,90,5.3671,5.3671,5.3671,0.0000,1.0000,88,0
+Sakamoto-like,identify,135,5.0961,7.3692,0.7236,0.0296,0.8370,75,0
+Sakamoto-like,evaluate,90,2.7686,3.8825,1.4644,0.0333,1.0000,88,0
+KF + H + fixed,identify,142,5.7511,5.7511,5.7511,0.0282,0.8310,75,0
+KF + H + fixed,evaluate,90,5.7511,5.7511,5.7511,0.0000,1.0000,88,0
+Proposed (dynamic),identify,142,10.7232,23.8102,4.5184,0.0000,0.8944,75,0
+Proposed (dynamic),evaluate,90,10.2540,18.0755,5.2923,0.0000,1.0000,88,0
