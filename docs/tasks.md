@@ -4,6 +4,8 @@
 パラメータの決め方と根拠は [parameters.md](parameters.md)、RQ と実験計画は [research-design.md](research-design.md)。
 判断の経緯と要約は Notion「特研2」(https://app.notion.com/p/40f2f92d225b803787f6c74485286e6d)。
 
+本人の作業の具体的な手順は [lab-checklist.md](lab-checklist.md)。
+
 状態:`[ ]` 未着手 / `[~]` 作業中 / `[x]` 完了。担当:**C** = Claude Code、**L** = レオ(本人)、**C+L** = 一緒に。
 
 ## 前提(2026-11-12 時点)
