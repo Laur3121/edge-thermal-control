@@ -22,3 +22,4 @@ thesis/**/*.fls
 
 # 論文のビルド結果
 thesis/build/
+thesis/out/

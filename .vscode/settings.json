@@ -24,5 +24,6 @@
   "latex-workshop.latex.search.rootFiles.include": [
     "thesis/main.tex",
     "thesis/resume/resume.tex"
-  ]
+  ],
+  "latex-workshop.latex.recipe.default": "first"
 }
