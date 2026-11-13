@@ -12,58 +12,32 @@
 - [ ] A–B、A–C の距離を測り、全体と各ノードの写真を撮る(論文の実験環境の図に使う)
 - [ ] 同じ筐体にいる他のノードは電源を切るか、アイドルのまま動かさないかを決める(条件を毎回同じにするため)
 
-### 2. ファンの配線(3台で30分〜1時間)【E1】
+### 2. ファンについて(配線は不要)
 
-公式ケースファンの線は3本。**電源を切ってから**つなぐ。
+ファンは PoE+ HAT 付属のもの。Linux から制御できるので配線しない(GPIO14 の公式ケースファンではなかった)。詳しくは `scripts/node/README.md`。
 
-| 線の色 | つなぐ先 | 物理ピン番号 |
-| --- | --- | --- |
-| 赤 | 5V | 4番 |
-| 黒 | GND | 6番 |
-| 青(制御) | GPIO14 | 8番 |
+- [ ] **給電を PoE に統一**:2026-11-13 の確認で raspi2 だけ PoE 電流が 0(USB-C 給電の可能性)。USB-C はコイル鳴き(蝉のような音)がするので PoE にそろえる
+- [ ] 3台とも HAT を付けたまま、ファンの向きも同じ(全条件で HAT ありに統一)
 
-ピン番号は基板の端(SD カードと反対側の角)から、外側の列が 2, 4, 6, 8…。`pinout` コマンドでも図が出る。
+### 3. 各 RasPi のセットアップ(1台5分、sudo パスワードを1回入れる)【C4】
 
-### 3. 各 RasPi の設定(1台15分)【C4】
+ファイルは Claude Code がコピー済み。Mac のターミナルで:
 
 ```sh
-# (a) 標準のファン制御とシリアルを止める
-sudo nano /boot/firmware/config.txt     # 古い OS なら /boot/config.txt
-#   - "dtoverlay=gpio-fan" で始まる行があれば先頭に # を付ける
-#   - "enable_uart=1" があれば # を付ける(GPIO14 はシリアルの送信ピンと共用のため)
-sudo raspi-config                        # Interface Options → Serial Port → login shell: No、hardware: No
-sudo reboot
-
-# (b) パッケージ
-sudo apt update && sudo apt install -y python3-paho-mqtt python3-gpiozero stress-ng
-
-# (c) 時刻同期の確認("System clock synchronized: yes" ならOK)
-timedatectl
-
-# (d) CPU ガバナを確認してメモ(ondemand など)
-cat /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
+ssh -t ubuntu@raspi1 'sudo bash ~/install_node.sh'
+ssh -t ubuntu@raspi2 'sudo bash ~/install_node.sh'
+ssh -t ubuntu@raspi3 'sudo bash ~/install_node.sh'
 ```
 
-### 4. ファンと計測の単体確認(1台10分)【E1】
+最後に `OK:` と出れば完了。以後のファン操作・CPU ガバナの切り替えは、サービスの起動・停止で自動的に行われる。
+
+### 4. 収集用 PC に Claude が入れるようにする(1分)
 
 ```sh
-# Mac から各 RasPi へコピー(ユーザー名とホスト名は実際のものに)
-scp scripts/node/node_agent.py pi@<RasPiのホスト名>:~/
-
-# RasPi 上で:ファンが5秒回って止まれば配線OK
-python3 -c "from gpiozero import OutputDevice; import time; f=OutputDevice(14); f.on(); time.sleep(5); f.off()"
-
-# 計測だけ試す。別の端末で stress-ng --cpu 2 --timeout 30 を流し、30秒ほどで Ctrl-C
-python3 node_agent.py --no-mqtt --no-fan
-tail -n 20 ~/etc_logs/*.csv
+ssh-copy-id laur@192.168.0.50
 ```
 
-確認すること:
-
-- [ ] `cpu` が 0〜100 の間で、負荷中は約50(2コア/4コア)。0 と 100 を行ったり来たりしていない
-- [ ] `clock` に数字が入っている(1500000000 前後)
-- [ ] `throttled` が `0x0`
-- [ ] `temp` が `vcgencmd measure_temp` と同じくらい
+入れるようになれば、PC の準備(5)と旧収集スクリプトの確認は Claude Code がやる(sudo が要るところだけ頼む)。
 
 ### 5. 収集用 Linux PC の準備(30分)【A6】
 
@@ -91,7 +65,7 @@ mosquitto_pub -h localhost -t etc/<Aのホスト名>/fan/set -m 0
 ```
 
 - [ ] collector の画面に3台とも `last seen 0〜1s` と出る
-- [ ] ファンが指令どおりに回る・止まる
+- [ ] ファンが指令どおりに回る・止まる(HAT のファン)
 - [ ] 確認が済んだら、指令を止めて10秒後にファンが強制 ON になる(安全機能)ことも見ておく
 
 ### 6. SwitchBot 温湿度計(設置10分 + 放置1時間)【E3】

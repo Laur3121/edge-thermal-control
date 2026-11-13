@@ -19,7 +19,7 @@ import time
 from pathlib import Path
 
 FIELDS = ["recv_ts", "ts", "host", "temp", "cpu", "cpu0", "cpu1", "cpu2", "cpu3", "clock",
-          "throttled", "fan", "fan_cmd", "failsafe", "load1", "load"]
+          "throttled", "fan", "fan_pwm", "fan_cmd", "failsafe", "load1", "load", "poe_ma"]
 
 
 def unique_path(p: Path) -> Path:

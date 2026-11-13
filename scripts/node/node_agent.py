@@ -9,6 +9,8 @@
   clock     ARM クロック [Hz](vcgencmd measure_clock arm。スロットリングで下がる)
   throttled vcgencmd get_throttled の値(16進文字列。0x0 なら問題なし)
   fan       ファンの状態(0/1)
+  fan_pwm   ファンの実際の PWM 値(0〜255、PoE+ HAT のとき。読めなければ空)
+  poe_ma    PoE+ HAT の電流 [mA](hwmon rpi_poe の curr1_input。USB-C 給電なら 0)
   fan_cmd   最後に受けた指令(0/1、指令なしは -1)
   failsafe  強制 ON 中なら 1
   load1     1分平均ロードアベレージ
@@ -17,14 +19,17 @@
 負荷:etc/<host>/load/set に整数 N を送ると `stress-ng --cpu N` を起動する(0 で停止。前の負荷は止めてから切り替え)。
 実験スクリプト(scripts/run_experiment.py)が負荷とファンを時刻どおりに切り替えるのに使う。
 
-ファン:公式ケースファンの制御線を GPIO14 に。MQTT の etc/<host>/fan/set に "0"/"1" を送ると切り替わる。
+ファン:MQTT の etc/<host>/fan/set に "0"/"1" を送ると切り替わる。
+  --fan-mode poe(既定):Raspberry Pi PoE+ HAT のファン。Linux の冷却デバイス(type=pwm-fan)の cur_state を書く。
+      OS の自動制御(thermal_zone0 の step_wise。40℃ から回り始める)を止めるため、起動時に policy を user_space にし、
+      終了時に元に戻す。**root 権限が必要**(sudo で起動するか systemd サービスにする。install_node.sh 参照)
+  --fan-mode gpio:公式ケースファン(制御線を GPIO14)。--fan-mode none:ファンを触らない
 安全のため、温度が --failsafe-temp 以上、または --cmd-timeout 秒以上指令がないとき(指令を1回でも受けた後)は強制 ON。
-**標準のファン制御(config.txt の dtoverlay=gpio-fan / raspi-config の Fan)は無効にしておくこと。** GPIO14 を取り合う。
 
 使い方(RasPi 上):
   sudo apt install python3-paho-mqtt python3-gpiozero   # 未導入なら
   python3 node_agent.py --broker 192.168.x.x --log-dir ~/etc_logs
-  python3 node_agent.py --no-mqtt --no-fan              # 計測だけ試す
+  python3 node_agent.py --no-mqtt --fan-mode none       # 計測だけ試す(root 不要)
 """
 
 from __future__ import annotations
@@ -42,7 +47,7 @@ import time
 from pathlib import Path
 
 FIELDS = ["ts", "host", "temp", "cpu", "cpu0", "cpu1", "cpu2", "cpu3", "clock",
-          "throttled", "fan", "fan_cmd", "failsafe", "load1", "load"]
+          "throttled", "fan", "fan_pwm", "fan_cmd", "failsafe", "load1", "load", "poe_ma"]
 
 
 # ---------- 計測(純粋関数はテストできるように分けてある) ----------
@@ -99,20 +104,104 @@ def vcgencmd(*args: str) -> str:
         return ""
 
 
+def find_hwmon(name: str, root: str = "/sys/class/hwmon") -> Path | None:
+    for d in sorted(Path(root).glob("hwmon*")):
+        try:
+            if (d / "name").read_text().strip() == name:
+                return d
+        except OSError:
+            pass
+    return None
+
+
+def read_int(path: Path | None) -> int | None:
+    if path is None:
+        return None
+    try:
+        return int(path.read_text().strip())
+    except (OSError, ValueError):
+        return None
+
+
 # ---------- ファン ----------
 
 class Fan:
-    def __init__(self, pin: int, enabled: bool):
-        self.dev = None
+    """ファンなし(--fan-mode none)。状態だけ覚える。"""
+
+    def __init__(self):
         self.state = 0
-        if enabled:
-            from gpiozero import OutputDevice  # RasPi 上でだけ必要
-            self.dev = OutputDevice(pin, active_high=True, initial_value=False)
 
     def set(self, on: bool) -> None:
         self.state = int(on)
-        if self.dev is not None:
-            self.dev.value = self.state
+
+    def pwm(self) -> int | None:
+        return None
+
+    def close(self) -> None:
+        self.set(False)
+
+
+class GpioFan(Fan):
+    """公式ケースファン(制御線を GPIO に直結)。"""
+
+    def __init__(self, pin: int):
+        super().__init__()
+        from gpiozero import OutputDevice  # RasPi 上でだけ必要
+        self.dev = OutputDevice(pin, active_high=True, initial_value=False)
+
+    def set(self, on: bool) -> None:
+        super().set(on)
+        self.dev.value = self.state
+
+
+class PoeFan(Fan):
+    """PoE+ HAT のファン。冷却デバイス(type=pwm-fan)の cur_state を直接書く。
+
+    OS の自動制御と取り合わないよう、thermal_zone0 の policy を user_space にする(終了時に元に戻す)。
+    """
+
+    def __init__(self, on_state: int | None = None, thermal_root: str = "/sys/class/thermal",
+                 hwmon_root: str = "/sys/class/hwmon"):
+        super().__init__()
+        root = Path(thermal_root)
+        self.cdev = next((d for d in sorted(root.glob("cooling_device*"))
+                          if (d / "type").read_text().strip() == "pwm-fan"), None)
+        if self.cdev is None:
+            raise RuntimeError("pwm-fan の冷却デバイスが見つからない(PoE+ HAT が認識されていない?)")
+        self.max_state = int((self.cdev / "max_state").read_text())
+        self.on_state = self.max_state if on_state is None else min(on_state, self.max_state)
+        self.policy_file = root / "thermal_zone0" / "policy"
+        self.orig_policy = self.policy_file.read_text().strip()
+        self.policy_file.write_text("user_space")
+        hw = find_hwmon("pwmfan", hwmon_root)
+        self.pwm_file = hw / "pwm1" if hw else None
+        self._write(0)
+
+    def _write(self, st: int) -> None:
+        (self.cdev / "cur_state").write_text(str(st))
+
+    def set(self, on: bool) -> None:
+        if int(on) != self.state:
+            self._write(self.on_state if on else 0)
+        super().set(on)
+
+    def pwm(self) -> int | None:
+        return read_int(self.pwm_file)
+
+    def close(self) -> None:
+        try:
+            self._write(0)
+        finally:
+            self.policy_file.write_text(self.orig_policy)  # OS の自動制御に戻す
+            self.state = 0
+
+
+def make_fan(args) -> Fan:
+    if args.no_fan or args.fan_mode == "none":
+        return Fan()
+    if args.fan_mode == "gpio":
+        return GpioFan(args.fan_pin)
+    return PoeFan(on_state=args.fan_on_state)
 
 
 # ---------- 負荷 ----------
@@ -150,7 +239,8 @@ class Agent:
     def __init__(self, args):
         self.args = args
         self.host = args.host or socket.gethostname()
-        self.fan = Fan(args.fan_pin, enabled=not args.no_fan)
+        self.fan = make_fan(args)
+        self.poe_file = (lambda d: d / "curr1_input" if d else None)(find_hwmon("rpi_poe"))
         self.fan_cmd = -1
         self.load = Load()
         self.load_cmd: int | None = None
@@ -198,6 +288,14 @@ class Agent:
         return cmd == 1, 0
 
     def run(self):
+        """計測ループ。例外で止まっても負荷を止め、ファンを OS の自動制御に戻す。"""
+        try:
+            self._loop()
+        finally:
+            self.load.stop()
+            self.fan.close()
+
+    def _loop(self):
         a = self.args
         log_dir = Path(a.log_dir).expanduser()
         log_dir.mkdir(parents=True, exist_ok=True)
@@ -229,15 +327,14 @@ class Agent:
                     **{f"cpu{i}": round(use.get(f"cpu{i}", float("nan")), 2) for i in range(4)},
                     "clock": parse_clock(vcgencmd("measure_clock", "arm")),
                     "throttled": parse_throttled(vcgencmd("get_throttled")),
-                    "fan": self.fan.state, "fan_cmd": self.fan_cmd, "failsafe": failsafe,
-                    "load1": os.getloadavg()[0], "load": self.load.workers,
+                    "fan": self.fan.state, "fan_pwm": self.fan.pwm(), "fan_cmd": self.fan_cmd,
+                    "failsafe": failsafe, "load1": os.getloadavg()[0], "load": self.load.workers,
+                    "poe_ma": read_int(self.poe_file),
                 }
                 w.writerow(row)
                 fp.flush()
                 if self.mqtt is not None:
                     self.mqtt.publish(self.topic_tel, json.dumps(row), qos=0)
-        self.load.stop()
-        self.fan.set(False)
 
 
 def main():
@@ -248,10 +345,12 @@ def main():
     ap.add_argument("--host", default=None, help="ノード名(省略時はホスト名)")
     ap.add_argument("--interval", type=float, default=1.0, help="計測周期 [s]")
     ap.add_argument("--log-dir", default="~/etc_logs")
-    ap.add_argument("--fan-pin", type=int, default=14)
+    ap.add_argument("--fan-mode", choices=["poe", "gpio", "none"], default="poe")
+    ap.add_argument("--fan-on-state", type=int, default=None, help="PoE+ HAT の ON 時の段階(既定は最大)")
+    ap.add_argument("--fan-pin", type=int, default=14, help="--fan-mode gpio のときのピン")
     ap.add_argument("--failsafe-temp", type=float, default=82.0)
     ap.add_argument("--cmd-timeout", type=float, default=10.0, help="指令が途絶えたら強制 ON にするまでの秒数")
-    ap.add_argument("--no-fan", action="store_true", help="GPIO を触らない(計測だけ)")
+    ap.add_argument("--no-fan", action="store_true", help="--fan-mode none と同じ(互換用)")
     ap.add_argument("--no-mqtt", action="store_true", help="MQTT を使わず CSV にだけ書く")
     args = ap.parse_args()
     agent = Agent(args)

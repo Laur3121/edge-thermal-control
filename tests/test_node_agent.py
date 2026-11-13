@@ -60,3 +60,42 @@ def test_failsafe():
     assert a.decide_fan(60.0, now=1005.0) == (False, 0)
     # 指令が途絶えたら ON
     assert a.decide_fan(60.0, now=1011.0) == (True, 1)
+
+
+def _fake_sysfs(tmp_path):
+    th = tmp_path / "thermal"
+    (th / "thermal_zone0").mkdir(parents=True)
+    (th / "thermal_zone0" / "policy").write_text("step_wise\n")
+    cd = th / "cooling_device0"
+    cd.mkdir()
+    (cd / "type").write_text("pwm-fan\n")
+    (cd / "max_state").write_text("4\n")
+    (cd / "cur_state").write_text("2\n")
+    hw = tmp_path / "hwmon" / "hwmon3"
+    hw.mkdir(parents=True)
+    (hw / "name").write_text("pwmfan\n")
+    (hw / "pwm1").write_text("64\n")
+    return th, tmp_path / "hwmon"
+
+
+def test_poe_fan_takes_and_returns_control(tmp_path):
+    th, hw = _fake_sysfs(tmp_path)
+    f = na.PoeFan(thermal_root=str(th), hwmon_root=str(hw))
+    # 起動時:OS の自動制御を止めて OFF
+    assert (th / "thermal_zone0" / "policy").read_text() == "user_space"
+    assert (th / "cooling_device0" / "cur_state").read_text() == "0"
+    f.set(True)
+    assert (th / "cooling_device0" / "cur_state").read_text() == "4"
+    assert f.pwm() == 64
+    f.set(False)
+    assert (th / "cooling_device0" / "cur_state").read_text() == "0"
+    # 終了時:元の policy に戻す
+    f.close()
+    assert (th / "thermal_zone0" / "policy").read_text() == "step_wise"
+
+
+def test_poe_fan_on_state_is_clamped(tmp_path):
+    th, hw = _fake_sysfs(tmp_path)
+    f = na.PoeFan(on_state=9, thermal_root=str(th), hwmon_root=str(hw))
+    f.set(True)
+    assert (th / "cooling_device0" / "cur_state").read_text() == "4"
