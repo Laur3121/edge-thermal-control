@@ -14,7 +14,7 @@
 - 対象:Raspberry Pi 4B のマイクロクラスタ。隣のノードの排熱で温度が上がる「空間熱干渉」がある
 - 手法:外部熱影響 H を状態として持つ拡張熱モデル + カルマンフィルタで、温度 T と H を同時推定 → Δ秒先の温度と不確実性 σ を予測 → 動的マージン M = ασ + δ → 安全閾値 Tsafe = Tlimit − M
 - 操作量:**Raspberry Pi PoE+ HAT のファン**(ノードごと。ソフトから ON/OFF。制御方法は確認中:Linux の冷却デバイス経由の見込み。GPIO14 の公式ケースファンではない)。予測温度 > Tsafe のときだけ回す
-- 実機:raspi1(A=負荷側)、raspi2(B=すぐ隣、真ん中に置く)、raspi3(C=2つ離れた位置)。OS は Ubuntu、SSH ユーザー `ubuntu`、IP 192.168.0.51〜53。収集用 PC は 192.168.0.50 の見込み。IPSJ 時は HAT を外していた(冷えすぎて温度が上がらないため)。新しい実験は全条件で HAT を付ける
+- 実機:raspi1(A=負荷側)、raspi2(B=すぐ隣、真ん中に置く)、raspi3(C=2つ離れた位置)。OS は Ubuntu、SSH ユーザー `ubuntu`、IP 192.168.0.51〜53(raspi4〜8 は 192.168.0.54〜58、ラックに設置。今回の実験では使わない)。物理的な並びは左から raspi1 | raspi2 | raspi3(ラック用マウント板に固定)。収集用 PC は 192.168.0.50(ユーザー laur、mosquitto 稼働、`~/sotuken/venv/bin/python` に paho・numpy・pandas、SwitchBot のトークンは `~/edge-thermal-control/.env`)。IPSJ 時は HAT を外していた(冷えすぎて温度が上がらないため)。新しい実験は全条件で HAT を付ける
 - 目標:スロットリング(約80℃〜)を避けつつ、ファン稼働をできるだけ減らす
 - 比較:ファンなし / 常時ON / 温度しきい値 ON-OFF / Self-only 予測 + 固定マージン / 提案手法
 
