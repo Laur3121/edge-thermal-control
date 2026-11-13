@@ -1,0 +1,27 @@
+{
+  "name": "step_identify",
+  "description": "同定用ステップ実験(タスク B1・B2・B3・E2)。80℃ 未満で、負荷とファンを1つずつ切り替える。part1 = ファンの効果と応答時間、part2 = A のファン ON で自己発熱と干渉(B・C を観測)、part3 = ファン OFF で自己発熱(短い負荷パルス)。負荷はすべて A だけ、B・C はアイドル・ファン OFF。82℃ 以上はノード側で強制ファン ON(ログの failsafe 列)。",
+  "settle": {"window_s": 120, "max_slope_c_per_min": 0.2, "timeout_s": 1800},
+  "phases": [
+    {"name": "p0_baseline", "duration_s": 300, "load": {"A": 0}, "fan": {"A": 0, "B": 0, "C": 0}},
+
+    {"name": "p1_heat_first", "max_s": 900, "until": {"role": "A", "temp_ge": 75}, "load": {"A": 2}, "fan": {"A": 0}},
+    {"repeat": 3, "phases": [
+      {"name": "p1_fan_on", "duration_s": 300, "fan": {"A": 1}},
+      {"name": "p1_fan_off", "max_s": 600, "until": {"role": "A", "temp_ge": 75}, "fan": {"A": 0}}
+    ]},
+    {"name": "p1_cool", "max_s": 600, "until": {"role": "A", "temp_le": 55}, "load": {"A": 0}, "fan": {"A": 1}},
+
+    {"name": "p2_idle", "duration_s": 300, "load": {"A": 0}, "fan": {"A": 1}},
+    {"name": "p2_load2", "duration_s": 900, "load": {"A": 2}},
+    {"name": "p2_rest", "duration_s": 600, "load": {"A": 0}},
+    {"name": "p2_load1", "duration_s": 900, "load": {"A": 1}},
+    {"name": "p2_rest_end", "duration_s": 600, "load": {"A": 0}},
+
+    {"name": "p3_fan_off_idle", "duration_s": 300, "fan": {"A": 0}},
+    {"repeat": 3, "phases": [
+      {"name": "p3_pulse", "max_s": 300, "until": {"role": "A", "temp_ge": 76}, "load": {"A": 2}},
+      {"name": "p3_rest", "duration_s": 480, "load": {"A": 0}}
+    ]}
+  ]
+}

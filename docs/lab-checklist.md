@@ -124,22 +124,33 @@ mosquitto_pub -h localhost -t etc/<Aのホスト名>/fan/set -m 0
 
 ## 11/14(土)
 
-### 9. ファンの応答時間を測る(約1時間)【E2】
+### 9・10. 同定用ステップ実験(ファンの応答時間を含む。約3時間、見ているだけ)【E2・B1・B2・B3】
 
-Δ = 30秒の根拠になる。A で行う。collector と node_agent を動かした状態で:
+負荷とファンの切り替えはスクリプトが自動でやる。前日の 1〜5 が済んでいることが前提。
 
-1. ファン OFF のまま A に `stress-ng --cpu 2` をかけ、温度が 75℃ 前後になるまで待つ(80℃ を超えるとスロットリングするので、超えそうなら負荷を `--cpu 1` に)
-2. 負荷はそのまま、`mosquitto_pub ... -m 1` でファン ON。その時刻をメモ
-3. 温度が下がって落ち着くまで(5〜10分)待つ
-4. ファン OFF にして、温度が上がって落ち着くまで待つ
-5. 2〜4 を3回くり返す
+```sh
+# 各 RasPi で node_agent を起動しておく(3台とも)
+python3 node_agent.py --broker <PCのIP>
 
-実験ディレクトリは `experiments/20261114_fan_response/`。README に室温・筐体の状態・負荷を書く(Claude が雛形を用意できる)。解析は Claude がやる。
+# PC で:まず段階の一覧を確認(何も動かない)
+python3 scripts/run_experiment.py --scenario scripts/scenarios/step_identify.json \
+    --nodes A=<Aのホスト名> B=<Bのホスト名> C=<Cのホスト名> --out experiments/20261114_step_identify --dry-run
+# 本番(--dry-run を外す)。collector も自動で起動する
+python3 scripts/run_experiment.py --scenario scripts/scenarios/step_identify.json \
+    --nodes A=<Aのホスト名> B=<Bのホスト名> C=<Cのホスト名> --out experiments/20261114_step_identify
+```
 
-### 10. 同定用ステップ実験(約3時間)【B1・B2・B3】
+中身(全部 A にだけ負荷。B・C はアイドル・ファン OFF):
 
-手順書と自動実行スクリプト(A7)は Claude が先に用意する。内容の予定:
+1. 開始前に3台の温度が落ち着くまで自動で待つ(最大30分)
+2. part1:ファンの効果と応答時間。A を 75℃ まで温め、ファン ON 5分 / OFF(75℃ に戻るまで)を3回
+3. part2:A のファン ON のまま、負荷 2コア 15分 → 休み 10分 → 1コア 15分 → 休み 10分(自己発熱と、B・C への干渉)
+4. part3:ファン OFF で、76℃ までの短い負荷パルスを3回
 
-- 自己発熱:A の負荷を ON/OFF(B・C はアイドル)→ a, b, d
-- 干渉:A に負荷、B・C を観測 → c, ρ
-- ファン:負荷一定でファン ON/OFF → ファンの効果
+やること:
+
+- [ ] 開始時と終了時に室温をメモ(SwitchBot の値)
+- [ ] 実験中は部屋の窓・エアコン・人の出入りをなるべく変えない
+- [ ] 終わったら `experiments/20261114_step_identify/README.md`(自動で雛形ができる)の「条件」を埋める
+- [ ] 中断したいときは Ctrl-C(負荷とファンは自動で止まる)。やり直すときは `--out` を別の名前に(生ログは上書きしない)
+- [ ] commit して push。解析は Claude がやる

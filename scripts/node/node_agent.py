@@ -12,6 +12,10 @@
   fan_cmd   最後に受けた指令(0/1、指令なしは -1)
   failsafe  強制 ON 中なら 1
   load1     1分平均ロードアベレージ
+  load      動かしている stress-ng の CPU ワーカー数(0 = 負荷なし)
+
+負荷:etc/<host>/load/set に整数 N を送ると `stress-ng --cpu N` を起動する(0 で停止。前の負荷は止めてから切り替え)。
+実験スクリプト(scripts/run_experiment.py)が負荷とファンを時刻どおりに切り替えるのに使う。
 
 ファン:公式ケースファンの制御線を GPIO14 に。MQTT の etc/<host>/fan/set に "0"/"1" を送ると切り替わる。
 安全のため、温度が --failsafe-temp 以上、または --cmd-timeout 秒以上指令がないとき(指令を1回でも受けた後)は強制 ON。
@@ -38,7 +42,7 @@ import time
 from pathlib import Path
 
 FIELDS = ["ts", "host", "temp", "cpu", "cpu0", "cpu1", "cpu2", "cpu3", "clock",
-          "throttled", "fan", "fan_cmd", "failsafe", "load1"]
+          "throttled", "fan", "fan_cmd", "failsafe", "load1", "load"]
 
 
 # ---------- 計測(純粋関数はテストできるように分けてある) ----------
@@ -111,6 +115,35 @@ class Fan:
             self.dev.value = self.state
 
 
+# ---------- 負荷 ----------
+
+class Load:
+    """stress-ng を1つだけ動かす。"""
+
+    def __init__(self):
+        self.proc: subprocess.Popen | None = None
+        self.workers = 0
+
+    def set(self, workers: int) -> None:
+        if workers == self.workers and (workers == 0 or self.proc is not None):
+            return
+        self.stop()
+        if workers > 0:
+            self.proc = subprocess.Popen(["stress-ng", "--cpu", str(workers), "--quiet"],
+                                         stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+        self.workers = workers
+
+    def stop(self) -> None:
+        if self.proc is not None:
+            self.proc.terminate()
+            try:
+                self.proc.wait(timeout=5)
+            except subprocess.TimeoutExpired:
+                self.proc.kill()
+            self.proc = None
+        self.workers = 0
+
+
 # ---------- 本体 ----------
 
 class Agent:
@@ -119,12 +152,15 @@ class Agent:
         self.host = args.host or socket.gethostname()
         self.fan = Fan(args.fan_pin, enabled=not args.no_fan)
         self.fan_cmd = -1
+        self.load = Load()
+        self.load_cmd: int | None = None
         self.last_cmd_time: float | None = None
         self.lock = threading.Lock()
         self.stop = threading.Event()
         self.mqtt = None
         self.topic_tel = f"{args.topic_prefix}/{self.host}/telemetry"
         self.topic_cmd = f"{args.topic_prefix}/{self.host}/fan/set"
+        self.topic_load = f"{args.topic_prefix}/{self.host}/load/set"
 
     def connect(self):
         import paho.mqtt.client as mqtt  # RasPi 上でだけ必要
@@ -132,7 +168,7 @@ class Agent:
             c = mqtt.Client(mqtt.CallbackAPIVersion.VERSION2, client_id=f"agent-{self.host}")
         except AttributeError:  # paho-mqtt 1.x
             c = mqtt.Client(client_id=f"agent-{self.host}")
-        c.on_connect = lambda client, *a: client.subscribe(self.topic_cmd, qos=1)
+        c.on_connect = lambda client, *a: client.subscribe([(self.topic_cmd, 1), (self.topic_load, 1)])
         c.on_message = self.on_cmd
         c.connect_async(self.args.broker, self.args.port, keepalive=30)
         c.loop_start()
@@ -140,6 +176,11 @@ class Agent:
 
     def on_cmd(self, client, userdata, msg):
         payload = msg.payload.decode(errors="ignore").strip()
+        if msg.topic == self.topic_load:
+            if payload.isdigit():
+                with self.lock:
+                    self.load_cmd = int(payload)
+            return
         if payload not in ("0", "1"):
             return
         with self.lock:
@@ -178,6 +219,10 @@ class Agent:
                 temp = read_temp()
                 on, failsafe = self.decide_fan(temp, now)
                 self.fan.set(on)
+                with self.lock:
+                    load_cmd = self.load_cmd
+                if load_cmd is not None:
+                    self.load.set(load_cmd)
                 row = {
                     "ts": round(now, 3), "host": self.host, "temp": temp,
                     "cpu": round(use.get("cpu", float("nan")), 2),
@@ -185,12 +230,13 @@ class Agent:
                     "clock": parse_clock(vcgencmd("measure_clock", "arm")),
                     "throttled": parse_throttled(vcgencmd("get_throttled")),
                     "fan": self.fan.state, "fan_cmd": self.fan_cmd, "failsafe": failsafe,
-                    "load1": os.getloadavg()[0],
+                    "load1": os.getloadavg()[0], "load": self.load.workers,
                 }
                 w.writerow(row)
                 fp.flush()
                 if self.mqtt is not None:
                     self.mqtt.publish(self.topic_tel, json.dumps(row), qos=0)
+        self.load.stop()
         self.fan.set(False)
 
 
