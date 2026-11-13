@@ -220,6 +220,10 @@ class Runner:
         self.ev = csv.DictWriter(self.ev_fp, fieldnames=["ts", "event", "phase", "role", "host", "value"])
         self.ev.writeheader()
 
+        ambient = None
+        if self.args.ambient:
+            ambient = subprocess.Popen([sys.executable, str(Path(__file__).with_name("ambient_logger.py")),
+                                        "--out", str(self.out)])
         collector = None
         if not self.args.no_collector:
             collector = subprocess.Popen([sys.executable, str(Path(__file__).with_name("collector.py")),
@@ -243,9 +247,10 @@ class Runner:
             self.stop.set()
             time.sleep(1)
             self.mqtt.loop_stop()
-            if collector is not None:
-                collector.send_signal(signal.SIGINT)
-                collector.wait(timeout=10)
+            for p in (collector, ambient):
+                if p is not None:
+                    p.send_signal(signal.SIGINT)
+                    p.wait(timeout=10)
             self.ev_fp.close()
 
 
@@ -280,6 +285,8 @@ def main():
     ap.add_argument("--topic-prefix", default="etc")
     ap.add_argument("--no-settle", action="store_true", help="開始前に温度が落ち着くのを待たない")
     ap.add_argument("--no-collector", action="store_true", help="collector を別に動かしている場合")
+    ap.add_argument("--ambient", action="store_true",
+                    help="SwitchBot 温湿度計の室温も記録する(scripts/ambient_logger.py。.env にトークンが必要)")
     ap.add_argument("--dry-run", action="store_true", help="段階の一覧と合計時間を表示するだけ")
     args = ap.parse_args()
 
