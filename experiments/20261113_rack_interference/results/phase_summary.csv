@@ -1,0 +1,10 @@
+phase,host,role,duration_s,T_start,T_end,dT,T_max,cpu_mean,fan_on_ratio,throttled_any
+baseline,raspi1,A,180,59.27,59.43,0.16,61.35,0.44,0.00,True
+baseline,raspi2,B,180,55.96,56.32,0.36,57.45,0.45,0.00,False
+baseline,raspi3,C,180,59.85,60.16,0.31,61.35,0.46,0.00,False
+load_A,raspi1,A,600,59.43,80.71,21.28,81.80,50.46,0.00,True
+load_A,raspi2,B,600,56.32,56.69,0.37,57.94,0.45,0.00,False
+load_A,raspi3,C,600,60.16,60.54,0.37,62.32,0.47,0.00,False
+rest,raspi1,A,300,80.71,61.85,-18.86,80.83,0.63,0.00,True
+rest,raspi2,B,300,56.69,57.00,0.31,57.94,0.46,0.00,False
+rest,raspi3,C,300,60.54,60.57,0.03,61.84,0.47,0.00,False
