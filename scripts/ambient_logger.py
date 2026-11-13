@@ -23,6 +23,7 @@ import hashlib
 import hmac
 import json
 import os
+import re
 import signal
 import threading
 import time
@@ -76,6 +77,8 @@ def main():
     ap.add_argument("--interval", type=float, default=60.0, help="取得間隔 [s]")
     ap.add_argument("--env", default=str(Path(__file__).resolve().parents[1] / ".env"))
     ap.add_argument("--list", action="store_true", help="温湿度計の一覧を表示して終わる")
+    ap.add_argument("--name-filter", default="防水温湿度計 [0-9]|ハブ",
+                    help="記録する機器名の正規表現(既定:防水温湿度計 1〜3 とハブ。自宅用などは除く)")
     args = ap.parse_args()
 
     env = {**load_env(Path(args.env)), **os.environ}
@@ -84,6 +87,8 @@ def main():
         raise SystemExit(f"SWITCHBOT_TOKEN / SWITCHBOT_SECRET が {args.env} にない")
 
     meters = list_meters(token, secret)
+    if not args.list:
+        meters = [d for d in meters if re.search(args.name_filter, d.get("deviceName", ""))]
     if args.list or not args.out:
         for d in meters:
             print(d["deviceId"], d.get("deviceName"), d.get("deviceType"), "hub=" + str(d.get("hubDeviceId")))
