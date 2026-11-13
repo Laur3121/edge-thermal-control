@@ -2,8 +2,49 @@
 \chapter{実装}
 % 約5ページ。もう実装済みなので書ける
 
-\section{システム構成}
-% ノード3台(ラック上段、左から raspi1 | raspi2 | raspi3)、収集・制御用 PC、MQTT ブローカー(mosquitto)、PoE スイッチ
+\section{システム構成}\label{sec:impl-system}
+図\ref{fig:system}に本研究のシステム構成を示す。本システムは、3台のノードと、計測データの収集と制御を行う制御用 PC 1台からなる。
+
+\begin{figure}[tb]
+  \centering
+  \fbox{\parbox{0.8\linewidth}{\centering\vspace{20mm}システム構成図(作成中)\vspace{20mm}}}
+  \caption{システム構成}
+  \label{fig:system}
+\end{figure}
+
+ノードには Raspi を3台用いた。3台はラックの上段に約 XX\,mm 間隔で横一列に設置し、左から raspi1、raspi2、raspi3 とした。各機器の仕様を表\ref{tab:env}に示す。各ノードへの給電は PoE スイッチから行った。各ノードには Raspberry Pi PoE+ HAT を装着し、そのファンを冷却に用いる。このファンはソフトウェアから ON/OFF でき、本研究の制御における操作量である。
+
+
+\begin{table}[tb]
+  \centering
+  \caption{実装環境}
+  \label{tab:env}
+  \begin{tabular}{lll}
+    \toprule
+    & ノード(3台) & 制御用 PC(1台) \\
+    \midrule
+    機種 & Raspberry Pi 4 Model B & Lenovo IdeaPad 5 14ALC05 \\
+    CPU & Cortex-A72 4 コア & AMD Ryzen 5 5500U \\
+    メモリ & 4\,GB & 8\,GB \\
+    OS & Ubuntu 24.04.3 LTS & Ubuntu 24.04.4 LTS \\
+    冷却 & PoE+ HAT のファン & --- \\
+    給電 & PoE & AC アダプタ \\
+    Python & 3.12.3 & 3.12.3 \\
+    MQTT & paho-mqtt 1.6.1 & mosquitto 2.0.18,paho-mqtt 2.1.0 \\
+    負荷生成 & stress-ng 0.17.06 & --- \\
+    数値計算 & --- & NumPy 2.4.1,pandas 2.3.3 \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+
+制御用 PC では MQTT ブローカーとして mosquitto を動作させた。
+各ノードは1秒ごとに計測値を MQTT で制御用 PC へ送信し、制御用 PC はファンの指令と、実験時には負荷の指令を MQTT で各ノードへ送信する。データの収集と記録、温度の推定、ファンの ON/OFF の判断は、すべて制御用 PC で行う。
+
+推定と制御をノード上ではなく別の PC で行った理由は2つある。1つ目は、ノード間の条件をそろえるためである。特定のノードで制御プログラムを動かすと、そのノードだけ処理による発熱が加わり、測定したい温度に影響する。2つ目は、制御の遅れを避けるためである。高負荷で温度が上がったノードで制御プログラムを動かすと、ファンを回す判断が最も必要なときに処理が遅れるおそれがある。なお、制御用 PC が停止した場合の対策は\ref{sec:impl-fan}節で述べる。
+
+
+
 
 \section{データ収集}
 % scripts/node/node_agent.py:1秒ごとに温度、CPU使用率(/proc/stat の差分)、クロック、get_throttled、
@@ -13,7 +54,7 @@
 \section{推定・制御プログラム}
 % src/etc/(model.py, kalman.py)
 
-\section{ファンの駆動}
+\section{ファンの駆動}\label{sec:impl-fan}
 % PoE+ HAT のファンを冷却デバイス経由で ON/OFF。実験中は OS の制御を止め、終了時に戻す
 % 安全機能:82℃ 以上、または指令が10秒途絶えたら強制 ON
 
