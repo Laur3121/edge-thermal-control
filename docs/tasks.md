@@ -89,6 +89,8 @@
 
 ## 更新ログ
 
+- 2026-11-13:raspi1〜3 をラック上段の空きスロットに戻した(左から raspi1 | raspi2 | raspi3)。SwitchBot 温湿度計はラックの上=1、左=3、右=2、ハブ2 は離れた場所(室温)。ラックでの干渉確認 → 同定実験を自動で連続実行中。先生は当分休みのため、連絡(F5)と形式確認(F2)は本人が直接話す(Claude Code)
+
 - 2026-11-13:raspi1・raspi3 でサービス化完了、PC(192.168.0.50、mosquitto 稼働中、`~/sotuken/venv` の python に paho あり)経由で通しテスト成功(負荷・ファン切り替え・記録・終了時の復帰)。ファン ON で数秒で温度が下がり始める。PoE 電流は CPU 負荷で変わる(アイドル約470mA、2コア約850mA)が、ファンでは変わらない。raspi1 だけ負荷のとき raspi3 が +4℃ → 物理的な並び順の確認が必要。raspi2 は apt のリストが壊れていてセットアップ未完了。収集用 PC で IPSJ 時の Kalman 実装を発見し legacy に保存(Claude Code)
 
 - 2026-11-13:SSH で3台を確認。ファンは PoE+ HAT(OS が 40℃ から自動で回していた)、OS は Ubuntu 24.04。node_agent を PoE+ HAT ファン対応に変更(PoE 電流も記録)、systemd サービス化のスクリプトを追加。計測部分は raspi1 で動作確認済み。raspi2 は USB-C 給電の可能性(Claude Code)
