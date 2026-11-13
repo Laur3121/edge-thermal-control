@@ -35,8 +35,8 @@
 - [x] A3 比較手法を同じ枠組みで:Self-only / 坂本型(Self-only + 過去誤差の統計)/ H なし KF / KF + 固定マージン / 提案
 - [x] A4 旧データ(実験C)で動作確認。予稿の数値とのずれ方を記録(一致は目標にしない)→ 旧データでは同定できないと判明。`experiments/20261112_legacy_kf_check/README.md`
 - [ ] A5 ファン制御則:予測温度 > Tsafe で ON。最小 ON 時間とヒステリシス付き。比較用にしきい値 ON-OFF も
-- [~] A6 収集スクリプトの拡張(**新規に作成済み、RasPi での動作確認待ち**:`scripts/node/node_agent.py`、`scripts/collector.py`、手順は `scripts/node/README.md`。旧スクリプトは Linux PC にあるらしいが未確認。見つかったらブローカーのアドレスとトピック名だけ合わせる):1秒ごとに温度、CPU使用率(**瞬時値ではなく前回取得からの平均。`/proc/stat` の差分**)、クロック(`vcgencmd measure_clock arm`)、`vcgencmd get_throttled`、ファン状態、室温。時刻は NTP 同期した UNIX 秒
-- [~] A7 実験の自動化(**作成済み、実機未確認**:`scripts/run_experiment.py`、シナリオ `scripts/scenarios/step_identify.json`。node_agent に MQTT での負荷切り替えを追加):stress-ng の負荷シナリオ、開始前に全ノードがアイドル温度 ±1℃ になるまで待つ、ログは `experiments/YYYYMMDD_<name>/` に保存
+- [x] A6 収集スクリプトの拡張(**新規に作成済み、RasPi での動作確認待ち**:`scripts/node/node_agent.py`、`scripts/collector.py`、手順は `scripts/node/README.md`。旧スクリプトは Linux PC にあるらしいが未確認。見つかったらブローカーのアドレスとトピック名だけ合わせる):1秒ごとに温度、CPU使用率(**瞬時値ではなく前回取得からの平均。`/proc/stat` の差分**)、クロック(`vcgencmd measure_clock arm`)、`vcgencmd get_throttled`、ファン状態、室温。時刻は NTP 同期した UNIX 秒
+- [x] A7 実験の自動化(**作成済み、実機未確認**:`scripts/run_experiment.py`、シナリオ `scripts/scenarios/step_identify.json`。node_agent に MQTT での負荷切り替えを追加):stress-ng の負荷シナリオ、開始前に全ノードがアイドル温度 ±1℃ になるまで待つ、ログは `experiments/YYYYMMDD_<name>/` に保存
 - [ ] A8 解析と図:軸ラベルと単位付き、論文にそのまま使える形。予測の時系列、誤差の表、マージン・σ の時系列、ファン稼働率と最高温度のトレードオフ
 
 ## B. パラメータの理由付け(C+L、詳細は parameters.md)
@@ -88,6 +88,8 @@
 - 予測は「その時刻までの情報だけ」で行う。未来の負荷・隣接温度は「今の値が続く」と仮定(IPSJ 版は未来の実測値を使っていた)
 
 ## 更新ログ
+
+- 2026-11-13:raspi1・raspi3 でサービス化完了、PC(192.168.0.50、mosquitto 稼働中、`~/sotuken/venv` の python に paho あり)経由で通しテスト成功(負荷・ファン切り替え・記録・終了時の復帰)。ファン ON で数秒で温度が下がり始める。PoE 電流は CPU 負荷で変わる(アイドル約470mA、2コア約850mA)が、ファンでは変わらない。raspi1 だけ負荷のとき raspi3 が +4℃ → 物理的な並び順の確認が必要。raspi2 は apt のリストが壊れていてセットアップ未完了。収集用 PC で IPSJ 時の Kalman 実装を発見し legacy に保存(Claude Code)
 
 - 2026-11-13:SSH で3台を確認。ファンは PoE+ HAT(OS が 40℃ から自動で回していた)、OS は Ubuntu 24.04。node_agent を PoE+ HAT ファン対応に変更(PoE 電流も記録)、systemd サービス化のスクリプトを追加。計測部分は raspi1 で動作確認済み。raspi2 は USB-C 給電の可能性(Claude Code)
 
