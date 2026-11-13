@@ -19,3 +19,6 @@ thesis/**/*.fdb_latexmk
 thesis/**/*.fls
 # secrets
 .env
+
+# 論文のビルド結果
+thesis/build/

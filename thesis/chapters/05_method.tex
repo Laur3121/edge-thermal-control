@@ -1,0 +1,30 @@
+\chapter{提案手法}
+% 約8〜10ページ。式は「なぜこうなるか」を必ず書く。下書きは docs/parameters.md
+
+\section{全体の流れ}
+% 観測 → 推定 → Δ秒先予測 → マージン決定 → ファン ON/OFF(ブロック図)
+
+\section{自ノードの熱モデルの導出}
+% RC モデル → P = P0 + k u → 厳密な離散化:a = exp(-dt/tau), b = (1-a) R k, d = (1-a)(T_amb + R P0)
+
+\section{空間熱干渉のモデル化}
+% H_{t+1} = rho H_t + (1-rho) z_t、z_t = 隣の温度 - 基準温度。rho = exp(-dt/tau_H)
+
+\section{ファンの効果のモデル化}
+% 案A:ON/OFF でパラメータを切り替える/案B:+ e f_t。同定データで比べて決める
+
+\section{パラメータの同定}
+% 同定専用のステップ実験(experiments/*_step_identify)。物理的な妥当性(0<a<1, b>0)の確認
+
+\section{カルマンフィルタによる推定}
+% T と H の同時推定、適応プロセスノイズ qH = qH0 + beta |Δz|
+
+\section{Δ秒先の予測と不確かさ}
+% 未来の入力は「今の値が続く」と仮定(IPSJ 版との違い)。σ = sqrt(P_TT)
+% Δ の決め方:ファンの応答時間 < Δ < τ
+
+\section{動的マージン}
+% M = alpha sigma + delta、Tsafe = Tlimit - M。alpha = 2 の根拠(片側 2.3%)
+
+\section{ファン制御則}
+% 予測温度 > Tsafe で ON、最小 ON 時間とヒステリシス

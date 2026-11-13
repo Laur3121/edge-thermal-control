@@ -1,0 +1,49 @@
+% 特別研究II 論文(仮テンプレート)
+% 研究室のテンプレートが手に入ったら、chapters/ の中身をそちらに流し込む。
+% ビルド:thesis/ で latexmk main.tex → build/main.pdf
+\documentclass[uplatex,dvipdfmx,a4paper,11pt,report,openany]{jsbook}
+
+\usepackage{amsmath,amssymb,bm}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{siunitx}
+\usepackage{url}
+\usepackage[dvipdfmx,hidelinks]{hyperref}
+\usepackage{pxjahyper}
+
+\graphicspath{{figures/}{../experiments/}}
+\sisetup{detect-all}
+
+\title{空間熱干渉を考慮した状態推定と\\動的熱マージンに基づくファン制御\\{\large(仮題)}}
+\author{鈴木 黎映\\東京都立産業技術高等専門学校 専攻科}
+\date{2027年1月}
+
+\begin{document}
+\maketitle
+
+\frontmatter
+\include{chapters/00_abstract}
+\tableofcontents
+\listoffigures
+\listoftables
+
+\mainmatter
+\include{chapters/01_intro}
+\include{chapters/02_background}
+\include{chapters/03_related}
+\include{chapters/04_preliminary}
+\include{chapters/05_method}
+\include{chapters/06_implementation}
+\include{chapters/07_evaluation}
+\include{chapters/08_discussion}
+\include{chapters/09_conclusion}
+
+\backmatter
+\chapter*{謝辞}
+\addcontentsline{toc}{chapter}{謝辞}
+% TODO
+
+\nocite{*} % 下書きの間は全文献を載せる。本文で \cite するようになったら消す
+\bibliographystyle{junsrt}
+\bibliography{references}
+\end{document}

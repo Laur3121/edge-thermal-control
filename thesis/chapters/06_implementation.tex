@@ -1,0 +1,20 @@
+\chapter{実装}
+% 約5ページ。もう実装済みなので書ける
+
+\section{システム構成}
+% ノード3台(ラック上段、左から raspi1 | raspi2 | raspi3)、収集・制御用 PC、MQTT ブローカー(mosquitto)、PoE スイッチ
+
+\section{データ収集}
+% scripts/node/node_agent.py:1秒ごとに温度、CPU使用率(/proc/stat の差分)、クロック、get_throttled、
+% ファン状態、PoE 電流。systemd サービスとして動かす(scripts/node/install_node.sh)
+% scripts/ambient_logger.py:SwitchBot 温湿度計(ラックの上・左・右)とハブ(室温)を1分ごと
+
+\section{推定・制御プログラム}
+% src/etc/(model.py, kalman.py)
+
+\section{ファンの駆動}
+% PoE+ HAT のファンを冷却デバイス経由で ON/OFF。実験中は OS の制御を止め、終了時に戻す
+% 安全機能:82℃ 以上、または指令が10秒途絶えたら強制 ON
+
+\section{負荷生成と実験の自動化}
+% scripts/run_experiment.py:シナリオ(JSON)、開始前に温度が落ち着くまで待つ、切り替え時刻を events.csv に記録

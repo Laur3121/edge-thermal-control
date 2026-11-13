@@ -1,0 +1,30 @@
+\chapter{関連技術}
+% 約8〜10ページ。今ある材料で書ける。1節ずつ埋める
+
+\section{シングルボードコンピュータとマイクロクラスタ}
+% Raspberry Pi 4B の仕様(SoC BCM2711、4コア、最大クロック)。クラスタとしての利用例
+% 設置形態:19インチラックのブレード型マウント、積み重ね型クラスタケースなど
+
+\section{Raspberry Pi の熱特性}
+% 温度センサ(/sys/class/thermal/thermal_zone0/temp、量子化は約0.5℃刻み)
+% 約80℃からのソフト温度制限、DVFS でクロックが下がる仕組み
+% vcgencmd get_throttled のビットの意味(例:0x80000 = ソフト温度制限が発生した)
+% CPU ガバナ(ondemand / performance)
+
+\section{冷却とファン}
+% Raspberry Pi PoE+ HAT のファン(本研究の操作量)
+% Linux からは冷却デバイス(type=pwm-fan、段階 0〜4)として見える
+% OS 標準の制御(thermal_zone0 の step_wise、40/45/50/55℃ で段階的に回る)と、
+% それを user_space に切り替えて自前で制御する方法
+
+\section{熱RCモデル}
+% 熱容量 C と熱抵抗 R:C dT/dt = -(T - T_amb)/R + P、時定数 tau = RC
+% 離散化(5章の導出の準備)
+
+\section{状態空間モデルとカルマンフィルタ}
+% 予測と更新、カルマンゲイン、誤差共分散 P が推定の不確かさを表すこと
+% 多段先予測での P の伝播
+
+\section{計測・負荷生成の技術}
+% vcgencmd、/proc/stat による CPU 使用率(区間平均)、MQTT、stress-ng、時刻同期(NTP)
+% SwitchBot 温湿度計(室温の記録)
