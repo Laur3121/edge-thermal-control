@@ -1,0 +1,6 @@
+# start_s,duration_s,cpu_workers,cpu_load_percent,label
+0,120,0,0,idle
+120,180,4,60,load60
+300,180,4,70,load70
+480,180,4,60,back60
+660,180,0,0,final_idle

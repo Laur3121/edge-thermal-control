@@ -33,7 +33,7 @@ IPSJ 時の値:ρ=0.90, R=0.077, qT=0.038, qH0=0.008, β=2.0, Δ=30s, α=2.0, δ
 
 ## 注意(過去の経緯)
 
-- IPSJ 時の Kalman 実装コードは見つかっていない。`legacy/ipsj2026/predict_rc.py` は最小二乗 ARX + 移動標準偏差マージンで、Kalman ではない。予稿の数値も再現しない。参照用で、編集しない
+- IPSJ 時の Kalman 実装は 2026-11-13 に収集用 PC で発見:`legacy/ipsj2026/linux_pc_sotuken/predict_kalman.py`(`--adaptive_qh` の出力が予稿の表3・4と一致)。ただし Δ秒先予測に未来の実測値を使う・同定と評価が同じデータ等の問題がある(同フォルダの README)。`legacy/ipsj2026/predict_rc.py` は ARX 版。どちらも参照用で、編集しない。特研IIの実装は `src/etc/`
 - 旧データでは負荷ノードが約84℃で頭打ち(スロットリング)。新しい実験では CPU クロック(`vcgencmd measure_clock arm`)とスロットリング状態(`vcgencmd get_throttled`)、ファン状態、室温を必ず記録する
 - パラメータ同定と評価には別のデータ(または別区間)を使う
 

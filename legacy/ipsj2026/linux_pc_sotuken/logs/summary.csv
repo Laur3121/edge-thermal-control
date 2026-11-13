@@ -1,0 +1,6 @@
+method,control_count,resume_count,mean_margin,max_margin,violate_count,violate_time_s
+fixed,0,0,1.995000,1.995000,0,0.000
+fixed,4,4,1.995000,1.995000,0,0.000
+fixed,4,3,2.361000,2.361000,0,0.000
+proposed,3,3,0.740617,1.071448,0,0.000
+sakamoto,2,2,0.364116,0.788243,0,0.000
