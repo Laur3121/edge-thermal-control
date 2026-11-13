@@ -1,0 +1,86 @@
+ts,event,phase,role,host,value
+1794550202.476,start,,,,step_identify
+1794550202.477,load,init,A,raspi1,0
+1794550202.477,load,init,B,raspi2,0
+1794550202.477,load,init,C,raspi3,0
+1794550202.478,fan,init,A,raspi1,0
+1794550202.478,fan,init,B,raspi2,0
+1794550202.478,fan,init,C,raspi3,0
+1794550202.478,settle_start,,,,
+1794550567.512,settled,,,,"{""A"": 58.913, ""B"": 56.965, ""C"": 58.913}"
+1794550567.512,phase_start,p0_baseline,,,
+1794550567.512,load,p0_baseline,A,raspi1,0
+1794550567.513,fan,p0_baseline,A,raspi1,0
+1794550567.513,fan,p0_baseline,B,raspi2,0
+1794550567.513,fan,p0_baseline,C,raspi3,0
+1794550867.584,phase_end,p0_baseline,,,time
+1794550867.584,phase_start,p1_heat_first,,,
+1794550867.584,load,p1_heat_first,A,raspi1,2
+1794550867.585,fan,p1_heat_first,A,raspi1,0
+1794550946.602,phase_end,p1_heat_first,A,raspi1,temp_ge 75.471
+1794550946.602,phase_start,p1_fan_on#1,,,
+1794550946.602,fan,p1_fan_on#1,A,raspi1,1
+1794551246.672,phase_end,p1_fan_on#1,,,time
+1794551246.672,phase_start,p1_fan_off#1,,,
+1794551246.672,fan,p1_fan_off#1,A,raspi1,0
+1794551531.742,phase_end,p1_fan_off#1,A,raspi1,temp_ge 75.471
+1794551531.742,phase_start,p1_fan_on#2,,,
+1794551531.742,fan,p1_fan_on#2,A,raspi1,1
+1794551831.814,phase_end,p1_fan_on#2,,,time
+1794551831.814,phase_start,p1_fan_off#2,,,
+1794551831.814,fan,p1_fan_off#2,A,raspi1,0
+1794552143.889,phase_end,p1_fan_off#2,A,raspi1,temp_ge 75.958
+1794552143.889,phase_start,p1_fan_on#3,,,
+1794552143.889,fan,p1_fan_on#3,A,raspi1,1
+1794552443.959,phase_end,p1_fan_on#3,,,time
+1794552443.96,phase_start,p1_fan_off#3,,,
+1794552443.96,fan,p1_fan_off#3,A,raspi1,0
+1794552766.042,phase_end,p1_fan_off#3,A,raspi1,temp_ge 75.471
+1794552766.042,phase_start,p1_cool,,,
+1794552766.042,load,p1_cool,A,raspi1,0
+1794552766.042,fan,p1_cool,A,raspi1,1
+1794552795.049,phase_end,p1_cool,A,raspi1,temp_le 54.53
+1794552795.049,phase_start,p2_idle,,,
+1794552795.05,load,p2_idle,A,raspi1,0
+1794552795.05,fan,p2_idle,A,raspi1,1
+1794553095.121,phase_end,p2_idle,,,time
+1794553095.121,phase_start,p2_load2,,,
+1794553095.121,load,p2_load2,A,raspi1,2
+1794553995.323,phase_end,p2_load2,,,time
+1794553995.323,phase_start,p2_rest,,,
+1794553995.323,load,p2_rest,A,raspi1,0
+1794554595.461,phase_end,p2_rest,,,time
+1794554595.461,phase_start,p2_load1,,,
+1794554595.461,load,p2_load1,A,raspi1,1
+1794555495.676,phase_end,p2_load1,,,time
+1794555495.676,phase_start,p2_rest_end,,,
+1794555495.676,load,p2_rest_end,A,raspi1,0
+1794556095.81,phase_end,p2_rest_end,,,time
+1794556095.81,phase_start,p3_fan_off_idle,,,
+1794556095.81,fan,p3_fan_off_idle,A,raspi1,0
+1794556395.878,phase_end,p3_fan_off_idle,,,time
+1794556395.878,phase_start,p3_pulse#1,,,
+1794556395.879,load,p3_pulse#1,A,raspi1,2
+1794556608.932,phase_end,p3_pulse#1,A,raspi1,temp_ge 76.445
+1794556608.932,phase_start,p3_rest#1,,,
+1794556608.932,load,p3_rest#1,A,raspi1,0
+1794557089.038,phase_end,p3_rest#1,,,time
+1794557089.038,phase_start,p3_pulse#2,,,
+1794557089.039,load,p3_pulse#2,A,raspi1,2
+1794557197.065,phase_end,p3_pulse#2,A,raspi1,temp_ge 76.445
+1794557197.065,phase_start,p3_rest#2,,,
+1794557197.065,load,p3_rest#2,A,raspi1,0
+1794557677.176,phase_end,p3_rest#2,,,time
+1794557677.176,phase_start,p3_pulse#3,,,
+1794557677.176,load,p3_pulse#3,A,raspi1,2
+1794557782.199,phase_end,p3_pulse#3,A,raspi1,temp_ge 76.445
+1794557782.199,phase_start,p3_rest#3,,,
+1794557782.199,load,p3_rest#3,A,raspi1,0
+1794558262.315,phase_end,p3_rest#3,,,time
+1794558262.315,load,end,A,raspi1,0
+1794558262.316,load,end,B,raspi2,0
+1794558262.316,load,end,C,raspi3,0
+1794558262.317,fan,end,A,raspi1,0
+1794558262.317,fan,end,B,raspi2,0
+1794558262.317,fan,end,C,raspi3,0
+1794558262.317,end,,,,
