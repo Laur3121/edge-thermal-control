@@ -15,6 +15,15 @@
 - 予備審査で必要なもの:論文1〜5章(約20p)、予備的な結果、アブスト、スライド。本実験(実験3)は12月
 - 間に合わない場合の最低ライン:ファン制御は「動作確認まで」。予測精度(実験2)と干渉の特性(実験1)を新データで示す
 
+## 現在地(2026-11-13 夕方。次のセッションはここから)
+
+- 予備審査 **11/27 確定**、11/20 ごろ先生へ提出。出すもの:スライド・レジュメ・成果の要旨・論文(約20p)。形式は [prelim-review-format.md](prelim-review-format.md)
+- 実機・計測・自動実験・室温記録はすべて動作確認済み(raspi1〜3 はラック上段、PoE+ HAT のファン、収集用 PC 192.168.0.50)
+- 熱干渉は囲いなしでもラックでもほぼ出ない(`experiments/20261113_openair_interference`、`20261113_rack_interference`)。方向性の案:主役はラックでのファン制御、干渉は条件として評価(先生と相談して決める。Notion の「現在地」)
+- 同定実験 `experiments/20261113_step_identify` を 15:10 から自動実行中(PC 上。終われば各ノードは OS のファン制御に戻る)。**次の作業は、このデータの取得 → `scripts/plot_run.py` → パラメータ同定(B1〜B3)→ KF の予測精度**
+- 進捗の見方:`ssh laur@192.168.0.50 'cd ~/edge-thermal-control && ~/sotuken/venv/bin/python scripts/status.py'`
+- 論文は `thesis/`(uplatex、`latexmk main.tex`)。章ごとに書く内容をコメントで入れてある
+
 ## 日程(11/12 改訂)
 
 | 日付 | C(Claude Code) | L(レオ) |
