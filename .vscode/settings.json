@@ -2,8 +2,8 @@
   "latex-workshop.latex.tools": [
     {
       "name": "latexmk-uplatex",
-      "command": "latexmk",
-      "args": ["-cd", "%DOC%"]
+      "command": "sh",
+      "args": ["-c", "cd \"%DIR%\" && latexmk \"%DOCFILE_EXT%\""]
     }
   ],
   "latex-workshop.latex.recipes": [
@@ -12,5 +12,6 @@
   "latex-workshop.latex.outDir": "%DIR%/build",
   "latex-workshop.latex.autoBuild.run": "onSave",
   "latex-workshop.view.pdf.viewer": "tab",
-  "latex-workshop.latex.rootFile.doNotPrompt": true
+  "latex-workshop.latex.rootFile.doNotPrompt": true,
+  "latex-workshop.latex.search.rootFiles.include": ["thesis/main.tex"]
 }
