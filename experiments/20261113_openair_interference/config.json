@@ -1,0 +1,59 @@
+{
+  "scenario": {
+    "name": "openair_interference",
+    "description": "囲いなし(開けた机の上)での熱干渉の予備確認。左から raspi1 | raspi2 | raspi3 の順。A=raspi1(端)だけ 2コア負荷、B=raspi2(すぐ隣)と C=raspi3(2つ離れた位置)の温度上昇を比べる。3台ともファン OFF(node_agent が制御)。PoE 給電、PoE+ HAT 装着。",
+    "settle": {
+      "window_s": 180,
+      "max_slope_c_per_min": 0.15,
+      "timeout_s": 1200
+    },
+    "phases": [
+      {
+        "name": "baseline",
+        "duration_s": 180,
+        "load": {
+          "A": 0
+        },
+        "fan": {
+          "A": 0,
+          "B": 0,
+          "C": 0
+        }
+      },
+      {
+        "name": "load_A",
+        "duration_s": 600,
+        "load": {
+          "A": 2
+        }
+      },
+      {
+        "name": "rest",
+        "duration_s": 300,
+        "load": {
+          "A": 0
+        }
+      }
+    ]
+  },
+  "nodes": {
+    "A": "raspi1",
+    "B": "raspi2",
+    "C": "raspi3"
+  },
+  "args": {
+    "scenario": "scripts/scenarios/openair_interference.json",
+    "nodes": [
+      "A=raspi1",
+      "B=raspi2",
+      "C=raspi3"
+    ],
+    "out": "experiments/20261113_openair_interference_v2",
+    "broker": "localhost",
+    "port": 1883,
+    "topic_prefix": "etc",
+    "no_settle": false,
+    "no_collector": false,
+    "dry_run": false
+  }
+}
