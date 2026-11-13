@@ -3,15 +3,26 @@
     {
       "name": "latexmk-uplatex",
       "command": "sh",
-      "args": ["-c", "cd \"%DIR%\" && latexmk \"%DOCFILE_EXT%\""]
+      "args": [
+        "-c",
+        "cd \"%DIR%\" && latexmk \"%DOCFILE_EXT%\""
+      ]
     }
   ],
   "latex-workshop.latex.recipes": [
-    { "name": "latexmk (uplatex + dvipdfmx, thesis/.latexmkrc)", "tools": ["latexmk-uplatex"] }
+    {
+      "name": "latexmk (uplatex + dvipdfmx, thesis/.latexmkrc)",
+      "tools": [
+        "latexmk-uplatex"
+      ]
+    }
   ],
   "latex-workshop.latex.outDir": "%DIR%/build",
   "latex-workshop.latex.autoBuild.run": "onSave",
   "latex-workshop.view.pdf.viewer": "tab",
   "latex-workshop.latex.rootFile.doNotPrompt": true,
-  "latex-workshop.latex.search.rootFiles.include": ["thesis/main.tex"]
+  "latex-workshop.latex.search.rootFiles.include": [
+    "thesis/main.tex",
+    "thesis/resume/resume.tex"
+  ]
 }

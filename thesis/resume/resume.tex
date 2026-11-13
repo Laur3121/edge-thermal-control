@@ -1,0 +1,84 @@
+% !TEX encoding = UTF-8 Unicode
+% 予備審査レジュメ(特研1審査会のレジュメ 2025年度 を元にしたテンプレート)
+% ヘッダーは先輩(2025年度 7307)の「創造工学専攻 情報工学コース / 年度 特別研究 2 審査会」に合わせた
+% ビルド:thesis/resume/ で latexmk resume.tex → build/resume.pdf
+\documentclass[10pt,uplatex,dvipdfmx]{jsarticle}
+
+% 描画・色関連
+\usepackage[dvipdfmx]{graphicx}
+\usepackage[dvipdfmx]{xcolor}
+\usepackage{here}
+
+% レイアウト調整関連
+\usepackage{geometry}
+\usepackage{setspace}
+\usepackage{fancyhdr}
+\usepackage{float}
+\usepackage{multicol}
+
+% 数式関連
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{mathtools}
+\usepackage{bm}
+
+% 表・リスト関連
+\usepackage{booktabs}
+\usepackage{enumerate}
+
+% テキスト装飾関連
+\usepackage{url}
+
+% キャプション関連
+\usepackage{caption}
+\usepackage{subcaption}
+
+\graphicspath{{figures/}{../figures/}{../../experiments/}}
+\geometry{a4paper, left=20mm,right=20mm,top=20mm,bottom=20mm}
+
+\definecolor{tmcitblue}{cmyk}{0.86,0.91,0,0.04}
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{\color{tmcitblue}\footnotesize 東京都立産業技術高等専門学校}
+\rhead{\color{tmcitblue}\footnotesize 創造工学専攻 情報工学コース\\2026 年度特別研究 2 審査会}
+\lfoot{\color{tmcitblue}\footnotesize Tokyo Metropolitan College of Industrial Technology}
+\renewcommand{\headrulewidth}{0.0pt}
+\setlength{\headheight}{20.2781pt}
+
+\begin{document}
+\setstretch{1.00}
+{\centering
+\Large{空間熱干渉を考慮した状態推定と動的熱マージンに基づくファン制御(仮題)}\\
+\vspace{6pt}
+\large{7303 鈴木黎映}\\  % TODO 今年度の番号を確認(特研1では 6303)
+\large{指導教員 知念 賢一}
+\par}
+\begin{multicols*}{2}
+
+\section{はじめに}
+% 背景(エッジ・ラックの RasPi クラスタ、専用空調なし)→ 課題(スロットリング、ファンを常に回す無駄)→ 目的
+(執筆中)
+
+\section{関連研究}
+% 熱 RC モデルと予測制御、不確かさを考慮したマージン、データセンタの熱再循環。比較表(○△×)にすると分かりやすい
+
+\section{提案手法}
+% 熱モデル(RC から導出)、外部熱影響 H、カルマンフィルタ、Δ秒先予測と σ、動的マージン M = ασ + δ、ファン制御則
+
+\section{実験}
+% 実験環境(ラック上段 3 台、PoE+ HAT ファン、室温計測)、同定実験、熱干渉の確認、予測精度
+
+\section{結果と考察}
+% 図表を 1〜2 個。うまくいかなかった点も書く
+
+\section{おわりに}
+% まとめと今後の課題(ファン制御の本実験は 12 月)
+
+\small{
+\begin{thebibliography}{99}
+  \bibitem{shi_edge_2016} Weisong Shi, Jie Cao, Quan Zhang, Youhuizi Li, Lanyu Xu, ``Edge Computing: Vision and Challenges,'' IEEE Internet of Things Journal, Vol.3, No.5, pp.637--646, 2016.
+\end{thebibliography}
+}
+
+\end{multicols*}
+\end{document}
