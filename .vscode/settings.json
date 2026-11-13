@@ -1,0 +1,16 @@
+{
+  "latex-workshop.latex.tools": [
+    {
+      "name": "latexmk-uplatex",
+      "command": "latexmk",
+      "args": ["-cd", "%DOC%"]
+    }
+  ],
+  "latex-workshop.latex.recipes": [
+    { "name": "latexmk (uplatex + dvipdfmx, thesis/.latexmkrc)", "tools": ["latexmk-uplatex"] }
+  ],
+  "latex-workshop.latex.outDir": "%DIR%/build",
+  "latex-workshop.latex.autoBuild.run": "onSave",
+  "latex-workshop.view.pdf.viewer": "tab",
+  "latex-workshop.latex.rootFile.doNotPrompt": true
+}
