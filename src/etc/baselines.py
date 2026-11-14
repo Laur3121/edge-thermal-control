@@ -10,13 +10,14 @@ import numpy as np
 from .model import ThermalParams
 
 
-def predict_arx(p: ThermalParams, T, u, m: int, nbr=None):
-    """ARX モデルで m ステップ先を予測する。未来の u(と隣接温度)は現在の値が続くと仮定。
+def predict_arx(p: ThermalParams, T, u, m: int, nbr=None, f=None):
+    """ARX モデルで m ステップ先を予測する。未来の u(と隣接温度・ファン状態 f)は現在の値が続くと仮定。
 
     p.c != 0 かつ nbr を与えた場合は H を決定的に回す(KF を使わない「H 入り ARX」)。
     """
     T, u = np.asarray(T, float), np.asarray(u, float)
     N = len(T)
+    f = np.zeros(N) if f is None else np.asarray(f, float)
     use_H = nbr is not None and p.c != 0.0
     if use_H:
         z = np.asarray(nbr, float) - p.z_base
@@ -28,7 +29,7 @@ def predict_arx(p: ThermalParams, T, u, m: int, nbr=None):
         Tk = T[k]
         Hk = H[k] if use_H else 0.0
         for _ in range(m):
-            Tk_next = p.a * Tk + p.b * u[k] + p.d + (p.c * Hk if use_H else 0.0)
+            Tk_next = p.a * Tk + p.b * u[k] + p.e * f[k] + p.d + (p.c * Hk if use_H else 0.0)
             if use_H:
                 Hk = p.rho * Hk + (1 - p.rho) * z[k]
             Tk = Tk_next

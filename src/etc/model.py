@@ -4,7 +4,7 @@ T_{t+1} = a T_t + b u_t + c H_t + d + e f_t
 H_{t+1} = rho H_t + (1 - rho) z_t,   z_t = T^nbr_t - z_base
 
 物理的な意味は docs/parameters.md を参照(a = exp(-dt/tau)、b = (1-a) R k など)。
-ファン項 e f_t は仮置き(案B)。案A(ファン ON/OFF でパラメータ切替)にするかは同定実験で決める。
+ファン項 e f_t は案B(加算項、2026-11-13 決定)。f を与えない同定では e = 0。
 """
 
 from __future__ import annotations
@@ -68,37 +68,44 @@ def _lstsq(X: np.ndarray, y: np.ndarray):
     return theta, resid
 
 
-def fit_self_only(T, u, dt: float, mask=None) -> tuple[ThermalParams, np.ndarray]:
-    """T_{t+1} = a T_t + b u_t + d を最小二乗で同定する。
+def fit_self_only(T, u, dt: float, mask=None, f=None) -> tuple[ThermalParams, np.ndarray]:
+    """T_{t+1} = a T_t + b u_t (+ e f_t) + d を最小二乗で同定する。
 
     mask(長さ len(T)-1 の bool)が True の遷移だけを使う。スロットリング中の区間を除くのに使う。
+    f(ファン状態 0〜1)を与えるとファン項 e も同定する(案B)。
     戻り値は (パラメータ, 1ステップ残差)。
     """
     T, u = np.asarray(T, float), np.asarray(u, float)
-    X = np.column_stack([T[:-1], u[:-1], np.ones(len(T) - 1)])
+    cols = [T[:-1], u[:-1]] + ([np.asarray(f, float)[:-1]] if f is not None else [])
+    X = np.column_stack(cols + [np.ones(len(T) - 1)])
     y = T[1:]
     if mask is not None:
         X, y = X[mask], y[mask]
-    (a, b, d), resid = _lstsq(X, y)
-    return ThermalParams(a=a, b=b, d=d, dt=dt), resid
+    theta, resid = _lstsq(X, y)
+    if f is not None:
+        a, b, e, d = theta
+    else:
+        (a, b, d), e = theta, 0.0
+    return ThermalParams(a=a, b=b, d=d, e=e, dt=dt), resid
 
 
 def fit_with_H(T, u, nbr, dt: float, z_base: float, rho: float | None = None,
-               rho_grid=None, mask=None) -> tuple[ThermalParams, np.ndarray]:
+               rho_grid=None, mask=None, f=None) -> tuple[ThermalParams, np.ndarray]:
     """H を含むモデルを同定する。
 
     H は観測できないので、rho を固定すれば z から決定的に計算できる(lowpass_H)。
-    その H を説明変数にして a, b, c, d を最小二乗で求める。
+    その H を説明変数にして a, b, c, d(f を与えれば e も)を最小二乗で求める。
     rho を与えなければ rho_grid の中から1ステップ残差が最小のものを選ぶ。
     """
     T, u, nbr = (np.asarray(v, float) for v in (T, u, nbr))
+    fcol = [np.asarray(f, float)[:-1]] if f is not None else []
     z = nbr - z_base
     rhos = [rho] if rho is not None else list(rho_grid if rho_grid is not None
                                              else np.linspace(0.5, 0.995, 100))
     best = None
     for r in rhos:
         H = lowpass_H(z, r)
-        X = np.column_stack([T[:-1], u[:-1], H[:-1], np.ones(len(T) - 1)])
+        X = np.column_stack([T[:-1], u[:-1], H[:-1]] + fcol + [np.ones(len(T) - 1)])
         y = T[1:]
         if mask is not None:
             X, y = X[mask], y[mask]
@@ -106,8 +113,12 @@ def fit_with_H(T, u, nbr, dt: float, z_base: float, rho: float | None = None,
         sse = float(resid @ resid)
         if best is None or sse < best[0]:
             best = (sse, r, theta, resid)
-    _, r, (a, b, c, d), resid = best
-    return ThermalParams(a=a, b=b, c=c, d=d, rho=r, z_base=z_base, dt=dt), resid
+    _, r, theta, resid = best
+    if f is not None:
+        a, b, c, e, d = theta
+    else:
+        (a, b, c, d), e = theta, 0.0
+    return ThermalParams(a=a, b=b, c=c, d=d, e=e, rho=r, z_base=z_base, dt=dt), resid
 
 
 def warn_if_unphysical(p: ThermalParams, label: str = "") -> None:

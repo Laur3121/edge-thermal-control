@@ -118,6 +118,8 @@
 
 ## 更新ログ
 
+- 2026-11-14:夜間ランダム実験で KF を評価(`scripts/eval_validate.py`、結果は `experiments/20261114_validate_random/README.md`)。入力一定なら 30 秒先 MAE 約 0.7℃、誤差の大半は負荷・ファンの切り替えをまたぐ 11% の区間。干渉はここでも c ≈ 0(A・C は負)。KF + H は改善せず、A は偶然の負の c で悪化。干渉がないと σ は一定 → 動的マージンは実質固定。B・C の同定も完了(τ 54・80 秒)。fit_self_only / fit_with_H / predict_arx にファン入力を追加(Claude Code)
+
 - 2026-11-13:同定実験を解析。案B(+e·f)を採用、τ≈66秒、b>0、ファンの応答 5 秒以内、干渉は B・C で同じ(共通の室温変化)。`experiments/20261113_step_identify/README.md`。次は同定したモデルで KF を回し、Δ秒先予測の精度を出す(Claude Code)
 
 - 2026-11-13:先輩2人の予備審査資料と自分の特研1レジュメから、出すものの形式を docs/prelim-review-format.md に整理。去年の予備審査は12月上旬だった可能性 → 日付の確認が必要(Claude Code)
