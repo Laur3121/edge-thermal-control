@@ -20,6 +20,10 @@
   ]
 }
 load / fan に書かなかった役割は前の段階の値を引き継ぐ。最初はすべて負荷 0・ファン 0。
+
+閉ループ制御:fan に 0/1 の代わりに方式名("proposed" / "self_fixed" / "threshold"、src/etc/control.py)を書くと、
+その段階から制御器が 5 秒ごとにファンを決める(段階に入るたびに制御器を作り直す)。--control-params の同定値を使う。
+制御器の設定はシナリオの "control": {...}(ControlConfig の項目)。判断の記録は <out>/control.csv。
 """
 
 from __future__ import annotations
@@ -35,7 +39,11 @@ import time
 from collections import deque
 from pathlib import Path
 
+sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
+
 HEARTBEAT_S = 2.0  # ファン指令を送り直す間隔(node_agent の指令途絶タイムアウトより短く)
+CONTROL_FIELDS = ["ts", "phase", "role", "host", "mode", "n", "T", "u", "f", "T_amb", "pred", "sigma",
+                  "margin", "tsafe", "fan", "reason"]
 
 
 # ---------- 純粋関数(テスト対象) ----------
@@ -101,8 +109,17 @@ class Runner:
         self.args, self.sc, self.nodes = args, scenario, nodes
         self.out = Path(args.out)
         self.temps = {h: deque(maxlen=3600) for h in nodes.values()}
+        self.rows = {h: deque(maxlen=120) for h in nodes.values()}  # (ts, temp, cpu, fan) 制御用
         self.load = {r: 0 for r in nodes}
         self.fan = {r: 0 for r in nodes}
+        self.mode: dict[str, str | None] = {r: None for r in nodes}
+        self.ctrl = {}
+        self.phase = ""
+        self.ctrl_params = (json.loads(Path(args.control_params).read_text())
+                            if getattr(args, "control_params", None) else None)
+        self._amb = (0.0, None)  # (読んだ時刻, 室温)
+        self.ctl_fp = None
+        self.ctl = None
         self.lock = threading.Lock()
         self.stop = threading.Event()
         self.mqtt = None
@@ -132,6 +149,11 @@ class Runner:
         if h in self.temps and row.get("temp") is not None:
             with self.lock:
                 self.temps[h].append((float(row["ts"]), float(row["temp"])))
+                try:
+                    self.rows[h].append((float(row["ts"]), float(row["temp"]), float(row["cpu"]),
+                                         float(row.get("fan") or 0)))
+                except (KeyError, TypeError, ValueError):
+                    pass
 
     def latest(self, role: str) -> float | None:
         with self.lock:
@@ -155,9 +177,71 @@ class Runner:
             self.send(role, "load", int(v))
             self.event("load", phase["name"], role, int(v))
         for role, v in phase.get("fan", {}).items():
+            if isinstance(v, str):  # 閉ループ制御。OFF から始める
+                self.ctrl[role] = self.make_ctrl(role, v)
+                self.mode[role] = v
+                self.event("fan_mode", phase["name"], role, v)
+                v = 0
+            else:
+                self.mode[role] = None
             self.fan[role] = int(v)
             self.send(role, "fan", int(v))
             self.event("fan", phase["name"], role, int(v))
+
+    def make_ctrl(self, role: str, mode: str):
+        from etc.control import ControlConfig, controller_from_dict
+        if self.ctrl_params is None:
+            raise SystemExit("閉ループ制御には --control-params が必要")
+        cfg = ControlConfig(**self.sc.get("control", {}))
+        return controller_from_dict(mode, self.ctrl_params["nodes"][self.nodes[role]], cfg)
+
+    def ambient(self) -> float:
+        """室温(ハブ)の最新値。ambient.csv を 30 秒ごとに読み直す。読めなければ前の値か --ambient-default。"""
+        now = time.time()
+        if now - self._amb[0] > 30:
+            val = self._amb[1]
+            path = self.out / "raw" / "ambient.csv"
+            try:
+                with open(path, newline="") as fp:
+                    for r in csv.DictReader(fp):
+                        if self.args.ambient_name in r["name"]:
+                            val = float(r["temperature"])
+            except (OSError, KeyError, ValueError):
+                pass
+            self._amb = (now, val)
+        return self._amb[1] if self._amb[1] is not None else self.args.ambient_default
+
+    def control_loop(self):
+        """閉ループ制御の役割について、dt 秒ごとに直近 dt 秒の平均で判断する。"""
+        if self.ctrl_params is None:
+            return
+        dt = float(self.ctrl_params["dt"])
+        nxt = time.time() + dt
+        while not self.stop.wait(max(0.0, nxt - time.time())):
+            now = nxt
+            nxt += dt
+            for role, mode in list(self.mode.items()):
+                if mode is None:
+                    continue
+                with self.lock:
+                    win = [r for r in self.rows[self.nodes[role]] if now - dt <= r[0] < now]
+                if not win:
+                    continue
+                T = sum(r[1] for r in win) / len(win)
+                u = sum(r[2] for r in win) / len(win) / 100.0
+                f = sum(r[3] for r in win) / len(win)
+                Ta = self.ambient()
+                d = self.ctrl[role].step(now, T, u, f, Ta)
+                self.ctl.writerow({"ts": round(now, 3), "phase": self.phase, "role": role, "host": self.nodes[role],
+                                   "mode": mode, "n": len(win), "T": round(T, 3), "u": round(u, 4),
+                                   "f": round(f, 3), "T_amb": Ta, "pred": round(d.pred, 3),
+                                   "sigma": round(d.sigma, 4), "margin": round(d.margin, 3),
+                                   "tsafe": round(d.tsafe, 3), "fan": d.fan, "reason": d.reason})
+                self.ctl_fp.flush()
+                if d.fan != self.fan[role] and self.mode[role] == mode:
+                    self.fan[role] = d.fan
+                    self.send(role, "fan", d.fan)
+                    self.event("fan", self.phase, role, d.fan)
 
     def heartbeat(self):
         while not self.stop.wait(HEARTBEAT_S):
@@ -183,6 +267,7 @@ class Runner:
             time.sleep(5)
 
     def run_phase(self, ph: dict):
+        self.phase = ph["name"]
         self.event("phase_start", ph["name"])
         self.apply(ph)
         t0 = time.time()
@@ -219,6 +304,10 @@ class Runner:
         self.ev_fp = open(self.out / "events.csv", "w", newline="")
         self.ev = csv.DictWriter(self.ev_fp, fieldnames=["ts", "event", "phase", "role", "host", "value"])
         self.ev.writeheader()
+        if self.ctrl_params is not None:
+            self.ctl_fp = open(self.out / "control.csv", "w", newline="")
+            self.ctl = csv.DictWriter(self.ctl_fp, fieldnames=CONTROL_FIELDS)
+            self.ctl.writeheader()
 
         ambient = None
         if self.args.ambient:
@@ -231,10 +320,12 @@ class Runner:
                                           "--topic-prefix", self.args.topic_prefix, "--out", str(self.out)])
         self.connect()
         hb = threading.Thread(target=self.heartbeat, daemon=True)
+        cl = threading.Thread(target=self.control_loop, daemon=True)
         try:
             self.event("start", value=self.sc.get("name", ""))
             self.apply({"name": "init", "load": {r: 0 for r in self.nodes}, "fan": {r: 0 for r in self.nodes}})
             hb.start()
+            cl.start()
             if not self.args.no_settle:
                 self.wait_settled()
             for ph in phases:
@@ -242,6 +333,7 @@ class Runner:
                     break
                 self.run_phase(ph)
         finally:
+            self.phase = "end"
             self.apply({"name": "end", "load": {r: 0 for r in self.nodes}, "fan": {r: 0 for r in self.nodes}})
             self.event("end")
             self.stop.set()
@@ -252,6 +344,8 @@ class Runner:
                     p.send_signal(signal.SIGINT)
                     p.wait(timeout=10)
             self.ev_fp.close()
+            if self.ctl_fp is not None:
+                self.ctl_fp.close()
 
 
 README_TEMPLATE = """# {name}
@@ -287,6 +381,10 @@ def main():
     ap.add_argument("--no-collector", action="store_true", help="collector を別に動かしている場合")
     ap.add_argument("--ambient", action="store_true",
                     help="SwitchBot 温湿度計の室温も記録する(scripts/ambient_logger.py。.env にトークンが必要)")
+    ap.add_argument("--control-params", default=None,
+                    help="閉ループ制御の同定値(scripts/fit_control_params.py の出力)。fan に方式名を書く段階で必須")
+    ap.add_argument("--ambient-name", default="ハブ", help="制御に使う室温計の名前(部分一致)")
+    ap.add_argument("--ambient-default", type=float, default=20.0, help="室温が読めないときの値 [℃]")
     ap.add_argument("--dry-run", action="store_true", help="段階の一覧と合計時間を表示するだけ")
     args = ap.parse_args()
 

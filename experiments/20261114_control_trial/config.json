@@ -1,0 +1,53 @@
+{
+  "scenario": {
+    "name": "control_trial",
+    "description": "閉ループ制御の試運転(A のみ)。4 コア負荷で提案手法がファンを ON/OFF するか、80℃ を超えないかを確認する。",
+    "control": {
+      "tlimit": 80.0,
+      "delta_s": 30.0,
+      "alpha": 2.0,
+      "delta_margin": 0.5,
+      "hysteresis": 1.0,
+      "min_on_s": 30.0
+    },
+    "phases": [
+      {
+        "name": "heat_proposed",
+        "duration_s": 480,
+        "load": {
+          "A": 4
+        },
+        "fan": {
+          "A": "proposed"
+        }
+      },
+      {
+        "name": "idle_proposed",
+        "duration_s": 180,
+        "load": {
+          "A": 0
+        }
+      }
+    ]
+  },
+  "nodes": {
+    "A": "raspi1"
+  },
+  "args": {
+    "scenario": "scripts/scenarios/control_trial.json",
+    "nodes": [
+      "A=raspi1"
+    ],
+    "out": "experiments/20261114_control_trial",
+    "broker": "localhost",
+    "port": 1883,
+    "topic_prefix": "etc",
+    "no_settle": true,
+    "no_collector": false,
+    "ambient": true,
+    "control_params": "scripts/control_params.json",
+    "ambient_name": "ハブ",
+    "ambient_default": 20.0,
+    "dry_run": false
+  }
+}

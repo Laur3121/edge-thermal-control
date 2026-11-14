@@ -1,0 +1,9 @@
+{
+  "name": "control_trial",
+  "description": "閉ループ制御の試運転(A のみ)。4 コア負荷で提案手法がファンを ON/OFF するか、80℃ を超えないかを確認する。",
+  "control": {"tlimit": 80.0, "delta_s": 30.0, "alpha": 2.0, "delta_margin": 0.5, "hysteresis": 1.0, "min_on_s": 30.0},
+  "phases": [
+    {"name": "heat_proposed", "duration_s": 480, "load": {"A": 4}, "fan": {"A": "proposed"}},
+    {"name": "idle_proposed", "duration_s": 180, "load": {"A": 0}}
+  ]
+}

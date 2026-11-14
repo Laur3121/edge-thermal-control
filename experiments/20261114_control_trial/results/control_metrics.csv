@@ -1,0 +1,2 @@
+round,condition,role,host,duration_s,T_start,T_max,over_limit_s,throttle_s,clock_min_MHz,failsafe_s,fan_on_ratio,fan_on_count
+,all,A,raspi1,660.222,49.660,76.445,0.000,0.000,1800.404,0.000,0.409,9
