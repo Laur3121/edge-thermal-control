@@ -75,7 +75,7 @@
 - [~] A2 パラメータ同定(最小二乗)。同定用と評価用でデータ(または区間)を分ける。0<a<1、b>0、0<ρ<1 をチェックして警告を出す
 - [x] A3 比較手法を同じ枠組みで:Self-only / 坂本型(Self-only + 過去誤差の統計)/ H なし KF / KF + 固定マージン / 提案
 - [x] A4 旧データ(実験C)で動作確認。予稿の数値とのずれ方を記録(一致は目標にしない)→ 旧データでは同定できないと判明。`experiments/20261112_legacy_kf_check/README.md`
-- [ ] A5 ファン制御則:予測温度 > Tsafe で ON。最小 ON 時間とヒステリシス付き。比較用にしきい値 ON-OFF も
+- [x] A5 ファン制御則:予測温度 > Tsafe で ON。最小 ON 時間とヒステリシス付き。比較用にしきい値 ON-OFF も
 - [x] A6 収集スクリプトの拡張(**新規に作成済み、RasPi での動作確認待ち**:`scripts/node/node_agent.py`、`scripts/collector.py`、手順は `scripts/node/README.md`。旧スクリプトは Linux PC にあるらしいが未確認。見つかったらブローカーのアドレスとトピック名だけ合わせる):1秒ごとに温度、CPU使用率(**瞬時値ではなく前回取得からの平均。`/proc/stat` の差分**)、クロック(`vcgencmd measure_clock arm`)、`vcgencmd get_throttled`、ファン状態、室温。時刻は NTP 同期した UNIX 秒
 - [x] A7 実験の自動化(**作成済み、実機未確認**:`scripts/run_experiment.py`、シナリオ `scripts/scenarios/step_identify.json`。node_agent に MQTT での負荷切り替えを追加):stress-ng の負荷シナリオ、開始前に全ノードがアイドル温度 ±1℃ になるまで待つ、ログは `experiments/YYYYMMDD_<name>/` に保存
 - [ ] A8 解析と図:軸ラベルと単位付き、論文にそのまま使える形。予測の時系列、誤差の表、マージン・σ の時系列、ファン稼働率と最高温度のトレードオフ
@@ -130,6 +130,8 @@
 - 予測は「その時刻までの情報だけ」で行う。未来の負荷・隣接温度は「今の値が続く」と仮定(IPSJ 版は未来の実測値を使っていた)
 
 ## 更新ログ
+
+- 2026-11-14:A5 ファン制御則を実装(`src/etc/control.py`。提案 / Self-only+固定 / しきい値、最小 ON 30 秒・ヒステリシス 1℃)、`run_experiment.py` に閉ループを組み込み。raspi1 で試運転(4 コアで最高 76.4℃、稼働率 41%)。比較実験 `experiments/20261114_compare`(5 条件 × 3 巡 × 3 台、しきい値は 75/70℃、レオ確認済み)を 17:23 に開始、02 時ごろ終了予定。9:28 のブレーカー断は夜間実験の終了後なのでデータに影響なし(Claude Code)
 
 - 2026-11-14:夜間ランダム実験で KF を評価(`scripts/eval_validate.py`、結果は `experiments/20261114_validate_random/README.md`)。入力一定なら 30 秒先 MAE 約 0.7℃、誤差の大半は負荷・ファンの切り替えをまたぐ 11% の区間。干渉はここでも c ≈ 0(A・C は負)。KF + H は改善せず、A は偶然の負の c で悪化。干渉がないと σ は一定 → 動的マージンは実質固定。B・C の同定も完了(τ 54・80 秒)。fit_self_only / fit_with_H / predict_arx にファン入力を追加(Claude Code)
 
