@@ -21,7 +21,7 @@
 - 実機・計測・自動実験・室温記録はすべて動作確認済み(raspi1〜3 はラック上段、PoE+ HAT のファン、収集用 PC 192.168.0.50)。今は全ノード OS のファン制御に戻してある
 - 熱干渉は囲いなしでもラックでもほぼ出ない(`experiments/20261113_openair_interference`、`20261113_rack_interference`)。方向性の案:主役はラックでのファン制御、干渉は条件として評価(先生と相談して決める。Notion の「現在地」)
 - 同定は完了(`experiments/20261113_step_identify`、案B、τ≈66秒、b>0)。日程より2日早い
-- **検証用のランダム実験 `experiments/20261114_validate_random` は完了**(00:36〜06:02、最高 78.9℃、スロットリング・強制 ON なし。データはリポジトリに取得済み)。次はこれで KF の評価(同定とは別の日のデータ)と B・C の同定。PC の known_hosts に raspi3(.53)が無く、終了時の自動停止が raspi3 だけ失敗した → 次の実験の前に PC で `ssh ubuntu@192.168.0.53` を1回して登録する
+- **検証用のランダム実験 `experiments/20261114_validate_random` は完了**(00:36〜06:02、最高 78.9℃、スロットリング・強制 ON なし。データはリポジトリに取得済み)。次はこれで KF の評価(同定とは別の日のデータ)と B・C の同定。終了時の自動停止が raspi3 だけ失敗した(PC の known_hosts と鍵が raspi3 に無かった)→ 11/14 朝に修正済み。PC から 3台とも `sudo systemctl stop etc-agent` できることを確認
 - 論文:6.1 はレオが書いた(XX mm と構成図が未)。6.2〜6.5 の材料は `docs/thesis-notes/ch6-materials.md`
 - **次の作業(11/14)**:C は ①同定モデルで KF の30秒先予測精度・σ・マージン(ベースライン比較)②ファン制御則と閉ループ制御(A5)③比較実験のシナリオを作って夜に自動実行。L は論文6章の箇条書き30分
 - 進捗の見方:`ssh laur@192.168.0.50 'cd ~/edge-thermal-control && ~/sotuken/venv/bin/python scripts/status.py'`
