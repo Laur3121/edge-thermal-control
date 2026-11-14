@@ -9,6 +9,12 @@
 - 評価区間を 2 つに分ける:全区間 / 入力一定(k から k+Δ の間にフェーズ境界=負荷・ファンの切り替えがない)
   切り替えをまたぐ予測は、未来の入力を知らない以上どの手法でも外れる。σ がそれを含むかを見るために分ける
 
+案B(11/14 夜に追加。評価の仕方は結果を見る前に決めた):
+  負荷の急上昇マージン M_B = α σ + δ + J_k、J_k = b (u_max − u_k) Σ_{i<m} a^i(今から負荷が最大に跳ねたときの Δ 秒後の上昇)。
+  J_k を足すのは、同定区間で「Δ 秒以内に負荷が上がる確率 p」が 1 − Φ(α)(α=2 なら 2.3%)を超えるとき。
+  上側 1 − Φ(α) の上限を守るには、それより起きやすい負荷の上昇を含めないといけないため
+--c-nonneg(既定):c < 0 と同定されたら c = 0(H なし)にする。c < 0 は物理的にありえないため(11/14 合意)
+
 出力:<run>/results/eval/ に prediction_metrics.csv、margin_metrics.csv、params.json、図
 """
 
@@ -16,6 +22,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import math
 import sys
 from pathlib import Path
 
@@ -70,10 +77,14 @@ def main():
     ap.add_argument("--fixed-q", type=float, default=0.977)
     ap.add_argument("--sakamoto-window", type=float, default=300.0, help="坂本型の誤差窓 [s]")
     ap.add_argument("--ambient", default="ハブ")
+    ap.add_argument("--u-max", type=float, default=1.0, help="案B:負荷の最大値(4 コア = 1.0)")
+    ap.add_argument("--no-c-nonneg", dest="c_nonneg", action="store_false", help="c < 0 でもそのまま使う")
+    out_dir_default = "eval"
+    ap.add_argument("--out-name", default=out_dir_default, help="results/ の下の出力先")
     args = ap.parse_args()
 
     d = Path(args.run_dir)
-    out = d / "results" / "eval"
+    out = d / "results" / args.out_name
     out.mkdir(parents=True, exist_ok=True)
     tel = pd.read_csv(d / "raw" / "telemetry.csv")
     ev = pd.read_csv(d / "events.csv")
@@ -131,6 +142,11 @@ def main():
         p_self, r_self = fit_self_only(th[:n_id], u[:n_id], dt, f=f[:n_id])
         p_H, r_H = fit_with_H(th[:n_id], u[:n_id], nbr[:n_id], dt, z_base=z_base, f=f[:n_id],
                               rho_grid=np.linspace(0.5, 0.995, 100))
+        H_clipped = False
+        if args.c_nonneg and p_H.c < 0:  # 物理的にありえないので H なしにする
+            p_H, r_H, H_clipped = ThermalParams(**{**{k: getattr(p_self, k) for k in
+                                                     ("a", "b", "d", "e", "dt")}, "c": 0.0,
+                                                  "rho": p_H.rho, "z_base": z_base}), r_self, True
         if src == "11/13 step":
             cb = ident["caseB"]
             p_self = ThermalParams(a=cb["a"], b=cb["b"], d=cb["d"], e=cb["e"], dt=dt)
@@ -146,6 +162,7 @@ def main():
                                 "self": {**p_self.to_dict(), "issues": p_self.check()},
                                 "withH": {**p_H.to_dict(), "issues": p_H.check(),
                                           "steady_rise_per_degC_of_nbr": p_H.c / (1 - p_H.a)},
+                                "H_clipped_to_c0": H_clipped,
                                 "resid_var_self": float(np.var(r_self)), "resid_var_H": float(np.var(r_H)),
                                 "noise_self": vars(n_self), "noise_H": vars(n_H),
                                 "T_max": float(np.nanmax(df["T"])), "clock_min": float(np.nanmin(df.clock))}
@@ -161,11 +178,23 @@ def main():
         def fixed(name):
             return fixed_margin_from(realized_errors(th, pred[name], m)[:n_id - m], args.fixed_q)
 
+        # 案B:負荷の急上昇マージン
+        du = np.full(n, np.nan)
+        for k in range(n_id - m):
+            du[k] = u[k + 1:k + m + 1].max() - u[k]
+        p_inc = float(np.nanmean(du[:n_id - m] > 0.1))  # Δ 秒以内に負荷が 10% 以上上がった割合(同定区間)
+        tail = 1 - 0.5 * (1 + math.erf(args.alpha / math.sqrt(2)))
+        geo = sum(p_H.a ** i for i in range(m))
+        J = p_H.b * np.clip(args.u_max - u, 0, None) * geo if p_inc > tail else np.zeros(n)
+        info["nodes"][label].update({"p_load_increase": p_inc, "tail": tail, "jump_used": bool(p_inc > tail),
+                                     "J_max": float(J.max())})
         margins = {"Self-only + fixed": ("Self-only", fixed("Self-only")),
                    "Sakamoto-like": ("Sakamoto-like", sk_M),
                    "KF + H + fixed": ("KF + H (proposed)", fixed("KF + H (proposed)")),
                    "Proposed (KF + H, ασ+δ)": ("KF + H (proposed)",
-                                                dynamic_margin(kfH["sigma"], args.alpha, args.delta_margin))}
+                                                dynamic_margin(kfH["sigma"], args.alpha, args.delta_margin)),
+                   "Plan B (ασ+δ + load jump)": ("KF + H (proposed)",
+                                                  dynamic_margin(kfH["sigma"], args.alpha, args.delta_margin) + J)}
         subsets = {"all": idx_ev, "steady": idx_ev[steady[idx_ev]], "switch": idx_ev[~steady[idx_ev]]}
         for name, pr in pred.items():
             for sub, idx in subsets.items():

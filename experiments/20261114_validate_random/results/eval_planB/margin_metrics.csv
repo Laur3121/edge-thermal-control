@@ -1,0 +1,61 @@
+node,method,subset,n,mean_margin,p95_margin,exceed_rate
+A (11/14 first half),Self-only + fixed,all,1890,5.6817,5.6817,0.0111
+A (11/14 first half),Self-only + fixed,steady,1681,5.6817,5.6817,0.0000
+A (11/14 first half),Self-only + fixed,switch,209,5.6817,5.6817,0.1005
+A (11/14 first half),Sakamoto-like,all,1890,3.0412,8.2304,0.0503
+A (11/14 first half),Sakamoto-like,steady,1681,3.0955,8.2306,0.0214
+A (11/14 first half),Sakamoto-like,switch,209,2.6047,6.4323,0.2823
+A (11/14 first half),KF + H + fixed,all,1890,5.7178,5.7178,0.0111
+A (11/14 first half),KF + H + fixed,steady,1681,5.7178,5.7178,0.0000
+A (11/14 first half),KF + H + fixed,switch,209,5.7178,5.7178,0.1005
+A (11/14 first half),"Proposed (KF + H, ασ+δ)",all,1890,2.9639,2.9639,0.0354
+A (11/14 first half),"Proposed (KF + H, ασ+δ)",steady,1681,2.9639,2.9639,0.0036
+A (11/14 first half),"Proposed (KF + H, ασ+δ)",switch,209,2.9639,2.9639,0.2919
+A (11/14 first half),Plan B (ασ+δ + load jump),all,1890,7.9019,10.4183,0.0005
+A (11/14 first half),Plan B (ασ+δ + load jump),steady,1681,7.9194,10.4183,0.0006
+A (11/14 first half),Plan B (ασ+δ + load jump),switch,209,7.7613,10.4183,0.0000
+B (11/14 first half),Self-only + fixed,all,1890,5.2173,5.2173,0.0217
+B (11/14 first half),Self-only + fixed,steady,1681,5.2173,5.2173,0.0012
+B (11/14 first half),Self-only + fixed,switch,209,5.2173,5.2173,0.1866
+B (11/14 first half),Sakamoto-like,all,1890,3.1545,6.7938,0.0444
+B (11/14 first half),Sakamoto-like,steady,1681,3.1875,6.7557,0.0155
+B (11/14 first half),Sakamoto-like,switch,209,2.8891,7.8032,0.2775
+B (11/14 first half),KF + H + fixed,all,1890,5.3811,5.3811,0.0212
+B (11/14 first half),KF + H + fixed,steady,1681,5.3811,5.3811,0.0012
+B (11/14 first half),KF + H + fixed,switch,209,5.3811,5.3811,0.1818
+B (11/14 first half),"Proposed (KF + H, ασ+δ)",all,1890,2.3755,2.3805,0.0899
+B (11/14 first half),"Proposed (KF + H, ασ+δ)",steady,1681,2.3756,2.3811,0.0589
+B (11/14 first half),"Proposed (KF + H, ασ+δ)",switch,209,2.3747,2.3769,0.3397
+B (11/14 first half),Plan B (ασ+δ + load jump),all,1890,8.3983,11.8286,0.0026
+B (11/14 first half),Plan B (ασ+δ + load jump),steady,1681,8.3915,11.8288,0.0006
+B (11/14 first half),Plan B (ασ+δ + load jump),switch,209,8.4533,11.8275,0.0191
+C (11/14 first half),Self-only + fixed,all,1890,3.5548,3.5548,0.0222
+C (11/14 first half),Self-only + fixed,steady,1681,3.5548,3.5548,0.0012
+C (11/14 first half),Self-only + fixed,switch,209,3.5548,3.5548,0.1914
+C (11/14 first half),Sakamoto-like,all,1890,2.9158,7.2760,0.0354
+C (11/14 first half),Sakamoto-like,steady,1681,2.9458,7.3696,0.0173
+C (11/14 first half),Sakamoto-like,switch,209,2.6744,7.2704,0.1818
+C (11/14 first half),KF + H + fixed,all,1890,3.6180,3.6180,0.0233
+C (11/14 first half),KF + H + fixed,steady,1681,3.6180,3.6180,0.0024
+C (11/14 first half),KF + H + fixed,switch,209,3.6180,3.6180,0.1914
+C (11/14 first half),"Proposed (KF + H, ασ+δ)",all,1890,2.4739,2.4739,0.0275
+C (11/14 first half),"Proposed (KF + H, ασ+δ)",steady,1681,2.4739,2.4739,0.0054
+C (11/14 first half),"Proposed (KF + H, ασ+δ)",switch,209,2.4739,2.4739,0.2057
+C (11/14 first half),Plan B (ασ+δ + load jump),all,1890,7.8387,10.5935,0.0053
+C (11/14 first half),Plan B (ασ+δ + load jump),steady,1681,7.8272,10.5935,0.0018
+C (11/14 first half),Plan B (ασ+δ + load jump),switch,209,7.9311,10.5919,0.0335
+A (11/13 step),Self-only + fixed,all,1890,5.9077,5.9077,0.0116
+A (11/13 step),Self-only + fixed,steady,1681,5.9077,5.9077,0.0000
+A (11/13 step),Self-only + fixed,switch,209,5.9077,5.9077,0.1053
+A (11/13 step),Sakamoto-like,all,1890,3.1295,8.1843,0.0550
+A (11/13 step),Sakamoto-like,steady,1681,3.1847,8.1909,0.0274
+A (11/13 step),Sakamoto-like,switch,209,2.6851,6.3191,0.2775
+A (11/13 step),KF + H + fixed,all,1890,5.9530,5.9530,0.0116
+A (11/13 step),KF + H + fixed,steady,1681,5.9530,5.9530,0.0000
+A (11/13 step),KF + H + fixed,switch,209,5.9530,5.9530,0.1053
+A (11/13 step),"Proposed (KF + H, ασ+δ)",all,1890,2.8473,2.8473,0.0413
+A (11/13 step),"Proposed (KF + H, ασ+δ)",steady,1681,2.8473,2.8473,0.0077
+A (11/13 step),"Proposed (KF + H, ασ+δ)",switch,209,2.8473,2.8473,0.3110
+A (11/13 step),Plan B (ασ+δ + load jump),all,1890,9.1717,12.3945,0.0011
+A (11/13 step),Plan B (ασ+δ + load jump),steady,1681,9.1941,12.3945,0.0012
+A (11/13 step),Plan B (ασ+δ + load jump),switch,209,8.9915,12.3945,0.0000

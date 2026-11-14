@@ -1,0 +1,49 @@
+node,method,subset,n,bias,MAE,RMSE,R2,P97.7_err
+A (11/14 first half),Self-only,all,1890,0.1460,1.0537,1.9774,0.9632,4.0978
+A (11/14 first half),Self-only,steady,1681,0.2092,0.6953,0.9014,0.9925,1.5163
+A (11/14 first half),Self-only,switch,209,-0.3625,3.9360,5.3687,0.6621,7.8619
+A (11/14 first half),Sakamoto-like,all,1890,0.0203,1.1061,2.0470,0.9606,3.9627
+A (11/14 first half),Sakamoto-like,steady,1681,0.0835,0.7510,1.0173,0.9905,2.2273
+A (11/14 first half),Sakamoto-like,switch,209,-0.4877,3.9621,5.4377,0.6534,8.9041
+A (11/14 first half),KF (no H),all,1890,0.1498,1.0708,1.9915,0.9627,4.1210
+A (11/14 first half),KF (no H),steady,1681,0.2131,0.7139,0.9325,0.9920,1.5388
+A (11/14 first half),KF (no H),switch,209,-0.3591,3.9416,5.3733,0.6615,7.8713
+A (11/14 first half),KF + H (proposed),all,1890,0.1498,1.0708,1.9915,0.9627,4.1210
+A (11/14 first half),KF + H (proposed),steady,1681,0.2131,0.7139,0.9325,0.9920,1.5388
+A (11/14 first half),KF + H (proposed),switch,209,-0.3591,3.9416,5.3733,0.6615,7.8713
+B (11/14 first half),Self-only,all,1890,0.2945,1.1566,2.1198,0.9530,4.8907
+B (11/14 first half),Self-only,steady,1681,0.3266,0.7803,1.1344,0.9868,2.9456
+B (11/14 first half),Self-only,switch,209,0.0360,4.1834,5.5033,0.6328,10.8849
+B (11/14 first half),Sakamoto-like,all,1890,0.0303,1.1529,2.1246,0.9528,4.3246
+B (11/14 first half),Sakamoto-like,steady,1681,0.0724,0.7775,1.0030,0.9897,1.8844
+B (11/14 first half),Sakamoto-like,switch,209,-0.3086,4.1719,5.7210,0.6032,11.1364
+B (11/14 first half),KF (no H),all,1890,0.3036,1.1764,2.1384,0.9522,4.9736
+B (11/14 first half),KF (no H),steady,1681,0.3350,0.8015,1.1722,0.9859,3.0374
+B (11/14 first half),KF (no H),switch,209,0.0510,4.1911,5.5044,0.6327,10.9072
+B (11/14 first half),KF + H (proposed),all,1890,0.3705,1.1749,2.1070,0.9536,4.8419
+B (11/14 first half),KF + H (proposed),steady,1681,0.4021,0.8050,1.1381,0.9867,2.8177
+B (11/14 first half),KF + H (proposed),switch,209,0.1159,4.1496,5.4524,0.6396,10.9598
+C (11/14 first half),Self-only,all,1890,0.2123,1.0440,2.0369,0.9497,3.0944
+C (11/14 first half),Self-only,steady,1681,0.2726,0.6840,0.8849,0.9907,1.7344
+C (11/14 first half),Self-only,switch,209,-0.2733,3.9392,5.5877,0.5437,10.4882
+C (11/14 first half),Sakamoto-like,all,1890,0.0135,1.0183,2.1029,0.9464,3.2653
+C (11/14 first half),Sakamoto-like,steady,1681,0.0681,0.6377,0.8640,0.9911,1.7225
+C (11/14 first half),Sakamoto-like,switch,209,-0.4253,4.0793,5.8297,0.5033,11.7956
+C (11/14 first half),KF (no H),all,1890,0.2202,1.0675,2.0571,0.9487,3.6309
+C (11/14 first half),KF (no H),steady,1681,0.2799,0.7093,0.9312,0.9897,1.7739
+C (11/14 first half),KF (no H),switch,209,-0.2600,3.9483,5.5940,0.5427,10.5500
+C (11/14 first half),KF + H (proposed),all,1890,0.2202,1.0675,2.0571,0.9487,3.6309
+C (11/14 first half),KF + H (proposed),steady,1681,0.2799,0.7093,0.9312,0.9897,1.7739
+C (11/14 first half),KF + H (proposed),switch,209,-0.2600,3.9483,5.5940,0.5427,10.5500
+A (11/13 step),Self-only,all,1890,0.5017,1.3743,2.1502,0.9565,4.3594
+A (11/13 step),Self-only,steady,1681,0.5693,1.0495,1.2909,0.9847,2.4282
+A (11/13 step),Self-only,switch,209,-0.0424,3.9869,5.3297,0.6670,8.1491
+A (11/13 step),Sakamoto-like,all,1890,0.0138,1.1920,2.0989,0.9586,4.0350
+A (11/13 step),Sakamoto-like,steady,1681,0.0740,0.8490,1.1335,0.9882,2.4010
+A (11/13 step),Sakamoto-like,switch,209,-0.4708,3.9509,5.4315,0.6541,8.7025
+A (11/13 step),KF (no H),all,1890,0.5131,1.3966,2.1687,0.9558,4.3898
+A (11/13 step),KF (no H),steady,1681,0.5809,1.0736,1.3226,0.9839,2.4895
+A (11/13 step),KF (no H),switch,209,-0.0323,3.9943,5.3349,0.6663,8.1925
+A (11/13 step),KF + H (proposed),all,1890,0.5134,1.3971,2.1690,0.9557,4.3903
+A (11/13 step),KF + H (proposed),steady,1681,0.5812,1.0741,1.3233,0.9839,2.4899
+A (11/13 step),KF + H (proposed),switch,209,-0.0321,3.9945,5.3350,0.6663,8.1927
