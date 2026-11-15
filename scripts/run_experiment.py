@@ -74,6 +74,13 @@ def parse_nodes(items: list[str]) -> dict[str, str]:
     return out
 
 
+def agent_address(host: str) -> str:
+    """raspiN → 192.168.0.(50+N)(CLAUDE.md の対応。PC はホスト名を引けないため)。"""
+    import re
+    mt = re.fullmatch(r"raspi(\d+)", host)
+    return f"192.168.0.{50 + int(mt.group(1))}" if mt else host
+
+
 def check_roles(phases: list[dict], roles: set[str]) -> None:
     for ph in phases:
         used = set(ph.get("load", {})) | set(ph.get("fan", {}))
@@ -187,6 +194,20 @@ class Runner:
             self.fan[role] = int(v)
             self.send(role, "fan", int(v))
             self.event("fan", phase["name"], role, int(v))
+
+    def stop_agents(self):
+        """終了後に各ノードの etc-agent を止め、ファンとガバナを OS の制御に戻す。
+        止めないと、指令が途絶えて 10 秒後から強制 ON でファンが回り続ける(11/14 の比較実験で発生)。"""
+        for role, host in self.nodes.items():
+            addr = agent_address(host)
+            try:
+                r = subprocess.run(["ssh", "-o", "ConnectTimeout=5", "-o", "BatchMode=yes", f"ubuntu@{addr}",
+                                    "sudo -n systemctl stop etc-agent && systemctl is-active etc-agent || true"],
+                                   capture_output=True, text=True, timeout=60)
+                res = (r.stdout.strip() or r.stderr.strip())[-80:]
+            except Exception as ex:  # noqa: BLE001  止められなくても終了処理は続ける
+                res = f"error {ex}"
+            self.event("agent_stop", "end", role, res)
 
     def make_ctrl(self, role: str, mode: str):
         from etc.control import ControlConfig, controller_from_dict
@@ -343,6 +364,8 @@ class Runner:
                 if p is not None:
                     p.send_signal(signal.SIGINT)
                     p.wait(timeout=10)
+            if not self.args.keep_agents:
+                self.stop_agents()
             self.ev_fp.close()
             if self.ctl_fp is not None:
                 self.ctl_fp.close()
@@ -385,6 +408,8 @@ def main():
                     help="閉ループ制御の同定値(scripts/fit_control_params.py の出力)。fan に方式名を書く段階で必須")
     ap.add_argument("--ambient-name", default="ハブ", help="制御に使う室温計の名前(部分一致)")
     ap.add_argument("--ambient-default", type=float, default=20.0, help="室温が読めないときの値 [℃]")
+    ap.add_argument("--keep-agents", action="store_true",
+                    help="終了後に各ノードの etc-agent を止めない(既定では止めて OS のファン制御に戻す)")
     ap.add_argument("--dry-run", action="store_true", help="段階の一覧と合計時間を表示するだけ")
     args = ap.parse_args()
 
