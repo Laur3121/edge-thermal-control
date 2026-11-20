@@ -143,7 +143,14 @@ KF(H なし)と Self-only の誤差はほぼ同じであった。A の KF + H �
 評価指標は、ファン稼働率(ファンが ON だった時間の割合)、最高温度、80\,℃ を超えた時間、スロットリングの時間、強制 ON の時間、ON にした回数とした。
 
 \subsection{結果}
-結果を表\ref{tab:eval-control}に、温度とファンの時系列を図\ref{fig:eval-control}に示す。
+結果を表\ref{tab:eval-control}と図\ref{fig:eval-bars}に、1巡目のノード A の温度とファンの時系列を図\ref{fig:eval-control}に示す。
+
+\begin{figure}[tb]
+  \centering
+  \includegraphics[width=\linewidth]{fig_control_bars.png}
+  \caption{各条件のファン稼働率と最高温度(9 回の平均。ひげは最小と最大)}
+  \label{fig:eval-bars}
+\end{figure}
 
 \begin{table}[tb]
   \centering
@@ -165,8 +172,8 @@ KF(H なし)と Self-only の誤差はほぼ同じであった。A の KF + H �
 
 \begin{figure}[tb]
   \centering
-  \includegraphics[width=\linewidth]{20261114_compare/results/control_timeseries.png}
-  \caption{ファン制御の比較実験の時系列(黒:実測温度、青:ファンを止めたときの 30 秒先予測、橙:安全閾値、緑:ファン)}
+  \includegraphics[width=\linewidth]{fig_control_round.png}
+  \caption{ファン制御の比較実験の時系列(1巡目、ノード A。各条件 20 分の負荷パターン)}
   \label{fig:eval-control}
 \end{figure}
 
@@ -183,8 +190,8 @@ KF(H なし)と Self-only の誤差はほぼ同じであった。A の KF + H �
 
 \begin{figure}[tb]
   \centering
-  \includegraphics[width=\linewidth]{20261114_sim_tradeoff/tradeoff.png}
-  \caption{設定を変えたときのファン稼働率と最高温度の関係(シミュレーション)}
+  \includegraphics[width=\linewidth]{fig_tradeoff.png}
+  \caption{設定を変えたときのファン稼働率と最高温度の関係(シミュレーション。左:比較実験と同じ負荷、右:ランダムな負荷の1本)}
   \label{fig:eval-sim}
 \end{figure}
 
