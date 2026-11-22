@@ -4,7 +4,7 @@
 - 図:役割ごとに、実測温度・Δ 秒先予測(ファン OFF のとき)・Tsafe・ファン状態・負荷
 - 指標(段階名の先頭 "r<巡>_<条件>_" ごとにまとめる。試運転のように該当しなければ実験全体で 1 つ):
   最高温度、80℃ 超過の秒数、スロットリング(get_throttled の下位ビットが立った秒数)、強制 ON の秒数、
-  ファン稼働率(ON の秒数 / 区間の秒数)、ON にした回数
+  ファン稼働率(ON の秒数 / 区間の秒数)、ON にした回数、段階で重みをつけた稼働(fan_stage の列があるとき。段階 / 4 の平均)
 
 出力:<run>/results/control_timeseries.png、control_metrics.csv
 """
@@ -71,12 +71,15 @@ def main():
                          "clock_min_MHz": g["clock"].min() / 1e6,
                          "failsafe_s": float(dts[g.failsafe.to_numpy() > 0].sum()),
                          "fan_on_ratio": float((dts * fan).sum() / dts.sum()),
-                         "fan_on_count": int(np.sum(np.diff(np.r_[0, fan]) == 1))})
+                         "fan_on_count": int(np.sum(np.diff(np.r_[0, fan]) == 1)),
+                         # 段階で重みをつけた稼働(段階 / 4 の平均)。fan_stage の列がある実験(11/22 以降)だけ
+                         "fan_stage_weighted": (float((dts * g.fan_stage.fillna(0).to_numpy() / 4).sum() / dts.sum())
+                                                if "fan_stage" in g else np.nan)})
     mt = pd.DataFrame(rows)
     mt.to_csv(out / "control_metrics.csv", index=False, float_format="%.3f")
     if len(mt):
         summ = mt.groupby("condition")[["T_max", "over_limit_s", "throttle_s", "failsafe_s",
-                                         "fan_on_ratio", "fan_on_count"]].agg(["mean", "max"])
+                                         "fan_on_ratio", "fan_on_count", "fan_stage_weighted"]].agg(["mean", "max"])
         summ.to_csv(out / "control_summary.csv", float_format="%.3f")
         print(mt.to_string(index=False, float_format="%.2f"))
 
