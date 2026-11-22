@@ -99,3 +99,32 @@ def test_poe_fan_on_state_is_clamped(tmp_path):
     f = na.PoeFan(on_state=9, thermal_root=str(th), hwmon_root=str(hw))
     f.set(True)
     assert (th / "cooling_device0" / "cur_state").read_text() == "4"
+
+
+def test_decide_fan_auto():
+    a = na.Agent(_Args())
+    a.fan_cmd, a.last_cmd_time = 2, 1000.0
+    assert a.decide_fan(60.0, now=1005.0) == (2, 0)
+    # 強制 ON は auto より優先
+    assert a.decide_fan(82.0, now=1005.0) == (True, 1)
+
+
+def test_poe_fan_auto_returns_and_takes_back_control(tmp_path):
+    th, hw = _fake_sysfs(tmp_path)
+    f = na.PoeFan(thermal_root=str(th), hwmon_root=str(hw))
+    policy = th / "thermal_zone0" / "policy"
+    cur = th / "cooling_device0" / "cur_state"
+    # auto:OS の制御に返し、OS が決めた段階を読む
+    f.apply(2)
+    assert policy.read_text() == "step_wise"
+    cur.write_text("3\n")  # OS が段階 3 にしたとする
+    f.apply(2)
+    assert f.stage() == 3 and f.state == 1
+    # 0/1 の指令で制御を取り戻す
+    f.apply(0)
+    assert policy.read_text() == "user_space"
+    assert cur.read_text() == "0" and f.state == 0
+    f.apply(1)
+    assert cur.read_text() == "4"
+    f.close()
+    assert policy.read_text() == "step_wise"

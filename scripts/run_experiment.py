@@ -21,6 +21,7 @@
 }
 load / fan に書かなかった役割は前の段階の値を引き継ぐ。最初はすべて負荷 0・ファン 0。
 
+OS 標準:fan に "os" と書くと、その段階はファンを OS の自動制御(step_wise)に任せる(2026-11-22 追加)。
 閉ループ制御:fan に 0/1 の代わりに方式名("proposed" / "self_fixed" / "threshold"、src/etc/control.py)を書くと、
 その段階から制御器が 5 秒ごとにファンを決める(段階に入るたびに制御器を作り直す)。--control-params の同定値を使う。
 制御器の設定はシナリオの "control": {...}(ControlConfig の項目)。判断の記録は <out>/control.csv。
@@ -184,6 +185,12 @@ class Runner:
             self.send(role, "load", int(v))
             self.event("load", phase["name"], role, int(v))
         for role, v in phase.get("fan", {}).items():
+            if v == "os":  # OS 標準のファン制御に任せる(node_agent に "2" を送る)
+                self.mode[role] = None
+                self.fan[role] = 2
+                self.send(role, "fan", 2)
+                self.event("fan", phase["name"], role, "os")
+                continue
             if isinstance(v, str):  # 閉ループ制御。OFF から始める
                 self.ctrl[role] = self.make_ctrl(role, v)
                 self.mode[role] = v
