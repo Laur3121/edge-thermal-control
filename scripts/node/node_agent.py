@@ -20,7 +20,8 @@
 負荷:etc/<host>/load/set に整数 N を送ると `stress-ng --cpu N` を起動する(0 で停止。前の負荷は止めてから切り替え)。
 実験スクリプト(scripts/run_experiment.py)が負荷とファンを時刻どおりに切り替えるのに使う。
 
-ファン:MQTT の etc/<host>/fan/set に "0"/"1" を送ると切り替わる。"2" を送ると OS の自動制御(step_wise)に返す(auto。
+ファン:MQTT の etc/<host>/fan/set に "0"/"1" を送ると切り替わる。etc/<host>/fan/stage/set に 1〜4 を送ると、
+  ON のときの段階を変える(PoE+ HAT のとき。2026-11-22 追加。強制 ON は常に最大の段階)。"2" を送ると OS の自動制御(step_wise)に返す(auto。
   OS 標準のファン制御との比較用、2026-11-22 追加)。auto の間も、強制 ON の条件になればエージェントが制御を取り戻して最大で回す。
   --fan-mode poe(既定):Raspberry Pi PoE+ HAT のファン。Linux の冷却デバイス(type=pwm-fan)の cur_state を書く。
       OS の自動制御(thermal_zone0 の step_wise。40℃ から回り始める)を止めるため、起動時に policy を user_space にし、
@@ -142,9 +143,12 @@ class Fan:
     def stage(self) -> int | None:
         return None
 
-    def apply(self, mode: int) -> None:
+    def apply(self, mode: int, failsafe: int = 0) -> None:
         """mode:0 = OFF、1 = ON、2 = OS に任せる(OS の制御がないファンでは OFF)。"""
         self.set(mode == 1)
+
+    def set_on_state(self, stage: int) -> None:
+        """ON のときの段階(段階を持たないファンでは何もしない)。"""
 
     def close(self) -> None:
         self.set(False)
@@ -179,6 +183,7 @@ class PoeFan(Fan):
             raise RuntimeError("pwm-fan の冷却デバイスが見つからない(PoE+ HAT が認識されていない?)")
         self.max_state = int((self.cdev / "max_state").read_text())
         self.on_state = self.max_state if on_state is None else min(on_state, self.max_state)
+        self.cur = None  # 今書いている段階
         self.policy_file = root / "thermal_zone0" / "policy"
         self.orig_policy = self.policy_file.read_text().strip()
         if self.orig_policy == "user_space":  # 前回の異常終了などで戻っていない場合
@@ -191,17 +196,25 @@ class PoeFan(Fan):
 
     def _write(self, st: int) -> None:
         (self.cdev / "cur_state").write_text(str(st))
+        self.cur = st
 
-    def set(self, on: bool) -> None:
+    def set(self, on: bool, stage: int | None = None) -> None:
+        target = (self.on_state if stage is None else stage) if on else 0
         if self.auto:  # OS から制御を取り戻す
             self.policy_file.write_text("user_space")
             self.auto = False
-            self._write(self.on_state if on else 0)
-        elif int(on) != self.state:
-            self._write(self.on_state if on else 0)
-        super().set(on)
+            self._write(target)
+        elif target != self.cur:
+            self._write(target)
+        Fan.set(self, on)
 
-    def apply(self, mode: int) -> None:
+    def set_on_state(self, stage: int) -> None:
+        self.on_state = max(1, min(int(stage), self.max_state))
+
+    def apply(self, mode: int, failsafe: int = 0) -> None:
+        if mode == 1 and failsafe:  # 強制 ON は最大の段階
+            self.set(True, stage=self.max_state)
+            return
         if mode == 2:
             if not self.auto:
                 self.policy_file.write_text(self.orig_policy)
@@ -280,6 +293,8 @@ class Agent:
         self.topic_tel = f"{args.topic_prefix}/{self.host}/telemetry"
         self.topic_cmd = f"{args.topic_prefix}/{self.host}/fan/set"
         self.topic_load = f"{args.topic_prefix}/{self.host}/load/set"
+        self.topic_stage = f"{args.topic_prefix}/{self.host}/fan/stage/set"
+        self.stage_cmd: int | None = None
 
     def connect(self):
         import paho.mqtt.client as mqtt  # RasPi 上でだけ必要
@@ -287,7 +302,7 @@ class Agent:
             c = mqtt.Client(mqtt.CallbackAPIVersion.VERSION2, client_id=f"agent-{self.host}")
         except AttributeError:  # paho-mqtt 1.x
             c = mqtt.Client(client_id=f"agent-{self.host}")
-        c.on_connect = lambda client, *a: client.subscribe([(self.topic_cmd, 1), (self.topic_load, 1)])
+        c.on_connect = lambda client, *a: client.subscribe([(self.topic_cmd, 1), (self.topic_load, 1), (self.topic_stage, 1)])
         c.on_message = self.on_cmd
         c.connect_async(self.args.broker, self.args.port, keepalive=30)
         c.loop_start()
@@ -295,6 +310,11 @@ class Agent:
 
     def on_cmd(self, client, userdata, msg):
         payload = msg.payload.decode(errors="ignore").strip()
+        if msg.topic == self.topic_stage:
+            if payload.isdigit():
+                with self.lock:
+                    self.stage_cmd = int(payload)
+            return
         if msg.topic == self.topic_load:
             if payload.isdigit():
                 with self.lock:
@@ -345,7 +365,11 @@ class Agent:
                 use, prev = cpu_usage(prev, cur), cur
                 temp = read_temp()
                 mode, failsafe = self.decide_fan(temp, now)
-                self.fan.apply(mode)
+                with self.lock:
+                    stage_cmd = self.stage_cmd
+                if stage_cmd is not None:
+                    self.fan.set_on_state(stage_cmd)
+                self.fan.apply(mode, failsafe)
                 with self.lock:
                     load_cmd = self.load_cmd
                 if load_cmd is not None:

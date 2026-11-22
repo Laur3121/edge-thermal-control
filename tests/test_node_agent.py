@@ -128,3 +128,21 @@ def test_poe_fan_auto_returns_and_takes_back_control(tmp_path):
     assert cur.read_text() == "4"
     f.close()
     assert policy.read_text() == "step_wise"
+
+
+def test_poe_fan_stage_and_failsafe(tmp_path):
+    th, hw = _fake_sysfs(tmp_path)
+    f = na.PoeFan(thermal_root=str(th), hwmon_root=str(hw))
+    cur = th / "cooling_device0" / "cur_state"
+    f.set_on_state(2)
+    f.apply(1)
+    assert cur.read_text() == "2"
+    # 強制 ON は最大の段階
+    f.apply(1, failsafe=1)
+    assert cur.read_text() == "4"
+    f.apply(1)
+    assert cur.read_text() == "2"
+    f.set_on_state(9)  # 範囲外は最大に丸める
+    f.apply(1)
+    assert cur.read_text() == "4"
+    f.close()

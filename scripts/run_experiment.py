@@ -21,6 +21,7 @@
 }
 load / fan に書かなかった役割は前の段階の値を引き継ぐ。最初はすべて負荷 0・ファン 0。
 
+ファンの段階:"fan_stage": {"A": 2} で、ON のときの段階を変える(PoE+ HAT、2026-11-22 追加)。
 OS 標準:fan に "os" と書くと、その段階はファンを OS の自動制御(step_wise)に任せる(2026-11-22 追加)。
 閉ループ制御:fan に 0/1 の代わりに方式名("proposed" / "self_fixed" / "threshold"、src/etc/control.py)を書くと、
 その段階から制御器が 5 秒ごとにファンを決める(段階に入るたびに制御器を作り直す)。--control-params の同定値を使う。
@@ -84,7 +85,7 @@ def agent_address(host: str) -> str:
 
 def check_roles(phases: list[dict], roles: set[str]) -> None:
     for ph in phases:
-        used = set(ph.get("load", {})) | set(ph.get("fan", {}))
+        used = set(ph.get("load", {})) | set(ph.get("fan", {})) | set(ph.get("fan_stage", {}))
         if "until" in ph:
             used.add(ph["until"]["role"])
         missing = used - roles
@@ -184,6 +185,9 @@ class Runner:
             self.load[role] = int(v)
             self.send(role, "load", int(v))
             self.event("load", phase["name"], role, int(v))
+        for role, v in phase.get("fan_stage", {}).items():  # ON のときのファンの段階(PoE+ HAT、1〜4)
+            self.send(role, "fan/stage", int(v))
+            self.event("fan_stage", phase["name"], role, int(v))
         for role, v in phase.get("fan", {}).items():
             if v == "os":  # OS 標準のファン制御に任せる(node_agent に "2" を送る)
                 self.mode[role] = None
