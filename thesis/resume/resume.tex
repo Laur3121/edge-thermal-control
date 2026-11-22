@@ -58,7 +58,7 @@
 \large{―熱干渉と冷却の速さが予測の効果に与える影響―}\\
 \vspace{6pt}
 \large{7303 鈴木 黎映}\\
-\large{指導教員 知念 賢一}
+\large{指導教員 知念 賢一 教授}
 \vspace{10pt}
 }]
 % ===== 下書き(Claude、11/22)。論文の 1・4〜9 章の要約。レオが読んで直す =====
@@ -66,7 +66,7 @@
 \section{はじめに}
 計算機を多数並べて動かす場所では、冷却が大きな課題である。データセンタでは冷却設備の電力が全体の大きな割合を占め\cite{dayarathna}、サーバの排熱が別のサーバの吸気側に回り込む熱の再循環が冷却の効率を下げる\cite{moore,tang}。同じ問題は、Raspberry Pi などを束ねたエッジのマイクロクラスタ\cite{shi,iridis}にもある。エッジの機器は空調のない棚や箱に置かれることが多く、Raspberry Pi 4B(以下、Raspi)は CPU 温度が約 80\,℃ を超えるとクロックを下げ(スロットリング)、処理が遅くなる。
 
-ファンを常に回せば温度は下がるが、ファンは回し続けるほど摩耗し、人のそばでは騒音にもなる。そこで本研究では、スロットリングを避けつつファンの稼働をできるだけ減らすことを目指す。先行発表\cite{ipsj}では、隣のノードの排熱で温度が上がる空間熱干渉を状態として推定するカルマンフィルタを提案した。しかし後の見直しで、予測に未来の実測値を用いていた、同定と評価に同じデータを用いていた、ファンを実際には動かしていなかった、などの課題が見つかった。
+ファンを常に回せば温度は下がるが、ファンの寿命は軸受けのグリースで決まり稼働時間で表されるため\cite{kim}、回し続けるほど寿命に近づく。人のそばでは騒音にもなる。そこで本研究では、スロットリングを避けつつファンの稼働をできるだけ減らすことを目指す。先行発表\cite{ipsj}では、隣のノードの排熱で温度が上がる空間熱干渉を状態として推定するカルマンフィルタを提案した。しかし後の見直しで、予測に未来の実測値を用いていた、同定と評価に同じデータを用いていた、ファンを実際には動かしていなかった、などの課題が見つかった。
 
 本研究では、これらを直したうえで、30 秒先の温度とその不確かさを予測し、予測が安全閾値を超えるときだけファンを回す制御を実機で評価する。次の3つの問いに答える。
 
@@ -78,7 +78,7 @@
 \end{description}
 
 \section{関連研究}
-Zanini ら\cite{zanini}は、熱 RC モデルによるモデル予測制御でマルチコアの温度を管理した。坂本ら\cite{sakamoto}は、過去の予測誤差の統計から動的にマージンを決める方法を提案した。データセンタでは、熱の再循環を考慮した負荷の配置が研究されている\cite{moore,tang}。Ogura ら\cite{ogura}は、データセンタの空調の給気温度をモデル予測制御で決める方法を提案した。笹倉ら\cite{sasakura}は、実際のサーバルームのデータから、状態空間モデルでラックの吸気温度を 30 分先まで予測し、95\,\% 信頼区間も示したが、予測を冷却の操作には用いていない。これらの多くは、性能を下げる操作(動作周波数など)や部屋全体の冷却を対象とし、シミュレーションで評価している。本研究は、性能を下げないノードごとのファンを操作し、予測の不確かさをカルマンフィルタの誤差共分散から求めてマージンに用いる点と、実機のファンを動かして閉ループで評価する点が異なる。
+Zanini ら\cite{zanini}は、熱 RC モデルによるモデル予測制御でマルチコアの温度を管理した。坂本ら\cite{sakamoto}は、仮想マシンの CPU 使用率の予測に持たせるマージンを、変動の大きさに応じて動的に変える方法を提案した。Coskun ら\cite{coskun}や Yeo ら\cite{yeo}は、温度を予測して先回りする熱管理が、上限に達してから処理を抑える反応的な方法より良いことを示した。ただし、そこで比べた反応的な方法は、性能を下げる操作であった。データセンタでは、熱の再循環を考慮した負荷の配置が研究されている\cite{moore,tang}。Ogura ら\cite{ogura}は、データセンタの空調の給気温度をモデル予測制御で決める方法を提案した。笹倉ら\cite{sasakura}は、実際のサーバルームのデータから、状態空間モデルでラックの吸気温度を 30 分先まで予測し、95\,\% 信頼区間も示したが、予測を冷却の操作には用いていない。これらの多くは、性能を下げる操作(動作周波数など)や部屋全体の冷却を対象とし、シミュレーションで評価している。本研究は、性能を下げないノードごとのファンを操作し、予測を用いる方式と温度だけを見る方式を同じ冷却手段で実機で比べ、予測が有効になる条件を明らかにする点が異なる。
 
 \section{提案手法}
 手法の流れを図\ref{fig:flow}に示す。5 秒ごとに、温度・CPU 使用率・ファンの状態を観測し、カルマンフィルタで状態を推定して、30 秒先の温度と不確かさ $\sigma$ を予測する。
@@ -113,7 +113,7 @@ Raspi 4B 3台(A、B、C)を 19 インチラックの上段に左から並べた�
 \section{結果}
 \textbf{RQ1(干渉)}:A だけに2コアの負荷を 10 分かけると、A は 21.3\,℃ 上がったが、すぐ隣の B と離れた C の上昇はどちらも 0.37\,℃ で同じであった。囲いのない机の上でも同様であった(B 0.49\,℃、C 0.50\,℃)。同定した干渉の係数 $c$ も 0 に近く(B で 0.0071)、A と C では負になった。ラックの環境では空間熱干渉はほぼ生じない(図\ref{fig:rack})。
 
-\textbf{RQ2(予測)}:負荷とファンが 30 秒の間変わらない区間(全体の 89\%)では、3台とも 30 秒先を平均絶対誤差 0.68〜0.78\,℃ で予測できた。30 秒以内に負荷が切り替わる区間では約 4\,℃ で、誤差の大半はここから生じる。干渉がない($c = 0$)と、$\sigma$ は時間によらず一定になり、動的マージンは固定マージンと同じ働きになる。
+\textbf{RQ2(予測)}:負荷とファンが 30 秒の間変わらない区間(全体の 89\%)では、3台とも 30 秒先を平均絶対誤差 0.68〜0.78\,℃ で予測できた。30 秒以内に負荷が切り替わる区間では約 4\,℃ で、誤差の大半はここから生じる。干渉がない($c = 0$)と、$\sigma$ は時間によらず一定になり、動的マージンは固定マージンと同じ働きになる。なお、温度の履歴だけから予測する AR モデルでも誤差はほぼ同じ(0.64〜0.72\,℃)であった。物理モデルを用いる意味は、「ファンを OFF のままにしたら」という入力を仮定した予測ができる点にある。
 
 \textbf{RQ3(制御)}:結果を表\ref{tab:control}と図\ref{fig:bars}に示す。予測を用いる2方式としきい値方式は、すべての回で 80\,℃ を超えず、スロットリングも起きなかった。提案手法は常時 ON と比べてファンの稼働を約 6 割減らした。ただし、しきい値方式との差はほぼなかった(38\% と 40\%)。シミュレーションで各方式の設定を広く変えても、ファン稼働率と最高温度の関係を表す曲線はほぼ重なった(図\ref{fig:tradeoff})。
 
@@ -158,7 +158,7 @@ Raspi 4B 3台(A、B、C)を 19 インチラックの上段に左から並べた�
 \end{figure*}
 
 \section{考察}
-\textbf{しきい値方式と差がなかった理由}:PoE+ HAT のファンは、ON にすると 5 秒以内に温度が下がり始め、冷却の効果も大きい。このように速くて強い冷却では、温度が上がってから回しても間に合うため、30 秒先を予測する利点が小さいと考えられる。
+\textbf{しきい値方式と差がなかった理由}:PoE+ HAT のファンは、ON にすると 5 秒以内に温度が下がり始め、冷却の効果も大きい。このように速くて強い冷却では、温度が上がってから回しても間に合うため、30 秒先を予測する利点が小さいと考えられる。Raspi 4B でファンをヒステリシス付きのしきい値で回した研究\cite{benoit}でも、スロットリングはすべての条件で防がれ、ファンの稼働率は 33〜65\,\% であり、本研究の結果と合う。
 
 \textbf{冷却が遅い場合}:これを確かめるため、シミュレーションで冷却の効きに遅れを加えた(図\ref{fig:slow})。条件は結果を見る前に決めた。指令が $L$ 秒後に効くむだ時間では、$L$ が 15〜30 秒を超えると、予測を用いる方式はしきい値方式より少ない稼働で 80\,℃ を守れるようになり、30 秒で 6〜13 ポイント、60 秒で 14〜28 ポイント少なかった。一方、効きがゆっくり変わる1次遅れでは、「先読みの間ずっと OFF にしたら」という判断が悲観的すぎ、効果ははっきりしなかった。「次の周期から ON にしても間に合うか」で判断すると差が出た。この判断は結果を見た後に追加したため、新しい負荷のパターン3本で基準を先に決めて確かめ、1次遅れ 120 秒で2本、240 秒で3本すべてで有効であった。遅い冷却では、予測の精度だけでなく、予測をどう判断に使うかが効果を左右する。
 
@@ -184,11 +184,15 @@ Raspi のマイクロクラスタで、予測に基づくファン制御を実�
   \bibitem{tang} Q. Tang, S. K. S. Gupta, G. Varsamopoulos, ``Energy-Efficient Thermal-Aware Task Scheduling for Homogeneous High-Performance Computing Data Centers: A Cyber-Physical Approach,'' IEEE Trans. Parallel and Distributed Systems, Vol.19, No.11, pp.1458--1472, 2008.
   \bibitem{shi} W. Shi, J. Cao, Q. Zhang, Y. Li, L. Xu, ``Edge Computing: Vision and Challenges,'' IEEE Internet of Things Journal, Vol.3, No.5, pp.637--646, 2016.
   \bibitem{iridis} S. J. Cox, J. T. Cox, R. P. Boardman, S. J. Johnston, M. Scott, ``Iridis-pi: a low-cost, compact demonstration cluster,'' Cluster Computing, pp.349--358, 2014.
+  \bibitem{kim} S. J. Kim, A. Claassen, ``How to Evaluate Fan Life,'' Electronics Cooling, 1996.
   \bibitem{ipsj} 鈴木 黎映, 知念 賢一, ``空間熱干渉を考慮した状態推定に基づく動的熱マージン制御手法,'' 情報処理学会研究報告, Vol.2026-OS-171, No.3, 2026.
-  \bibitem{ogura} M. Ogura, J. Wan, S. Kasahara, ``Model Predictive Control for Energy-Efficient Operation of Data Centers with Cold Aisle Containments,'' IFAC-PapersOnLine, 2018.
-  \bibitem{sasakura} 笹倉 康佑, 小松 正佳, 青木 健, 渡邊 剛, ``機械学習モデルを活用したサーバルームにおける温度環境の管理手法に関する研究(第1報),'' 空気調和・衛生工学会論文集, No.278, pp.1--8, 2020.
   \bibitem{zanini} F. Zanini, D. Atienza, L. Benini, G. De Micheli, ``Multicore Thermal Management with Model Predictive Control,'' Proc. European Conference on Circuit Theory and Design, pp.711--714, 2009.
   \bibitem{sakamoto} 坂本 竜, 高橋 竜一, 深澤 良彰, ``仮想マシンの CPU 使用率の負荷予測に対する安定度を用いた動的マージン設定手法,'' 信学技報, Vol.117, No.465, pp.49--54, 2018.
+  \bibitem{coskun} A. K. Coskun, T. S. Rosing, K. C. Gross, ``Proactive Temperature Management in MPSoCs,'' Proc. ISLPED, 2008.
+  \bibitem{yeo} I. Yeo, C. C. Liu, E. J. Kim, ``Predictive Dynamic Thermal Management for Multicore Systems,'' Proc. DAC, pp.734--739, 2008.
+  \bibitem{ogura} M. Ogura, J. Wan, S. Kasahara, ``Model Predictive Control for Energy-Efficient Operation of Data Centers with Cold Aisle Containments,'' IFAC-PapersOnLine, 2018.
+  \bibitem{sasakura} 笹倉 康佑, 小松 正佳, 青木 健, 渡邊 剛, ``機械学習モデルを活用したサーバルームにおける温度環境の管理手法に関する研究(第1報),'' 空気調和・衛生工学会論文集, No.278, pp.1--8, 2020.
+  \bibitem{benoit} T. Benoit-Cattin, D. Velasco-Montero, J. Fern\'{a}ndez-Berni, ``Impact of Thermal Throttling on Long-Term Visual Inference in a CPU-based Edge Device,'' arXiv:2010.06291, 2020.
 \end{thebibliography}
 }
 
