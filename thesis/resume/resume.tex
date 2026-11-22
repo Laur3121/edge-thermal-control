@@ -77,7 +77,7 @@
 \end{description}
 
 \section{関連研究}
-Zanini ら\cite{zanini}は、熱 RC モデルによるモデル予測制御でマルチコアの温度を管理した。坂本ら\cite{sakamoto}は、過去の予測誤差の統計から動的にマージンを決める方法を提案した。データセンタでは、熱の再循環を考慮した負荷の配置が研究されている\cite{moore,tang}。Ogura ら\cite{ogura}は、データセンタの空調の給気温度をモデル予測制御で決める方法を提案した。これらの多くは、性能を下げる操作(動作周波数など)や部屋全体の冷却を対象とし、シミュレーションで評価している。本研究は、性能を下げないノードごとのファンを操作し、予測の不確かさをカルマンフィルタの誤差共分散から求めてマージンに用いる点と、実機のファンを動かして閉ループで評価する点が異なる。
+Zanini ら\cite{zanini}は、熱 RC モデルによるモデル予測制御でマルチコアの温度を管理した。坂本ら\cite{sakamoto}は、過去の予測誤差の統計から動的にマージンを決める方法を提案した。データセンタでは、熱の再循環を考慮した負荷の配置が研究されている\cite{moore,tang}。Ogura ら\cite{ogura}は、データセンタの空調の給気温度をモデル予測制御で決める方法を提案した。笹倉ら\cite{sasakura}は、実際のサーバルームのデータから、状態空間モデルでラックの吸気温度を 30 分先まで予測し、95\,\% 信頼区間も示したが、予測を冷却の操作には用いていない。これらの多くは、性能を下げる操作(動作周波数など)や部屋全体の冷却を対象とし、シミュレーションで評価している。本研究は、性能を下げないノードごとのファンを操作し、予測の不確かさをカルマンフィルタの誤差共分散から求めてマージンに用いる点と、実機のファンを動かして閉ループで評価する点が異なる。
 
 \section{提案手法}
 手法の流れを図\ref{fig:flow}に示す。5 秒ごとに、温度・CPU 使用率・ファンの状態を観測し、カルマンフィルタで状態を推定して、30 秒先の温度と不確かさ $\sigma$ を予測する。
@@ -185,6 +185,7 @@ Raspi のマイクロクラスタで、予測に基づくファン制御を実�
   \bibitem{iridis} S. J. Cox, J. T. Cox, R. P. Boardman, S. J. Johnston, M. Scott, ``Iridis-pi: a low-cost, compact demonstration cluster,'' Cluster Computing, pp.349--358, 2014.
   \bibitem{ipsj} 鈴木 黎映, 知念 賢一, ``空間熱干渉を考慮した状態推定に基づく動的熱マージン制御手法,'' 情報処理学会研究報告, Vol.2026-OS-171, No.3, 2026.
   \bibitem{ogura} M. Ogura, J. Wan, S. Kasahara, ``Model Predictive Control for Energy-Efficient Operation of Data Centers with Cold Aisle Containments,'' IFAC-PapersOnLine, 2018.
+  \bibitem{sasakura} 笹倉 康佑, 小松 正佳, 青木 健, 渡邊 剛, ``機械学習モデルを活用したサーバルームにおける温度環境の管理手法に関する研究(第1報),'' 空気調和・衛生工学会論文集, No.278, pp.1--8, 2020.
   \bibitem{zanini} F. Zanini, D. Atienza, L. Benini, G. De Micheli, ``Multicore Thermal Management with Model Predictive Control,'' Proc. European Conference on Circuit Theory and Design, pp.711--714, 2009.
   \bibitem{sakamoto} 坂本 竜, 高橋 竜一, 深澤 良彰, ``仮想マシンの CPU 使用率の負荷予測に対する安定度を用いた動的マージン設定手法,'' 信学技報, Vol.117, No.465, pp.49--54, 2018.
 \end{thebibliography}
