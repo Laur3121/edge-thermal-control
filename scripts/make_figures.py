@@ -175,6 +175,69 @@ def fig_slow_cooling():
     plt.close(fig)
 
 
+def fig_predict():
+    """RQ2:ランダムの実験の後半(同定に使っていない区間)の A で、実測と 30 秒先の予測、予測 + マージン。"""
+    import json
+    import sys
+    sys.path.insert(0, str(ROOT / "src"))
+    sys.path.insert(0, str(ROOT / "scripts"))
+    from eval_validate import resample
+    from etc.kalman import NoiseParams, run_kf
+    from etc.model import ThermalParams
+
+    d = EXP / "20261114_validate_random"
+    tel = pd.read_csv(d / "raw" / "telemetry.csv", usecols=["ts", "host", "temp", "cpu", "fan", "clock"])
+    ev = pd.read_csv(d / "events.csv")
+    amb = pd.read_csv(d / "raw" / "ambient.csv")
+    amb = amb[amb.name.str.contains("ハブ")].sort_values("ts")
+    prm = json.loads((d / "results" / "eval" / "params.json").read_text())
+    nodeA = prm["nodes"]["A (11/14 first half)"]
+    mm = pd.read_csv(d / "results" / "eval" / "margin_metrics.csv")
+    fixedM = float(mm[(mm.node == "A (11/14 first half)") & (mm.method == "Self-only + fixed")
+                      & (mm.subset == "all")].mean_margin.iloc[0])
+    dt, m = prm["dt"], prm["m"]
+    ps = ev[ev.event == "phase_start"]
+    t0 = float(ps.ts.iloc[0])
+    n = prm["n"]
+    tk = t0 + np.arange(n) * dt
+    Tamb = np.interp(tk + dt / 2, amb.ts.to_numpy(), amb.temperature.to_numpy())
+    D = resample(tel, nodeA["host"], dt, t0, n).ffill().bfill()
+    th = D["T"].to_numpy() - Tamb
+    u, f = D.u.to_numpy(), D.f.to_numpy()
+    sp = nodeA["self"]
+    p = ThermalParams(a=sp["a"], b=sp["b"], d=sp["d"], e=sp["e"], c=0.0, dt=dt)  # A は c = 0(H なしと同じ)
+    nz = nodeA["noise_self"]
+    kf = run_kf(p, NoiseParams(R=nz["R"], qT=nz["qT"], qH0=0.0, beta=0.0), th, u, np.zeros(n), m, f=f)
+    M = 2.0 * kf["sigma"] + 0.5
+    a0 = prm["n_identify"] + int(20 * 60 / dt)
+    a1 = min(n, a0 + int(40 * 60 / dt))
+    sl = slice(a0, a1)
+    tmin = (tk - t0) / 60
+    tt, tf = tmin[sl], tmin[sl] + m * dt / 60
+    fig, ax = plt.subplots(2, 1, figsize=(6.6, 4.6), sharex=True, gridspec_kw={"height_ratios": [3, 1]})
+    ax[0].plot(tt, th[sl] + Tamb[sl], color="k", lw=1.2, label="実測")
+    pr = kf["pred"][sl] + Tamb[sl]
+    ax[0].plot(tf, pr, color=COL["proposed"], lw=1, label="30 秒先の予測(予測先の時刻に描画)")
+    ax[0].fill_between(tf, pr, pr + M[sl], color=COL["proposed"], alpha=0.18, lw=0,
+                       label=f"予測 + マージン(2σ + 0.5 = {np.nanmean(M[sl]):.1f}℃)")
+    ax[0].plot(tf, pr + fixedM, color=COL["selffixed"], lw=0.9, ls="--", label=f"予測 + 固定マージン({fixedM:.1f}℃)")
+    ax[0].set_ylabel("CPU 温度 [℃]")
+    ax[0].legend(frameon=False, fontsize=7.5, loc="upper right")
+    ax[1].plot(tt, u[sl] * 100, color="0.3", lw=1)
+    ax[1].set_ylabel("CPU 使用率 [%]")
+    ax[1].set_ylim(-5, 105)
+    a2 = ax[1].twinx()
+    a2.fill_between(tt, 0, f[sl], step="post", color="#9cc3ea", alpha=0.6, lw=0)
+    a2.set_ylim(0, 3)
+    a2.set_yticks([0, 1])
+    a2.set_yticklabels(["OFF", "ON"])
+    a2.set_ylabel("ファン", color="#5b8fc9")
+    ax[1].set_xlabel("実験開始からの時間 [分]")
+    fig.tight_layout()
+    fig.savefig(OUT / "fig_predict.png")
+    plt.close(fig)
+
+
 def fig_rack_interference():
     """ラックで A だけに負荷をかけたときの 3 台の温度。"""
     d = EXP / "20261113_rack_interference"
@@ -268,6 +331,6 @@ def fig_system():
 
 
 if __name__ == "__main__":
-    for f in [fig_control_round, fig_control_bars, fig_tradeoff, fig_rack_interference, fig_method_flow, fig_system, fig_slow_cooling]:
+    for f in [fig_control_round, fig_control_bars, fig_tradeoff, fig_rack_interference, fig_method_flow, fig_system, fig_slow_cooling, fig_predict]:
         f()
         print("ok", f.__name__)
