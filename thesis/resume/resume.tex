@@ -1,8 +1,9 @@
 % !TEX encoding = UTF-8 Unicode
 % 予備審査レジュメ(特研1審査会のレジュメ 2025年度 を元にしたテンプレート)
+% 図をページ幅で入れるため multicols ではなく twocolumn にした(11/22)
 % ヘッダーは先輩(2025年度 7307)の「創造工学専攻 情報工学コース / 年度 特別研究 2 審査会」に合わせた
 % ビルド:thesis/resume/ で latexmk resume.tex → build/resume.pdf
-\documentclass[10pt,uplatex,dvipdfmx]{jsarticle}
+\documentclass[10pt,uplatex,dvipdfmx,twocolumn]{jsarticle}
 
 % 描画・色関連
 \usepackage[dvipdfmx]{graphicx}
@@ -14,7 +15,6 @@
 \usepackage{setspace}
 \usepackage{fancyhdr}
 \usepackage{float}
-\usepackage{multicol}
 
 % 数式関連
 \usepackage{amsmath}
@@ -44,41 +44,150 @@
 \lfoot{\color{tmcitblue}\footnotesize Tokyo Metropolitan College of Industrial Technology}
 \renewcommand{\headrulewidth}{0.0pt}
 \setlength{\headheight}{20.2781pt}
+% ページ幅の図(figure*)をページの上に2つまで置けるように
+\setcounter{dbltopnumber}{3}
+\renewcommand{\dbltopfraction}{0.85}
+\renewcommand{\dblfloatpagefraction}{0.85}
+\renewcommand{\textfraction}{0.1}
 
 \begin{document}
 \setstretch{1.00}
-{\centering
+\twocolumn[{%
+\centering
 \Large{空間熱干渉を考慮した状態推定と動的熱マージンに基づくファン制御(仮題)}\\
 \vspace{6pt}
-\large{7303 鈴木黎映}\\
+\large{7303 鈴木 黎映}\\
 \large{指導教員 知念 賢一}
-\par}
-\begin{multicols*}{2}
+\vspace{10pt}
+}]
+% ===== 下書き(Claude、11/22)。論文の 1・4〜9 章の要約。レオが読んで直す =====
 
 \section{はじめに}
-% 背景(エッジ・ラックの RasPi クラスタ、専用空調なし)→ 課題(スロットリング、ファンを常に回す無駄)→ 目的
-(執筆中)
+計算機を多数並べて動かす場所では、冷却が大きな課題である。データセンタでは冷却設備の電力が全体の大きな割合を占め\cite{dayarathna}、サーバの排熱が別のサーバの吸気側に回り込む熱の再循環が冷却の効率を下げる\cite{moore,tang}。同じ問題は、Raspberry Pi などを束ねたエッジのマイクロクラスタ\cite{shi,iridis}にもある。エッジの機器は空調のない棚や箱に置かれることが多く、Raspberry Pi 4B(以下、Raspi)は CPU 温度が約 80\,℃ を超えるとクロックを下げ(スロットリング)、処理が遅くなる。
+
+ファンを常に回せば温度は下がるが、ファンは回し続けるほど摩耗し、人のそばでは騒音にもなる。そこで本研究では、スロットリングを避けつつファンの稼働をできるだけ減らすことを目指す。先行発表\cite{ipsj}では、隣のノードの排熱で温度が上がる空間熱干渉を状態として推定するカルマンフィルタを提案した。しかし後の見直しで、予測に未来の実測値を用いていた、同定と評価に同じデータを用いていた、ファンを実際には動かしていなかった、などの課題が見つかった。
+
+本研究では、これらを直したうえで、30 秒先の温度とその不確かさを予測し、予測が安全閾値を超えるときだけファンを回す制御を実機で評価する。次の3つの問いに答える。
+
+\begin{description}
+  \setlength{\itemsep}{0pt}
+  \item[RQ1] ラックに並べた環境で、空間熱干渉はどの程度生じるか
+  \item[RQ2] 別のデータに対して、30 秒先の温度をどの程度の誤差で予測できるか
+  \item[RQ3] 予測に基づくファン制御は、80\,℃ を超えずにファンの稼働をどれだけ減らせるか。しきい値方式と差があるか
+\end{description}
 
 \section{関連研究}
-% 熱 RC モデルと予測制御、不確かさを考慮したマージン、データセンタの熱再循環。比較表(○△×)にすると分かりやすい
+Zanini ら\cite{zanini}は、熱 RC モデルによるモデル予測制御でマルチコアの温度を管理した。坂本ら\cite{sakamoto}は、過去の予測誤差の統計から動的にマージンを決める方法を提案した。データセンタでは、熱の再循環を考慮した負荷の配置が研究されている\cite{moore,tang}。本研究は、予測の不確かさをカルマンフィルタの誤差共分散から求めてマージンに用いる点と、実機のファンを動かして閉ループで評価する点が異なる。
+% TODO(Claude):3 章を書いたら、比較表(○△×)にするか検討する
 
 \section{提案手法}
-% 熱モデル(RC から導出)、外部熱影響 H、カルマンフィルタ、Δ秒先予測と σ、動的マージン M = ασ + δ、ファン制御則
+手法の流れを図\ref{fig:flow}に示す。5 秒ごとに、温度・CPU 使用率・ファンの状態を観測し、カルマンフィルタで状態を推定して、30 秒先の温度と不確かさ $\sigma$ を予測する。
+
+\textbf{熱モデル}:熱 RC モデルを離散化し、温度を室温からの上昇分 $\theta = T - T_{\mathrm{amb}}$ で表す。$u_t$ は CPU 使用率、$f_t$ はファンの状態(0/1)、$H_t$ は隣接ノードからの外部熱影響である。
+\begin{gather}
+  \theta_{t+1} = a\,\theta_t + b\,u_t + c\,H_t + e\,f_t + d \\
+  H_{t+1} = \rho\,H_t + (1-\rho)\,z_t
+\end{gather}
+$z_t$ は隣接ノードの温度の普段からの変化分である。$a = \exp(-\Delta t/\tau)$($\tau$ は時定数)、$b > 0$ は負荷による加熱、$e < 0$ はファンによる冷却を表す。隣が熱くなると自ノードが冷えることはないため、$c \ge 0$ とする。
+
+\textbf{推定と予測}:状態 $[\theta_t, H_t]^\top$ をカルマンフィルタで推定する。隣接ノードの温度が急に変わったときは、$H$ のプロセスノイズを大きくする。30 秒先の予測では、未来の値は分からないため、今の負荷が続き、ファンは OFF のままと仮定する。誤差共分散から $\sigma = \sqrt{P_{t+m|t}[0,0]}$ を求める。
+
+\textbf{動的マージンと制御則}:
+\begin{equation}
+  M_t = \alpha\,\sigma_t + \delta,\qquad T_{\mathrm{safe}} = T_{\mathrm{limit}} - M_t
+\end{equation}
+$\alpha = 2$、$\delta = 0.5$\,℃、$T_{\mathrm{limit}} = 80$\,℃ とした。予測温度が $T_{\mathrm{safe}}$ を超えたらファンを ON にし、最小 ON 時間(30 秒)が過ぎて予測が $T_{\mathrm{safe}} - 1$\,℃ を下回ったら OFF にする。
+
+\begin{figure*}[tb]
+  \centering
+  \includegraphics[width=0.85\textwidth]{fig_method_flow.png}
+  \caption{提案手法の流れ(5 秒ごと)}
+  \label{fig:flow}
+\end{figure*}
 
 \section{実験}
-% 実験環境(ラック上段 3 台、PoE+ HAT ファン、室温計測)、同定実験、熱干渉の確認、予測精度
+Raspi 4B 3台(A、B、C)を 19 インチラックの上段に左から並べた。B は A のすぐ隣、C は A から2つ離れた位置である。3台とも PoE+ HAT のファンを用い、制御用 PC から ON/OFF した。1 秒ごとに温度・CPU 使用率・クロック・スロットリングの状態・ファンの状態を MQTT で集め、室温は SwitchBot の温湿度計で記録した。負荷は \texttt{stress-ng} で与えた。
 
-\section{結果と考察}
-% 図表を 1〜2 個。うまくいかなかった点も書く
+パラメータの同定と評価には別のデータを用いた。11/14 夜のランダムな実験(3台の負荷 0〜4 コアとファンを独立に切り替え、約 5.4 時間)の前半で同定し、後半で予測を評価した。制御の評価では、20 分の負荷のパターン(4 コアの負荷を含む)を、5 つの条件(ファンなし、常時 ON、しきい値 75/70\,℃、Self-only + 固定マージン、提案)で、順番をランダムにして3巡、3台同時に行った(各条件 9 回)。
+
+\section{結果}
+\textbf{RQ1(干渉)}:A だけに2コアの負荷を 10 分かけると、A は 21.3\,℃ 上がったが、すぐ隣の B と離れた C の上昇はどちらも 0.37\,℃ で同じであった。囲いのない机の上でも同様であった(B 0.49\,℃、C 0.50\,℃)。同定した干渉の係数 $c$ も 0 に近く(B で 0.0071)、A と C では負になった。ラックの環境では空間熱干渉はほぼ生じない(図\ref{fig:rack})。
+
+\textbf{RQ2(予測)}:負荷とファンが 30 秒の間変わらない区間(全体の 89\%)では、3台とも 30 秒先を平均絶対誤差 0.68〜0.78\,℃ で予測できた。30 秒以内に負荷が切り替わる区間では約 4\,℃ で、誤差の大半はここから生じる。干渉がない($c = 0$)と、$\sigma$ は時間によらず一定になり、動的マージンは固定マージンと同じ働きになる。
+
+\textbf{RQ3(制御)}:結果を表\ref{tab:control}と図\ref{fig:bars}に示す。予測を用いる2方式としきい値方式は、すべての回で 80\,℃ を超えず、スロットリングも起きなかった。提案手法は常時 ON と比べてファンの稼働を約 6 割減らした。ただし、しきい値方式との差はほぼなかった(38\% と 40\%)。シミュレーションで各方式の設定を広く変えても、ファン稼働率と最高温度の関係を表す曲線はほぼ重なった(図\ref{fig:tradeoff})。
+
+\begin{figure*}[tb]
+  \centering
+  \includegraphics[width=0.72\textwidth]{fig_rack_interference.png}
+  \caption{ラックで A だけに負荷をかけたときの3台の温度(ファンは3台とも OFF)。B と C はほぼ重なる}
+  \label{fig:rack}
+\end{figure*}
+
+\begin{figure*}[tb]
+  \centering
+  \includegraphics[width=0.72\textwidth]{fig_tradeoff.png}
+  \caption{設定を変えたときのファン稼働率と最高温度(シミュレーション。左:比較実験と同じ負荷、右:ランダムな負荷の1本)}
+  \label{fig:tradeoff}
+\end{figure*}
+
+\begin{table}[tb]
+  \centering
+  \caption{ファン制御の結果(9 回の平均)}
+  \label{tab:control}
+  \small
+  \begin{tabular}{lrrr}
+    \toprule
+    条件 & 稼働率 & 最高温度 & 80\,℃ 超過 \\
+    \midrule
+    ファンなし & 14\%$^{*}$ & 83.6\,℃ & 696 秒 \\
+    常時 ON & 100\% & 65.0\,℃ & 0 \\
+    しきい値 & 40\% & 78.5\,℃ & 0 \\
+    Self-only + 固定 & 45\% & 76.8\,℃ & 0 \\
+    提案 & 38\% & 78.7\,℃ & 0 \\
+    \bottomrule
+    \multicolumn{4}{l}{\footnotesize $^{*}$ 82\,℃ 以上での強制 ON のみ}
+  \end{tabular}
+\end{table}
+
+\begin{figure*}[tb]
+  \centering
+  \includegraphics[width=0.72\textwidth]{fig_control_bars.png}
+  \caption{各条件のファン稼働率と最高温度(9 回の平均、ひげは最小〜最大)}
+  \label{fig:bars}
+\end{figure*}
+
+\section{考察}
+\textbf{しきい値方式と差がなかった理由}:PoE+ HAT のファンは、ON にすると 5 秒以内に温度が下がり始め、冷却の効果も大きい。このように速くて強い冷却では、温度が上がってから回しても間に合うため、30 秒先を予測する利点が小さいと考えられる。
+
+\textbf{冷却が遅い場合}:これを確かめるため、シミュレーションで冷却の効きに遅れを加えた(図\ref{fig:slow})。条件は結果を見る前に決めた。指令が $L$ 秒後に効くむだ時間では、$L$ が 15〜30 秒を超えると、予測を用いる方式はしきい値方式より少ない稼働で 80\,℃ を守れるようになり、30 秒で 6〜13 ポイント、60 秒で 14〜28 ポイント少なかった。一方、効きがゆっくり変わる1次遅れでは、「先読みの間ずっと OFF にしたら」という判断が悲観的すぎ、効果ははっきりしなかった。「次の周期から ON にしても間に合うか」で判断すると差が出たが、これは結果を見た後に追加したものである。遅い冷却では、予測の精度だけでなく、予測をどう判断に使うかが効果を左右する。
+
+\textbf{データセンタへの示唆}:空間熱干渉はデータセンタの熱の再循環と同じ構造であり、データセンタにもサーバのファン(速い)と部屋の空調(遅い)がある。本研究の結果からは、速い冷却にはしきい値方式で十分であり、予測は空調のような遅い冷却に用いるべきであると考えられる。ただし、データセンタで有効であることを示したものではない。
+
+\begin{figure*}[tb]
+  \centering
+  \includegraphics[width=0.85\textwidth]{fig_slow_cooling.png}
+  \caption{冷却の効きの遅れと、80\,℃ を超えない中での最小のファン稼働率(シミュレーション、4 つの負荷パターンの平均)。灰色の帯は PoE+ HAT のファンに当たる}
+  \label{fig:slow}
+\end{figure*}
 
 \section{おわりに}
-% まとめと今後の課題(ファン制御の本実験は 12 月)
+Raspi のマイクロクラスタで、予測に基づくファン制御を実機で評価した。ラックの環境では空間熱干渉はほぼ生じず、30 秒先を誤差約 0.7\,℃ で予測できた。予測に基づく制御は 80\,℃ を超えずに常時 ON よりファンの稼働を約 6 割減らしたが、速くて強いファンではしきい値方式と差がなかった。予測が要るのは、効きの遅い冷却と、排熱がこもる配置であると考えられる。
+
+12 月に追加の実験を行い、1 月の本審査に反映する。囲った筐体での干渉と外部熱影響の推定の効果、部屋のファンなど効きの遅い冷却での評価、実アプリケーションの負荷と OS 標準のファン制御との比較、手元の 8 台を用いた台数と配置の拡張を予定している。
 
 \small{
 \begin{thebibliography}{99}
-  \bibitem{shi_edge_2016} Weisong Shi, Jie Cao, Quan Zhang, Youhuizi Li, Lanyu Xu, ``Edge Computing: Vision and Challenges,'' IEEE Internet of Things Journal, Vol.3, No.5, pp.637--646, 2016.
+  \setlength{\itemsep}{0pt}
+  \bibitem{dayarathna} M. Dayarathna, Y. Wen, R. Fan, ``Data Center Energy Consumption Modeling: A Survey,'' IEEE Communications Surveys \& Tutorials, Vol.18, No.1, pp.732--794, 2016.
+  \bibitem{moore} J. Moore, J. Chase, P. Ranganathan, R. Sharma, ``Making Scheduling ``Cool'': Temperature-Aware Workload Placement in Data Centers,'' Proc. USENIX Annual Technical Conference, pp.61--74, 2005.
+  \bibitem{tang} Q. Tang, S. K. S. Gupta, G. Varsamopoulos, ``Energy-Efficient Thermal-Aware Task Scheduling for Homogeneous High-Performance Computing Data Centers: A Cyber-Physical Approach,'' IEEE Trans. Parallel and Distributed Systems, Vol.19, No.11, pp.1458--1472, 2008.
+  \bibitem{shi} W. Shi, J. Cao, Q. Zhang, Y. Li, L. Xu, ``Edge Computing: Vision and Challenges,'' IEEE Internet of Things Journal, Vol.3, No.5, pp.637--646, 2016.
+  \bibitem{iridis} S. J. Cox, J. T. Cox, R. P. Boardman, S. J. Johnston, M. Scott, ``Iridis-pi: a low-cost, compact demonstration cluster,'' Cluster Computing, pp.349--358, 2014.
+  \bibitem{ipsj} 鈴木 黎映, 知念 賢一, ``空間熱干渉を考慮した状態推定に基づく動的熱マージン制御手法,'' 情報処理学会研究報告, Vol.2026-OS-171, No.3, 2026.
+  \bibitem{zanini} F. Zanini, D. Atienza, L. Benini, G. De Micheli, ``Multicore Thermal Management with Model Predictive Control,'' Proc. European Conference on Circuit Theory and Design, pp.711--714, 2009.
+  \bibitem{sakamoto} 坂本 竜, 高橋 竜一, 深澤 良彰, ``仮想マシンの CPU 使用率の負荷予測に対する安定度を用いた動的マージン設定手法,'' 信学技報, Vol.117, No.465, pp.49--54, 2018.
 \end{thebibliography}
 }
 
-\end{multicols*}
 \end{document}
