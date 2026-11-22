@@ -149,6 +149,32 @@ def fig_tradeoff():
     plt.close(fig)
 
 
+def fig_slow_cooling():
+    """シミュレーション:冷却の効きの遅れと、80℃ を超えない中での最小ファン稼働率(4 パターンの平均)。"""
+    sm = pd.read_csv(EXP / "20261122_sim_slow_cooling" / "summary.csv")
+    sm = sm.dropna(subset=["threshold", "proposed"])  # どの方式も 80℃ を超える条件(L=120 s・ランダム 1)を除く
+    kinds = [("dead", "(a) むだ時間(指令が L 秒後に効く)", "むだ時間 L [秒]"),
+             ("lag", "(b) 1 次遅れ(効きが時定数 τ でゆっくり変わる)", "時定数 τ [秒]")]
+    fig, axes = plt.subplots(1, 2, figsize=(6.6, 2.9), sharey=True)
+    for ax, (k, title, xl) in zip(axes, kinds):
+        g = sm[sm.kind == k]
+        th = g[g.rule == "off"].groupby("delay_s").threshold.mean() * 100
+        off = g[g.rule == "off"].groupby("delay_s").proposed.mean() * 100
+        nxt = g[g.rule == "next"].groupby("delay_s").proposed.mean() * 100
+        ax.plot(th.index, th.values, "o-", ms=4, lw=1.2, color=COL["threshold"], label="しきい値")
+        ax.plot(off.index, off.values, "^-", ms=4, lw=1.2, color=COL["proposed"], label="提案(事前に決めた判断)")
+        ax.plot(nxt.index, nxt.values, "^--", ms=4, lw=1.2, color="#7fa6e0", label="提案(ぎりぎりまで待つ判断、事後に追加)")
+        ax.axvspan(-4, 4, color="#dfe6ee", zorder=0)
+        ax.set_title(title, loc="left", fontsize=9)
+        ax.set_xlabel(xl)
+        ax.set_ylim(0, None)
+    axes[0].set_ylabel("最小のファン稼働率 [%]")
+    axes[0].legend(frameon=False, fontsize=7.2, loc="upper left")
+    fig.tight_layout()
+    fig.savefig(OUT / "fig_slow_cooling.png")
+    plt.close(fig)
+
+
 def fig_rack_interference():
     """ラックで A だけに負荷をかけたときの 3 台の温度。"""
     d = EXP / "20261113_rack_interference"
@@ -242,6 +268,6 @@ def fig_system():
 
 
 if __name__ == "__main__":
-    for f in [fig_control_round, fig_control_bars, fig_tradeoff, fig_rack_interference, fig_method_flow, fig_system]:
+    for f in [fig_control_round, fig_control_bars, fig_tradeoff, fig_rack_interference, fig_method_flow, fig_system, fig_slow_cooling]:
         f()
         print("ok", f.__name__)
