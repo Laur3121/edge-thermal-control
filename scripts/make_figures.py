@@ -163,7 +163,7 @@ def fig_slow_cooling():
         nxt = g[g.rule == "next"].groupby("delay_s").proposed.mean() * 100
         ax.plot(th.index, th.values, "o-", ms=4, lw=1.2, color=COL["threshold"], label="しきい値")
         ax.plot(off.index, off.values, "^-", ms=4, lw=1.2, color=COL["proposed"], label="提案(事前に決めた判断)")
-        ax.plot(nxt.index, nxt.values, "^--", ms=4, lw=1.2, color="#7fa6e0", label="提案(ぎりぎりまで待つ判断、事後に追加)")
+        ax.plot(nxt.index, nxt.values, "^--", ms=4, lw=1.2, color="#7fa6e0", label="提案(ぎりぎりまで待つ判断)")
         ax.axvspan(-4, 4, color="#dfe6ee", zorder=0)
         ax.set_title(title, loc="left", fontsize=9)
         ax.set_xlabel(xl)
