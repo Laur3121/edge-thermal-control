@@ -207,7 +207,7 @@ def fig_slow_cooling_resume():
     ax.annotate("", xy=(x, pr[x] + 1), xytext=(x, th[x] - 1),
                 arrowprops=dict(arrowstyle="<->", color="#333", lw=0.9))
     ax.text(x + 3, (th[x] + pr[x]) / 2 + 4, f"{th[x] - pr[x]:.0f}\nポイント", fontsize=8, va="center", ha="left")
-    ax.set_xlabel("冷却が効き始めるまでの遅れ L [秒]")
+    ax.set_xlabel("冷却の効果発現時間 L [秒]")
     ax.set_ylabel("80℃ を超えない最小の\nファン稼働率 [%]")
     ax.set_xlim(-3, 125)
     ax.set_ylim(0, 80)
