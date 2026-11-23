@@ -35,7 +35,7 @@ plt.rcParams.update({
 COL = {"nofan": "#c0392b", "always": "#7f8c8d", "threshold": "#e67e22",
        "selffixed": "#27ae60", "proposed": "#1f5fbf"}
 NAME = {"nofan": "ファンなし", "always": "常時 ON", "threshold": "しきい値(75/70℃)",
-        "selffixed": "Self-only + 固定", "proposed": "提案"}
+        "selffixed": "予測 + 固定マージン", "proposed": "提案"}
 
 
 def phase_windows(events: pd.DataFrame) -> dict:
@@ -111,7 +111,7 @@ def fig_control_bars():
         hi = g[col].max().reindex(order) * scale
         ax.bar(x, mean, color=[COL[o] for o in order], width=0.55)
         ax.errorbar(x, mean, yerr=[mean - lo, hi - mean], fmt="none", ecolor="black", lw=0.8, capsize=2)
-        ax.set_xticks(x, [NAME[o].replace("(75/70℃)", "").replace("Self-only + 固定", "Self-only\n+ 固定") for o in order], rotation=0, fontsize=7.5)
+        ax.set_xticks(x, [NAME[o].replace("(75/70℃)", "").replace("予測 + 固定マージン", "予測 +\n固定マージン") for o in order], rotation=0, fontsize=7.5)
         ax.set_xlim(-0.5, len(order) - 0.1)
         ax.set_ylabel(lab)
         for xi, v in zip(x, mean):
@@ -129,7 +129,7 @@ def fig_tradeoff():
     """シミュレーション:設定を変えたときのファン稼働率と最高温度。"""
     r = pd.read_csv(EXP / "20261114_sim_tradeoff" / "results.csv")
     pats = [("compare", "比較実験と同じ負荷"), ("random1", "ランダムな負荷 1")]
-    modes = [("threshold", "しきい値(ON の温度 60〜79℃)"), ("self_fixed", "Self-only + 固定(マージン 0〜8℃)"),
+    modes = [("threshold", "しきい値(ON の温度 60〜79℃)"), ("self_fixed", "予測 + 固定マージン(0〜8℃)"),
              ("proposed", "提案(α 0〜5)")]
     cmap = {"threshold": COL["threshold"], "self_fixed": COL["selffixed"], "proposed": COL["proposed"]}
     mk = {"threshold": "o", "self_fixed": "s", "proposed": "^"}
