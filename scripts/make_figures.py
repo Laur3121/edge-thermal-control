@@ -157,7 +157,7 @@ def fig_slow_cooling(column=False):
     kinds = [("dead", "(a) むだ時間(指令が L 秒後に効く)", "むだ時間 L [秒]"),
              ("lag", "(b) 1 次遅れ(効きが時定数 τ でゆっくり変わる)", "時定数 τ [秒]")]
     if column:
-        fig, axes = plt.subplots(2, 1, figsize=(3.3, 3.4), sharey=True)
+        fig, axes = plt.subplots(2, 1, figsize=(3.3, 2.9), sharey=True)
     else:
         fig, axes = plt.subplots(1, 2, figsize=(6.6, 2.9), sharey=True)
     for ax, (k, title, xl) in zip(axes, kinds):
@@ -174,10 +174,15 @@ def fig_slow_cooling(column=False):
         ax.set_ylim(0, None)
     if column:
         for ax in axes:
-            ax.set_ylabel("最小のファン稼働率 [%]")
+            ax.set_ylabel("最小の稼働率 [%]")
+            ax.set_ylim(0, 100)  # 凡例を線に重ねないため上を空ける
     else:
         axes[0].set_ylabel("最小のファン稼働率 [%]")
-    axes[0].legend(frameon=False, fontsize=7.2, loc="upper left")
+    if column:  # パネルが低いので、凡例を詰めて線に重ねない
+        axes[0].legend(frameon=False, fontsize=6.3, loc="upper left", labelspacing=0.2,
+                       handlelength=1.5, borderaxespad=0.1)
+    else:
+        axes[0].legend(frameon=False, fontsize=7.2, loc="upper left")
     fig.tight_layout()
     fig.savefig(OUT / ("fig_slow_cooling_col.png" if column else "fig_slow_cooling.png"))
     plt.close(fig)

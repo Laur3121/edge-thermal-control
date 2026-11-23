@@ -72,7 +72,7 @@
 }]
 
 \section{はじめに}
-データセンタでは冷却設備の電力が全体の大きな割合を占め\cite{dayarathna}、サーバの排熱が別のサーバの吸気側に回り込む熱の再循環が冷却の効率を下げる\cite{moore,tang}。空調のない棚や箱に置かれるエッジのマイクロクラスタ\cite{iridis}にも同じ問題があり、Raspberry Pi 4B(以下、Raspi)は CPU 温度が約 80\,℃ を超えるとクロックを下げ(スロットリング)、処理が遅くなる。ファンを常に回せば温度は下がるが、ファンの寿命は稼働時間で表されるため\cite{kim}回し続けるほど寿命に近づき、騒音にもなる。
+データセンタでは冷却設備の電力が全体の大きな割合を占め\cite{dayarathna}、サーバの排熱が別のサーバの吸気側に回り込む熱の再循環が冷却の効率を下げる\cite{moore,tang}。空調のない棚や箱に置かれるエッジのマイクロクラスタにも同じ問題があり、Raspberry Pi 4B(以下、Raspi)は CPU 温度が約 80\,℃ を超えるとクロックを下げ(スロットリング)、処理が遅くなる。ファンを常に回せば温度は下がるが、ファンの寿命は稼働時間で表されるため\cite{kim}回し続けるほど寿命に近づき、騒音にもなる。
 
 本研究では、スロットリングを避けつつファンの稼働をできるだけ減らすことを目指す。先行発表\cite{ipsj}では、隣のノードの排熱で温度が上がる空間熱干渉を状態として推定するカルマンフィルタを提案した。しかし、予測に未来の実測値を用いていた、同定と評価に同じデータを用いていた、などの課題があった。本研究ではこれらを直し、30 秒先の温度とその不確かさを予測して、予測が安全閾値を超えるときだけファンを回す制御を実機で評価する。あわせて、空間熱干渉が実際にどの程度生じるかと、温度だけを見るしきい値方式と比べて、予測がどのような条件で有効になるかを明らかにする。
 
@@ -93,9 +93,16 @@ $H_t$ は隣接ノードからの外部熱影響、$z_t$ は隣接ノードの�
 $\alpha = 2$、$\delta = 0.5$\,℃、$T_{\mathrm{limit}} = 80$\,℃ とし、予測温度が $T_{\mathrm{safe}}$ を超えたらファンを ON にする(最小 ON 時間 30 秒、OFF は 1\,℃ のヒステリシス)。
 
 \section{実験}
-Raspi 3台(A、B、C)を 19 インチラックの上段に左から並べ(B は A のすぐ隣、C は2つ離れた位置)、PoE+ HAT のファンを制御用 PC から ON/OFF した。1 秒ごとに温度・CPU 使用率・クロック・スロットリングの状態・ファンの状態を MQTT で集め、室温も記録した。負荷は \texttt{stress-ng} で与えた。
+Raspi 3台(A、B、C)を 19 インチラックの上段に左から並べ(B は A のすぐ隣、C は2つ離れた位置)、PoE+ HAT のファンを制御用 PC から ON/OFF した。1 秒ごとに温度・CPU 使用率・クロック・ファンの状態などを MQTT で集め、室温も記録した。負荷は \texttt{stress-ng} で与えた。
 
-11/14 のランダムな実験(3台の負荷とファンを独立に切り替え、約 5.4 時間)の前半でパラメータを同定し、後半で予測を評価した。制御の評価では、20 分の負荷のパターンを表\ref{tab:control}の 5 条件で、順番をランダムにして3巡、3台同時に行った(各条件 9 回)。Self-only + 固定は、自ノードだけのモデルの予測に固定マージン(3.5〜5.0\,℃)を用いる。
+11/14 のランダムな実験(3台の負荷とファンを独立に切り替え、約 5.4 時間)の前半でパラメータを同定し、後半で予測を評価した。制御の評価では、20 分の負荷のパターンを次の 5 条件で、順番をランダムにして3巡、3台同時に行った(各条件 9 回)。
+\begin{itemize}
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}\setlength{\leftmargin}{1em}
+  \item ファンなし・常時 ON:基準(ファンなしも 82\,℃ 以上で強制 ON)
+  \item しきい値方式:75\,℃ 以上で ON、70\,℃ 以下で OFF
+  \item Self-only + 固定:$H$ なしのモデルで予測し、一定のマージン(3.5〜5.0\,℃)を引いた閾値を超えたら ON
+  \item 提案手法:3 章の方法(動的マージン)
+\end{itemize}
 
 \section{結果}
 \subsection{空間熱干渉の大きさ}
@@ -109,16 +116,16 @@ A だけに2コアの負荷を 10 分かけると、A は 21.3\,℃ 上がった
 
 \begin{table}[tb]
   \centering
-  \caption{制御の結果(9 回の平均、$^{*}$ 強制 ON のみ)}
+  \caption{ファン制御の結果(9 回の平均)}
   \label{tab:control}
   \small
   \begin{tabular}{lrrr}
     \toprule
     条件 & 稼働率 & 最高温度 & 80\,℃ 超過 \\
     \midrule
-    ファンなし$^{*}$ & 14\% & 83.6\,℃ & 696 秒 \\
+    ファンなし & 14\% & 83.6\,℃ & 696 秒 \\
     常時 ON & 100\% & 65.0\,℃ & 0 \\
-    しきい値(75/70\,℃) & 40\% & 78.5\,℃ & 0 \\
+    しきい値 & 40\% & 78.5\,℃ & 0 \\
     Self-only + 固定 & 45\% & 76.8\,℃ & 0 \\
     提案 & 38\% & 78.7\,℃ & 0 \\
     \bottomrule
@@ -128,7 +135,7 @@ A だけに2コアの負荷を 10 分かけると、A は 21.3\,℃ 上がった
 \begin{figure}[tb]
   \centering
   \includegraphics[width=\columnwidth]{fig_slow_cooling_col.png}
-  \caption{冷却の効きの遅れと、80\,℃ を超えない最小のファン稼働率(シミュレーション)。灰色:PoE+ HAT のファン}
+  \caption{冷却の効きの遅れと、80\,℃ を超えない最小のファン稼働率(シミュレーション。灰色:PoE+ HAT)}
   \label{fig:slow}
 \end{figure}
 
@@ -148,7 +155,6 @@ PoE+ HAT のファンは ON にすると 5 秒以内に効き始め、冷却の�
   \bibitem{dayarathna} M. Dayarathna, Y. Wen, R. Fan, ``Data Center Energy Consumption Modeling: A Survey,'' IEEE Commun. Surveys \& Tutorials, Vol.18, No.1, pp.732--794, 2016.
   \bibitem{moore} J. Moore, J. Chase, P. Ranganathan, R. Sharma, ``Making Scheduling ``Cool'': Temperature-Aware Workload Placement in Data Centers,'' USENIX ATC, pp.61--74, 2005.
   \bibitem{tang} Q. Tang, S. K. S. Gupta, G. Varsamopoulos, ``Energy-Efficient Thermal-Aware Task Scheduling for Homogeneous HPC Data Centers,'' IEEE TPDS, Vol.19, No.11, pp.1458--1472, 2008.
-  \bibitem{iridis} S. J. Cox, J. T. Cox, R. P. Boardman, S. J. Johnston, M. Scott, ``Iridis-pi: a low-cost, compact demonstration cluster,'' Cluster Computing, pp.349--358, 2014.
   \bibitem{kim} S. J. Kim, A. Claassen, ``How to Evaluate Fan Life,'' Electronics Cooling, 1996.
   \bibitem{ipsj} 鈴木 黎映, 知念 賢一, ``空間熱干渉を考慮した状態推定に基づく動的熱マージン制御手法,'' 情報処理学会研究報告, Vol.2026-OS-171, No.3, 2026.
   \bibitem{zanini} F. Zanini, D. Atienza, L. Benini, G. De Micheli, ``Multicore Thermal Management with Model Predictive Control,'' Proc. ECCTD, pp.711--714, 2009.
