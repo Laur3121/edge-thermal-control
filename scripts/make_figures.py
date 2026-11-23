@@ -149,13 +149,17 @@ def fig_tradeoff():
     plt.close(fig)
 
 
-def fig_slow_cooling():
-    """シミュレーション:冷却の効きの遅れと、80℃ を超えない中での最小ファン稼働率(4 パターンの平均)。"""
+def fig_slow_cooling(column=False):
+    """シミュレーション:冷却の効きの遅れと、80℃ を超えない中での最小ファン稼働率(4 パターンの平均)。
+    column=True はレジュメの 1 段の幅に入れる縦 2 段の版(fig_slow_cooling_col.png)。"""
     sm = pd.read_csv(EXP / "20261122_sim_slow_cooling" / "summary.csv")
     sm = sm.dropna(subset=["threshold", "proposed"])  # どの方式も 80℃ を超える条件(L=120 s・ランダム 1)を除く
     kinds = [("dead", "(a) むだ時間(指令が L 秒後に効く)", "むだ時間 L [秒]"),
              ("lag", "(b) 1 次遅れ(効きが時定数 τ でゆっくり変わる)", "時定数 τ [秒]")]
-    fig, axes = plt.subplots(1, 2, figsize=(6.6, 2.9), sharey=True)
+    if column:
+        fig, axes = plt.subplots(2, 1, figsize=(3.3, 3.4), sharey=True)
+    else:
+        fig, axes = plt.subplots(1, 2, figsize=(6.6, 2.9), sharey=True)
     for ax, (k, title, xl) in zip(axes, kinds):
         g = sm[sm.kind == k]
         th = g[g.rule == "off"].groupby("delay_s").threshold.mean() * 100
@@ -168,10 +172,14 @@ def fig_slow_cooling():
         ax.set_title(title, loc="left", fontsize=9)
         ax.set_xlabel(xl)
         ax.set_ylim(0, None)
-    axes[0].set_ylabel("最小のファン稼働率 [%]")
+    if column:
+        for ax in axes:
+            ax.set_ylabel("最小のファン稼働率 [%]")
+    else:
+        axes[0].set_ylabel("最小のファン稼働率 [%]")
     axes[0].legend(frameon=False, fontsize=7.2, loc="upper left")
     fig.tight_layout()
-    fig.savefig(OUT / "fig_slow_cooling.png")
+    fig.savefig(OUT / ("fig_slow_cooling_col.png" if column else "fig_slow_cooling.png"))
     plt.close(fig)
 
 
@@ -334,3 +342,5 @@ if __name__ == "__main__":
     for f in [fig_control_round, fig_control_bars, fig_tradeoff, fig_rack_interference, fig_method_flow, fig_system, fig_slow_cooling, fig_predict]:
         f()
         print("ok", f.__name__)
+    fig_slow_cooling(column=True)  # レジュメ(2 ページ版)用
+    print("ok", "fig_slow_cooling(column)")
