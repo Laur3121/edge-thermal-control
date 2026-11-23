@@ -188,6 +188,34 @@ def fig_slow_cooling(column=False):
     plt.close(fig)
 
 
+def fig_slow_cooling_resume():
+    """レジュメ(2 ページ版)用:むだ時間だけ、しきい値方式と予測の 2 本に絞った図(fig_slow_cooling_resume.png)。
+    予測は事前に決めた判断(rule=off)。4 パターンの平均(L=120 秒は 3 パターン)。"""
+    sm = pd.read_csv(EXP / "20261122_sim_slow_cooling" / "summary.csv")
+    sm = sm.dropna(subset=["threshold", "proposed"])
+    g = sm[(sm.kind == "dead") & (sm.rule == "off")]
+    th = g.groupby("delay_s").threshold.mean() * 100
+    pr = g.groupby("delay_s").proposed.mean() * 100
+    fig, ax = plt.subplots(figsize=(3.4, 2.6))
+    ax.axvspan(-3, 5, color="#dfe6ee", zorder=0)
+    ax.text(7, 66, "PoE+ HAT の\nファン(5 秒以内)", fontsize=8, color="#555", va="top")
+    ax.plot(th.index, th.values, "o-", ms=5, lw=1.8, color=COL["threshold"])
+    ax.plot(pr.index, pr.values, "^-", ms=5, lw=1.8, color=COL["proposed"])
+    ax.text(th.index[-1] - 2, th.values[-1] + 4, "しきい値方式", color=COL["threshold"], fontsize=9, ha="right")
+    ax.text(pr.index[-1] + 2, 12, "予測(提案)", color=COL["proposed"], fontsize=9, ha="right")
+    x = 60
+    ax.annotate("", xy=(x, pr[x] + 1), xytext=(x, th[x] - 1),
+                arrowprops=dict(arrowstyle="<->", color="#333", lw=0.9))
+    ax.text(x + 3, (th[x] + pr[x]) / 2 + 4, f"{th[x] - pr[x]:.0f}\nポイント", fontsize=8, va="center", ha="left")
+    ax.set_xlabel("冷却が効き始めるまでの遅れ L [秒]")
+    ax.set_ylabel("80℃ を超えない最小の\nファン稼働率 [%]")
+    ax.set_xlim(-3, 125)
+    ax.set_ylim(0, 80)
+    fig.tight_layout()
+    fig.savefig(OUT / "fig_slow_cooling_resume.png")
+    plt.close(fig)
+
+
 def fig_predict():
     """RQ2:ランダムの実験の後半(同定に使っていない区間)の A で、実測と 30 秒先の予測、予測 + マージン。"""
     import json
@@ -347,5 +375,7 @@ if __name__ == "__main__":
     for f in [fig_control_round, fig_control_bars, fig_tradeoff, fig_rack_interference, fig_method_flow, fig_system, fig_slow_cooling, fig_predict]:
         f()
         print("ok", f.__name__)
-    fig_slow_cooling(column=True)  # レジュメ(2 ページ版)用
+    fig_slow_cooling(column=True)
     print("ok", "fig_slow_cooling(column)")
+    fig_slow_cooling_resume()  # レジュメ(2 ページ版)用
+    print("ok", "fig_slow_cooling_resume")

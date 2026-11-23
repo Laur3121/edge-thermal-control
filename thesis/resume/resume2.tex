@@ -72,7 +72,7 @@
 }]
 
 \section{はじめに}
-データセンタでは冷却設備の電力が全体の大きな割合を占め\cite{dayarathna}、サーバの排熱が別のサーバの吸気側に回り込む熱の再循環が冷却の効率を下げる\cite{moore,tang}。空調のない棚や箱に置かれるエッジのマイクロクラスタにも同じ問題があり、Raspberry Pi 4B(以下、Raspi)は CPU 温度が約 80\,℃ を超えるとクロックを下げ(スロットリング)、処理が遅くなる。ファンを常に回せば温度は下がるが、ファンの寿命は稼働時間で表されるため\cite{kim}回し続けるほど寿命に近づき、騒音にもなる。
+データセンタでは冷却設備の電力が全体の大きな割合を占め\cite{dayarathna}、サーバの排熱が別のサーバの吸気側に回り込む熱の再循環が冷却の効率を下げる\cite{moore,tang}。空調のない棚や箱に置かれるエッジのマイクロクラスタ\cite{iridis}にも同じ問題があり、Raspberry Pi 4B(以下、Raspi)は CPU 温度が約 80\,℃ を超えるとクロックを下げ(スロットリング)、処理が遅くなる。ファンを常に回せば温度は下がるが、ファンの寿命は稼働時間で表されるため\cite{kim}回し続けるほど寿命に近づき、騒音にもなる。
 
 本研究では、スロットリングを避けつつファンの稼働をできるだけ減らすことを目指す。先行発表\cite{ipsj}では、隣のノードの排熱で温度が上がる空間熱干渉を状態として推定するカルマンフィルタを提案した。しかし、予測に未来の実測値を用いていた、同定と評価に同じデータを用いていた、などの課題があった。本研究ではこれらを直し、30 秒先の温度とその不確かさを予測して、予測が安全閾値を超えるときだけファンを回す制御を実機で評価する。あわせて、空間熱干渉が実際にどの程度生じるかと、温度だけを見るしきい値方式と比べて、予測がどのような条件で有効になるかを明らかにする。
 
@@ -134,8 +134,8 @@ A だけに2コアの負荷を 10 分かけると、A は 21.3\,℃ 上がった
 
 \begin{figure}[tb]
   \centering
-  \includegraphics[width=\columnwidth]{fig_slow_cooling_col.png}
-  \caption{冷却の効きの遅れと、80\,℃ を超えない最小のファン稼働率(シミュレーション。灰色:PoE+ HAT)}
+  \includegraphics[width=\columnwidth]{fig_slow_cooling_resume.png}
+  \caption{冷却が効き始めるまでの遅れ(むだ時間)と、80\,℃ を超えない最小のファン稼働率(シミュレーション、4 つの負荷パターンの平均)}
   \label{fig:slow}
 \end{figure}
 
@@ -144,17 +144,18 @@ A だけに2コアの負荷を 10 分かけると、A は 21.3\,℃ 上がった
 PoE+ HAT のファンは ON にすると 5 秒以内に効き始め、冷却の効果も大きい。このように速くて強い冷却では、温度が上がってから回しても間に合うため、予測の利点が小さいと考えられる。Raspi 4B でしきい値のファン制御を行った研究\cite{benoit}でもスロットリングは防がれており、本研究の結果と合う。
 
 \subsection{冷却が遅い場合}
-シミュレーションで冷却の効きに遅れを加えた(図\ref{fig:slow}、条件は結果を見る前に決めた)。指令が $L$ 秒後に効くむだ時間では、$L$ が 15〜30 秒を超えると予測を用いる方式がしきい値方式より少ない稼働で 80\,℃ を守り、30 秒で 6〜13 ポイント、60 秒で 14〜28 ポイント少なかった。効きがゆっくり変わる1次遅れでは、「次の周期から ON にしても間に合うか」で判断すると差が出た(後から追加した判断のため、新しい負荷で確かめた)。データセンタにもサーバのファン(速い)と空調(遅い)があり、予測は遅い冷却に用いるべきであることを示唆する。
+シミュレーションで冷却の効きに遅れを加えた(条件は結果を見る前に決めた)。指令が $L$ 秒後に効くむだ時間では、$L$ が 15〜30 秒を超えると予測を用いる方式がしきい値方式より少ない稼働で 80\,℃ を守り(図\ref{fig:slow})、30 秒で 6〜13 ポイント、60 秒で 14〜28 ポイント少なかった。効きがゆっくり変わる1次遅れでは、「次の周期から ON にしても間に合うか」で判断すると差が出た(後から追加した判断のため、新しい負荷で確かめた)。データセンタにもサーバのファン(速い)と空調(遅い)があり、予測は遅い冷却に用いるべきであることを示唆する。
 
 \section{おわりに}
 予測に基づくファン制御は 80\,℃ を超えずに常時 ON よりファンの稼働を約 6 割減らしたが、速くて強いファンではしきい値方式と差がなかった。予測が要るのは、効きの遅い冷却と、排熱がこもる配置であると考えられる。12 月に、囲った筐体で空間熱干渉が生じたときの外部熱影響の推定の効果と、効きの遅い冷却での予測の効果を実機で確かめる。
 
-\scriptsize{
+\footnotesize{
 \begin{thebibliography}{99}
   \setlength{\itemsep}{0pt}
   \bibitem{dayarathna} M. Dayarathna, Y. Wen, R. Fan, ``Data Center Energy Consumption Modeling: A Survey,'' IEEE Commun. Surveys \& Tutorials, Vol.18, No.1, pp.732--794, 2016.
   \bibitem{moore} J. Moore, J. Chase, P. Ranganathan, R. Sharma, ``Making Scheduling ``Cool'': Temperature-Aware Workload Placement in Data Centers,'' USENIX ATC, pp.61--74, 2005.
   \bibitem{tang} Q. Tang, S. K. S. Gupta, G. Varsamopoulos, ``Energy-Efficient Thermal-Aware Task Scheduling for Homogeneous HPC Data Centers,'' IEEE TPDS, Vol.19, No.11, pp.1458--1472, 2008.
+  \bibitem{iridis} S. J. Cox, J. T. Cox, R. P. Boardman, S. J. Johnston, M. Scott, ``Iridis-pi: a low-cost, compact demonstration cluster,'' Cluster Computing, pp.349--358, 2014.
   \bibitem{kim} S. J. Kim, A. Claassen, ``How to Evaluate Fan Life,'' Electronics Cooling, 1996.
   \bibitem{ipsj} 鈴木 黎映, 知念 賢一, ``空間熱干渉を考慮した状態推定に基づく動的熱マージン制御手法,'' 情報処理学会研究報告, Vol.2026-OS-171, No.3, 2026.
   \bibitem{zanini} F. Zanini, D. Atienza, L. Benini, G. De Micheli, ``Multicore Thermal Management with Model Predictive Control,'' Proc. ECCTD, pp.711--714, 2009.
