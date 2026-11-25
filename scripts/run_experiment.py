@@ -44,7 +44,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
 
 HEARTBEAT_S = 2.0  # ファン指令を送り直す間隔(node_agent の指令途絶タイムアウトより短く)
-CONTROL_FIELDS = ["ts", "phase", "role", "host", "mode", "n", "T", "u", "f", "T_amb", "pred", "sigma",
+CONTROL_FIELDS = ["ts", "phase", "role", "host", "mode", "n", "T", "u", "f", "T_nbr", "T_amb", "pred", "sigma",
                   "margin", "tsafe", "fan", "reason"]
 
 
@@ -263,9 +263,19 @@ class Runner:
                 u = sum(r[2] for r in win) / len(win) / 100.0
                 f = sum(r[3] for r in win) / len(win)
                 Ta = self.ambient()
-                d = self.ctrl[role].step(now, T, u, f, Ta)
+                # 隣の温度(H の入力):control_params の "neighbors"(ホスト名)の直近 dt 秒の平均の平均
+                T_nbr = None
+                nb = self.ctrl_params["nodes"][self.nodes[role]].get("neighbors")
+                if nb:
+                    with self.lock:
+                        vals = [sum(r[1] for r in w) / len(w) for w in
+                                ([r for r in self.rows.get(h, []) if now - dt <= r[0] < now] for h in nb) if w]
+                    if len(vals) == len(nb):
+                        T_nbr = sum(vals) / len(vals)
+                d = self.ctrl[role].step(now, T, u, f, Ta, T_nbr)
                 self.ctl.writerow({"ts": round(now, 3), "phase": self.phase, "role": role, "host": self.nodes[role],
                                    "mode": mode, "n": len(win), "T": round(T, 3), "u": round(u, 4),
+                                   "T_nbr": None if T_nbr is None else round(T_nbr, 3),
                                    "f": round(f, 3), "T_amb": Ta, "pred": round(d.pred, 3),
                                    "sigma": round(d.sigma, 4), "margin": round(d.margin, 3),
                                    "tsafe": round(d.tsafe, 3), "fan": d.fan, "reason": d.reason})

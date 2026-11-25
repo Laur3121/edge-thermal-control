@@ -60,30 +60,33 @@ class FanController:
             raise ValueError(f"mode は {MODES} のどれか: {self.mode}")
         self.m = int(round(self.cfg.delta_s / self.p.dt))
         self.kf: ThermalKF | None = None
-        self.prev: tuple[float, float] | None = None  # 前のステップの (u, f)
+        self.prev: tuple[float, float, float] | None = None  # 前のステップの (u, f, 隣の温度 − 室温)
         self.fan = 0
         self.on_since: float | None = None
 
-    def _predict_off(self, theta: float, u: float) -> tuple[float, float]:
-        """Δ 秒先の θ の予測(ファン OFF・負荷は今の値が続く)と σ。"""
+    def _predict_off(self, theta: float, u: float, nbr: float) -> tuple[float, float]:
+        """Δ 秒先の θ の予測(ファン OFF・負荷と隣の温度は今の値が続く)と σ。"""
         if self.mode == "proposed":
-            return self.kf.predict_ahead(self.m, u, nbr=self.p.z_base, f=0.0)
+            return self.kf.predict_ahead(self.m, u, nbr=nbr, f=0.0)
         p, x = self.p, theta
         for _ in range(self.m):
             x = p.a * x + p.b * u + p.d
         return x, float("nan")
 
-    def step(self, t: float, T: float, u: float, f: float, T_amb: float) -> Decision:
-        """t:時刻 [s]、T:直近 dt 秒の平均温度 [℃]、u:平均 CPU 使用率 [0,1]、f:平均ファン状態 [0,1]、T_amb:室温 [℃]。"""
+    def step(self, t: float, T: float, u: float, f: float, T_amb: float,
+             T_nbr: float | None = None) -> Decision:
+        """t:時刻 [s]、T:直近 dt 秒の平均温度 [℃]、u:平均 CPU 使用率 [0,1]、f:平均ファン状態 [0,1]、T_amb:室温 [℃]。
+        T_nbr:隣のノードの平均温度 [℃](H の入力。None なら z_base = 隣の影響なし。2026-11-25 追加)。"""
         c = self.cfg
         theta = T - T_amb
+        nbr = self.p.z_base if T_nbr is None else T_nbr - T_amb
         # KF は毎回更新しておく(方式によらず。ログ用にも使える)
         if self.kf is None:
             self.kf = ThermalKF(self.p, self.noise, T0=theta)
         else:
-            u0, f0 = self.prev
-            self.kf.step(theta, u0, self.p.z_base, f0)
-        self.prev = (u, f)
+            u0, f0, n0 = self.prev
+            self.kf.step(theta, u0, n0, f0)
+        self.prev = (u, f, nbr)
 
         min_on_ok = self.on_since is None or t - self.on_since >= c.min_on_s
         if self.mode == "threshold":
@@ -93,7 +96,7 @@ class FanController:
             elif self.fan == 1 and min_on_ok and T <= c.t_off:
                 d.fan, d.reason = 0, f"T {T:.1f} <= {c.t_off}"
         else:
-            pred_th, sigma = self._predict_off(theta, u)
+            pred_th, sigma = self._predict_off(theta, u, nbr)
             if self.mode == "proposed":
                 M = c.alpha * sigma + c.delta_margin
             else:
@@ -112,8 +115,17 @@ class FanController:
 
 
 def controller_from_dict(mode: str, node_params: dict, cfg: ControlConfig) -> FanController:
-    """control_params.json の 1 ノード分から作る。"""
+    """control_params.json の 1 ノード分から作る。
+    proposed で node_params に "withH"(c, rho, z_base を含む)があればそれを使う(H あり、2026-11-25 追加)。
+    """
     s = node_params["self"]
+    if mode == "proposed" and "withH" in node_params:
+        h = node_params["withH"]
+        p = ThermalParams(a=h["a"], b=h["b"], d=h["d"], e=h["e"], c=h["c"], rho=h["rho"], z_base=h["z_base"],
+                          dt=h["dt"])
+        n = NoiseParams(R=node_params["R"], qT=node_params["qT_H"], qH0=node_params.get("qH0", 0.008),
+                        beta=node_params.get("beta", 2.0))
+        return FanController(mode, p, n, cfg)
     p = ThermalParams(a=s["a"], b=s["b"], d=s["d"], e=s["e"], c=0.0, dt=s["dt"])
     n = NoiseParams(R=node_params["R"], qT=node_params["qT"], qH0=0.0, beta=0.0)
     return FanController(mode, p, n, cfg, fixed_margin=node_params.get("fixed_margin", float("nan")))
