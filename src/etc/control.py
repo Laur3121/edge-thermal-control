@@ -22,7 +22,9 @@ import numpy as np
 from .kalman import NoiseParams, ThermalKF
 from .model import ThermalParams
 
-MODES = ("proposed", "self_fixed", "threshold")
+MODES = ("proposed", "self_fixed", "threshold", "proposed_ms")
+# proposed_ms(11/26 追加):ファンの段階 1〜4 ごとに「その段階で回したら Δ 秒先は何℃か」を予測し、
+# Tsafe を下回る一番弱い段階を選ぶ。段階 s の効きは e × stage_eff[s](stage_eff[4] = 1、同定した相対値)
 
 
 @dataclass
@@ -45,6 +47,7 @@ class Decision:
     margin: float = float("nan")
     tsafe: float = float("nan")
     reason: str = ""
+    stage: int | None = None  # proposed_ms のとき選んだ段階(0 = OFF)
 
 
 @dataclass
@@ -54,6 +57,7 @@ class FanController:
     noise: NoiseParams
     cfg: ControlConfig = field(default_factory=ControlConfig)
     fixed_margin: float = float("nan")  # self_fixed 用
+    stage_eff: tuple = (0.0, 0.25, 0.5, 0.75, 1.0)  # proposed_ms 用:段階 0〜4 の相対的な効き
 
     def __post_init__(self):
         if self.mode not in MODES:
@@ -62,11 +66,13 @@ class FanController:
         self.kf: ThermalKF | None = None
         self.prev: tuple[float, float, float] | None = None  # 前のステップの (u, f, 隣の温度 − 室温)
         self.fan = 0
+        self.stage = 0
         self.on_since: float | None = None
+        self.changed_at: float | None = None
 
     def _predict_off(self, theta: float, u: float, nbr: float) -> tuple[float, float]:
         """Δ 秒先の θ の予測(ファン OFF・負荷と隣の温度は今の値が続く)と σ。"""
-        if self.mode == "proposed":
+        if self.mode in ("proposed", "proposed_ms"):
             return self.kf.predict_ahead(self.m, u, nbr=nbr, f=0.0)
         p, x = self.p, theta
         for _ in range(self.m):
@@ -86,7 +92,11 @@ class FanController:
         else:
             u0, f0, n0 = self.prev
             self.kf.step(theta, u0, n0, f0)
-        self.prev = (u, f, nbr)
+        # proposed_ms は段階ごとに効きが違うので、KF に入れるファンの入力は「今の段階の相対的な効き」
+        self.prev = (u, self.stage_eff[self.stage] if self.mode == "proposed_ms" else f, nbr)
+
+        if self.mode == "proposed_ms":
+            return self._step_ms(t, T, u, nbr, T_amb)
 
         min_on_ok = self.on_since is None or t - self.on_since >= c.min_on_s
         if self.mode == "threshold":
@@ -114,18 +124,42 @@ class FanController:
         return d
 
 
+    def _step_ms(self, t: float, T: float, u: float, nbr: float, T_amb: float) -> Decision:
+        """段階を選ぶ。上げるのはすぐ、下げるのは最小保持時間が過ぎ、下げた段階でも Tsafe − h を下回るときだけ。"""
+        c = self.cfg
+        _, sigma = self.kf.predict_ahead(self.m, u, nbr=nbr, f=0.0)
+        M = c.alpha * sigma + c.delta_margin
+        tsafe = c.tlimit - M
+        preds = [self.kf.predict_ahead(self.m, u, nbr=nbr, f=self.stage_eff[s])[0] + T_amb for s in range(5)]
+        need = next((s for s in range(5) if preds[s] <= tsafe), 4)  # Tsafe 以下に収まる一番弱い段階
+        hold_ok = self.changed_at is None or t - self.changed_at >= c.min_on_s
+        new = self.stage
+        reason = ""
+        if need > self.stage:
+            new, reason = need, f"pred(s{self.stage}) {preds[self.stage]:.1f} > Tsafe {tsafe:.1f} → s{need}"
+        elif need < self.stage and hold_ok:
+            lower = next((s for s in range(self.stage) if preds[s] <= tsafe - c.hysteresis), self.stage)
+            if lower < self.stage:
+                new, reason = lower, f"pred(s{lower}) {preds[lower]:.1f} < Tsafe-h {tsafe - c.hysteresis:.1f} → s{lower}"
+        if new != self.stage:
+            self.stage, self.changed_at = new, t
+        self.fan = int(self.stage > 0)
+        return Decision(self.fan, pred=preds[0], sigma=sigma, margin=M, tsafe=tsafe, reason=reason, stage=self.stage)
+
+
 def controller_from_dict(mode: str, node_params: dict, cfg: ControlConfig) -> FanController:
     """control_params.json の 1 ノード分から作る。
     proposed で node_params に "withH"(c, rho, z_base を含む)があればそれを使う(H あり、2026-11-25 追加)。
     """
     s = node_params["self"]
-    if mode == "proposed" and "withH" in node_params:
+    if mode in ("proposed", "proposed_ms") and "withH" in node_params:
         h = node_params["withH"]
         p = ThermalParams(a=h["a"], b=h["b"], d=h["d"], e=h["e"], c=h["c"], rho=h["rho"], z_base=h["z_base"],
                           dt=h["dt"])
         n = NoiseParams(R=node_params["R"], qT=node_params["qT_H"], qH0=node_params.get("qH0", 0.008),
                         beta=node_params.get("beta", 2.0))
-        return FanController(mode, p, n, cfg)
+        eff = tuple(node_params.get("stage_eff", (0.0, 0.25, 0.5, 0.75, 1.0)))
+        return FanController(mode, p, n, cfg, stage_eff=eff)
     p = ThermalParams(a=s["a"], b=s["b"], d=s["d"], e=s["e"], c=0.0, dt=s["dt"])
     n = NoiseParams(R=node_params["R"], qT=node_params["qT"], qH0=0.0, beta=0.0)
     return FanController(mode, p, n, cfg, fixed_margin=node_params.get("fixed_margin", float("nan")))

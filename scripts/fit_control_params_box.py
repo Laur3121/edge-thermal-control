@@ -36,10 +36,11 @@ NBR = {h: [s for s, q in GRID.items() if s != h and max(abs(p[0] - q[0]), abs(p[
 R = json.loads(Path("experiments/20261113_step_identify/results/identify.json").read_text())["noise"]["R_1s"] / DT
 
 
-def main():
-    tel = pd.read_csv(EXP / "raw" / "telemetry.csv")
-    ev = pd.read_csv(EXP / "events.csv")
-    amb = pd.read_csv(EXP / "raw" / "ambient.csv")
+def load(exp):
+    """1 つの実験を 5 秒ごとに。戻り値:{host: DataFrame(T, u, f, clk)}, 室温"""
+    tel = pd.read_csv(exp / "raw" / "telemetry.csv")
+    ev = pd.read_csv(exp / "events.csv")
+    amb = pd.read_csv(exp / "raw" / "ambient.csv")
     amb = amb[amb.name.astype(str).str.contains("ハブ２")].sort_values("ts")
     t0 = float(ev[ev.event == "phase_start"].ts.iloc[0])
     n = int((float(ev[ev.event == "phase_end"].ts.max()) - t0) // DT)
@@ -51,13 +52,33 @@ def main():
         k = ((g.ts - t0) // DT).astype(int)
         D[h] = g.groupby(k).agg(T=("temp", "mean"), u=("cpu", "mean"), f=("fan", "mean"),
                                 clk=("clock", "min")).reindex(range(n)).ffill().bfill()
+    return D, Tamb
+
+
+def main():
+    global EXP, OUT
+    import argparse
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--exp", nargs="+", default=[str(EXP)], help="同定に使う実験(複数可。つなげて使い、つなぎ目の遷移は除く)")
+    ap.add_argument("--out", default=str(OUT))
+    a = ap.parse_args()
+    EXP, OUT = [Path(e) for e in a.exp], Path(a.out)
+    parts = [load(e) for e in EXP]
+    Tamb = np.concatenate([p[1] for p in parts])
+    D = {h: pd.concat([p[0][h] for p in parts], ignore_index=True) for h in GRID}
+    seam = np.zeros(len(Tamb), bool)  # つなぎ目(各実験の最後の点)からの遷移は使わない
+    pos = 0
+    for p in parts:
+        pos += len(p[1])
+        seam[pos - 1] = True
+    n = len(Tamb)
 
     fits = {}
     for h in GRID:
         th = D[h]["T"].to_numpy() - Tamb
         u, f = D[h].u.to_numpy() / 100, D[h].f.to_numpy()
         ok = D[h].clk.to_numpy() >= 1790e6
-        mask = ok[:-1] & ok[1:]
+        mask = ok[:-1] & ok[1:] & ~seam[:-1]
         nbr = np.mean([D[s]["T"].to_numpy() - Tamb for s in NBR[h]], axis=0)
         has_fan = int(((f[:-1] > 0.5) & mask).sum()) >= 30
         ps, rs = fit_self_only(th, u, DT, mask=mask, f=f if has_fan else None)
@@ -70,7 +91,7 @@ def main():
     gain = float(np.mean(gains))
     print("ファンの定常の効き e/(1−a):", np.round(gains, 1), "→ 平均", round(gain, 1))
 
-    out = {"source": str(EXP), "dt": DT, "delta": DELTA, "R": R, "fixed_q": FIXED_Q, "fan_gain_mean": gain,
+    out = {"source": [str(e) for e in EXP], "dt": DT, "delta": DELTA, "R": R, "fixed_q": FIXED_Q, "fan_gain_mean": gain,
            "note": "温度は室温(ハブ 2)からの上昇分。囲いあり。fit_control_params_box.py", "nodes": {}}
     for h, x in fits.items():
         ps, ph = x["ps"], x["ph"]

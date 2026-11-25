@@ -122,6 +122,7 @@ class Runner:
         self.load = {r: 0 for r in nodes}
         self.fan = {r: 0 for r in nodes}
         self.mode: dict[str, str | None] = {r: None for r in nodes}
+        self.stage: dict[str, int] = {}  # proposed_ms が最後に送った段階
         self.ctrl = {}
         self.phase = ""
         self.ctrl_params = (json.loads(Path(args.control_params).read_text())
@@ -186,6 +187,7 @@ class Runner:
             self.send(role, "load", int(v))
             self.event("load", phase["name"], role, int(v))
         for role, v in phase.get("fan_stage", {}).items():  # ON のときのファンの段階(PoE+ HAT、1〜4)
+            self.stage[role] = int(v)
             self.send(role, "fan/stage", int(v))
             self.event("fan_stage", phase["name"], role, int(v))
         for role, v in phase.get("fan", {}).items():
@@ -278,8 +280,14 @@ class Runner:
                                    "T_nbr": None if T_nbr is None else round(T_nbr, 3),
                                    "f": round(f, 3), "T_amb": Ta, "pred": round(d.pred, 3),
                                    "sigma": round(d.sigma, 4), "margin": round(d.margin, 3),
-                                   "tsafe": round(d.tsafe, 3), "fan": d.fan, "reason": d.reason})
+                                   "tsafe": round(d.tsafe, 3), "fan": d.fan if d.stage is None else d.stage,
+                                   "reason": d.reason})
                 self.ctl_fp.flush()
+                if d.stage is not None and d.stage > 0 and d.stage != self.stage.get(role) and self.mode[role] == mode:
+                    # proposed_ms:段階を先に送ってから ON にする(11/26 追加)
+                    self.stage[role] = d.stage
+                    self.send(role, "fan/stage", d.stage)
+                    self.event("fan_stage", self.phase, role, d.stage)
                 if d.fan != self.fan[role] and self.mode[role] == mode:
                     self.fan[role] = d.fan
                     self.send(role, "fan", d.fan)
