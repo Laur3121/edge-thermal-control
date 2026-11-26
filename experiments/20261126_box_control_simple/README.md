@@ -19,6 +19,8 @@
 - シナリオ:`gen_box_control.py --ctrl-only --conds threshold periodic random --seed 2026112620` → `box_control_simple.json`
 - 見張り:`box_watchdog.py --limit 50`
 
+**実行前の変更(11/26 12:30、この実験の開始前)**:**囲いなしで行う**。レオの帰宅後に箱を外し、そのまま囲いなしで続けることにした(レオ「A でいい」:囲いありの制御データに、囲いなしの比較を加えるため)。パラメータは囲いなしで同定し直したもの(`scripts/control_params_open.json`:11/25 の囲いなしの測定 + `20261126_open_ident` の前半 6 割で同定し、後半 4 割で `check_params_holdout.py` を通したもの)を使う。囲いありのパラメータは流用しない。ほかの条件・判定・予想は変えない(予想は囲いありを前提に書いたので、外れても書く)。
+
 ## 指標と判定
 
 指標は `scripts/analyze_box_control.py` と同じ。参考に、昨夜の常時 ON(稼働 100%、80℃ 超過 3 秒)を並べる。

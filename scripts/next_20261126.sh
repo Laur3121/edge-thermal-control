@@ -23,22 +23,32 @@ run() {  # $1 名前, $2 シナリオ, $3 パラメータ
 if ! $PY scripts/check_params.py scripts/control_params_box2.json > experiments/check_params_box2.txt 2>&1; then log "check_params NG(box2)。止める"; exit 0; fi
 # 11/26 10:55 追加:ファンの余力を見る提案(結果が出やすそうなものから)
 run 20261126_box_control_hr scripts/scenarios/box_control_hr.json scripts/control_params_box2.json
-run 20261126_stage_ident scripts/scenarios/stage_ident.json scripts/control_params_box2.json
-$PY scripts/fit_stage_eff.py experiments/20261126_stage_ident scripts/control_params_box2.json scripts/control_params_box_ms.json \
+# 11/26 12:30 組み替え:レオの帰宅まで囲いありで 2 コアのやり直し(帰宅したら Claude が SIGINT で止める。終わった巡だけ集計)
+run 20261126_box_control_2core_redo scripts/scenarios/box_control_2core.json scripts/control_params_box2.json
+# 箱を外すのを待つ(レオが外したら Claude が experiments/BOX_REMOVED を作る)
+log "箱を外すのを待つ(experiments/BOX_REMOVED)"
+until [ -f experiments/BOX_REMOVED ]; do sleep 30; done
+log "箱を外した:$(cat experiments/BOX_REMOVED)"
+# ここから囲いなし。パラメータは囲いなしで同定し直す(囲いありのものは流用しない)
+run 20261126_open_ident scripts/scenarios/open_ident.json scripts/control_params_box2.json
+$PY scripts/fit_control_params_box.py --exp experiments/20261125_pattern_open experiments/20261126_open_ident --head-frac 0.6 \
+  --out scripts/control_params_open.json > experiments/20261126_open_ident/fit_params.txt 2>&1
+if ! $PY scripts/check_params_holdout.py scripts/control_params_open.json experiments/20261126_open_ident > experiments/check_params_open.txt 2>&1; then
+  log "check_params_holdout NG(open)。止める"; exit 0; fi
+log "check_params_holdout OK(open)"
+run 20261126_open_control scripts/scenarios/open_control.json scripts/control_params_open.json
+run 20261126_stage_ident scripts/scenarios/stage_ident.json scripts/control_params_open.json
+$PY scripts/fit_stage_eff.py experiments/20261126_stage_ident scripts/control_params_open.json scripts/control_params_open_ms.json \
   > experiments/20261126_stage_ident/fit_stage_eff.txt 2>&1
 log "fit_stage_eff: $(grep 平均 experiments/20261126_stage_ident/fit_stage_eff.txt)"
-if [ ! -f scripts/control_params_box_ms.json ]; then log "同定に失敗(control_params_box_ms.json なし)。stage_ms は回さない"; exit 0; fi
-if ! $PY scripts/check_params.py scripts/control_params_box_ms.json > experiments/check_params_box_ms.txt 2>&1; then log "check_params NG(box_ms)。止める"; exit 0; fi
-run 20261126_stage_ms scripts/scenarios/stage_ms.json scripts/control_params_box_ms.json
+if [ ! -f scripts/control_params_open_ms.json ]; then log "同定に失敗(control_params_open_ms.json なし)。stage_ms は回さない"; exit 0; fi
+run 20261126_stage_ms scripts/scenarios/stage_ms.json scripts/control_params_open_ms.json
 # ずらした負荷:H の同定 → 制御の比較
-run 20261126_stagger_ident scripts/scenarios/stagger_ident.json scripts/control_params_box2.json
-$PY scripts/fit_control_params_box.py --exp experiments/20261125_pattern_box_front_open experiments/20261126_stagger_ident \
-  --out scripts/control_params_box3.json > experiments/20261126_stagger_ident/fit_params.txt 2>&1
-if $PY scripts/check_params.py scripts/control_params_box3.json > experiments/check_params_box3.txt 2>&1; then PAR=scripts/control_params_box3.json
-else PAR=scripts/control_params_box2.json; log "check_params NG(box3)→ stagger_ctrl は box2 で回す"; fi
-log "stagger fit: $(grep -E '^raspi[0-9]: e=' experiments/20261126_stagger_ident/fit_params.txt | sed 's/ qT.*//' | tr '\n' ' ')"
+run 20261126_stagger_ident scripts/scenarios/stagger_ident.json scripts/control_params_open.json
+$PY scripts/fit_control_params_box.py --exp experiments/20261125_pattern_open experiments/20261126_stagger_ident \
+  --out scripts/control_params_open3.json > experiments/20261126_stagger_ident/fit_params.txt 2>&1
+if $PY scripts/check_params_holdout.py scripts/control_params_open3.json experiments/20261126_open_ident > experiments/check_params_open3.txt 2>&1; then PAR=scripts/control_params_open3.json
+else PAR=scripts/control_params_open.json; log "check_params_holdout NG(open3)→ stagger_ctrl は open で回す"; fi
 run 20261126_stagger_ctrl scripts/scenarios/stagger_ctrl.json $PAR
-# 残り:1 分おき・ランダム、2 コアのやり直し
-run 20261126_box_control_simple scripts/scenarios/box_control_simple.json scripts/control_params_box2.json
-run 20261126_box_control_2core_redo scripts/scenarios/box_control_2core.json scripts/control_params_box2.json
+run 20261126_box_control_simple scripts/scenarios/box_control_simple.json scripts/control_params_open.json
 log "next done"

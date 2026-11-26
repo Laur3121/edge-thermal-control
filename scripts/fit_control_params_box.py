@@ -61,9 +61,15 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--exp", nargs="+", default=[str(EXP)], help="同定に使う実験(複数可。つなげて使い、つなぎ目の遷移は除く)")
     ap.add_argument("--out", default=str(OUT))
+    ap.add_argument("--head-frac", type=float, default=1.0,
+                    help="最後の実験は前からこの割合だけを使う(残りを確認に回すため。11/26 追加)")
     a = ap.parse_args()
     EXP, OUT = [Path(e) for e in a.exp], Path(a.out)
     parts = [load(e) for e in EXP]
+    if a.head_frac < 1.0:  # 最後の実験の後半は同定に使わない(check_params_holdout.py の確認用に残す)
+        D_last, T_last = parts[-1]
+        m = int(len(T_last) * a.head_frac)
+        parts[-1] = ({h: d.iloc[:m].reset_index(drop=True) for h, d in D_last.items()}, T_last[:m])
     Tamb = np.concatenate([p[1] for p in parts])
     D = {h: pd.concat([p[0][h] for p in parts], ignore_index=True) for h in GRID}
     seam = np.zeros(len(Tamb), bool)  # つなぎ目(各実験の最後の点)からの遷移は使わない

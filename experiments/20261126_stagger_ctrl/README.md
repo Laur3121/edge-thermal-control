@@ -17,6 +17,8 @@
 - シナリオ:`scripts/scenarios/gen_stagger.py ctrl` → `stagger_ctrl.json`(約 3.3 時間)
 - 見張り:`box_watchdog.py --limit 50`
 
+**実行前の変更(11/26 12:30、この実験の開始前)**:**囲いなしで行う**。レオの帰宅後に箱を外し、そのまま囲いなしで続けることにした(レオ「A でいい」:囲いありの制御データに、囲いなしの比較を加えるため)。パラメータは囲いなしで同定し直したもの(`scripts/control_params_open.json`:11/25 の囲いなしの測定 + `20261126_open_ident` の前半 6 割で同定し、後半 4 割で `check_params_holdout.py` を通したもの)を使う。囲いありのパラメータは流用しない。パラメータは `control_params_open3.json`(確認が NG なら `control_params_open.json`)。ほかの条件・判定・予想は変えない(予想は囲いありを前提に書いたので、外れても書く)。
+
 ## 指標と判定
 
 指標は `scripts/analyze_box_control.py` と同じ。加えて、**区画が隣に来たとき(自分は 1 コアのまま、隣が 3 コアになる 240 秒)**だけの 80℃ 超過・最高温度・稼働も出す。

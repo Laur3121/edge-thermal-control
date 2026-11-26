@@ -33,6 +33,24 @@ def ident():
             "phases": phases}
 
 
+def ident_rf():
+    """囲いなしの同定用(11/26 追加):台ごとに独立なランダム負荷(0〜3 コア、180 秒ごと)と、
+    台ごとに独立なランダムなファン(60 秒ごとに確率 0.5 で ON)を 60 分。全台のファンの効き e を同定するため"""
+    rng = random.Random(2026112660)
+    phases = [{"name": "p0_baseline", "duration_s": 300, "load": {r: 0 for r in ROLES}, "fan": {r: 0 for r in ROLES},
+               "fan_stage": {r: 4 for r in ROLES}}]
+    loads = {r: 0 for r in ROLES}
+    for i in range(60):
+        if i % 3 == 0:
+            loads = {r: rng.choice([0, 1, 2, 3]) for r in ROLES}
+        phases.append({"name": f"rf{i + 1:02d}", "duration_s": 60, "load": dict(loads),
+                       "fan": {r: int(rng.random() < 0.5) for r in ROLES}})
+    phases.append({"name": "rf_rest", "duration_s": 600, "load": {r: 0 for r in ROLES}, "fan": {r: 0 for r in ROLES}})
+    return {"name": "open_ident", "description": "囲いなしの同定:台ごとに独立なランダム負荷(0〜3 コア、180 秒ごと)と"
+                                                 "ランダムなファン(60 秒ごと、確率 0.5)を 60 分。seed 2026112660",
+            "settle": SETTLE, "control": CONTROL, "phases": phases}
+
+
 def ctrl():
     seq = [(1, 2), (2, 3), (3, 4), (2, 3), (1, 2)]
     conds = {"proposed": "proposed", "selffixed": "self_fixed", "threshold": "threshold"}
@@ -55,4 +73,4 @@ def ctrl():
 
 
 if __name__ == "__main__":
-    print(json.dumps({"ident": ident, "ctrl": ctrl}[sys.argv[1]](), ensure_ascii=False, indent=1))
+    print(json.dumps({"ident": ident, "ident_rf": ident_rf, "ctrl": ctrl}[sys.argv[1]](), ensure_ascii=False, indent=1))

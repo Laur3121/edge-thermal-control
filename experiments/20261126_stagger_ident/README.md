@@ -15,6 +15,8 @@
 - 同定:`fit_control_params_box.py --exp experiments/20261125_pattern_box_front_open experiments/20261126_stagger_ident --out scripts/control_params_box3.json`(11/25 午後の 1 台ずつ負荷をかけたデータと合わせる。全台同時のデータ = 昨夜の制御は入れない)。`check_params.py` が NG なら、`stagger_ctrl` は `control_params_box2.json` で回し、その旨をログに書く
 - 予想(Claude):c は半分以上の台で正になるが、小さい(0.01〜0.1)
 
+**実行前の変更(11/26 12:30、この実験の開始前)**:**囲いなしで行う**。レオの帰宅後に箱を外し、そのまま囲いなしで続けることにした(レオ「A でいい」:囲いありの制御データに、囲いなしの比較を加えるため)。パラメータは囲いなしで同定し直したもの(`scripts/control_params_open.json`:11/25 の囲いなしの測定 + `20261126_open_ident` の前半 6 割で同定し、後半 4 割で `check_params_holdout.py` を通したもの)を使う。囲いありのパラメータは流用しない。同定は 11/25 の囲いなしの測定 + この実験(`control_params_open3.json`)、確認は `20261126_open_ident`。ほかの条件・判定・予想は変えない(予想は囲いありを前提に書いたので、外れても書く)。
+
 ## 結果
 
 (未)
