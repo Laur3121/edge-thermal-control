@@ -60,27 +60,39 @@ def load(exp):
 
 
 def fig_rise(exps, phase):
-    fig, axes = plt.subplots(1, len(exps), figsize=(3.3, 1.55), sharey=True, squeeze=False)
+    """下段に負荷をかけたときの上段の温度 − 室温。11/26 夜、先生の指摘(横軸が同じなら重ねて線の種類で分ける)で
+    1 つの図にした:色 = ノード、点線 = 囲いなし、実線 = 囲いあり"""
+    fig, ax = plt.subplots(figsize=(3.3, 1.75))
     colors = ["#1f77b4", "#ff7f0e", "#2ca02c", "#d62728"]
-    for ax, (exp, lab) in zip(axes[0], exps):
+    styles = {"囲いなし": (0, (2.5, 1.5)), "囲いあり": "-"}
+    pe_last = 0
+    for exp, lab in exps:
         tel, ev, amb = load(exp)
         ps = ev[(ev.event == "phase_start") & (ev.phase == phase)].ts.iloc[0]
         pe = ev[(ev.event == "phase_end") & (ev.phase == phase)].ts.iloc[0]
+        pe_last = max(pe_last, (pe - ps) / 60)
         t0, t1 = ps - 180, pe + 600
         a = amb[amb.name.str.contains(ROOM)].sort_values("ts")
         for c, role in zip(colors, ["r1", "r2", "r3", "r4"]):
             g = tel[(tel.host == f"raspi{role[1:]}") & (tel.ts >= t0) & (tel.ts <= t1)].sort_values("ts")
             T = g.temp.rolling(30, center=True, min_periods=5).mean()
             room = np.interp(g.ts, a.ts, a.temperature)
-            ax.plot((g.ts - ps) / 60, T - room, color=c, lw=0.9, label=role)
-        ax.axvspan(0, (pe - ps) / 60, color="0.9", zorder=0)
-        ax.set_title(lab, fontsize=7.5, pad=2)
-        for s in ["top", "right"]:
-            ax.spines[s].set_visible(False)
-    axes[0][0].set_ylabel("上段の温度 − 室温 [℃]")
-    fig.supxlabel("下段の負荷開始からの時間 [分](灰色が負荷の区間)", fontsize=8)
-    axes[0][-1].legend(fontsize=6.5, frameon=False, ncol=2, loc="lower right", handlelength=1, columnspacing=0.6)
-    fig.tight_layout(pad=0.2, w_pad=0.4)
+            ax.plot((g.ts - ps) / 60, T - room, color=c, lw=0.9, ls=styles[lab])
+    ax.axvspan(0, pe_last, color="0.9", zorder=0)
+    from matplotlib.lines import Line2D
+    h1 = [Line2D([], [], color=c, lw=1.2) for c in colors]
+    h2 = [Line2D([], [], color="0.3", lw=0.9, ls=styles[k]) for k in styles]
+    l1 = ax.legend(h1, ["r1", "r2", "r3", "r4"], fontsize=6, frameon=False, loc="upper left",
+                   bbox_to_anchor=(1.0, 1.02), handlelength=1.2, labelspacing=0.3)
+    ax.add_artist(l1)
+    ax.legend(h2, list(styles), fontsize=6, frameon=False, loc="lower left", bbox_to_anchor=(1.0, -0.02),
+              handlelength=1.8, labelspacing=0.3)
+    ax.set_ylabel("上段の温度 − 室温 [℃]", fontsize=7)
+    ax.set_xlabel("下段の負荷開始からの時間 [分](灰色:下段に負荷)", fontsize=7)
+    ax.tick_params(labelsize=6.5)
+    for s_ in ["top", "right"]:
+        ax.spines[s_].set_visible(False)
+    fig.tight_layout(pad=0.2)
     fig.savefig(FIG / "fig_res_rise.png", dpi=300)
 
 
