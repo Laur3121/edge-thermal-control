@@ -37,7 +37,11 @@ def draw_front(cx):
 
 
 def draw(ax, bx):
+    draw_top(ax)
+    draw_layout(bx)
 
+
+def draw_top(ax):
     # (a) 1 台を上から見た図。x:前後 [mm](0 が正面、右が奥)、y:左右 [mm]。
     #     正面に立って奥を向いたときの右手側が図の下側になる(HAT は右側なので基板の下)
     ax.add_patch(Rectangle((0, 26), 85, 1.6, fc=PCB, ec="none"))                 # 基板(縦に立つ)
@@ -56,6 +60,8 @@ def draw(ax, bx):
     ax.axis("off")
     ax.set_title("(a-2) 上から", fontsize=8, pad=1, loc="left")
 
+
+def draw_layout(bx, title="(b) 正面から見た配置"):
     # (b) 配置(正面から)
     W, H, GX, GY = 1.0, 0.62, 0.14, 0.14
     for i in range(8):
@@ -79,7 +85,7 @@ def draw(ax, bx):
     bx.set_ylim(-0.3, top + 0.62)
     bx.set_aspect("equal")
     bx.axis("off")
-    bx.set_title("(b) 正面から見た配置", fontsize=8, pad=1, loc="left")
+    bx.set_title(title, fontsize=8, pad=1, loc="left")
 
 
 # レジュメ・成果の要旨用:上の段に (a-1)(a-2)、下の段に (b)
@@ -100,3 +106,12 @@ for a_ in (cx, ax, bx):
     a_.set_anchor("N")  # 3 つの図を上端でそろえ、題名の高さを合わせる
 fig.tight_layout(pad=0.1, w_pad=0.6)
 fig.savefig("thesis/figures/fig_rack_layout_wide.png", dpi=300, bbox_inches="tight", pad_inches=0.02)
+# スライド用(11/27 予備審査):(a-1) 正面からと (b) 配置だけ。配置を大きめに
+fig, (cx, bx) = plt.subplots(1, 2, figsize=(5.6, 2.2), gridspec_kw={"width_ratios": [0.62, 1.4]})
+draw_front(cx)
+cx.set_title("(a) 1 台を正面から", fontsize=8, pad=1, loc="left")
+draw_layout(bx, "(b) 8 台の配置(正面から)")
+for a_ in (cx, bx):
+    a_.set_anchor("N")
+fig.tight_layout(pad=0.1, w_pad=1.0)
+fig.savefig("thesis/figures/fig_rack_layout_slide.png", dpi=300, bbox_inches="tight", pad_inches=0.02)
