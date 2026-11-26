@@ -177,3 +177,25 @@ def fig_fanwind(exp=Path("experiments/20261125_box_control")):
         ax.spines[s_].set_visible(False)
     fig.tight_layout(pad=0.2)
     fig.savefig(FIG / "fig_res_fanwind.png", dpi=300)
+
+
+def fig_sim_slide():
+    """予備スライド用:冷却の効きの遅れ(むだ時間)と、80℃ を超えない中での最小のファン稼働率(シミュレーション、11/22)。
+    データ:experiments/20261122_sim_slow_cooling/summary.csv(4 パターンの平均、どの方式も 80℃ を超える条件は除く)"""
+    sm = pd.read_csv("experiments/20261122_sim_slow_cooling/summary.csv").dropna(subset=["threshold", "proposed"])
+    g = sm[(sm.kind == "dead") & (sm.rule == "off")]
+    th = g.groupby("delay_s").threshold.mean() * 100
+    pr = g.groupby("delay_s").proposed.mean() * 100
+    fig, ax = plt.subplots(figsize=(3.9, 1.85))
+    ax.axvspan(-4, 4, color="#E6F5F9", zorder=0)
+    ax.text(5, 66, "PoE+ HAT の\nファン(5 秒以内)", fontsize=6.5, color="#006F8A", va="top")
+    ax.plot(th.index, th.values, "o-", ms=4, lw=1.4, color="#8C99A6", label="しきい値")
+    ax.plot(pr.index, pr.values, "^-", ms=4.5, lw=1.6, color="#0099BB", label="提案(予測)")
+    ax.set_xlabel("冷却の効き始めまでの遅れ(むだ時間)[秒]")
+    ax.set_ylabel("80℃ を守れる最小の\nファン稼働率 [%]")
+    ax.set_ylim(0, 75)
+    ax.legend(fontsize=7, frameon=False, loc="lower right")
+    for s_ in ["top", "right"]:
+        ax.spines[s_].set_visible(False)
+    fig.tight_layout(pad=0.2)
+    fig.savefig(FIG / "fig_sim_slide.png", dpi=300)
