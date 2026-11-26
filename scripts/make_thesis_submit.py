@@ -4,7 +4,7 @@ thesis/ を一時フォルダに写し、次を外してから組む。元のフ
   - 概要の冒頭の注記の枠
   - \\TBD{...}(中身ごと消す)
   - 結果待ちのダミーの図(\\DUMMYFIG)を含む節:囲いなし 8 台の制御、段階選択と負荷の形
-  - ファンの指令を遅らせる比較の節は、シミュレーションの図と説明だけ残し、実機の部分は今後の課題の 1 文にする
+  - ファンの指令を遅らせる比較の節は残す(11/27 未明に実機の結果が出た)
 出力:~/Documents/7303_鈴木黎映_論文.pdf
 """
 import re
@@ -33,11 +33,8 @@ s = ev.read_text()
 i = s.index(r"\subsection{Q3:囲いなしでの 8 台の制御")
 j = s.index(r"\subsection{ファンの指令を遅らせた比較")
 s = s[:i] + s[j:]
-# 遅らせる比較の節:題、実機の段落、ダミーの図
-s = s.replace(r"\subsection{ファンの指令を遅らせた比較(11 月 26 日夜)}", r"\subsection{冷却の効きが遅い場合(シミュレーション)}")
-i = s.index("これを実機で確かめるため、")
-j = s.index(r"\begin{figure}", i)
-s = s[:i] + "冷却の効きが遅い条件を実機で作り、この結果を確かめることは今後の課題である(第\\ref{chap:conclusion}章)。\n\n" + s[j:]
+# 遅らせる比較の節:実機の結果が出たので残す(11/27 未明)。題の日付だけ外す
+s = s.replace(r"\subsection{ファンの指令を遅らせた比較(11 月 26 日夜〜27 日未明)}", r"\subsection{ファンの指令を遅らせた比較}")
 s = re.sub(r"\\begin\{figure\}\[tb\]\s*\\centering\s*\\DUMMYFIG.*?\\end\{figure\}\n*", "", s, flags=re.S)
 # 段階選択と負荷の形の節を消す(次の \section まで)
 i = s.index(r"\subsection{ファンの段階を予測で選ぶ制御と、負荷の形を変えた条件}")

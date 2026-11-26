@@ -320,3 +320,41 @@ def fig_box_rerun(exclude=("raspi5",), wide=True):
              "80℃ 超えは 7 台・2 巡の合計", fontsize=5.6, color="0.3")
     fig.tight_layout(pad=0.3, rect=(0, 0.07, 1, 1))
     fig.savefig(FIG / "fig_box_rerun.png", dpi=300)
+
+
+def fig_delay_real(exp="experiments/20261126_open_delay60", exclude=("raspi5",)):
+    """ファンの指令を 60 秒遅らせた実機の比較(11/27 未明、囲いなし)。(a) ノードごとの 80℃ 超えの時間(2 巡の合計)、
+    (b) ファン稼働率と 7 台合計の 80℃ 超え。exclude:ファンの不調で外すノード(r5)"""
+    d = pd.read_csv(Path(exp) / "results" / "control_summary.csv")
+    d = d[~d.host.isin(exclude)]
+    conds = [("threshold", "しきい値", "#8C99A6"), ("proposed", "提案", "#0099BB")]
+    fig, (ax, bx) = plt.subplots(1, 2, figsize=(6.6, 1.9), gridspec_kw={"width_ratios": (3, 1.4)})
+    hosts = sorted(d.host.unique())
+    x = np.arange(len(hosts))
+    for k, (c, lab, col) in enumerate(conds):
+        v = d[d.cond == c].groupby("host").over80_s.sum().reindex(hosts)
+        ax.bar(x + (k - 0.5) * 0.36, v, 0.34, color=col, label=lab)
+    ax.set_xticks(x, ["r" + h[5:] for h in hosts], fontsize=6.5)
+    ax.set_ylabel("80℃ を超えた時間 [秒]", fontsize=7)
+    ax.set_title("(a) ノードごとの 80℃ 超え(2 巡の合計)", fontsize=7, loc="left")
+    ax.legend(fontsize=6.5, frameon=False, ncol=2, loc="upper left")
+    ax.set_ylim(0, 480)
+    for i, (c, lab, col) in enumerate(conds):
+        g = d[d.cond == c]
+        v = g.duty.mean() * 100
+        bx.bar(i, v, 0.6, color=col)
+        bx.text(i, v + 2, f"{v:.0f}%", ha="center", va="bottom", fontsize=6.5)
+        bx.text(i, v + 13, f"80℃ 超え\n{g.over80_s.sum():.0f} 秒", ha="center", va="bottom", fontsize=6, color="#C0392B")
+    bx.set_xticks(range(2), [l for _, l, _ in conds], fontsize=6.5)
+    bx.set_xlim(-0.6, 1.6)
+    bx.set_ylim(0, 100)
+    bx.set_ylabel("ファン稼働率 [%]", fontsize=7)
+    bx.set_title("(b) 稼働率(7 台の平均)", fontsize=7, loc="left")
+    for a in (ax, bx):
+        a.tick_params(labelsize=6.5)
+        for s_ in ["top", "right"]:
+            a.spines[s_].set_visible(False)
+    fig.text(0.01, 0.01, "囲いなし・ファンの指令を 60 秒遅らせる・4 コアの負荷を含むパターン × 2 巡。r5 を除く 7 台(ファンの不調)。"
+             "82℃ 以上の強制 ON は遅らせない", fontsize=5.6, color="0.3")
+    fig.tight_layout(pad=0.3, rect=(0, 0.07, 1, 1))
+    fig.savefig(FIG / "fig_delay_real.png", dpi=300)
