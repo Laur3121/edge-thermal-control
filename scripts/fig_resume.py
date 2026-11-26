@@ -116,10 +116,12 @@ if __name__ == "__main__":
     fig_pred()
 
 
-def fig_fan(box_exp="experiments/20261125_box_control", box_label="囲いあり", bad=("self_fixed", "proposed"), wide=False):
+def fig_fan(box_exp="experiments/20261125_box_control", box_label="囲いあり", bad=("self_fixed", "proposed"), wide=False,
+            omit_bad=True, out=None):
     """Q3:方式ごとの (a) ファン稼働率 と (b) 最高温度(全ノード・全巡の最大)。80℃ を超えた時間(合計)は (b) に赤で書く。
     囲いなし = 11/14(3 台 × 3 巡)、囲いあり = box_exp(8 台 × 2 巡)。
     bad:パラメータに誤りがあった方式(11/25 夜はファンの効きを 6 台で過大に見積もっていた)。斜線・白抜きにして注を書く。
+    omit_bad=True(本文用、11/26 にレオと決めた):bad の方式は描かず「再実験中」と書く。False:斜線・白抜きで描く(予備スライド用)
     wide=False はレジュメ用(上下 2 段、fig_res_fan.png)、True はスライド用(横 2 つ、fig_res_fan_wide.png)"""
     conds = [("always", "常時 ON"), ("threshold", "しきい値"), ("self_fixed", "自ノード\nの予測"), ("proposed", "提案")]
     m = pd.read_csv("experiments/20261114_compare/results/control_metrics.csv")
@@ -141,6 +143,10 @@ def fig_fan(box_exp="experiments/20261125_box_control", box_label="囲いあり"
                 continue
             x = i + (j - (len(sets) - 1) / 2) * w
             isbad = cond in badset
+            if isbad and omit_bad:
+                ax1.text(x, 2, "再\n実\n験\n中", ha="center", va="bottom", fontsize=5.5, color="0.35", linespacing=1.0)
+                ax2.text(x, 61, "再\n実\n験\n中", ha="center", va="bottom", fontsize=5.5, color="0.35", linespacing=1.0)
+                continue
             v = g.duty.mean() * 100
             ax1.bar(x, v, w * 0.92, color=c, edgecolor="white", linewidth=0, hatch="////" if isbad else None,
                     label=lab if i == 0 else None)
@@ -152,7 +158,7 @@ def fig_fan(box_exp="experiments/20261125_box_control", box_label="囲いあり"
             if g.over.sum() >= 1:
                 ax2.text(x, t + 3.3, f"{g.over.sum():.0f}秒", ha="center", va="bottom", fontsize=5.3, color="#C0392B")
     ax1.legend(fontsize=6.3, frameon=False, loc="upper right", ncol=2)
-    ax1.set_ylabel("(a) ファン稼働率 [%]", fontsize=6.5 if not wide else 7)
+    ax1.set_ylabel("(a) ファン稼働率 [%]" if wide else "(a) 稼働率 [%]", fontsize=7)
     ax1.set_ylim(0, 125)
     ax1.set_yticks([0, 50, 100])
     ax2.axhline(80, color="#C0392B", lw=0.7, ls="--", zorder=0)
@@ -166,13 +172,15 @@ def fig_fan(box_exp="experiments/20261125_box_control", box_label="囲いあり"
         for s_ in ["top", "right"]:
             ax.spines[s_].set_visible(False)
     note = "(b) 赤の破線:80℃、赤字:80℃ を超えた時間(全ノード・全巡の合計)"
-    if len(sets) > 1 and sets[1][3]:
+    if len(sets) > 1 and sets[1][3] and omit_bad:
+        note += "\n囲いありの予測の 2 方式は、パラメータを同定し直して再実験中"
+    elif len(sets) > 1 and sets[1][3]:
         note += ("\n斜線・白抜き:囲いありの自ノードの予測と提案は、ファンの効きを過大に見積もったパラメータのまま(同定し直して再実験中)"
                  if wide else "\n斜線・白抜き:ファンの効きを過大に見積もったパラメータのまま(再実験中)")
     nl = note.count("\n") + 1
     fig.text(0.01, 0.005, note, ha="left", va="bottom", fontsize=5.6, color="0.3", linespacing=1.25)
     fig.tight_layout(pad=0.2, h_pad=0.4, rect=(0, (0.062 if wide else 0.036) * nl + 0.01, 1, 1))
-    fig.savefig(FIG / ("fig_res_fan_wide.png" if wide else "fig_res_fan.png"), dpi=300)
+    fig.savefig(FIG / (out or ("fig_res_fan_wide.png" if wide else "fig_res_fan.png")), dpi=300)
 
 
 def fig_fanwind(exp=Path("experiments/20261125_box_control")):
