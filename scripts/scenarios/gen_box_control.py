@@ -50,6 +50,9 @@ def main():
     ap.add_argument("--seed", type=int, default=SEED)
     ap.add_argument("--delta", type=float, default=30.0, help="予測の先読み Δ [秒](11/26 朝追加)")
     ap.add_argument("--stage", type=int, default=STAGE, help="ファン ON のときの段階(0〜4、11/26 朝追加)")
+    ap.add_argument("--random-load", type=int, default=None, metavar="SEED",
+                    help="台ごとに独立なランダム負荷(11/26 昼追加):20 分を 120 秒 × 10 区間に分け、各区間・各ノードで"
+                         "0〜4 コアを等確率で選ぶ。同じ表を全方式・全巡で使う(方式どうしを同じ負荷で比べるため)")
     args = ap.parse_args()
     fan_roles = [r for r in ROLES if r not in args.no_fan]
     load_roles = fan_roles  # ファンを使えないノードには負荷をかけない
@@ -59,6 +62,10 @@ def main():
                 "fan": {r: fan.get(r, 0) for r in fan_roles}}
 
     pattern = [({4: 2, 2: 1}.get(c, c), d) for c, d in PATTERN] if args.half_load else PATTERN
+    rload = None
+    if args.random_load is not None:
+        lrng = random.Random(args.random_load)
+        rload = [{r: (lrng.choice([0, 1, 2, 3, 4]) if r in load_roles else 0) for r in ROLES} for _ in range(10)]
     if args.ctrl_only:
         phases = [{**phase("p0_baseline", 300, {}, {}), "fan_stage": {r: args.stage for r in fan_roles}}]
     else:
@@ -89,6 +96,14 @@ def main():
                             slot += 1
                     phases.append(phase(f"c{k}_{cond}_rest", REST_S, {}, {}))
                     continue
+                if rload is not None:
+                    for i, row in enumerate(rload):
+                        ph = {"name": f"c{k}_{cond}_s{i + 1}", "duration_s": 120, "load": dict(row)}
+                        if i == 0:
+                            ph["fan"] = {r: CONDITIONS[cond] for r in fan_roles}
+                        phases.append(ph)
+                    phases.append(phase(f"c{k}_{cond}_rest", REST_S, {}, {}))
+                    continue
                 for i, (cores, dur) in enumerate(pattern):
                     ph = {"name": f"c{k}_{cond}_s{i + 1}", "duration_s": dur,
                           "load": {r: (cores if r in load_roles else 0) for r in ROLES}}
@@ -101,7 +116,7 @@ def main():
           "description": (("" if args.ctrl_only else f"温度上昇を長く見る(下段 {RISE_CORES} コア {RISE_LOAD} 秒、上段アイドル)")
                           + ("" if args.rise_only else
                              f" + ファン制御の比較 {len(args.conds)} 方式 × {ROUNDS} 巡(順番 {order}、seed={args.seed}、"
-                             f"負荷パターン {pattern}、Δ={args.delta:.0f} 秒、ON の段階 {args.stage})")
+                             f"負荷パターン {('台ごとのランダム(seed ' + str(args.random_load) + ')') if rload else pattern}、Δ={args.delta:.0f} 秒、ON の段階 {args.stage})")
                           + f"。ファンなし:{args.no_fan or 'なし'}。合計 {total / 3600:.1f} 時間(落ち着き待ちを除く)"),
           "settle": {"window_s": 120, "max_slope_c_per_min": 0.2, "timeout_s": 1800},
           "control": {"tlimit": 80.0, "delta_s": args.delta, "alpha": 2.0, "delta_margin": 0.5, "hysteresis": 1.0,

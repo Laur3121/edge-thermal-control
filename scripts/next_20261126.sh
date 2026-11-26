@@ -23,8 +23,8 @@ run() {  # $1 名前, $2 シナリオ, $3 パラメータ
 if ! $PY scripts/check_params.py scripts/control_params_box2.json > experiments/check_params_box2.txt 2>&1; then log "check_params NG(box2)。止める"; exit 0; fi
 # 11/26 10:55 追加:ファンの余力を見る提案(結果が出やすそうなものから)
 run 20261126_box_control_hr scripts/scenarios/box_control_hr.json scripts/control_params_box2.json
-# 11/26 12:30 組み替え:レオの帰宅まで囲いありで 2 コアのやり直し(帰宅したら Claude が SIGINT で止める。終わった巡だけ集計)
-run 20261126_box_control_2core_redo scripts/scenarios/box_control_2core.json scripts/control_params_box2.json
+# 11/26 11:50 差し替え:2 コアのやり直し → 台ごとにランダムな負荷(レオと決めた。帰宅したら Claude が SIGINT で止める。終わった巡だけ集計)
+run 20261126_box_control_rload scripts/scenarios/box_control_rload.json scripts/control_params_box2.json
 # 箱を外すのを待つ(レオが外したら Claude が experiments/BOX_REMOVED を作る)
 log "箱を外すのを待つ(experiments/BOX_REMOVED)"
 until [ -f experiments/BOX_REMOVED ]; do sleep 30; done
