@@ -358,3 +358,46 @@ def fig_delay_real(exp="experiments/20261126_open_delay60", exclude=("raspi5",))
              "82℃ 以上の強制 ON は遅らせない", fontsize=5.6, color="0.3")
     fig.tight_layout(pad=0.3, rect=(0, 0.07, 1, 1))
     fig.savefig(FIG / "fig_delay_real.png", dpi=300)
+
+
+def fig_q1_bars(exps=((OPEN, "囲いなし"), (BOXED, "囲いあり")), phase="off_bottom_load"):
+    """スライド用(11/27 未明、レオ「図 2 が分かりづらい」):Q1 の 2 つの効果を同じ目盛りで並べる。
+    上段 4 台ごとに (1) 囲ったことで上がった分 = 負荷の前 3 分の(温度 − 室温)の平均の差(囲いあり − なし)、
+    (2) 下段に負荷をかけて上がった分 = 負荷の最後の 1 分と負荷をかける前の 1 分の(温度 − 室温)の差(囲いあり・なし)"""
+    res = {}
+    for exp, lab in exps:
+        tel, ev, amb = load(exp)
+        ps = ev[(ev.event == "phase_start") & (ev.phase == phase)].ts.iloc[0]
+        pe = ev[(ev.event == "phase_end") & (ev.phase == phase)].ts.iloc[0]
+        a = amb[amb.name.str.contains(ROOM)].sort_values("ts")
+        for role in ["r1", "r2", "r3", "r4"]:
+            g = tel[tel.host == f"raspi{role[1:]}"].sort_values("ts")
+            d = g.temp - np.interp(g.ts, a.ts, a.temperature)
+            m = lambda t0, t1: d[(g.ts >= t0) & (g.ts < t1)].mean()
+            res[(lab, role)] = dict(base=m(ps - 180, ps), rise=m(pe - 60, pe) - m(ps - 60, ps))
+    roles = ["r1", "r2", "r3", "r4"]
+    box = [res[("囲いあり", r)]["base"] - res[("囲いなし", r)]["base"] for r in roles]
+    load_box = [res[("囲いあり", r)]["rise"] for r in roles]
+    load_open = [res[("囲いなし", r)]["rise"] for r in roles]
+    fig, ax = plt.subplots(figsize=(5.2, 2.1))
+    x = np.arange(4)
+    w = 0.27
+    for k, (v, lab, col) in enumerate([(box, "囲ったことで上がった分", "#0099BB"),
+                                       (load_box, "下段の負荷で上がった分(囲いあり)", "#8C99A6"),
+                                       (load_open, "下段の負荷で上がった分(囲いなし)", "#C9D1D9")]):
+        ax.bar(x + (k - 1) * w, v, w * 0.92, color=col, label=lab)
+        for i, y in enumerate(v):
+            ax.text(x[i] + (k - 1) * w, max(y, 0) + 0.2, f"{y:+.1f}", ha="center", va="bottom", fontsize=5.5)
+    ax.axhline(0, color="0.3", lw=0.6)
+    ax.set_xticks(x, [f"{r}" for r in roles], fontsize=7)
+    ax.set_xlabel("上段のノード(左から)", fontsize=7)
+    ax.set_ylabel("温度の上がり [℃]\n(室温との差)", fontsize=7)
+    ax.set_ylim(-0.5, 10)
+    ax.tick_params(labelsize=6.5)
+    ax.legend(fontsize=6, frameon=False, loc="lower left", bbox_to_anchor=(0.0, 1.0), ncol=3, columnspacing=1.2,
+              handlelength=1.2)
+    for s_ in ["top", "right"]:
+        ax.spines[s_].set_visible(False)
+    fig.tight_layout(pad=0.2)
+    fig.savefig(FIG / "fig_q1_bars.png", dpi=300)
+    return box, load_box, load_open
