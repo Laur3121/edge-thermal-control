@@ -3,7 +3,7 @@
 
 指標(方式ごと、2 巡 × 8 台):ファン稼働率(20 分の負荷パターンの間に ON だった割合)、80℃ を超えた時間、最高温度、
 強制 ON の時間、最低クロック、ON/OFF の回数
-出力:<exp>/results/control_summary.csv、summary_control.txt、thesis/figures/fig_res_fan.png
+出力:<exp>/results/control_summary.csv、summary_control.txt、fig_control.png
 
 使い方:python scripts/analyze_box_control.py experiments/20261125_box_control
 """
@@ -19,9 +19,9 @@ import pandas as pd  # noqa: E402
 
 plt.rcParams.update({"font.family": ["Hiragino Sans", "sans-serif"], "font.size": 8})
 COND = {"always": "常時 ON", "periodic": "1 分おき", "random": "ランダム", "threshold": "しきい値",
-        "selffixed": "自ノードの\n予測", "proposed": "提案\n(KF + H)"}
+        "selffixed": "自ノードの\n予測", "proposed": "提案\n(KF + H)", "proposed_hr": "提案\n+ 余力"}
 COL = {"always": "#C9D1D9", "periodic": "#DDE3E8", "random": "#DDE3E8", "threshold": "#A7B3C2",
-       "selffixed": "#8C99A6", "proposed": "#0099BB"}
+       "selffixed": "#8C99A6", "proposed": "#0099BB", "proposed_hr": "#006F8A"}
 
 
 def main(exp: Path):
@@ -72,7 +72,7 @@ def main(exp: Path):
     for s in ["top", "right"]:
         ax.spines[s].set_visible(False)
     fig.tight_layout(pad=0.2)
-    fig.savefig("thesis/figures/fig_res_fan.png", dpi=300)
+    fig.savefig(out / "fig_control.png", dpi=300)  # レジュメの図 thesis/figures/fig_res_fan.png は上書きしない
 
 
 if __name__ == "__main__":

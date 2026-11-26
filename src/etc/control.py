@@ -22,7 +22,11 @@ import numpy as np
 from .kalman import NoiseParams, ThermalKF
 from .model import ThermalParams
 
-MODES = ("proposed", "self_fixed", "threshold", "proposed_ms")
+MODES = ("proposed", "self_fixed", "threshold", "proposed_ms", "proposed_hr")
+# proposed_hr(11/26 追加):ファンの余力を見る。次のどちらかなら「余力なし」として ON にし、止めない。
+#   (1) モデル:今の負荷・H のままファンを回し続けたときの定常温度 T_on = (b u + c H + e + d)/(1 − a) + 室温 が Tsafe − hr_margin を超える
+#   (2) 実測:ファンを hr_on_s 秒以上回しているのに、温度が Tsafe − hr_margin より高い(モデルが囲いの温まりを拾いきれないため)
+# 余力があるときは proposed と同じ
 # proposed_ms(11/26 追加):ファンの段階 1〜4 ごとに「その段階で回したら Δ 秒先は何℃か」を予測し、
 # Tsafe を下回る一番弱い段階を選ぶ。段階 s の効きは e × stage_eff[s](stage_eff[4] = 1、同定した相対値)
 
@@ -37,6 +41,8 @@ class ControlConfig:
     min_on_s: float = 30.0  # 最小 ON 時間 [s]
     t_on: float = 75.0  # threshold 方式
     t_off: float = 70.0
+    hr_margin: float = 2.0  # proposed_hr:ファン ON の定常温度がこれだけ Tsafe に近づいたら余力なしとみなす [℃]
+    hr_on_s: float = 60.0  # proposed_hr:ファンをこの秒数回しても下がらなければ余力なしとみなす
 
 
 @dataclass
@@ -72,7 +78,7 @@ class FanController:
 
     def _predict_off(self, theta: float, u: float, nbr: float) -> tuple[float, float]:
         """Δ 秒先の θ の予測(ファン OFF・負荷と隣の温度は今の値が続く)と σ。"""
-        if self.mode in ("proposed", "proposed_ms"):
+        if self.mode in ("proposed", "proposed_ms", "proposed_hr"):
             return self.kf.predict_ahead(self.m, u, nbr=nbr, f=0.0)
         p, x = self.p, theta
         for _ in range(self.m):
@@ -107,14 +113,27 @@ class FanController:
                 d.fan, d.reason = 0, f"T {T:.1f} <= {c.t_off}"
         else:
             pred_th, sigma = self._predict_off(theta, u, nbr)
-            if self.mode == "proposed":
+            if self.mode in ("proposed", "proposed_hr"):
                 M = c.alpha * sigma + c.delta_margin
             else:
                 M = self.fixed_margin
             pred = pred_th + T_amb
             tsafe = c.tlimit - M
             d = Decision(self.fan, pred=pred, sigma=sigma, margin=M, tsafe=tsafe)
-            if self.fan == 0 and pred > tsafe:
+            no_headroom = False
+            if self.mode == "proposed_hr":
+                p, H = self.p, float(self.kf.x[1])
+                T_on = (p.b * u + p.c * H + p.e + p.d) / (1 - p.a) + T_amb  # ファンを回し続けたときの定常温度
+                on_for = t - self.on_since if (self.fan == 1 and self.on_since is not None) else 0.0
+                by_model = T_on > tsafe - c.hr_margin
+                by_meas = on_for >= c.hr_on_s and T > tsafe - c.hr_margin
+                no_headroom = by_model or by_meas
+            if no_headroom:
+                if self.fan == 0:
+                    d.fan, d.reason = 1, f"余力なし(モデル) T_on {T_on:.1f} > {tsafe - c.hr_margin:.1f}"
+                elif by_meas and not by_model:
+                    d.reason = f"余力なし(実測) T {T:.1f} > {tsafe - c.hr_margin:.1f}、ON {on_for:.0f} 秒"
+            elif self.fan == 0 and pred > tsafe:
                 d.fan, d.reason = 1, f"pred {pred:.1f} > Tsafe {tsafe:.1f}"
             elif self.fan == 1 and min_on_ok and pred < tsafe - c.hysteresis:
                 d.fan, d.reason = 0, f"pred {pred:.1f} < Tsafe-h {tsafe - c.hysteresis:.1f}"
@@ -152,7 +171,7 @@ def controller_from_dict(mode: str, node_params: dict, cfg: ControlConfig) -> Fa
     proposed で node_params に "withH"(c, rho, z_base を含む)があればそれを使う(H あり、2026-11-25 追加)。
     """
     s = node_params["self"]
-    if mode in ("proposed", "proposed_ms") and "withH" in node_params:
+    if mode in ("proposed", "proposed_ms", "proposed_hr") and "withH" in node_params:
         h = node_params["withH"]
         p = ThermalParams(a=h["a"], b=h["b"], d=h["d"], e=h["e"], c=h["c"], rho=h["rho"], z_base=h["z_base"],
                           dt=h["dt"])

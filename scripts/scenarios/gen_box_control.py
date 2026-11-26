@@ -32,6 +32,7 @@ TOP, BOTTOM = ROLES[:4], ROLES[4:]
 STAGE = 4
 RISE_CORES, RISE_PRE, RISE_LOAD, RISE_REST = 4, 300, 2400, 900
 CONDITIONS = {"always": 1, "threshold": "threshold", "selffixed": "self_fixed", "proposed": "proposed",
+              "proposed_hr": "proposed_hr",
               "periodic": None, "random": None}  # periodic / random は 60 秒ごとに ON/OFF を切り替える(11/26 追加、11/24 の先生の案)
 SLOT = 60
 PATTERN = [(1, 120), (4, 360), (0, 180), (4, 300), (2, 120), (4, 120)]  # 11/14 の比較実験と同じ

@@ -21,6 +21,8 @@ run() {  # $1 名前, $2 シナリオ, $3 パラメータ
 }
 # パラメータの確認(11/26 追加。外れたら回さない)
 if ! $PY scripts/check_params.py scripts/control_params_box2.json > experiments/check_params_box2.txt 2>&1; then log "check_params NG(box2)。止める"; exit 0; fi
+# 11/26 10:55 追加:ファンの余力を見る提案(結果が出やすそうなものから)
+run 20261126_box_control_hr scripts/scenarios/box_control_hr.json scripts/control_params_box2.json
 run 20261126_stage_ident scripts/scenarios/stage_ident.json scripts/control_params_box2.json
 $PY scripts/fit_stage_eff.py experiments/20261126_stage_ident scripts/control_params_box2.json scripts/control_params_box_ms.json \
   > experiments/20261126_stage_ident/fit_stage_eff.txt 2>&1
