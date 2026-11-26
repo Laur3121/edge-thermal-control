@@ -1,0 +1,10 @@
+scripts/control_params_open.json を experiments/20261126_open_ident の後半 40% で確認(30 秒先)
+  raspi1: 誤差 全体 2.31 ファン ON 2.77℃  OK
+  raspi2: 誤差 全体 1.81 ファン ON 2.09℃  OK
+  raspi3: 誤差 全体 2.27 ファン ON 2.43℃  OK
+  raspi4: 誤差 全体 2.96 ファン ON 3.99℃  OK
+  raspi5: 誤差 全体 2.87 ファン ON 3.40℃  OK
+  raspi6: 誤差 全体 1.85 ファン ON 1.77℃  OK
+  raspi7: 誤差 全体 1.81 ファン ON 2.41℃  OK
+  raspi8: 誤差 全体 2.06 ファン ON 2.48℃  OK
+結果: OK

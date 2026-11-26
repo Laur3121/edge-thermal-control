@@ -1,0 +1,17 @@
+raspi1: fan_steps=204 self a=0.941 b=2.16 e=-1.24 | H a=0.928 c=0.015 rho=0.980 e=-1.40
+raspi2: fan_steps=347 self a=0.949 b=1.76 e=-0.89 | H a=0.937 c=0.015 rho=0.935 e=-1.00
+raspi3: fan_steps=275 self a=0.948 b=1.59 e=-1.31 | H a=0.932 c=0.022 rho=0.500 e=-1.46
+raspi4: fan_steps=263 self a=0.912 b=3.14 e=-1.31 | H a=0.886 c=0.046 rho=0.995 e=-1.40
+raspi5: fan_steps=287 self a=0.950 b=2.13 e=-0.25 | H a=0.957 c=-0.012 rho=0.805 e=-0.30
+raspi6: fan_steps=480 self a=0.923 b=2.32 e=-1.60 | H a=0.906 c=0.032 rho=0.840 e=-1.77
+raspi7: fan_steps=204 self a=0.935 b=2.17 e=-1.35 | H a=0.929 c=0.012 rho=0.500 e=-1.42
+raspi8: fan_steps=228 self a=0.913 b=2.99 e=-1.32 | H a=0.889 c=0.024 rho=0.965 e=-1.46
+ファンの定常の効き e/(1−a): [-20.9 -17.3 -25.1 -14.9  -5.  -20.8 -20.8 -15.3] → 平均 -17.5
+raspi1: e=-1.24 c=0.015 qT=0.102 qT_H=0.101 fixed_margin=2.95 issues=[]
+raspi2: e=-0.89 c=0.015 qT=0.147 qT_H=0.145 fixed_margin=3.20 issues=[]
+raspi3: e=-1.31 c=0.022 qT=0.108 qT_H=0.102 fixed_margin=3.80 issues=[]
+raspi4: e=-1.31 c=0.046 qT=0.125 qT_H=0.117 fixed_margin=5.60 issues=[]
+raspi5: e=-0.25 c=0.000 qT=0.087 qT_H=0.087 fixed_margin=3.01 issues=[]
+raspi6: e=-1.60 c=0.032 qT=0.182 qT_H=0.168 fixed_margin=6.02 issues=[]
+raspi7: e=-1.35 c=0.012 qT=0.129 qT_H=0.127 fixed_margin=3.02 issues=[]
+raspi8: e=-1.32 c=0.024 qT=0.075 qT_H=0.072 fixed_margin=3.92 issues=[]
