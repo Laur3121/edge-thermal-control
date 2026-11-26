@@ -274,3 +274,37 @@ def fig_sim_trace(L_list=(0, 60), pattern="compare"):
                 ax.spines[s_].set_visible(False)
     fig.subplots_adjust(left=0.1, right=0.99, top=0.92, bottom=0.15)
     fig.savefig(FIG / "fig_sim_trace.png", dpi=300)
+
+
+def fig_box_rerun(exclude=("raspi5",), wide=True):
+    """囲いありの再実験(11/26):(a) ファンを段階 2 にした比較、(b) ファンの余力を見る提案。
+    稼働率の棒と、80℃ を超えた時間(赤字)。exclude:ファンの不調で比較から外すノード(r5、README に記載)"""
+    sets = [("(a) ファンを段階 2 に弱めた(2 コアの負荷)", "experiments/20261126_box_control_stage2",
+             [("threshold", "しきい値"), ("proposed", "提案")]),
+            ("(b) 余力を見る提案(4 コアの負荷)", "experiments/20261126_box_control_hr",
+             [("always", "常時 ON"), ("threshold", "しきい値"), ("proposed_hr", "提案\n+ 余力")])]
+    col = {"always": "#C9D1D9", "threshold": "#8C99A6", "proposed": "#0099BB", "proposed_hr": "#0099BB"}
+    fig, axes = plt.subplots(1, 2, figsize=(6.6, 1.9), gridspec_kw={"width_ratios": (2, 3)})
+    for ax, (title, exp, conds) in zip(axes, sets):
+        d = pd.read_csv(Path(exp) / "results" / "control_summary.csv")
+        d = d[~d.host.isin(exclude)]
+        for i, (c, lab) in enumerate(conds):
+            g = d[d.cond == c]
+            v = g.duty.mean() * 100
+            ax.bar(i, v, 0.6, color=col[c])
+            ax.text(i, v + 2, f"{v:.0f}%", ha="center", va="bottom", fontsize=6.5)
+            ax.text(i, v + 13, f"80℃ 超え {g.over80_s.sum():.0f} 秒", ha="center", va="bottom", fontsize=6,
+                    color="#C0392B" if g.over80_s.sum() >= 1 else "0.35")
+        ax.set_xticks(range(len(conds)), [l for _, l in conds], fontsize=6.5)
+        ax.set_xlim(-0.6, len(conds) - 0.4)
+        ax.set_ylim(0, 128)
+        ax.set_yticks([0, 50, 100])
+        ax.set_title(title, fontsize=7, loc="left")
+        ax.tick_params(labelsize=6.5)
+        for s_ in ["top", "right"]:
+            ax.spines[s_].set_visible(False)
+    axes[0].set_ylabel("ファン稼働率 [%]", fontsize=7)
+    fig.text(0.01, 0.01, f"8 台 × 2 巡のうち {', '.join('r' + h[5:] for h in exclude)} を除く 7 台(ファンの不調。11/26 に止まっていたのを確認)。"
+             "80℃ 超えは 7 台・2 巡の合計", fontsize=5.6, color="0.3")
+    fig.tight_layout(pad=0.3, rect=(0, 0.07, 1, 1))
+    fig.savefig(FIG / "fig_box_rerun.png", dpi=300)
