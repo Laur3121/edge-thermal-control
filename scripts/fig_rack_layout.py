@@ -25,9 +25,10 @@ def draw_front(cx):
     cx.text(19.3, 58.5, "HAT", ha="center", va="bottom", fontsize=7, color=HAT)
     cx.text(0.8, 58.5, "基板", ha="center", va="bottom", fontsize=7, color=PCB)
     cx.text(27, 44, "ファン", ha="left", va="center", fontsize=6.5)
-    # 風の軸:ファンは HAT の板に平行なので、風は HAT に垂直(正面から見て左右)。吸い込みか吹き出しかは未確認なので両向き
-    cx.add_patch(FancyArrowPatch((27, 28), (46, 28), arrowstyle="<|-|>", mutation_scale=9, color=INK, lw=1.1))
-    cx.text(27.5, 22, "通風方向\n(吸排気の\n向きは未確認)", ha="left", va="top", fontsize=5.5, color="0.3", linespacing=1.0)
+    # 風:ファンは HAT の板に平行なので、風は HAT に垂直(正面から見て左右)。11/26 夜、吸気(外側から HAT へ吸い込む)とした
+    # (先生から「吸気のはず」と聞いた。自分たちで目視の確認はまだ。12 月にティッシュで確かめる)
+    cx.add_patch(FancyArrowPatch((46, 28), (27, 28), arrowstyle="-|>", mutation_scale=9, color=INK, lw=1.1))
+    cx.text(27.5, 22, "吸気", ha="left", va="top", fontsize=6.5, color="0.3")
     cx.set_xlim(-22, 58)
     cx.set_ylim(-4, 68)
     cx.set_aspect("equal")
