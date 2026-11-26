@@ -360,7 +360,7 @@ def fig_delay_real(exp="experiments/20261126_open_delay60", exclude=("raspi5",))
     fig.savefig(FIG / "fig_delay_real.png", dpi=300)
 
 
-def fig_q1_bars(exps=((OPEN, "囲いなし"), (BOXED, "囲いあり")), phase="off_bottom_load"):
+def fig_q1_bars(exps=((OPEN, "囲いなし"), (BOXED, "囲いあり")), phase="off_bottom_load", resume=False):
     """スライド用(11/27 未明、レオ「図 2 が分かりづらい」):Q1 の 2 つの効果を同じ目盛りで並べる。
     上段 4 台ごとに (1) 囲ったことで上がった分 = 負荷の前 3 分の(温度 − 室温)の平均の差(囲いあり − なし)、
     (2) 下段に負荷をかけて上がった分 = 負荷の最後の 1 分と負荷をかける前の 1 分の(温度 − 室温)の差(囲いあり・なし)"""
@@ -379,7 +379,8 @@ def fig_q1_bars(exps=((OPEN, "囲いなし"), (BOXED, "囲いあり")), phase="o
     box = [res[("囲いあり", r)]["base"] - res[("囲いなし", r)]["base"] for r in roles]
     load_box = [res[("囲いあり", r)]["rise"] for r in roles]
     load_open = [res[("囲いなし", r)]["rise"] for r in roles]
-    fig, ax = plt.subplots(figsize=(5.2, 2.1))
+    # resume=True:レジュメ用(1 段幅でそのままの大きさ、凡例は図の中、11/27 朝)
+    fig, ax = plt.subplots(figsize=(3.3, 1.45) if resume else (5.2, 2.1))
     x = np.arange(4)
     w = 0.27
     for k, (v, lab, col) in enumerate([(box, "囲ったことで上がった分", "#0099BB"),
@@ -392,12 +393,15 @@ def fig_q1_bars(exps=((OPEN, "囲いなし"), (BOXED, "囲いあり")), phase="o
     ax.set_xticks(x, [f"{r}" for r in roles], fontsize=7)
     ax.set_xlabel("上段のノード(左から)", fontsize=7)
     ax.set_ylabel("温度の上がり [℃]\n(室温との差)", fontsize=7)
-    ax.set_ylim(-0.5, 10)
+    ax.set_ylim(-0.5, 14 if resume else 10)
     ax.tick_params(labelsize=6.5)
-    ax.legend(fontsize=6, frameon=False, loc="lower left", bbox_to_anchor=(0.0, 1.0), ncol=3, columnspacing=1.2,
-              handlelength=1.2)
+    if resume:
+        ax.legend(fontsize=6, frameon=False, loc="upper right", ncol=1, handlelength=1.2)
+    else:
+        ax.legend(fontsize=6, frameon=False, loc="lower left", bbox_to_anchor=(0.0, 1.0), ncol=3, columnspacing=1.2,
+                  handlelength=1.2)
     for s_ in ["top", "right"]:
         ax.spines[s_].set_visible(False)
     fig.tight_layout(pad=0.2)
-    fig.savefig(FIG / "fig_q1_bars.png", dpi=300)
+    fig.savefig(FIG / ("fig_q1_bars_resume.png" if resume else "fig_q1_bars.png"), dpi=300)
     return box, load_box, load_open
