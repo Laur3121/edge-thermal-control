@@ -116,44 +116,63 @@ if __name__ == "__main__":
     fig_pred()
 
 
-def fig_fan(box_exp=None, box_label="囲いあり"):
-    """Q3:方式ごとのファン稼働率。囲いなし = 11/14(3 台 × 3 巡)、囲いあり = box_exp(8 台 × 2 巡、あれば)。
-    80℃ を超えた時間(合計)は、超えたときだけ棒の上に赤で書く。"""
+def fig_fan(box_exp="experiments/20261125_box_control", box_label="囲いあり", bad=("self_fixed", "proposed"), wide=False):
+    """Q3:方式ごとの (a) ファン稼働率 と (b) 最高温度(全ノード・全巡の最大)。80℃ を超えた時間(合計)は (b) に赤で書く。
+    囲いなし = 11/14(3 台 × 3 巡)、囲いあり = box_exp(8 台 × 2 巡)。
+    bad:パラメータに誤りがあった方式(11/25 夜はファンの効きを 6 台で過大に見積もっていた)。斜線・白抜きにして注を書く。
+    wide=False はレジュメ用(上下 2 段、fig_res_fan.png)、True はスライド用(横 2 つ、fig_res_fan_wide.png)"""
     conds = [("always", "常時 ON"), ("threshold", "しきい値"), ("self_fixed", "自ノード\nの予測"), ("proposed", "提案")]
     m = pd.read_csv("experiments/20261114_compare/results/control_metrics.csv")
     m["cond"] = m.condition.replace({"selffixed": "self_fixed"})
-    sets = [("囲いなし", m.rename(columns={"fan_on_ratio": "duty", "over_limit_s": "over"}), "#A7B3C2")]
+    sets = [("囲いなし", m.rename(columns={"fan_on_ratio": "duty", "over_limit_s": "over", "T_max": "tmax"}), "#A7B3C2", ())]
     if box_exp is not None:
         b = pd.read_csv(Path(box_exp) / "results" / "control_summary.csv")
         b["cond"] = b.cond.replace({"selffixed": "self_fixed"})
-        sets.append((box_label, b.rename(columns={"over80_s": "over"}), "#0099BB"))
-    fig, ax = plt.subplots(figsize=(3.3, 1.55))
+        sets.append((box_label, b.rename(columns={"over80_s": "over", "max_temp": "tmax"}), "#0099BB", bad))
+    if wide:
+        fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(6.6, 1.8))
+    else:
+        fig, (ax1, ax2) = plt.subplots(2, 1, figsize=(3.3, 2.4), sharex=True, gridspec_kw={"height_ratios": (1, 1.3)})
     w = 0.8 / len(sets)
-    for j, (lab, df, c) in enumerate(sets):
+    for j, (lab, df, c, badset) in enumerate(sets):
         for i, (cond, _) in enumerate(conds):
             g = df[df.cond == cond]
             if g.empty:
                 continue
             x = i + (j - (len(sets) - 1) / 2) * w
+            isbad = cond in badset
             v = g.duty.mean() * 100
-            ax.bar(x, v, w * 0.92, color=c, label=lab if i == 0 or (j and cond == "threshold") else None)
-            ax.text(x, v + 1.5, f"{v:.0f}", ha="center", va="bottom", fontsize=6)
+            ax1.bar(x, v, w * 0.92, color=c, edgecolor="white", linewidth=0, hatch="////" if isbad else None,
+                    label=lab if i == 0 else None)
+            ax1.text(x, v + 1.5, f"{v:.0f}", ha="center", va="bottom", fontsize=6)
+            t = g.tmax.max()
+            ax2.plot([x, x], [60, t], color=c, lw=1.0, zorder=1)
+            ax2.plot(x, t, "o", ms=4.5, color=c, mfc="white" if isbad else c, mew=1.2, zorder=3)
+            ax2.text(x, t + 0.8, f"{t:.1f}", ha="center", va="bottom", fontsize=5.3)
             if g.over.sum() >= 1:
-                ax.text(x, v + 9, f"超過\n{g.over.sum():.0f}秒", ha="center", va="bottom", fontsize=5.3, color="#C0392B",
-                        linespacing=0.9)
-    h, l = ax.get_legend_handles_labels()
-    seen = {}
-    for hh, ll in zip(h, l):
-        seen.setdefault(ll, hh)
-    ax.legend(seen.values(), seen.keys(), fontsize=6, frameon=False, loc="upper right", ncol=len(seen))
-    ax.set_xticks(range(len(conds)), [n for _, n in conds], fontsize=6.5)
-    ax.set_ylabel("ファン稼働率 [%]")
-    ax.set_ylim(0, 128)
-    ax.set_yticks([0, 50, 100])
-    for s_ in ["top", "right"]:
-        ax.spines[s_].set_visible(False)
-    fig.tight_layout(pad=0.2)
-    fig.savefig(FIG / "fig_res_fan.png", dpi=300)
+                ax2.text(x, t + 3.3, f"{g.over.sum():.0f}秒", ha="center", va="bottom", fontsize=5.3, color="#C0392B")
+    ax1.legend(fontsize=6.3, frameon=False, loc="upper right", ncol=2)
+    ax1.set_ylabel("(a) ファン稼働率 [%]", fontsize=6.5 if not wide else 7)
+    ax1.set_ylim(0, 125)
+    ax1.set_yticks([0, 50, 100])
+    ax2.axhline(80, color="#C0392B", lw=0.7, ls="--", zorder=0)
+    ax2.set_ylabel("(b) 最高温度 [℃]", fontsize=7)
+    ax2.set_ylim(60, 93)
+    ax2.set_yticks([60, 70, 80, 90])
+    for ax in (ax1, ax2):
+        ax.set_xticks(range(len(conds)), [n for _, n in conds], fontsize=6.5)
+        ax.set_xlim(-0.6, len(conds) - 0.4)
+        ax.tick_params(labelsize=6.5)
+        for s_ in ["top", "right"]:
+            ax.spines[s_].set_visible(False)
+    note = "(b) 赤の破線:80℃、赤字:80℃ を超えた時間(全ノード・全巡の合計)"
+    if len(sets) > 1 and sets[1][3]:
+        note += ("\n斜線・白抜き:囲いありの自ノードの予測と提案は、ファンの効きを過大に見積もったパラメータのまま(同定し直して再実験中)"
+                 if wide else "\n斜線・白抜き:ファンの効きを過大に見積もったパラメータのまま(再実験中)")
+    nl = note.count("\n") + 1
+    fig.text(0.01, 0.005, note, ha="left", va="bottom", fontsize=5.6, color="0.3", linespacing=1.25)
+    fig.tight_layout(pad=0.2, h_pad=0.4, rect=(0, (0.062 if wide else 0.036) * nl + 0.01, 1, 1))
+    fig.savefig(FIG / ("fig_res_fan_wide.png" if wide else "fig_res_fan.png"), dpi=300)
 
 
 def fig_fanwind(exp=Path("experiments/20261125_box_control")):

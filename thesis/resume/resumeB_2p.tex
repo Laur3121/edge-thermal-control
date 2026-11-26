@@ -54,6 +54,7 @@
 % 節と図の前後の空きを詰める
 \setlength{\textfloatsep}{8pt plus 2pt minus 2pt}
 \setlength{\dbltextfloatsep}{8pt plus 2pt minus 2pt}
+\setlength{\floatsep}{6pt plus 2pt minus 2pt}\setlength{\abovecaptionskip}{3pt}
 \captionsetup{skip=4pt}
 \makeatletter
 \renewcommand{\section}{\@startsection{section}{1}{\z@}{0.6\Cvs \@plus.3\Cdp}{0.3\Cvs}{\normalfont\large\headfont\raggedright}}
@@ -113,7 +114,7 @@ Q1 では、負荷を r6 だけ・r7 だけ・下段 4 台にかけ、負荷の�
 \subsection{Q1:空間熱干渉はどこで起こるか}
 \begin{figure}[tb]
   \centering
-  \includegraphics[width=0.9\columnwidth]{fig_res_rise.png}
+  \includegraphics[width=0.85\columnwidth]{fig_res_rise.png}
   \caption{下段に負荷をかけたときの上段(ファン OFF)}
   \label{fig:rise}
 \end{figure}
@@ -122,7 +123,7 @@ Q1 では、負荷を r6 だけ・r7 だけ・下段 4 台にかけ、負荷の�
 \subsection{Q2:予測精度は向上するか}
 \begin{figure}[tb]
   \centering
-  \includegraphics[width=0.88\columnwidth]{fig_res_pred.png}
+  \includegraphics[width=0.8\columnwidth]{fig_res_pred.png}
   \caption{30 秒先の予測の誤差(上段 r1〜r3 の平均)}
   \label{fig:pred}
 \end{figure}
@@ -131,14 +132,14 @@ Q1 では、負荷を r6 だけ・r7 だけ・下段 4 台にかけ、負荷の�
 \subsection{Q3:ファンの稼働を減らせるか}
 \begin{figure}[tb]
   \centering
-  \includegraphics[width=0.88\columnwidth]{fig_res_fan.png}
-  \caption{方式ごとのファン稼働率(囲いなし)}
+  \includegraphics[width=0.8\columnwidth]{fig_res_fan.png}
+  \caption{方式ごとのファン稼働率と最高温度}
   \label{fig:fan}
 \end{figure}
-図~\ref{fig:fan}に、20 分の負荷パターンでのファン稼働率を示す。囲いなし(3 台 × 3 巡)では、どの方式も 80\,℃ を超えず、提案は 38\% で常時 ON より約 6 割少なかったが、しきい値(40\%)との差はほぼなかった。PoE+ HAT のファンは 5 秒以内に効き 20\,℃ 以上下げるため、温度が上がってから回しても間に合う。囲いありでは、初期の同定でファンの冷却効果を過大に見積もっていたため、パラメータを再同定して再実験を行っている。\TBD{囲いありの結果}
+図~\ref{fig:fan}に、20 分の負荷パターンでのファン稼働率と最高温度を示す。囲いなし(3 台 × 3 巡)では、どの方式も 80\,℃ を超えず、提案は 38\% で常時 ON より約 6 割少なかったが、しきい値(40\%)との差はほぼなかった。PoE+ HAT のファンは 5 秒以内に効き 20\,℃ 以上下げるため、温度が上がってから回しても間に合う。囲いあり(8 台 × 2 巡)では、常時 ON でも最高 80.3\,℃ でファンの余力がほとんどなく、ファンを止める方式はどれも 80\,℃ を超えた。ただし予測の 2 方式は、ファンの冷却効果を過大に見積もったパラメータで動かしており、再実験中である。\TBD{囲いありの再実験の結果}
 
 \section{考察とまとめ}
-1 台の排熱が隣を直接温める経路は小さく、囲いありではどの位置関係でも 0.5\,℃ 以内であった。温度を押し上げていたのは囲いの中に熱が溜まる経路で、囲うだけで 5〜10\,℃ 高くなった。対外発表の約 12\,℃ も、密閉した容器で熱が溜まった結果と考えられる。隣のファンの風は逆に周りを冷やした。$H$ は、追加のセンサや配線なしに、周りのノードの温度だけで囲いの昇温を推定し、囲いの中に温度計を置いたのと同じ精度で誤差を 4〜5 割減らした。一方、制御での予測の利点は、ファンを弱い段階で回すなど冷却が遅い・弱い条件で出ると考えられる。今後は、ファンの回転の段階(4 段階)を予測で選ぶ制御と、負荷の形を変えた条件で評価する。
+1 台の排熱が隣を直接温める経路は小さく、囲いありではどの位置関係でも 0.5\,℃ 以内であった。温度を押し上げていたのは囲いの中に熱が溜まる経路で、囲うだけで 5〜10\,℃ 高くなった。対外発表の約 12\,℃ も、密閉した容器で熱が溜まった結果と考えられる。隣のファンの風は逆に周りを冷やした。$H$ は、追加のセンサや配線なしに、周りのノードの温度だけで囲いの昇温を推定し、囲いの中に温度計を置いたのと同じ精度で誤差を 4〜5 割減らした。一方、制御での予測の利点は冷却が遅い・弱い条件で出ると考えられ、今後はファンの段階を予測で選ぶ制御で評価する。
 
 \section*{対外発表}
 本研究の手法の一部は、情報処理学会 OS 研究会で発表した~\cite{ipsj}。
