@@ -3,6 +3,9 @@
 
 指標(方式ごと、2 巡 × 8 台):ファン稼働率(20 分の負荷パターンの間に ON だった割合)、80℃ を超えた時間、最高温度、
 強制 ON の時間、最低クロック、ON/OFF の回数
+追加の指標(11/26 昼、レオと決めた。実行前に決めた判定には使わない参考の指標):
+  clock_low_s    クロックが 1795 MHz 未満だった時間(温度によるクロックの制限。ガバナは performance で、アイドルでも 1800 MHz)
+  clock_loss_pct 20 分の間の平均のクロック低下 [%](1 − クロック / 1800 MHz の時間平均)。処理の遅れの目安
 出力:<exp>/results/control_summary.csv、summary_control.txt、fig_control.png
 
 使い方:python scripts/analyze_box_control.py experiments/20261125_box_control
@@ -45,6 +48,9 @@ def main(exp: Path):
                                  over80_s=float(dt[g.temp.to_numpy() > 80].sum()), max_temp=g.temp.max(),
                                  failsafe_s=float(dt[g.failsafe.to_numpy() == 1].sum()),
                                  min_clock_mhz=g.clock.min() / 1e6,
+                                 clock_low_s=float(dt[g.clock.to_numpy() / 1e6 < 1795].sum()),
+                                 clock_loss_pct=float((np.clip(1 - g.clock.to_numpy() / 1e6 / 1800, 0, 1) * dt).sum()
+                                                      / dt.sum() * 100),
                                  switches=int((np.diff(f) != 0).sum()), complete=bool(t1 - t0 > 1150)))
     df = pd.DataFrame(rows)
     out = exp / "results"
@@ -53,6 +59,8 @@ def main(exp: Path):
     agg = df.groupby("cond").agg(duty=("duty", "mean"), duty_min=("duty", "min"), duty_max=("duty", "max"),
                                  over80_s=("over80_s", "sum"), max_temp=("max_temp", "max"),
                                  failsafe_s=("failsafe_s", "sum"), min_clock=("min_clock_mhz", "min"),
+                                 clock_low_s=("clock_low_s", "sum"), clock_loss_pct=("clock_loss_pct", "mean"),
+                                 clock_loss_max=("clock_loss_pct", "max"),
                                  switches=("switches", "mean"), n=("duty", "size")).reindex(list(COND)).dropna(how="all")
     per_round = df.groupby(["cond", "round"]).duty.mean().unstack()
     txt = "\n".join(["# box_control 第 2 部(方式ごと、2 巡 × 8 台)", agg.round(3).to_string(), "",
