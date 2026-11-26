@@ -15,6 +15,7 @@
 
 from __future__ import annotations
 
+from collections import deque
 from dataclasses import dataclass, field
 
 import numpy as np
@@ -43,6 +44,9 @@ class ControlConfig:
     t_off: float = 70.0
     hr_margin: float = 2.0  # proposed_hr:ファン ON の定常温度がこれだけ Tsafe に近づいたら余力なしとみなす [℃]
     hr_on_s: float = 60.0  # proposed_hr:ファンをこの秒数回しても下がらなければ余力なしとみなす
+    fan_delay_s: float = 0.0  # ファンの指令が効くまでの遅れ L [s](11/26 追加。実験で指令をわざと遅らせる)
+    # L > 0 のとき、予測を使う方式は先読みを Δ + L にし、すでに出した指令(L 秒のうちに効くもの)を予測に入れ、
+    # 先読みの間の予測の最大値で判断する(11/22 のシミュレーション sim_slow_cooling.py の rule "off" と同じ)
 
 
 @dataclass
@@ -68,7 +72,11 @@ class FanController:
     def __post_init__(self):
         if self.mode not in MODES:
             raise ValueError(f"mode は {MODES} のどれか: {self.mode}")
-        self.m = int(round(self.cfg.delta_s / self.p.dt))
+        self.Ld = int(round(self.cfg.fan_delay_s / self.p.dt))
+        self.m = int(round((self.cfg.delta_s + self.cfg.fan_delay_s) / self.p.dt))
+        if self.Ld > 0 and self.mode in ("proposed_ms", "proposed_hr"):
+            raise ValueError("fan_delay_s > 0 は proposed・self_fixed・threshold だけ")
+        self.hist = deque([0] * self.Ld, maxlen=self.Ld) if self.Ld > 0 else None  # 直近 Ld 回の指令(古い順)
         self.kf: ThermalKF | None = None
         self.prev: tuple[float, float, float] | None = None  # 前のステップの (u, f, 隣の温度 − 室温)
         self.fan = 0
@@ -78,6 +86,19 @@ class FanController:
 
     def _predict_off(self, theta: float, u: float, nbr: float) -> tuple[float, float]:
         """Δ 秒先の θ の予測(ファン OFF・負荷と隣の温度は今の値が続く)と σ。"""
+        if self.Ld > 0:
+            # 遅れあり:0 ステップ目は OFF とみなし(遅れ 0 と同じ近似)、1〜Ld ステップ目はすでに出した指令が効く。
+            # その先(今の指令から後)は OFF。先読みの間の最大値を返す
+            fs = [0.0] + [float(v) for v in self.hist] + [0.0] * (self.m - 1 - self.Ld)
+            fs = fs[:self.m]
+            if self.mode == "proposed":
+                means, sigma = self.kf.predict_path(fs, u, nbr)
+                return float(means.max()), sigma
+            p, x, mx = self.p, theta, -np.inf
+            for f in fs:
+                x = p.a * x + p.b * u + p.d + p.e * f
+                mx = max(mx, x)
+            return float(mx), float("nan")
         if self.mode in ("proposed", "proposed_ms", "proposed_hr"):
             return self.kf.predict_ahead(self.m, u, nbr=nbr, f=0.0)
         p, x = self.p, theta
@@ -140,6 +161,8 @@ class FanController:
         if d.fan != self.fan:
             self.on_since = t if d.fan == 1 else None
             self.fan = d.fan
+        if self.hist is not None:
+            self.hist.append(d.fan)
         return d
 
 
@@ -185,16 +208,21 @@ def controller_from_dict(mode: str, node_params: dict, cfg: ControlConfig) -> Fa
 
 
 def simulate(ctrl: FanController, p_true: ThermalParams, u_seq, T_amb: float, T0: float,
-             noise_sd: float = 0.0, seed: int = 0):
-    """真のモデル p_true の下で閉ループを回す(テスト・事前確認用)。戻り値は (T, fan)。"""
+             noise_sd: float = 0.0, seed: int = 0, delay_steps: int = 0):
+    """真のモデル p_true の下で閉ループを回す(テスト・事前確認用)。戻り値は (T, fan(効いていた状態), cmd(指令))。
+    delay_steps:指令が効くまでの遅れ [ステップ](11/26 追加)。判断は次の区間から効き、さらに delay_steps 遅れる。"""
     rng = np.random.default_rng(seed)
-    theta, T_log, f_log = T0 - T_amb, [], []
+    theta, T_log, f_log, c_log = T0 - T_amb, [], [], []
     f_cur = 0  # このステップの間のファン状態(1 つ前の判断。実機でも判断は次の区間から効く)
+    cmds = []
     for k, u in enumerate(u_seq):
         y = theta + T_amb + rng.normal(0, noise_sd)
         dec = ctrl.step(k * p_true.dt, y, u, f_cur, T_amb)
         T_log.append(theta + T_amb)
         f_log.append(f_cur)
         theta = p_true.a * theta + p_true.b * u + p_true.e * f_cur + p_true.d
-        f_cur = dec.fan
-    return np.array(T_log), np.array(f_log)
+        cmds.append(dec.fan)
+        c_log.append(dec.fan)
+        src = len(cmds) - 1 - delay_steps
+        f_cur = cmds[src] if src >= 0 else 0
+    return np.array(T_log), np.array(f_log), np.array(c_log)

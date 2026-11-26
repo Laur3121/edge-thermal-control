@@ -53,6 +53,8 @@ def main():
     ap.add_argument("--random-load", type=int, default=None, metavar="SEED",
                     help="台ごとに独立なランダム負荷(11/26 昼追加):20 分を 120 秒 × 10 区間に分け、各区間・各ノードで"
                          "0〜4 コアを等確率で選ぶ。同じ表を全方式・全巡で使う(方式どうしを同じ負荷で比べるため)")
+    ap.add_argument("--fan-delay", type=float, default=0.0,
+                    help="ファンの指令を送るまでの遅れ [秒](11/26 夜追加。冷却の効きが遅い条件を実機で作る)")
     args = ap.parse_args()
     fan_roles = [r for r in ROLES if r not in args.no_fan]
     load_roles = fan_roles  # ファンを使えないノードには負荷をかけない
@@ -116,11 +118,13 @@ def main():
           "description": (("" if args.ctrl_only else f"温度上昇を長く見る(下段 {RISE_CORES} コア {RISE_LOAD} 秒、上段アイドル)")
                           + ("" if args.rise_only else
                              f" + ファン制御の比較 {len(args.conds)} 方式 × {ROUNDS} 巡(順番 {order}、seed={args.seed}、"
-                             f"負荷パターン {('台ごとのランダム(seed ' + str(args.random_load) + ')') if rload else pattern}、Δ={args.delta:.0f} 秒、ON の段階 {args.stage})")
+                             f"負荷パターン {('台ごとのランダム(seed ' + str(args.random_load) + ')') if rload else pattern}、Δ={args.delta:.0f} 秒、ON の段階 {args.stage}"
+                             + (f"、ファンの指令の遅れ {args.fan_delay:.0f} 秒" if args.fan_delay > 0 else "") + ")")
                           + f"。ファンなし:{args.no_fan or 'なし'}。合計 {total / 3600:.1f} 時間(落ち着き待ちを除く)"),
           "settle": {"window_s": 120, "max_slope_c_per_min": 0.2, "timeout_s": 1800},
           "control": {"tlimit": 80.0, "delta_s": args.delta, "alpha": 2.0, "delta_margin": 0.5, "hysteresis": 1.0,
-                      "min_on_s": 30.0, "t_on": 75.0, "t_off": 70.0},
+                      "min_on_s": 30.0, "t_on": 75.0, "t_off": 70.0,
+                      **({"fan_delay_s": args.fan_delay} if args.fan_delay > 0 else {})},
           "phases": phases}
     print(json.dumps(sc, indent=1, ensure_ascii=False))
 

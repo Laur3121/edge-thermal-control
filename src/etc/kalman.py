@@ -74,6 +74,19 @@ class ThermalKF:
             P = self.A @ P @ self.A.T + Q
         return float(x[0]), float(np.sqrt(P[0, 0]))
 
+    def predict_path(self, fs, u: float, nbr: float):
+        """ファンの効きの列 fs(長さ m、fs[i] は i ステップ目の遷移に効くファン)を与えたときの、
+        1〜m ステップ先の温度の平均の列と、m ステップ先の σ(11/26 追加、ファンの指令を遅らせる実験用)。"""
+        z = nbr - self.p.z_base
+        x, P = self.x.copy(), self.P.copy()
+        Q = self._Q(0.0)
+        means = []
+        for f in fs:
+            x = self.A @ x + self._drive(u, z, float(f))
+            P = self.A @ P @ self.A.T + Q
+            means.append(float(x[0]))
+        return np.array(means), float(np.sqrt(P[0, 0]))
+
 
 def run_kf(p: ThermalParams, n: NoiseParams, T, u, nbr, m: int, f=None):
     """系列全体に KF を回し、各時刻 k での m ステップ先予測を返す。

@@ -120,7 +120,10 @@ class Runner:
         self.temps = {h: deque(maxlen=3600) for h in nodes.values()}
         self.rows = {h: deque(maxlen=120) for h in nodes.values()}  # (ts, temp, cpu, fan) 制御用
         self.load = {r: 0 for r in nodes}
-        self.fan = {r: 0 for r in nodes}
+        self.fan = {r: 0 for r in nodes}  # 制御が決めた指令
+        self.applied = {r: 0 for r in nodes}  # ノードに送った(効いている)指令。fan_delay_s = 0 なら fan と同じ
+        self.pending: list[tuple[float, str, int, str]] = []  # (送る時刻, 役割, 値, 方式):指令を遅らせる実験(11/26)
+        self.fan_delay = float(scenario.get("control", {}).get("fan_delay_s", 0.0))
         self.mode: dict[str, str | None] = {r: None for r in nodes}
         self.stage: dict[str, int] = {}  # proposed_ms が最後に送った段階
         self.ctrl = {}
@@ -191,9 +194,12 @@ class Runner:
             self.send(role, "fan/stage", int(v))
             self.event("fan_stage", phase["name"], role, int(v))
         for role, v in phase.get("fan", {}).items():
+            with self.lock:
+                self.pending = [x for x in self.pending if x[1] != role]
             if v == "os":  # OS 標準のファン制御に任せる(node_agent に "2" を送る)
                 self.mode[role] = None
                 self.fan[role] = 2
+                self.applied[role] = 2
                 self.send(role, "fan", 2)
                 self.event("fan", phase["name"], role, "os")
                 continue
@@ -205,6 +211,7 @@ class Runner:
             else:
                 self.mode[role] = None
             self.fan[role] = int(v)
+            self.applied[role] = int(v)
             self.send(role, "fan", int(v))
             self.event("fan", phase["name"], role, int(v))
 
@@ -290,13 +297,33 @@ class Runner:
                     self.event("fan_stage", self.phase, role, d.stage)
                 if d.fan != self.fan[role] and self.mode[role] == mode:
                     self.fan[role] = d.fan
-                    self.send(role, "fan", d.fan)
-                    self.event("fan", self.phase, role, d.fan)
+                    if self.fan_delay > 0:  # 指令を遅らせて送る(11/26 追加)
+                        with self.lock:
+                            self.pending.append((now + self.fan_delay, role, d.fan, mode))
+                        self.event("fan_cmd", self.phase, role, d.fan)
+                    else:
+                        self.applied[role] = d.fan
+                        self.send(role, "fan", d.fan)
+                        self.event("fan", self.phase, role, d.fan)
 
     def heartbeat(self):
         while not self.stop.wait(HEARTBEAT_S):
-            for role, v in self.fan.items():
+            for role, v in self.applied.items():
                 self.send(role, "fan", v)
+
+    def delay_sender(self):
+        """fan_delay_s > 0 のとき、制御の指令を fan_delay_s 秒あとに送る(11/26 追加)。
+        途中で方式が変わった(休みの区間に入った)ら、古い指令は捨てる。"""
+        while not self.stop.wait(0.5):
+            now = time.time()
+            with self.lock:
+                due = [x for x in self.pending if x[0] <= now]
+                self.pending = [x for x in self.pending if x[0] > now]
+            for _, role, v, mode in due:
+                if self.mode.get(role) == mode:
+                    self.applied[role] = v
+                    self.send(role, "fan", v)
+                    self.event("fan", self.phase, role, v)
 
     def wait_settled(self):
         st = self.sc.get("settle", {})
@@ -371,11 +398,13 @@ class Runner:
         self.connect()
         hb = threading.Thread(target=self.heartbeat, daemon=True)
         cl = threading.Thread(target=self.control_loop, daemon=True)
+        ds = threading.Thread(target=self.delay_sender, daemon=True)
         try:
             self.event("start", value=self.sc.get("name", ""))
             self.apply({"name": "init", "load": {r: 0 for r in self.nodes}, "fan": {r: 0 for r in self.nodes}})
             hb.start()
             cl.start()
+            ds.start()
             if not self.args.no_settle:
                 self.wait_settled()
             for ph in phases:

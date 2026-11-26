@@ -36,13 +36,13 @@ def test_no_fan_exceeds_limit():
 
 def test_predictive_modes_stay_below_limit_and_fan_not_always_on():
     for mode in ("proposed", "self_fixed", "threshold"):
-        T, f = run(mode)
+        T, f, _ = run(mode)
         assert T.max() < 80.0, (mode, T.max())
         assert 0.05 < f.mean() < 0.95, (mode, f.mean())
 
 
 def test_min_on_time_respected():
-    T, f = run("proposed", min_on_s=60.0)
+    T, f, _ = run("proposed", min_on_s=60.0)
     # ON になったら少なくとも 60 秒(12 ステップ)続く
     starts = np.where(np.diff(np.r_[0, f]) == 1)[0]
     ends = np.where(np.diff(np.r_[f, 0]) == -1)[0]
@@ -55,3 +55,13 @@ def test_proposed_margin_is_alpha_sigma_plus_delta():
         d = ctrl.step(5.0 * k, 60.0, 0.5, 0, T_AMB)
     assert np.isclose(d.margin, 2.0 * d.sigma + 0.5)
     assert np.isclose(d.tsafe, 80.0 - d.margin)
+
+
+def test_delay_zero_is_unchanged_and_delay_runs():
+    # fan_delay_s = 0 は今までと同じ判断(hist なし)。遅れありでも予測の方式は 80℃ を守る(11/26 追加)
+    a = FanController("proposed", P, N, ControlConfig())
+    assert a.hist is None and a.m == 6
+    ctrl = FanController("proposed", P, N, ControlConfig(fan_delay_s=60.0))
+    assert ctrl.Ld == 12 and ctrl.m == 18
+    T, f, c = simulate(ctrl, P, U, T_AMB, T0=50.0, noise_sd=0.3, seed=1, delay_steps=12)
+    assert T.max() < 80.0, T.max()
