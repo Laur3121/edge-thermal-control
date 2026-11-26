@@ -226,3 +226,51 @@ def fig_sim_slide():
         ax.spines[s_].set_visible(False)
     fig.tight_layout(pad=0.2)
     fig.savefig(FIG / "fig_sim_slide.png", dpi=300)
+
+
+def fig_sim_trace(L_list=(0, 60), pattern="compare"):
+    """予備スライド・論文用:「こうなるはず」の時系列(11/22 のシミュレーション、11/26 に図示)。
+    設定は実機の実験と同じ(しきい値 75/70℃、提案 α = 2・δ = 0.5)で、後から選んだ値ではない。
+    冷却の効き始めの遅れ(むだ時間)L ごとに、温度とファンの指令を並べる。"""
+    sys.path.insert(0, str(Path(__file__).resolve().parent))
+    import sim_slow_cooling as S
+    plant, cp = S.load_models()
+    u = S.load_patterns()[pattern]
+    t = np.arange(len(u)) * S.DT / 60
+    fig = plt.figure(figsize=(6.6, 2.5))
+    gs = fig.add_gridspec(3, len(L_list), height_ratios=(0.45, 3, 0.9), hspace=0.12, wspace=0.12)
+    styles = {"threshold": ("しきい値(75℃ で ON)", "#8C99A6", 75.0), "proposed": ("提案(予測)", "#0099BB", 2.0)}
+    for j, L in enumerate(L_list):
+        axl = fig.add_subplot(gs[0, j])
+        axt = fig.add_subplot(gs[1, j], sharex=axl)
+        axf = fig.add_subplot(gs[2, j], sharex=axl)
+        axl.fill_between(t, 0, u * 4, step="post", color="0.8", lw=0)
+        axl.set_ylim(0, 4.4)
+        axl.set_yticks([])
+        axl.set_title(f"冷却の遅れ {L} 秒" + ("(PoE+ HAT 相当)" if L == 0 else ""), fontsize=7.5, pad=2)
+        if j == 0:
+            axl.set_ylabel("負荷\n(0〜4 コア)", fontsize=6, rotation=0, ha="right", va="center")
+        for k, (mode, (lab, c, val)) in enumerate(styles.items()):
+            x = S.simulate(plant, cp, u, "dead", L, mode, val, trace=True)
+            axt.plot(t, x["T"], color=c, lw=1.2, label=f"{lab}:稼働 {x['fan_ratio'] * 100:.0f}%、最高 {x['T_max']:.1f}℃")
+            axf.fill_between(t, k, k + 0.8 * x["cmd"], step="post", color=c, lw=0)
+        axt.axhline(80, color="#C0392B", lw=0.7, ls="--")
+        axt.set_ylim(42, 85)
+        axt.set_yticks([50, 60, 70, 80])
+        axt.legend(fontsize=5.6, frameon=False, loc="lower right", handlelength=1.2)
+        axf.set_ylim(-0.1, 2)
+        axf.set_yticks([0.4, 1.4], ["しきい値", "提案"] if j == 0 else ["", ""], fontsize=6)
+        axf.set_xlabel("時間 [分]", fontsize=7)
+        if j == 0:
+            axt.set_ylabel("温度 [℃]", fontsize=7)
+            axf.set_ylabel("ファン", fontsize=6.5, rotation=0, ha="right", va="center", labelpad=28)
+        else:
+            axt.tick_params(labelleft=False)
+        for ax in (axl, axt):
+            ax.tick_params(labelbottom=False)
+        for ax in (axl, axt, axf):
+            ax.tick_params(labelsize=6.5)
+            for s_ in ["top", "right"]:
+                ax.spines[s_].set_visible(False)
+    fig.subplots_adjust(left=0.1, right=0.99, top=0.92, bottom=0.15)
+    fig.savefig(FIG / "fig_sim_trace.png", dpi=300)

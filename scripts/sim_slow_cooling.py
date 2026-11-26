@@ -47,7 +47,7 @@ def load_models():
     return plant, cp
 
 
-def simulate(plant, cp, u_seq, kind, delay_s, mode, val, fixed_fan=None, rule="off"):
+def simulate(plant, cp, u_seq, kind, delay_s, mode, val, fixed_fan=None, rule="off", trace=False):
     """1 本の閉ループ。mode:threshold / self_fixed / proposed、val:その方式の設定値。
 
     rule(予測を使う方式の判断):
@@ -152,8 +152,11 @@ def simulate(plant, cp, u_seq, kind, delay_s, mode, val, fixed_fan=None, rule="o
             g = g + lam * (dec[k] - g)
             eff = g
     # 稼働率は「ファンを回した指令の割合」(電力・寿命に効くのは指令側)
-    return {"T_max": float(Tlog.max()), "over80_s": float((Tlog > 80).sum() * DT),
-            "fan_ratio": float(Clog.mean()), "fan_on_count": int(np.sum(np.diff(np.r_[0, Clog]) == 1))}
+    res = {"T_max": float(Tlog.max()), "over80_s": float((Tlog > 80).sum() * DT),
+           "fan_ratio": float(Clog.mean()), "fan_on_count": int(np.sum(np.diff(np.r_[0, Clog]) == 1))}
+    if trace:  # 11/26 追加:図のために時系列も返す(判断・結果は変わらない)
+        res.update(T=Tlog.copy(), cmd=Clog.copy(), eff=Elog.copy())
+    return res
 
 
 def run_condition(args):
