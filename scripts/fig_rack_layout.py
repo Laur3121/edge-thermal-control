@@ -27,7 +27,7 @@ def draw_front(cx):
     cx.text(27, 44, "ファン", ha="left", va="center", fontsize=6.5)
     # 風の軸:ファンは HAT の板に平行なので、風は HAT に垂直(正面から見て左右)。吸い込みか吹き出しかは未確認なので両向き
     cx.add_patch(FancyArrowPatch((27, 28), (46, 28), arrowstyle="<|-|>", mutation_scale=9, color=INK, lw=1.1))
-    cx.text(27.5, 22, "風の軸\n(向きは未確認)", ha="left", va="top", fontsize=5.5, color="0.3", linespacing=1.0)
+    cx.text(27.5, 22, "通風方向\n(吸排気の\n向きは未確認)", ha="left", va="top", fontsize=5.5, color="0.3", linespacing=1.0)
     cx.set_xlim(-22, 58)
     cx.set_ylim(-4, 68)
     cx.set_aspect("equal")
