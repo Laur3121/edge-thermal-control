@@ -10,6 +10,8 @@
 \usepackage{url}
 \usepackage{xcolor}
 \newcommand{\TBD}[1]{\textcolor{red}{【#1】}}  % 結果待ち・要確認
+% 結果待ちの図の場所取り(11/26)。#1 = 図の中身、#2 = いつ出るか
+\newcommand{\DUMMYFIG}[2]{\fcolorbox{red}{white}{\parbox[c][4.2cm][c]{0.8\linewidth}{\centering\color{red}\small 図(ダミー):#1\\[4pt]\footnotesize #2}}}
 \usepackage[dvipdfmx,hidelinks]{hyperref}
 \usepackage{pxjahyper}
 
