@@ -33,13 +33,12 @@ HEAD = {(0, 1): "東京都立産業技術高等専門学校", (0, 3): "創造工
 
 S11 = [
     "データセンタでは、サーバの排熱が別のサーバの吸気側に回り込む熱の再循環が冷却の効率を下げ、これを考慮した負荷の配置が"
-    "研究されている[1][2]。同じ問題は、Raspberry Pi などの小型の計算機を密に並べ、空調のない場所に置くエッジのマイクロクラスタ[3]"
+    "研究されている[1][2]。同じ問題は、Raspberry Pi などの小型の計算機を密に並べ、空調のない場所に置くエッジのマイクロクラスタ"
     "でも起こりうる。Raspberry Pi 4B は CPU 温度が約 80℃ を超えると動作周波数を下げ(スロットリング)、処理が遅くなる。ファンを"
-    "常に回せば温度は下がるが、ファンの寿命は稼働時間で表され[4]、騒音にもなる。",
-    "筆者は対外発表[5]で、あるノードの発熱でほかのノードの温度が上がる現象(空間熱干渉)を、外部熱影響 H として状態に持つ"
+    "常に回せば温度は下がるが、ファンの寿命は稼働時間で表され[3]、騒音にもなる。",
+    "筆者は対外発表[4]で、あるノードの発熱でほかのノードの温度が上がる現象(空間熱干渉)を、外部熱影響 H として状態に持つ"
     "カルマンフィルタで温度を予測する手法を提案した。密閉した容器では隣の負荷だけで負荷のないノードの温度が約 12℃ 上がったが、"
-    "開いたラックでは 0.5℃ 未満で、どのような配置で干渉が起こるのかは測られていなかった。温度を予測して先回りする熱管理[6][7]も"
-    "1 台の内部が対象である。",
+    "開いたラックでは 0.5℃ 未満で、どのような配置で干渉が起こるのかは測られていなかった。",
     "本研究の目的は、(1) 空間熱干渉がどの位置関係・囲いで起こるかを 8 台の実機で明らかにし、(2) 干渉を H として推定すると予測が"
     "改善するか、(3) その予測に基づくファン制御で 80℃ を超えずにファンの稼働を減らせるかを評価することである。小型の計算機を"
     "密に置くとき、どの条件で干渉を考慮した熱管理が必要かを示すことに意義がある。",
@@ -50,10 +49,10 @@ S12 = [
     "ポート側を正面に向けて固定した。各ノードに Raspberry Pi PoE+ HAT(ファン付き)を付け、ファンを制御用 PC から ON/OFF した。"
     "CPU 温度・使用率・動作周波数・ファンの状態を 1 秒ごとに MQTT で収集し、室温(囲いの外)と囲いの中の気温を市販の温湿度計で約 1 分ごとに記録した。負荷は stress-ng で与えた。",
     "FIG:fig_rack_layout.png:図 1 (a) 1 台の向き(8 台とも同じ)、(b) 配置",
-    "CPU の温度は、熱容量と熱抵抗からなる熱 RC モデル[8]で表した。室温からの温度上昇は、発熱を CPU 使用率とファンの状態の"
+    "CPU の温度は、熱容量と熱抵抗からなる熱 RC モデル[5]で表した。室温からの温度上昇は、発熱を CPU 使用率とファンの状態の"
     "一次式で近似すると一次遅れ系になり、これを 5 秒ごとに離散化した。ほかのノードの熱は空気を介して遅れて届くとみなし、周りの"
-    "ノードの温度の変化を一次遅れで追う量を H として式に加えた(対外発表[5]と同じ)。パラメータは事前の実験から最小二乗法で同定した。"
-    "カルマンフィルタ[9]で推定した 30 秒先の温度(ファン OFF のまま)が 80℃−(2σ+0.5℃) を超えたときだけ"
+    "ノードの温度の変化を一次遅れで追う量を H として式に加えた(対外発表[4]と同じ)。パラメータは事前の実験から最小二乗法で同定した。"
+    "カルマンフィルタ[6]で推定した 30 秒先の温度(ファン OFF のまま)が 80℃−(2σ+0.5℃) を超えたときだけ"
     "ファンを ON にする。σ は予測の標準偏差。同定と評価には別のデータを用いた。",
     "囲いは「なし」と「あり」の 2 条件とした。囲いありは、ラック全体に段ボール箱(307 × 220 × 120 mm)をかぶせ、上・左右・後ろを"
     "覆い、正面と下を開けた。干渉の測定では、1 台だけ、または下段 4 台に 2 コアの負荷を一度にかけて 10 分続け、12 分休ませた"
@@ -94,17 +93,12 @@ REFS = [
     "Placement in Data Centers,” Proc. USENIX ATC, pp.61–74, 2005.",
     "[2] Q. Tang, S. K. S. Gupta, G. Varsamopoulos, “Energy-Efficient Thermal-Aware Task Scheduling for Homogeneous "
     "High-Performance Computing Data Centers: A Cyber-Physical Approach,” IEEE TPDS, Vol.19, No.11, pp.1458–1472, 2008.",
-    "[3] S. J. Cox, J. T. Cox, R. P. Boardman, S. J. Johnston, M. Scott, “Iridis-pi: a low-cost, compact demonstration "
-    "cluster,” Cluster Computing, pp.349–358, 2014.",
-    "[4] S. J. Kim, A. Claassen, “How to Evaluate Fan Life,” Electronics Cooling, 1996.",
-    "[5] 鈴木 黎映, 知念 賢一, “空間熱干渉を考慮した状態推定に基づく動的熱マージン制御手法,” 情報処理学会研究報告, "
+    "[3] S. J. Kim, A. Claassen, “How to Evaluate Fan Life,” Electronics Cooling, 1996.",
+    "[4] 鈴木 黎映, 知念 賢一, “空間熱干渉を考慮した状態推定に基づく動的熱マージン制御手法,” 情報処理学会研究報告, "
     "Vol.2026-OS-171, No.3, 2026.",
-    "[6] A. K. Coskun, T. S. Rosing, K. C. Gross, “Proactive Temperature Management in MPSoCs,” Proc. ISLPED, 2008.",
-    "[7] I. Yeo, C. C. Liu, E. J. Kim, “Predictive Dynamic Thermal Management for Multicore Systems,” Proc. DAC, "
-    "pp.734–739, 2008.",
-    "[8] K. Skadron, M. R. Stan, W. Huang, S. Velusamy, K. Sankaranarayanan, D. Tarjan, “Temperature-Aware "
+    "[5] K. Skadron, M. R. Stan, W. Huang, S. Velusamy, K. Sankaranarayanan, D. Tarjan, “Temperature-Aware "
     "Microarchitecture,” Proc. ISCA, pp.2–13, 2003.",
-    "[9] R. E. Kalman, “A New Approach to Linear Filtering and Prediction Problems,” Journal of Basic Engineering, "
+    "[6] R. E. Kalman, “A New Approach to Linear Filtering and Prediction Problems,” Journal of Basic Engineering, "
     "Vol.82, No.1, pp.35–45, 1960.",
 ]
 
@@ -173,7 +167,7 @@ def fill(cell, paras, indent=True, keep_spaces=False):
         if text.startswith("FIG:"):
             _, fname, cap = text.split(":", 2)
             p.alignment = 1
-            p.add_run().add_picture(str(FIG / fname), width=Cm(7.0))
+            p.add_run().add_picture(str(FIG / fname), width=Cm(8.5))
             cp = copy.deepcopy(p_el)
             cell._tc.append(cp)
             q = cell.paragraphs[-1]
