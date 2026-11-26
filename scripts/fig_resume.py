@@ -98,7 +98,7 @@ def fig_pred():
             ax.bar(x, m[key], w * 0.92, color=c, label=lab if j == 0 else None)
             ax.text(x, m[key] + 0.02, f"{m[key]:.2f}", ha="center", va="bottom", fontsize=6.5)
     ax.set_xticks([0, 1], ["囲いなし", "囲いあり"])
-    ax.set_ylabel("30 秒先の平均絶対誤差 [℃]")
+    ax.set_ylabel("30 秒先の誤差 [℃]")
     ax.set_ylim(0, 1.0)
     ax.legend(fontsize=6, frameon=False, loc="upper left", bbox_to_anchor=(1.0, 1.0), labelspacing=0.8)
     for s in ["top", "right"]:
@@ -114,3 +114,66 @@ if __name__ == "__main__":
     fig_direct()
     fig_rise(exps, phase)
     fig_pred()
+
+
+def fig_fan(box_exp=None, box_label="囲いあり"):
+    """Q3:方式ごとのファン稼働率。囲いなし = 11/14(3 台 × 3 巡)、囲いあり = box_exp(8 台 × 2 巡、あれば)。
+    80℃ を超えた時間(合計)は、超えたときだけ棒の上に赤で書く。"""
+    conds = [("always", "常時 ON"), ("threshold", "しきい値"), ("self_fixed", "自ノード\nの予測"), ("proposed", "提案")]
+    m = pd.read_csv("experiments/20261114_compare/results/control_metrics.csv")
+    m["cond"] = m.condition.replace({"selffixed": "self_fixed"})
+    sets = [("囲いなし", m.rename(columns={"fan_on_ratio": "duty", "over_limit_s": "over"}), "#A7B3C2")]
+    if box_exp is not None:
+        b = pd.read_csv(Path(box_exp) / "results" / "control_summary.csv")
+        b["cond"] = b.cond.replace({"selffixed": "self_fixed"})
+        sets.append((box_label, b.rename(columns={"over80_s": "over"}), "#0099BB"))
+    fig, ax = plt.subplots(figsize=(3.3, 1.55))
+    w = 0.8 / len(sets)
+    for j, (lab, df, c) in enumerate(sets):
+        for i, (cond, _) in enumerate(conds):
+            g = df[df.cond == cond]
+            if g.empty:
+                continue
+            x = i + (j - (len(sets) - 1) / 2) * w
+            v = g.duty.mean() * 100
+            ax.bar(x, v, w * 0.92, color=c, label=lab if i == 0 or (j and cond == "threshold") else None)
+            ax.text(x, v + 1.5, f"{v:.0f}", ha="center", va="bottom", fontsize=6)
+            if g.over.sum() >= 1:
+                ax.text(x, v + 9, f"超過\n{g.over.sum():.0f}秒", ha="center", va="bottom", fontsize=5.3, color="#C0392B",
+                        linespacing=0.9)
+    h, l = ax.get_legend_handles_labels()
+    seen = {}
+    for hh, ll in zip(h, l):
+        seen.setdefault(ll, hh)
+    ax.legend(seen.values(), seen.keys(), fontsize=6, frameon=False, loc="upper right", ncol=len(seen))
+    ax.set_xticks(range(len(conds)), [n for _, n in conds], fontsize=6.5)
+    ax.set_ylabel("ファン稼働率 [%]")
+    ax.set_ylim(0, 128)
+    ax.set_yticks([0, 50, 100])
+    for s_ in ["top", "right"]:
+        ax.spines[s_].set_visible(False)
+    fig.tight_layout(pad=0.2)
+    fig.savefig(FIG / "fig_res_fan.png", dpi=300)
+
+
+def fig_fanwind(exp=Path("experiments/20261125_box_control")):
+    """囲いありで下段 4 台に 4 コア・ファン ON を 40 分。上段(負荷なし・ファン OFF)の温度 − 室温。"""
+    tel, ev, amb = load(exp)
+    ps = ev[(ev.event == "phase_start") & (ev.phase == "rise_load")].ts.iloc[0]
+    pe = ev[(ev.event == "phase_end") & (ev.phase == "rise_load")].ts.iloc[0]
+    a = amb[amb.name.str.contains(ROOM)].sort_values("ts")
+    fig, ax = plt.subplots(figsize=(3.3, 1.55))
+    for c, role in zip(["#1f77b4", "#ff7f0e", "#2ca02c", "#d62728"], ["r1", "r2", "r3", "r4"]):
+        g = tel[(tel.host == f"raspi{role[1:]}") & (tel.ts >= ps - 600) & (tel.ts <= pe + 300)].sort_values("ts")
+        T = g.temp.rolling(30, center=True, min_periods=5).mean() - np.interp(g.ts, a.ts, a.temperature)
+        ax.plot((g.ts - ps) / 60, T, color=c, lw=0.9, label=role)
+    ax.axvspan(0, (pe - ps) / 60, color="0.9", zorder=0)
+    ax.text(20, 1.02, "灰色:下段に 4 コア、下段のファン ON", transform=ax.get_xaxis_transform(), fontsize=6.3, color="0.3",
+            ha="center", va="bottom")
+    ax.set_xlabel("下段の負荷開始からの時間 [分]")
+    ax.set_ylabel("上段の温度 − 室温 [℃]")
+    ax.legend(fontsize=6.3, frameon=False, ncol=1, loc="upper left", bbox_to_anchor=(1.0, 1.0), handlelength=1)
+    for s_ in ["top", "right"]:
+        ax.spines[s_].set_visible(False)
+    fig.tight_layout(pad=0.2)
+    fig.savefig(FIG / "fig_res_fanwind.png", dpi=300)
