@@ -36,6 +36,8 @@ CONDITIONS = {"always": 1, "threshold": "threshold", "selffixed": "self_fixed", 
               "periodic": None, "random": None}  # periodic / random は 60 秒ごとに ON/OFF を切り替える(11/26 追加、11/24 の先生の案)
 SLOT = 60
 PATTERN = [(1, 120), (4, 360), (0, 180), (4, 300), (2, 120), (4, 120)]  # 11/14 の比較実験と同じ
+# 徐々に上がる負荷(11/27 追加):PATTERN の 4 コアに上がる所を 1 分ごとに 1 コアずつにしたもの。各ブロックの長さは同じ
+RAMP = [(1, 120), (2, 60), (3, 60), (4, 240), (0, 180), (1, 60), (2, 60), (3, 60), (4, 120), (2, 120), (3, 60), (4, 60)]
 REST_S, ROUNDS = 720, 2
 
 
@@ -71,6 +73,8 @@ def main():
     ap.add_argument("--random-load", type=int, default=None, metavar="SEED",
                     help="台ごとに独立なランダム負荷(11/26 昼追加):20 分を 120 秒 × 10 区間に分け、各区間・各ノードで"
                          "0〜4 コアを等確率で選ぶ。同じ表を全方式・全巡で使う(方式どうしを同じ負荷で比べるため)")
+    ap.add_argument("--ramp", action="store_true",
+                    help="負荷を 1 分ごとに 1 コアずつ上げるパターン(RAMP)にする(11/27 追加)")
     ap.add_argument("--fan-delay", type=float, default=0.0,
                     help="ファンの指令を送るまでの遅れ [秒](11/26 夜追加。冷却の効きが遅い条件を実機で作る)")
     args = ap.parse_args()
@@ -81,7 +85,8 @@ def main():
         return {"name": name, "duration_s": dur, "load": {r: load.get(r, 0) for r in ROLES},
                 "fan": {r: fan.get(r, 0) for r in fan_roles}}
 
-    pattern = [({4: 2, 2: 1}.get(c, c), d) for c, d in PATTERN] if args.half_load else PATTERN
+    base = RAMP if args.ramp else PATTERN
+    pattern = [({4: 2, 2: 1}.get(c, c), d) for c, d in base] if args.half_load else base
     rload = None
     if args.random_load is not None:
         lrng = random.Random(args.random_load)

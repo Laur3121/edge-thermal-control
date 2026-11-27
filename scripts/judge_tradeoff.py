@@ -35,6 +35,15 @@ def main(exp: Path, exclude=("raspi5",)):
         print(f"{c}: 稼働 {r.duty:.3f}、80℃ 超え {r.over80:.0f} 秒、同じ稼働のしきい値 {ref:.0f} 秒 → 比 {ratio:.2f}")
         yes += ratio <= 0.7
         no += ratio >= 1.0
+    # 副の指標(A'、11/27 追加):80℃ 超えが合計 60 秒以下の設定のうち一番少ない稼働率
+    safe_th, safe_pr = th[th.over80 <= 60], pr[pr.over80 <= 60]
+    if len(safe_th) and len(safe_pr):
+        d = (safe_th.duty.min() - safe_pr.duty.min()) * 100
+        print(f"副:80℃ 超え 60 秒以下で一番少ない稼働 しきい値 {safe_th.duty.min():.3f}({safe_th.duty.idxmin()})、"
+              f"提案 {safe_pr.duty.min():.3f}({safe_pr.duty.idxmin()})→ 提案が {d:.1f} ポイント少ない"
+              + ("(5 ポイント以上:80℃ を守ったまま減らせた)" if d >= 5 else ""))
+    else:
+        print("副:どちらかの方式で 80℃ 超え 60 秒以下の設定がない → 比べられない")
     judge = "yes" if yes >= 2 else "no" if no >= 2 else "unclear"
     print(f"JUDGE={judge}")
 
