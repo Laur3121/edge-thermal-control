@@ -39,6 +39,24 @@ PATTERN = [(1, 120), (4, 360), (0, 180), (4, 300), (2, 120), (4, 120)]  # 11/14 
 REST_S, ROUNDS = 720, 2
 
 
+def cond_value(cond: str):
+    """方式名 → シナリオの fan の値。th<N> はしきい値 N℃ ON・N−5℃ OFF、pa<α> は提案の α、pd<δ> は提案の δ を変えたもの(小数点は p)(11/27 追加)。"""
+    import re
+    if cond in CONDITIONS:
+        return CONDITIONS[cond]
+    m = re.fullmatch(r"th(\d+)", cond)
+    if m:
+        t = int(m.group(1))
+        return f"threshold@t_on={t},t_off={t - 5}"
+    m = re.fullmatch(r"pa(\d+(?:p\d+)?)", cond)
+    if m:
+        return f"proposed@alpha={m.group(1).replace('p', '.')}"
+    m = re.fullmatch(r"pd(\d+(?:p\d+)?)", cond)
+    if m:  # 提案のマージンの定数 δ を変えたもの(σ がほぼ一定なので α より点が動く)
+        return f"proposed@delta_margin={m.group(1).replace('p', '.')}"
+    raise SystemExit(f"知らない方式: {cond}")
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--no-fan", nargs="*", default=[])
@@ -102,7 +120,7 @@ def main():
                     for i, row in enumerate(rload):
                         ph = {"name": f"c{k}_{cond}_s{i + 1}", "duration_s": 120, "load": dict(row)}
                         if i == 0:
-                            ph["fan"] = {r: CONDITIONS[cond] for r in fan_roles}
+                            ph["fan"] = {r: cond_value(cond) for r in fan_roles}
                         phases.append(ph)
                     phases.append(phase(f"c{k}_{cond}_rest", REST_S, {}, {}))
                     continue
@@ -110,7 +128,7 @@ def main():
                     ph = {"name": f"c{k}_{cond}_s{i + 1}", "duration_s": dur,
                           "load": {r: (cores if r in load_roles else 0) for r in ROLES}}
                     if i == 0:
-                        ph["fan"] = {r: CONDITIONS[cond] for r in fan_roles}
+                        ph["fan"] = {r: cond_value(cond) for r in fan_roles}
                     phases.append(ph)
                 phases.append(phase(f"c{k}_{cond}_rest", REST_S, {}, {}))
     total = sum(p["duration_s"] for p in phases)

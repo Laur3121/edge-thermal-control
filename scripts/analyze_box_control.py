@@ -33,6 +33,13 @@ def main(exp: Path):
     ps = ev[ev.event == "phase_start"][["ts", "phase"]].reset_index(drop=True)
     ps["end"] = list(ps.ts[1:]) + [ev.ts.max()]
     rows = []
+    # 方式は段階名 c<巡>_<方式>_s<番号> から拾う(th65・pa1 など、11/27 追加の方式も含める)
+    found = ps.phase.str.extract(r"^c\d+_(.+)_s\d+$")[0].dropna().unique()
+    for c in found:
+        if c not in COND:
+            COND[c] = ({"th": "しきい値\n", "pa": "提案 α=", "pd": "提案 δ="}[c[:2]] + c[2:].replace("p", ".")
+                       if c[:2] in ("th", "pa", "pd") else c)
+            COL[c] = "#A7B3C2" if c.startswith("th") else "#0099BB" if c[:2] in ("pa", "pd") else "#C9D1D9"
     for k in (1, 2):
         for cond in COND:
             sub = ps[ps.phase.str.match(rf"c{k}_{cond}_s\d")]

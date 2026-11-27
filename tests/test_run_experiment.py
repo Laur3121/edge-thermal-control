@@ -44,3 +44,24 @@ def test_bundled_scenarios_are_valid():
     for path in (ROOT / "scripts" / "scenarios").glob("*.json"):
         sc = json.loads(path.read_text())
         rx.check_roles(rx.expand_phases(sc["phases"]), {"A", "B", "C"})
+
+
+def test_split_mode_overrides():
+    """方式名の後ろの設定(11/27 追加)。"""
+    sys.path.insert(0, str(ROOT / "src"))
+    from etc.control import ControlConfig
+    base, cfg = rx.split_mode("threshold@t_on=65,t_off=60", ControlConfig())
+    assert base == "threshold" and cfg.t_on == 65 and cfg.t_off == 60 and cfg.alpha == 2.0
+    base, cfg = rx.split_mode("proposed", ControlConfig(alpha=3))
+    assert base == "proposed" and cfg.alpha == 3
+    with pytest.raises(ValueError):
+        rx.split_mode("proposed@nosuch=1", ControlConfig())
+
+
+def test_gen_cond_value():
+    sys.path.insert(0, str(ROOT / "scripts" / "scenarios"))
+    import gen_box_control as g
+    assert g.cond_value("th65") == "threshold@t_on=65,t_off=60"
+    assert g.cond_value("pa1p5") == "proposed@alpha=1.5"
+    assert g.cond_value("pd3") == "proposed@delta_margin=3"
+    assert g.cond_value("threshold") == "threshold"

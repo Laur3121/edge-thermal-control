@@ -113,6 +113,23 @@ def is_settled(samples, window_s: float, max_slope_c_per_min: float) -> bool:
 
 # ---------- 実行 ----------
 
+def split_mode(mode: str, cfg):
+    """"threshold@t_on=65,t_off=60" のように、方式名の後ろに設定を付けて書けるようにする(11/27 追加。
+    1 つのシナリオの中でしきい値や α を振るため)。設定のない方式名はそのまま返す。"""
+    import dataclasses
+    if "@" not in mode:
+        return mode, cfg
+    base, opts = mode.split("@", 1)
+    kw = {}
+    for item in opts.split(","):
+        k, v = item.split("=")
+        k = k.strip()
+        if k not in {f.name for f in dataclasses.fields(cfg)}:
+            raise ValueError(f"ControlConfig にない設定: {k}")
+        kw[k] = float(v)
+    return base, dataclasses.replace(cfg, **kw)
+
+
 class Runner:
     def __init__(self, args, scenario: dict, nodes: dict[str, str]):
         self.args, self.sc, self.nodes = args, scenario, nodes
@@ -234,7 +251,8 @@ class Runner:
         if self.ctrl_params is None:
             raise SystemExit("閉ループ制御には --control-params が必要")
         cfg = ControlConfig(**self.sc.get("control", {}))
-        return controller_from_dict(mode, self.ctrl_params["nodes"][self.nodes[role]], cfg)
+        base, cfg = split_mode(mode, cfg)
+        return controller_from_dict(base, self.ctrl_params["nodes"][self.nodes[role]], cfg)
 
     def ambient(self) -> float:
         """室温(ハブ)の最新値。ambient.csv を 30 秒ごとに読み直す。読めなければ前の値か --ambient-default。"""
