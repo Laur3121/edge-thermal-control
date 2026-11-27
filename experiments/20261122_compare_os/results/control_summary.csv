@@ -1,0 +1,6 @@
+,T_max,T_max,over_limit_s,over_limit_s,throttle_s,throttle_s,failsafe_s,failsafe_s,fan_on_ratio,fan_on_ratio,fan_on_count,fan_on_count,fan_stage_weighted,fan_stage_weighted
+,mean,max,mean,max,mean,max,mean,max,mean,max,mean,max,mean,max
+condition,,,,,,,,,,,,,,
+os,64.378,66.218,0.000,0.000,0.000,0.000,0.000,0.000,0.999,0.999,1.000,1,0.913,0.930
+proposed,79.367,80.341,0.222,1.000,0.000,0.000,0.000,0.000,0.334,0.423,13.444,17,0.334,0.423
+threshold,77.852,78.880,0.000,0.000,0.000,0.000,0.000,0.000,0.367,0.446,14.222,16,0.367,0.446
