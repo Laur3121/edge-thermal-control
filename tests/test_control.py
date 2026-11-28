@@ -65,3 +65,23 @@ def test_delay_zero_is_unchanged_and_delay_runs():
     assert ctrl.Ld == 12 and ctrl.m == 18
     T, f, c = simulate(ctrl, P, U, T_AMB, T0=50.0, noise_sd=0.3, seed=1, delay_steps=12)
     assert T.max() < 80.0, T.max()
+
+
+def test_risk_mode_runs_and_is_more_careful_at_low_load():
+    """proposed_risk(11/28 追加):遅れありで 80℃ を守る。同じ温度なら、負荷が低い(上がる余地がある)ときの方が
+    超える確率を高く見積もる。負荷が最大なら今の負荷が続く場合だけ。"""
+    ctrl = FanController("proposed_risk", P, N, ControlConfig(fan_delay_s=60.0, risk_eps=0.01, risk_p=0.3))
+    T, f, c = simulate(ctrl, P, U, T_AMB, T0=50.0, noise_sd=0.3, seed=1, delay_steps=12)
+    assert T.max() < 80.0, T.max()
+    a = FanController("proposed_risk", P, N, ControlConfig(fan_delay_s=60.0, risk_p=0.3))
+    a.step(0.0, 70.0, 0.25, 0.0, T_AMB)
+    th = 70.0 - T_AMB
+    pred, sig = a._predict_off(th, 0.25, P.z_base)
+    p_low = a._risk(pred, sig, 0.25, P.z_base, 80.0 - T_AMB)
+    pred1, sig1 = a._predict_off(th, 1.0, P.z_base)
+    p_max = a._risk(pred1, sig1, 1.0, P.z_base, 80.0 - T_AMB)
+    from math import erf, sqrt
+    assert abs(p_max - 0.5 * (1 + erf((pred1 - (80.0 - T_AMB)) / sig1 / sqrt(2)))) < 1e-9
+    b = FanController("proposed_risk", P, N, ControlConfig(fan_delay_s=60.0, risk_p=0.0))
+    b.step(0.0, 70.0, 0.25, 0.0, T_AMB)
+    assert p_low > b._risk(pred, sig, 0.25, P.z_base, 80.0 - T_AMB)

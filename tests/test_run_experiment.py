@@ -64,6 +64,7 @@ def test_gen_cond_value():
     assert g.cond_value("th65") == "threshold@t_on=65,t_off=60"
     assert g.cond_value("pa1p5") == "proposed@alpha=1.5"
     assert g.cond_value("pd3") == "proposed@delta_margin=3"
+    assert g.cond_value("pr0p5") == "proposed_risk@risk_eps=0.005,risk_p=0.2"
     assert g.cond_value("threshold") == "threshold"
 
 

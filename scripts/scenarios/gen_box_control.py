@@ -41,6 +41,9 @@ RAMP = [(1, 120), (2, 60), (3, 60), (4, 240), (0, 180), (1, 60), (2, 60), (3, 60
 REST_S, ROUNDS = 720, 2
 
 
+RISK_P = {"p": 0.2}
+
+
 def cond_value(cond: str):
     """方式名 → シナリオの fan の値。th<N> はしきい値 N℃ ON・N−5℃ OFF、pa<α> は提案の α、pd<δ> は提案の δ を変えたもの(小数点は p)(11/27 追加)。"""
     import re
@@ -53,6 +56,9 @@ def cond_value(cond: str):
     m = re.fullmatch(r"pa(\d+(?:p\d+)?)", cond)
     if m:
         return f"proposed@alpha={m.group(1).replace('p', '.')}"
+    m = re.fullmatch(r"pr(\d+(?:p\d+)?)", cond)
+    if m:  # 負荷リスクの動的マージン、ε [%](11/28 追加)。risk_p は --risk-p で与える
+        return f"proposed_risk@risk_eps={float(m.group(1).replace('p', '.')) / 100:g},risk_p={RISK_P['p']:g}"
     m = re.fullmatch(r"pd(\d+(?:p\d+)?)", cond)
     if m:  # 提案のマージンの定数 δ を変えたもの(σ がほぼ一定なので α より点が動く)
         return f"proposed@delta_margin={m.group(1).replace('p', '.')}"
@@ -75,9 +81,12 @@ def main():
                          "0〜4 コアを等確率で選ぶ。同じ表を全方式・全巡で使う(方式どうしを同じ負荷で比べるため)")
     ap.add_argument("--ramp", action="store_true",
                     help="負荷を 1 分ごとに 1 コアずつ上げるパターン(RAMP)にする(11/27 追加)")
+    ap.add_argument("--risk-p", type=float, default=0.2,
+                    help="負荷リスク(pr<ε%>)の、先読みの間に負荷が上がる確率(11/28 追加)")
     ap.add_argument("--fan-delay", type=float, default=0.0,
                     help="ファンの指令を送るまでの遅れ [秒](11/26 夜追加。冷却の効きが遅い条件を実機で作る)")
     args = ap.parse_args()
+    RISK_P["p"] = args.risk_p
     fan_roles = [r for r in ROLES if r not in args.no_fan]
     load_roles = fan_roles  # ファンを使えないノードには負荷をかけない
 

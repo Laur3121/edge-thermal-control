@@ -74,6 +74,15 @@ class ThermalKF:
             P = self.A @ P @ self.A.T + Q
         return float(x[0]), float(np.sqrt(P[0, 0]))
 
+    def predict_path_seq(self, fs, us, nbr: float) -> np.ndarray:
+        """predict_path の負荷を列 us で与える版(1〜m ステップ先の温度の平均の列。11/28 追加、負荷リスク用)。"""
+        z = nbr - self.p.z_base
+        x = self.x.copy(); means = []
+        for f, u in zip(fs, us):
+            x = self.A @ x + self._drive(float(u), z, float(f))
+            means.append(float(x[0]))
+        return np.array(means)
+
     def predict_path(self, fs, u: float, nbr: float):
         """ファンの効きの列 fs(長さ m、fs[i] は i ステップ目の遷移に効くファン)を与えたときの、
         1〜m ステップ先の温度の平均の列と、m ステップ先の σ(11/26 追加、ファンの指令を遅らせる実験用)。"""

@@ -1,6 +1,6 @@
 #!/bin/bash
 # 実験 B(囲いあり + 遅れ 60 秒で、提案の H あり/なしを比べる。11/28 夜、experiments/20261128_box_hcheck/README.md)。
-# next6 が終わり、レオが箱をかぶせたら(Claude が experiments/BOX_ON を作る)始める。
+# next8(負荷リスクの実機、囲いなし)が終わり、レオが箱をかぶせたら(Claude が experiments/BOX_ON を作る)始める。
 # 同定(box_ident)→ 前半 6 割で同定 → 後半 4 割で check_params_holdout → c > 0 が 7 台中 3 台以上 → 制御の比較。
 # どこかで条件を満たさなければ止める(README で実行前に決めた)
 cd ~/edge-thermal-control
@@ -21,7 +21,7 @@ run() {  # $1 フォルダ, $2 シナリオ, $3 パラメータ
   pkill -f "box_watchdog.py --exp $exp"
   log "end $exp: $(tail -1 $exp/events.csv)"
 }
-until grep -q "next6 done" experiments/chain_20261126.log; do sleep 60; done
+until grep -q "next8 done" experiments/chain_20261126.log; do sleep 60; done
 log "next7(box_hcheck):箱を待つ(experiments/BOX_ON)"
 until [ -f experiments/BOX_ON ]; do sleep 30; done
 log "箱をかぶせた:$(cat experiments/BOX_ON)"

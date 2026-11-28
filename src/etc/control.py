@@ -23,7 +23,7 @@ import numpy as np
 from .kalman import NoiseParams, ThermalKF
 from .model import ThermalParams
 
-MODES = ("proposed", "self_fixed", "threshold", "proposed_ms", "proposed_hr")
+MODES = ("proposed", "self_fixed", "threshold", "proposed_ms", "proposed_hr", "proposed_risk")
 # proposed_hr(11/26 追加):ファンの余力を見る。次のどちらかなら「余力なし」として ON にし、止めない。
 #   (1) モデル:今の負荷・H のままファンを回し続けたときの定常温度 T_on = (b u + c H + e + d)/(1 − a) + 室温 が Tsafe − hr_margin を超える
 #   (2) 実測:ファンを hr_on_s 秒以上回しているのに、温度が Tsafe − hr_margin より高い(モデルが囲いの温まりを拾いきれないため)
@@ -44,6 +44,8 @@ class ControlConfig:
     t_off: float = 70.0
     hr_margin: float = 2.0  # proposed_hr:ファン ON の定常温度がこれだけ Tsafe に近づいたら余力なしとみなす [℃]
     hr_on_s: float = 60.0  # proposed_hr:ファンをこの秒数回しても下がらなければ余力なしとみなす
+    risk_eps: float = 0.02  # proposed_risk:80℃ を超える確率がこれを超えたら ON(11/28 追加)
+    risk_p: float = 0.2  # proposed_risk:先読みの間に負荷が上がる確率(同じ負荷の過去の記録から決める)
     use_h: float = 1.0  # 0 にすると proposed でも H を使わない(自ノードのモデル + 同じ判断。11/27 追加、実験 B の比較用)
     fan_delay_s: float = 0.0  # ファンの指令が効くまでの遅れ L [s](11/26 追加。実験で指令をわざと遅らせる)
     # L > 0 のとき、予測を使う方式は先読みを Δ + L にし、すでに出した指令(L 秒のうちに効くもの)を予測に入れ、
@@ -92,7 +94,7 @@ class FanController:
             # その先(今の指令から後)は OFF。先読みの間の最大値を返す
             fs = [0.0] + [float(v) for v in self.hist] + [0.0] * (self.m - 1 - self.Ld)
             fs = fs[:self.m]
-            if self.mode == "proposed":
+            if self.mode in ("proposed", "proposed_risk"):
                 means, sigma = self.kf.predict_path(fs, u, nbr)
                 return float(means.max()), sigma
             p, x, mx = self.p, theta, -np.inf
@@ -100,7 +102,7 @@ class FanController:
                 x = p.a * x + p.b * u + p.d + p.e * f
                 mx = max(mx, x)
             return float(mx), float("nan")
-        if self.mode in ("proposed", "proposed_ms", "proposed_hr"):
+        if self.mode in ("proposed", "proposed_ms", "proposed_hr", "proposed_risk"):
             return self.kf.predict_ahead(self.m, u, nbr=nbr, f=0.0)
         p, x = self.p, theta
         for _ in range(self.m):
@@ -135,7 +137,7 @@ class FanController:
                 d.fan, d.reason = 0, f"T {T:.1f} <= {c.t_off}"
         else:
             pred_th, sigma = self._predict_off(theta, u, nbr)
-            if self.mode in ("proposed", "proposed_hr"):
+            if self.mode in ("proposed", "proposed_hr", "proposed_risk"):
                 M = c.alpha * sigma + c.delta_margin
             else:
                 M = self.fixed_margin
@@ -155,6 +157,13 @@ class FanController:
                     d.fan, d.reason = 1, f"余力なし(モデル) T_on {T_on:.1f} > {tsafe - c.hr_margin:.1f}"
                 elif by_meas and not by_model:
                     d.reason = f"余力なし(実測) T {T:.1f} > {tsafe - c.hr_margin:.1f}、ON {on_for:.0f} 秒"
+            elif self.mode == "proposed_risk":
+                Pex = self._risk(pred_th, sigma, u, nbr, c.tlimit - T_amb)
+                d.margin, d.reason = Pex, f"P(>80) {Pex:.3f}"
+                if self.fan == 0 and Pex > c.risk_eps:
+                    d.fan = 1
+                elif self.fan == 1 and min_on_ok and Pex < c.risk_eps / 2:
+                    d.fan = 0
             elif self.fan == 0 and pred > tsafe:
                 d.fan, d.reason = 1, f"pred {pred:.1f} > Tsafe {tsafe:.1f}"
             elif self.fan == 1 and min_on_ok and pred < tsafe - c.hysteresis:
@@ -166,6 +175,27 @@ class FanController:
             self.hist.append(d.fan)
         return d
 
+
+    def _risk(self, pred_th: float, sigma: float, u: float, nbr: float, thr: float) -> float:
+        """80℃ を超える確率(11/28 追加、experiments/20261128_sim_risk_margin の方法)。
+        確率 1 − p で今の負荷が続き、確率 p で先読みの間のステップ s(等確率)に負荷が u' に上がる(u' は今より高い
+        0.25 刻みの値を等確率)。それぞれの先読みの最高温度が正規分布(標準偏差 σ)だとして、thr を超える確率を混ぜる。"""
+        from math import erf, sqrt
+        Phi = lambda x: 0.5 * (1 + erf(x / sqrt(2)))  # noqa: E731
+        sig = max(sigma, 1e-3) if sigma == sigma else 1.0
+        P = Phi((pred_th - thr) / sig)
+        ups = [v for v in (0.25, 0.5, 0.75, 1.0) if v > u + 1e-6]
+        if not ups or u >= 0.95:
+            return P
+        fs = ([0.0] + [float(v) for v in self.hist] + [0.0] * (self.m - 1 - self.Ld))[:self.m] if self.hist is not None \
+            else [0.0] * self.m
+        acc = []
+        for st in range(self.m):
+            for v in ups:
+                mx = float(self.kf.predict_path_seq(fs, [u] * st + [v] * (self.m - st), nbr).max())
+                acc.append(Phi((mx - thr) / sig))
+        p = self.cfg.risk_p
+        return (1 - p) * P + p * float(np.mean(acc))
 
     def _step_ms(self, t: float, T: float, u: float, nbr: float, T_amb: float) -> Decision:
         """段階を選ぶ。上げるのはすぐ、下げるのは最小保持時間が過ぎ、下げた段階でも Tsafe − h を下回るときだけ。"""
@@ -195,7 +225,7 @@ def controller_from_dict(mode: str, node_params: dict, cfg: ControlConfig) -> Fa
     proposed で node_params に "withH"(c, rho, z_base を含む)があればそれを使う(H あり、2026-11-25 追加)。
     """
     s = node_params["self"]
-    if mode in ("proposed", "proposed_ms", "proposed_hr") and "withH" in node_params and cfg.use_h:
+    if mode in ("proposed", "proposed_ms", "proposed_hr", "proposed_risk") and "withH" in node_params and cfg.use_h:
         h = node_params["withH"]
         p = ThermalParams(a=h["a"], b=h["b"], d=h["d"], e=h["e"], c=h["c"], rho=h["rho"], z_base=h["z_base"],
                           dt=h["dt"])

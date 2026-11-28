@@ -29,7 +29,7 @@
 - 囲い:`20261125_pattern_box_front_open` と同じ形(段ボール箱で上・左右・後ろを覆い、正面(ポート側)と下が開いている)。温度計 1 はラックの上(箱の中)、2・3 は正面の内側、ハブ 2 は箱の外(部屋)
 - 安全:`box_watchdog.py --limit 50`(箱の中が 50℃ で止める)。ノードは 82℃ で強制 ON
 - **r5 はファンが不調なので、負荷 0・ファン OFF(アイドルのまま置く)。判定は r5 を除く 7 台**
-- 自動実行:`scripts/next7_box_hcheck.sh`。next6(A')が終わり、レオが箱をかぶせたら(Claude が `experiments/BOX_ON` を作る)始める
+- 自動実行:`scripts/next7_box_hcheck.sh`。next8(負荷リスクの実機、囲いなし、約 13 時間)が終わり、レオが箱をかぶせたら(Claude が `experiments/BOX_ON` を作る)始める
 
 ## 指標と判定(実行前に決めた)
 
