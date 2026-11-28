@@ -51,6 +51,24 @@ def ident_rf():
             "settle": SETTLE, "control": CONTROL, "phases": phases}
 
 
+def box_ident():
+    """囲いありの同定用(11/28 追加、実験 B):ident_rf と同じ形(台ごとのランダム負荷 0〜3 コア・ランダムなファン)。
+    r5 はファンが不調なので負荷 0・ファン OFF(アイドルのまま置く)。seed 2026112870"""
+    rng = random.Random(2026112870)
+    phases = [{"name": "p0_baseline", "duration_s": 300, "load": {r: 0 for r in ROLES}, "fan": {r: 0 for r in ROLES},
+               "fan_stage": {r: 4 for r in ROLES}}]
+    loads = {r: 0 for r in ROLES}
+    for i in range(60):
+        if i % 3 == 0:
+            loads = {r: (0 if r == "r5" else rng.choice([0, 1, 2, 3])) for r in ROLES}
+        phases.append({"name": f"bf{i + 1:02d}", "duration_s": 60, "load": dict(loads),
+                       "fan": {r: (0 if r == "r5" else int(rng.random() < 0.5)) for r in ROLES}})
+    phases.append({"name": "bf_rest", "duration_s": 600, "load": {r: 0 for r in ROLES}, "fan": {r: 0 for r in ROLES}})
+    return {"name": "box_ident", "description": "囲いありの同定:台ごとに独立なランダム負荷(0〜3 コア、180 秒ごと)と"
+                                                "ランダムなファン(60 秒ごと、確率 0.5)を 60 分。r5 は負荷 0・ファン OFF。seed 2026112870",
+            "settle": SETTLE, "control": CONTROL, "phases": phases}
+
+
 def ctrl():
     seq = [(1, 2), (2, 3), (3, 4), (2, 3), (1, 2)]
     conds = {"proposed": "proposed", "selffixed": "self_fixed", "threshold": "threshold"}
@@ -73,4 +91,4 @@ def ctrl():
 
 
 if __name__ == "__main__":
-    print(json.dumps({"ident": ident, "ident_rf": ident_rf, "ctrl": ctrl}[sys.argv[1]](), ensure_ascii=False, indent=1))
+    print(json.dumps({"ident": ident, "ident_rf": ident_rf, "box_ident": box_ident, "ctrl": ctrl}[sys.argv[1]](), ensure_ascii=False, indent=1))

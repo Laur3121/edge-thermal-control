@@ -22,9 +22,9 @@ import pandas as pd  # noqa: E402
 
 plt.rcParams.update({"font.family": ["Hiragino Sans", "sans-serif"], "font.size": 8})
 COND = {"always": "常時 ON", "periodic": "1 分おき", "random": "ランダム", "threshold": "しきい値",
-        "selffixed": "自ノードの\n予測", "proposed": "提案\n(KF + H)", "proposed_hr": "提案\n+ 余力"}
+        "selffixed": "自ノードの\n予測", "proposed": "提案\n(KF + H)", "proposed_hr": "提案\n+ 余力", "pnoh": "提案\n(H なし)"}
 COL = {"always": "#C9D1D9", "periodic": "#DDE3E8", "random": "#DDE3E8", "threshold": "#A7B3C2",
-       "selffixed": "#8C99A6", "proposed": "#0099BB", "proposed_hr": "#006F8A"}
+       "selffixed": "#8C99A6", "proposed": "#0099BB", "proposed_hr": "#006F8A", "pnoh": "#66B8D6"}
 
 
 def main(exp: Path):

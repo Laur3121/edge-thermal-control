@@ -65,3 +65,14 @@ def test_gen_cond_value():
     assert g.cond_value("pa1p5") == "proposed@alpha=1.5"
     assert g.cond_value("pd3") == "proposed@delta_margin=3"
     assert g.cond_value("threshold") == "threshold"
+
+
+def test_use_h_zero_uses_self_model():
+    """use_h = 0 なら proposed でも H なしのモデル(11/27 追加、実験 B)。"""
+    sys.path.insert(0, str(ROOT / "src"))
+    from etc.control import ControlConfig, controller_from_dict
+    node = json.loads((ROOT / "scripts" / "control_params_open.json").read_text())["nodes"]["raspi1"]
+    assert controller_from_dict("proposed", node, ControlConfig()).p.c > 0
+    base, cfg = rx.split_mode("proposed@use_h=0", ControlConfig())
+    c = controller_from_dict(base, node, cfg)
+    assert c.p.c == 0 and c.p.a == node["self"]["a"]

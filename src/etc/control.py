@@ -44,6 +44,7 @@ class ControlConfig:
     t_off: float = 70.0
     hr_margin: float = 2.0  # proposed_hr:ファン ON の定常温度がこれだけ Tsafe に近づいたら余力なしとみなす [℃]
     hr_on_s: float = 60.0  # proposed_hr:ファンをこの秒数回しても下がらなければ余力なしとみなす
+    use_h: float = 1.0  # 0 にすると proposed でも H を使わない(自ノードのモデル + 同じ判断。11/27 追加、実験 B の比較用)
     fan_delay_s: float = 0.0  # ファンの指令が効くまでの遅れ L [s](11/26 追加。実験で指令をわざと遅らせる)
     # L > 0 のとき、予測を使う方式は先読みを Δ + L にし、すでに出した指令(L 秒のうちに効くもの)を予測に入れ、
     # 先読みの間の予測の最大値で判断する(11/22 のシミュレーション sim_slow_cooling.py の rule "off" と同じ)
@@ -194,7 +195,7 @@ def controller_from_dict(mode: str, node_params: dict, cfg: ControlConfig) -> Fa
     proposed で node_params に "withH"(c, rho, z_base を含む)があればそれを使う(H あり、2026-11-25 追加)。
     """
     s = node_params["self"]
-    if mode in ("proposed", "proposed_ms", "proposed_hr") and "withH" in node_params:
+    if mode in ("proposed", "proposed_ms", "proposed_hr") and "withH" in node_params and cfg.use_h:
         h = node_params["withH"]
         p = ThermalParams(a=h["a"], b=h["b"], d=h["d"], e=h["e"], c=h["c"], rho=h["rho"], z_base=h["z_base"],
                           dt=h["dt"])
