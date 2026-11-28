@@ -1,0 +1,1953 @@
+logging to experiments/20261127_delay_sweep/d15/raw/telemetry.csv
+[01:29:26] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:1s raspi7:1s raspi8:1s
+[01:29:36] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:1s raspi7:1s raspi8:1s
+[01:29:46] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:1s raspi7:1s raspi8:1s
+[01:29:56] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:1s raspi7:1s raspi8:1s
+[01:30:06] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:1s raspi7:1s raspi8:1s
+[01:30:16] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:1s raspi7:1s raspi8:1s
+[01:30:26] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:1s raspi7:1s raspi8:1s
+[01:30:36] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:1s raspi7:1s raspi8:1s
+[01:30:46] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:1s raspi7:1s raspi8:1s
+[01:30:56] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:1s raspi7:1s raspi8:1s
+[01:31:06] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:1s raspi7:1s raspi8:1s
+[01:31:16] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:1s raspi7:1s raspi8:1s
+[01:31:26] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:1s raspi7:1s raspi8:1s
+[01:31:36] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:1s raspi7:1s raspi8:1s
+[01:31:46] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:1s raspi7:1s raspi8:1s
+[01:31:56] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:1s raspi7:1s raspi8:1s
+[01:32:06] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:1s raspi7:1s raspi8:1s
+[01:32:16] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:1s raspi7:1s raspi8:1s
+[01:32:26] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:1s raspi7:1s raspi8:1s
+[01:32:36] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:1s raspi7:1s raspi8:1s
+[01:32:46] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:1s raspi7:1s raspi8:1s
+[01:32:56] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:1s raspi7:1s raspi8:1s
+[01:33:06] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:1s raspi7:1s raspi8:1s
+[01:33:16] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:1s raspi7:1s raspi8:1s
+[01:33:26] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:1s raspi7:1s raspi8:1s
+[01:33:36] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:1s raspi7:1s raspi8:1s
+[01:33:46] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:1s raspi7:1s raspi8:1s
+[01:33:56] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:1s raspi7:1s raspi8:1s
+[01:34:06] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:1s raspi7:1s raspi8:1s
+[01:34:16] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:1s raspi7:1s raspi8:1s
+[01:34:26] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:1s raspi7:1s raspi8:1s
+[01:34:36] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:1s raspi7:1s raspi8:1s
+[01:34:46] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:1s raspi7:1s raspi8:1s
+[01:34:56] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:1s raspi7:1s raspi8:1s
+[01:35:06] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:1s raspi7:1s raspi8:1s
+[01:35:16] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:1s raspi7:1s raspi8:1s
+[01:35:26] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:1s raspi7:1s raspi8:1s
+[01:35:36] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:1s raspi7:1s raspi8:1s
+[01:35:46] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:1s raspi7:1s raspi8:1s
+[01:35:56] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:1s raspi7:1s raspi8:1s
+[01:36:06] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:1s raspi7:1s raspi8:1s
+[01:36:16] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:1s raspi7:1s raspi8:1s
+[01:36:26] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:1s raspi7:1s raspi8:1s
+[01:36:36] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:1s raspi7:1s raspi8:1s
+[01:36:46] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:1s raspi7:1s raspi8:1s
+[01:36:56] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:1s raspi7:1s raspi8:1s
+[01:37:06] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:1s raspi7:1s raspi8:1s
+[01:37:16] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:1s raspi7:1s raspi8:1s
+[01:37:26] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:1s raspi7:1s raspi8:1s
+[01:37:36] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:1s raspi7:1s raspi8:1s
+[01:37:46] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:1s raspi7:1s raspi8:1s
+[01:37:56] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:1s raspi7:1s raspi8:1s
+[01:38:06] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:1s raspi7:1s raspi8:1s
+[01:38:16] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:1s raspi7:1s raspi8:1s
+[01:38:26] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:1s raspi7:1s raspi8:1s
+[01:38:36] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:1s raspi7:1s raspi8:1s
+[01:38:46] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:1s raspi7:1s raspi8:1s
+[01:38:56] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:1s raspi7:1s raspi8:1s
+[01:39:06] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:1s raspi7:1s raspi8:1s
+[01:39:16] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:1s raspi7:1s raspi8:1s
+[01:39:26] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:1s raspi7:1s raspi8:1s
+[01:39:36] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:1s raspi7:1s raspi8:1s
+[01:39:46] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:1s raspi7:1s raspi8:1s
+[01:39:56] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:1s raspi7:1s raspi8:1s
+[01:40:06] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:1s raspi7:1s raspi8:1s
+[01:40:16] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:1s raspi7:1s raspi8:1s
+[01:40:26] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:1s raspi7:1s raspi8:1s
+[01:40:36] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:1s raspi7:1s raspi8:1s
+[01:40:46] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:1s raspi7:1s raspi8:1s
+[01:40:56] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:1s raspi7:1s raspi8:1s
+[01:41:06] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:1s raspi7:1s raspi8:1s
+[01:41:16] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:1s raspi7:1s raspi8:1s
+[01:41:26] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:1s raspi7:1s raspi8:1s
+[01:41:36] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:1s raspi7:1s raspi8:1s
+[01:41:46] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:1s raspi7:1s raspi8:1s
+[01:41:56] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:1s raspi7:1s raspi8:1s
+[01:42:06] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:1s raspi7:1s raspi8:1s
+[01:42:16] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:1s raspi7:1s raspi8:1s
+[01:42:26] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:1s raspi7:1s raspi8:1s
+[01:42:36] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:1s raspi7:1s raspi8:1s
+[01:42:46] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:1s raspi7:1s raspi8:1s
+[01:42:56] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:1s raspi7:1s raspi8:1s
+[01:43:06] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:1s raspi7:1s raspi8:1s
+[01:43:16] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:1s raspi7:1s raspi8:1s
+[01:43:26] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:1s raspi7:1s raspi8:1s
+[01:43:36] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:1s raspi7:1s raspi8:1s
+[01:43:46] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:1s raspi7:1s raspi8:1s
+[01:43:56] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:1s raspi7:1s raspi8:1s
+[01:44:06] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:1s raspi7:1s raspi8:1s
+[01:44:16] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:1s raspi7:1s raspi8:1s
+[01:44:26] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:1s raspi7:1s raspi8:1s
+[01:44:36] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:1s raspi7:1s raspi8:1s
+[01:44:46] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:1s raspi7:1s raspi8:1s
+[01:44:56] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:1s raspi7:1s raspi8:1s
+[01:45:06] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:1s raspi7:1s raspi8:1s
+[01:45:16] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:1s raspi7:1s raspi8:1s
+[01:45:26] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:1s raspi7:1s raspi8:1s
+[01:45:36] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:1s raspi7:1s raspi8:1s
+[01:45:46] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:1s raspi7:1s raspi8:1s
+[01:45:56] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:1s raspi7:1s raspi8:1s
+[01:46:06] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:1s raspi7:1s raspi8:1s
+[01:46:16] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:1s raspi7:1s raspi8:1s
+[01:46:26] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:1s raspi7:1s raspi8:1s
+[01:46:36] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:1s raspi7:1s raspi8:1s
+[01:46:46] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:1s raspi7:1s raspi8:1s
+[01:46:56] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:1s raspi7:1s raspi8:1s
+[01:47:06] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:1s raspi7:1s raspi8:1s
+[01:47:16] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:1s raspi7:1s raspi8:1s
+[01:47:26] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:1s raspi7:1s raspi8:1s
+[01:47:36] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:1s raspi7:1s raspi8:1s
+[01:47:46] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:1s raspi7:1s raspi8:1s
+[01:47:56] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:1s raspi7:1s raspi8:1s
+[01:48:06] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:1s raspi7:1s raspi8:1s
+[01:48:16] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:1s raspi7:1s raspi8:1s
+[01:48:26] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:1s raspi7:1s raspi8:1s
+[01:48:36] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:1s raspi7:1s raspi8:1s
+[01:48:46] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:1s raspi7:1s raspi8:1s
+[01:48:56] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:1s raspi7:1s raspi8:1s
+[01:49:06] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:1s raspi7:1s raspi8:1s
+[01:49:16] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:1s raspi7:1s raspi8:1s
+[01:49:26] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:1s raspi7:1s raspi8:1s
+[01:49:36] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:1s raspi7:1s raspi8:1s
+[01:49:46] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:1s raspi7:1s raspi8:1s
+[01:49:56] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:1s raspi7:1s raspi8:1s
+[01:50:06] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:1s raspi7:1s raspi8:1s
+[01:50:16] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:1s raspi7:1s raspi8:1s
+[01:50:26] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:1s raspi7:1s raspi8:1s
+[01:50:36] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:1s raspi7:1s raspi8:1s
+[01:50:46] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:1s raspi7:1s raspi8:1s
+[01:50:56] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:1s raspi7:1s raspi8:1s
+[01:51:06] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:1s raspi7:1s raspi8:1s
+[01:51:16] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:1s raspi7:1s raspi8:1s
+[01:51:26] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:1s raspi7:1s raspi8:1s
+[01:51:36] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:1s raspi7:1s raspi8:1s
+[01:51:46] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:1s raspi7:1s raspi8:1s
+[01:51:56] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:1s raspi7:1s raspi8:1s
+[01:52:06] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:1s raspi7:1s raspi8:1s
+[01:52:16] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:1s raspi7:1s raspi8:1s
+[01:52:26] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:1s raspi7:1s raspi8:1s
+[01:52:36] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:1s raspi7:1s raspi8:1s
+[01:52:46] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:1s raspi7:1s raspi8:1s
+[01:52:56] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:1s raspi7:1s raspi8:1s
+[01:53:06] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:1s raspi7:1s raspi8:1s
+[01:53:16] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:1s raspi7:1s raspi8:1s
+[01:53:26] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:1s raspi7:1s raspi8:1s
+[01:53:36] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:1s raspi7:1s raspi8:1s
+[01:53:46] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:1s raspi7:1s raspi8:1s
+[01:53:56] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:1s raspi7:1s raspi8:1s
+[01:54:06] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:1s raspi7:1s raspi8:1s
+[01:54:16] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:1s raspi7:1s raspi8:1s
+[01:54:26] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:1s raspi7:1s raspi8:1s
+[01:54:36] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:1s raspi7:1s raspi8:1s
+[01:54:46] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:1s raspi7:1s raspi8:1s
+[01:54:56] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:1s raspi7:1s raspi8:1s
+[01:55:06] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:1s raspi7:1s raspi8:1s
+[01:55:16] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:1s raspi7:1s raspi8:1s
+[01:55:26] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:1s raspi7:1s raspi8:1s
+[01:55:36] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:1s raspi7:1s raspi8:1s
+[01:55:46] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:1s raspi7:1s raspi8:1s
+[01:55:56] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:1s raspi7:1s raspi8:1s
+[01:56:06] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:1s raspi7:1s raspi8:1sbox_control: 29 phases, 最長 133 分(待ち時間を除く)
+[01:29:16] start   box_control
+[01:29:16] load init r1 0
+[01:29:16] load init r2 0
+[01:29:16] load init r3 0
+[01:29:16] load init r4 0
+[01:29:16] load init r5 0
+[01:29:16] load init r6 0
+[01:29:16] load init r7 0
+[01:29:16] load init r8 0
+[01:29:16] fan init r1 0
+[01:29:16] fan init r2 0
+[01:29:16] fan init r3 0
+[01:29:16] fan init r4 0
+[01:29:16] fan init r5 0
+[01:29:16] fan init r6 0
+[01:29:16] fan init r7 0
+[01:29:16] fan init r8 0
+[01:29:16] settle_start
+[01:36:11] settled   {"r1": 62.322, "r2": 59.887, "r3": 63.296, "r4": 57.939, "r5": 64.757, "r6": 66.705, "r7": 63.296, "r8": 55.991}
+[01:36:11] phase_start p0_baseline
+[01:36:11] load p0_baseline r1 0
+[01:36:11] load p0_baseline r2 0
+[01:36:11] load p0_baseline r3 0
+[01:36:11] load p0_baseline r4 0
+[01:36:11] load p0_baseline r5 0
+[01:36:11] load p0_baseline r6 0
+[01:36:11] load p0_baseline r7 0
+[01:36:11] load p0_baseline r8 0
+[01:36:11] fan_stage p0_baseline r1 4
+[01:36:11] fan_stage p0_baseline r2 4
+[01:36:11] fan_stage p0_baseline r3 4
+[01:36:11] fan_stage p0_baseline r4 4
+[01:36:11] fan_stage p0_baseline r5 4
+[01:36:11] fan_stage p0_baseline r6 4
+[01:36:11] fan_stage p0_baseline r7 4
+[01:36:11] fan_stage p0_baseline r8 4
+[01:36:11] fan p0_baseline r1 0
+[01:36:11] fan p0_baseline r2 0
+[01:36:11] fan p0_baseline r3 0
+[01:36:11] fan p0_baseline r4 0
+[01:36:11] fan p0_baseline r5 0
+[01:36:11] fan p0_baseline r6 0
+[01:36:11] fan p0_baseline r7 0
+[01:36:11] fan p0_baseline r8 0
+[01:41:11] phase_end p0_baseline  time
+[01:41:11] phase_start c1_threshold_s1
+[01:41:11] load c1_threshold_s1 r1 1
+[01:41:11] load c1_threshold_s1 r2 1
+[01:41:11] load c1_threshold_s1 r3 1
+[01:41:11] load c1_threshold_s1 r4 1
+[01:41:11] load c1_threshold_s1 r5 1
+[01:41:11] load c1_threshold_s1 r6 1
+[01:41:11] load c1_threshold_s1 r7 1
+[01:41:11] load c1_threshold_s1 r8 1
+[01:41:11] fan_mode c1_threshold_s1 r1 threshold
+[01:41:11] fan c1_threshold_s1 r1 0
+[01:41:11] fan_mode c1_threshold_s1 r2 threshold
+[01:41:11] fan c1_threshold_s1 r2 0
+[01:41:11] fan_mode c1_threshold_s1 r3 threshold
+[01:41:11] fan c1_threshold_s1 r3 0
+[01:41:11] fan_mode c1_threshold_s1 r4 threshold
+[01:41:11] fan c1_threshold_s1 r4 0
+[01:41:11] fan_mode c1_threshold_s1 r5 threshold
+[01:41:11] fan c1_threshold_s1 r5 0
+[01:41:11] fan_mode c1_threshold_s1 r6 threshold
+[01:41:11] fan c1_threshold_s1 r6 0
+[01:41:11] fan_mode c1_threshold_s1 r7 threshold
+[01:41:11] fan c1_threshold_s1 r7 0
+[01:41:11] fan_mode c1_threshold_s1 r8 threshold
+[01:41:11] fan c1_threshold_s1 r8 0
+[01:43:11] phase_end c1_threshold_s1  time
+[01:43:11] phase_start c1_threshold_s2
+[01:43:11] load c1_threshold_s2 r1 4
+[01:43:11] load c1_threshold_s2 r2 4
+[01:43:11] load c1_threshold_s2 r3 4
+[01:43:11] load c1_threshold_s2 r4 4
+[01:43:11] load c1_threshold_s2 r5 4
+[01:43:11] load c1_threshold_s2 r6 4
+[01:43:11] load c1_threshold_s2 r7 4
+[01:43:11] load c1_threshold_s2 r8 4
+[01:43:16] fan_cmd c1_threshold_s2 r1 1
+[01:43:16] fan_cmd c1_threshold_s2 r5 1
+[01:43:16] fan_cmd c1_threshold_s2 r6 1
+[01:43:21] fan_cmd c1_threshold_s2 r2 1
+[01:43:21] fan_cmd c1_threshold_s2 r3 1
+[01:43:21] fan_cmd c1_threshold_s2 r4 1
+[01:43:21] fan_cmd c1_threshold_s2 r7 1
+[01:43:31] fan_cmd c1_threshold_s2 r8 1
+[01:43:31] fan c1_threshold_s2 r1 1
+[01:43:31] fan c1_threshold_s2 r5 1
+[01:43:31] fan c1_threshold_s2 r6 1
+[01:43:36] fan c1_threshold_s2 r2 1
+[01:43:36] fan c1_threshold_s2 r3 1
+[01:43:36] fan c1_threshold_s2 r4 1
+[01:43:36] fan c1_threshold_s2 r7 1
+[01:43:46] fan c1_threshold_s2 r8 1
+[01:44:21] fan_cmd c1_threshold_s2 r8 0
+[01:44:36] fan c1_threshold_s2 r8 0
+[01:45:01] fan_cmd c1_threshold_s2 r4 0
+[01:45:01] fan_cmd c1_threshold_s2 r8 1
+[01:45:16] fan c1_threshold_s2 r4 0
+[01:45:16] fan c1_threshold_s2 r8 1
+[01:45:36] fan_cmd c1_threshold_s2 r4 1
+[01:45:46] fan_cmd c1_threshold_s2 r8 0
+[01:45:51] fan c1_threshold_s2 r4 1
+[01:46:01] fan c1_threshold_s2 r8 0
+[01:46:26] fan_cmd c1_threshold_s2 r8 1
+[01:46:31] fan_cmd c1_threshold_s2 r4 0
+[01:46:41] fan c1_threshold_s2 r8 1
+[01:46:46] fan c1_threshold_s2 r4 0
+[01:47:01] fan_cmd c1_threshold_s2 r4 1
+[01:47:06] fan_cmd c1_threshold_s2 r8 0
+[01:47:16] fan c1_threshold_s2 r4 1
+[01:47:21] fan c1_threshold_s2 r8 0
+[01:47:51] fan_cmd c1_threshold_s2 r4 0
+[01:47:51] fan_cmd c1_threshold_s2 r8 1
+[01:48:01] fan_cmd c1_threshold_s2 r3 0
+[01:48:06] fan c1_threshold_s2 r4 0
+[01:48:06] fan c1_threshold_s2 r8 1
+[01:48:16] fan c1_threshold_s2 r3 0
+[01:48:26] fan_cmd c1_threshold_s2 r4 1
+[01:48:31] fan_cmd c1_threshold_s2 r3 1
+[01:48:36] fan_cmd c1_threshold_s2 r8 0
+[01:48:41] fan c1_threshold_s2 r4 1
+[01:48:46] fan c1_threshold_s2 r3 1
+[01:48:51] fan c1_threshold_s2 r8 0
+[01:49:11] phase_end c1_threshold_s2  time
+[01:49:11] phase_start c1_threshold_s3
+[01:49:11] load c1_threshold_s3 r1 0
+[01:49:11] load c1_threshold_s3 r2 0
+[01:49:11] load c1_threshold_s3 r3 0
+[01:49:11] load c1_threshold_s3 r4 0
+[01:49:11] load c1_threshold_s3 r5 0
+[01:49:11] load c1_threshold_s3 r6 0
+[01:49:11] load c1_threshold_s3 r7 0
+[01:49:11] load c1_threshold_s3 r8 0
+[01:49:16] fan_cmd c1_threshold_s3 r1 0
+[01:49:16] fan_cmd c1_threshold_s3 r2 0
+[01:49:16] fan_cmd c1_threshold_s3 r3 0
+[01:49:16] fan_cmd c1_threshold_s3 r4 0
+[01:49:16] fan_cmd c1_threshold_s3 r6 0
+[01:49:16] fan_cmd c1_threshold_s3 r7 0
+[01:49:31] fan c1_threshold_s3 r1 0
+[01:49:31] fan c1_threshold_s3 r2 0
+[01:49:31] fan c1_threshold_s3 r3 0
+[01:49:31] fan c1_threshold_s3 r4 0
+[01:49:31] fan c1_threshold_s3 r6 0
+[01:49:31] fan c1_threshold_s3 r7 0
+[01:50:01] fan_cmd c1_threshold_s3 r5 0
+[01:50:16] fan c1_threshold_s3 r5 0
+[01:52:11] phase_end c1_threshold_s3  time
+[01:52:11] phase_start c1_threshold_s4
+[01:52:11] load c1_threshold_s4 r1 4
+[01:52:11] load c1_threshold_s4 r2 4
+[01:52:11] load c1_threshold_s4 r3 4
+[01:52:11] load c1_threshold_s4 r4 4
+[01:52:11] load c1_threshold_s4 r5 4
+[01:52:11] load c1_threshold_s4 r6 4
+[01:52:11] load c1_threshold_s4 r7 4
+[01:52:11] load c1_threshold_s4 r8 4
+[01:52:21] fan_cmd c1_threshold_s4 r5 1
+[01:52:26] fan_cmd c1_threshold_s4 r6 1
+[01:52:31] fan_cmd c1_threshold_s4 r1 1
+[01:52:31] fan_cmd c1_threshold_s4 r2 1
+[01:52:31] fan_cmd c1_threshold_s4 r3 1
+[01:52:31] fan_cmd c1_threshold_s4 r7 1
+[01:52:36] fan_cmd c1_threshold_s4 r4 1
+[01:52:36] fan c1_threshold_s4 r5 1
+[01:52:41] fan_cmd c1_threshold_s4 r8 1
+[01:52:41] fan c1_threshold_s4 r6 1
+[01:52:46] fan c1_threshold_s4 r1 1
+[01:52:46] fan c1_threshold_s4 r2 1
+[01:52:46] fan c1_threshold_s4 r3 1
+[01:52:46] fan c1_threshold_s4 r7 1
+[01:52:51] fan c1_threshold_s4 r4 1
+[01:52:56] fan c1_threshold_s4 r8 1
+[01:53:31] fan_cmd c1_threshold_s4 r8 0
+[01:53:46] fan c1_threshold_s4 r8 0
+[01:54:01] fan_cmd c1_threshold_s4 r4 0
+[01:54:16] fan_cmd c1_threshold_s4 r8 1
+[01:54:16] fan c1_threshold_s4 r4 0
+[01:54:31] fan c1_threshold_s4 r8 1
+[01:54:36] fan_cmd c1_threshold_s4 r3 0
+[01:54:36] fan_cmd c1_threshold_s4 r4 1
+[01:54:51] fan c1_threshold_s4 r3 0
+[01:54:51] fan c1_threshold_s4 r4 1
+[01:55:01] fan_cmd c1_threshold_s4 r8 0
+[01:55:06] fan_cmd c1_threshold_s4 r3 1
+[01:55:16] fan c1_threshold_s4 r8 0
+[01:55:21] fan c1_threshold_s4 r3 1
+[01:55:36] fan_cmd c1_threshold_s4 r4 0
+[01:55:46] fan_cmd c1_threshold_s4 r8 1
+[01:55:51] fan c1_threshold_s4 r4 0
+[01:56:01] fan c1_threshold_s4 r8 1
+[01:56:11] fan_cmd c1_threshold_s4 r4 1
+[01:56:26] fan c1_threshold_s4 r4 1
+[01:56:31] fan_cmd c1_threshold_s4 r8 0
+[01:56:46] fan_cmd c1_threshold_s4 r3 0
+[01:56:46] fan c1_threshold_s4 r8 0
+[01:56:56] fan_cmd c1_threshold_s4 r2 0
+[01:57:01] fan c1_threshold_s4 r3 0
+[01:57:06] fan_cmd c1_threshold_s4 r4 0
+[01:57:11] fan_cmd c1_threshold_s4 r7 0
+[01:57:11] fan_cmd c1_threshold_s4 r8 1
+[01:57:11] fan c1_threshold_s4 r2 0
+[01:57:11] phase_end c1_threshold_s4  time
+[01:57:11] phase_start c1_threshold_s5
+[01:57:11] load c1_threshold_s5 r1 2
+[01:57:11] load c1_threshold_s5 r2 2
+[01:57:11] load c1_threshold_s5 r3 2
+[01:57:11] load c1_threshold_s5 r4 2
+[01:57:11] load c1_threshold_s5 r5 2
+[01:57:11] load c1_threshold_s5 r6 2
+[01:57:11] load c1_threshold_s5 r7 2
+[01:57:11] load c1_threshold_s5 r8 2
+[01:57:16] fan_cmd c1_threshold_s5 r1 0
+[01:57:21] fan_cmd c1_threshold_s5 r6 0
+[01:57:21] fan c1_threshold_s5 r4 0
+[01:56:16] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:1s raspi7:1s raspi8:1s
+[01:56:26] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:1s raspi7:1s raspi8:1s
+[01:56:36] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:1s raspi7:1s raspi8:1s
+[01:56:46] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:1s raspi7:1s raspi8:1s
+[01:56:56] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:1s raspi7:1s raspi8:1s
+[01:57:06] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:1s raspi7:1s raspi8:1s
+[01:57:16] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:1s raspi7:1s raspi8:1s
+[01:57:26] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:1s raspi7:1s raspi8:1s
+[01:57:36] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:1s raspi7:1s raspi8:1s
+[01:57:46] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:1s raspi7:1s raspi8:1s
+[01:57:56] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:1s raspi7:1s raspi8:1s
+[01:58:06] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:1s raspi7:1s raspi8:1s
+[01:58:16] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:1s raspi7:1s raspi8:1s
+[01:58:26] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:1s raspi7:1s raspi8:1s
+[01:58:36] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:1s raspi7:1s raspi8:1s
+[01:58:46] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:1s raspi7:1s raspi8:1s
+[01:58:56] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:1s raspi7:1s raspi8:1s
+[01:59:06] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:1s raspi7:1s raspi8:1s
+[01:59:16] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:1s raspi7:1s raspi8:1s
+[01:59:26] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:1s raspi7:1s raspi8:1s
+[01:59:36] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:1s raspi7:1s raspi8:1s
+[01:59:46] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:1s raspi7:1s raspi8:1s
+[01:59:56] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:1s raspi7:1s raspi8:1s
+[02:00:06] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:1s raspi7:1s raspi8:1s
+[02:00:16] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:1s raspi7:1s raspi8:1s
+[02:00:26] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:1s raspi7:1s raspi8:1s
+[02:00:36] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:1s raspi7:1s raspi8:1s
+[02:00:46] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:1s raspi7:1s raspi8:1s
+[02:00:56] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:1s raspi7:1s raspi8:1s
+[02:01:06] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:1s raspi7:1s raspi8:1s
+[02:01:16] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:1s raspi7:1s raspi8:1s
+[02:01:26] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:01:36] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:01:46] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:01:56] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:1s raspi7:1s raspi8:1s
+[02:02:06] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:02:16] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:02:26] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:02:36] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:02:46] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:02:56] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:03:06] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:03:16] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:03:26] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:03:36] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:03:46] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:03:56] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:04:06] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:04:16] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:04:26] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:04:36] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:04:46] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:04:56] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:05:06] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:05:16] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:05:26] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:1s raspi7:1s raspi8:1s
+[02:05:36] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:05:46] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:05:56] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:06:06] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:06:16] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:06:26] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:06:36] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:06:46] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:06:56] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:07:06] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:07:16] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:07:26] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:07:36] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:07:46] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:07:56] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:08:06] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:08:16] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:08:26] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:08:36] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:08:46] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:08:56] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:09:06] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:09:16] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:09:26] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:09:36] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:09:46] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:09:56] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:10:06] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:10:16] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:10:26] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:10:36] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:10:46] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:10:56] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:11:06] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:11:16] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:11:26] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:11:36] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:11:46] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:11:56] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:12:06] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:12:16] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:12:26] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:12:36] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:12:46] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:12:56] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:13:06] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:13:16] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:13:26] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:13:36] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:13:46] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:13:56] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:14:06] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:14:16] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:14:26] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:14:36] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:14:46] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:14:56] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:15:06] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:15:16] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:15:26] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:15:36] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:15:46] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:15:56] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:16:06] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:16:16] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:16:26] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:16:36] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:16:46] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:16:56] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:17:06] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:17:16] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:17:26] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:17:36] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:17:46] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:17:56] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:18:06] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:18:16] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:18:26] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:18:36] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:18:46] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:18:56] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:19:06] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:19:16] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:19:26] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:19:36] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:19:46] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:19:56] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:20:06] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:20:16] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:20:26] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:20:36] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:20:46] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:20:56] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:21:06] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:21:16] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:21:26] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:21:36] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:21:46] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:21:56] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:22:06] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:22:16] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:22:26] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:22:36] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:22:46] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:22:56] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:23:06] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[01:57:26] fan c1_threshold_s5 r7 0
+[01:57:26] fan c1_threshold_s5 r8 1
+[01:57:31] fan c1_threshold_s5 r1 0
+[01:57:36] fan c1_threshold_s5 r6 0
+[01:57:41] fan_cmd c1_threshold_s5 r8 0
+[01:57:56] fan c1_threshold_s5 r8 0
+[01:59:11] phase_end c1_threshold_s5  time
+[01:59:11] phase_start c1_threshold_s6
+[01:59:11] load c1_threshold_s6 r1 4
+[01:59:11] load c1_threshold_s6 r2 4
+[01:59:11] load c1_threshold_s6 r3 4
+[01:59:11] load c1_threshold_s6 r4 4
+[01:59:11] load c1_threshold_s6 r5 4
+[01:59:11] load c1_threshold_s6 r6 4
+[01:59:11] load c1_threshold_s6 r7 4
+[01:59:11] load c1_threshold_s6 r8 4
+[01:59:16] fan_cmd c1_threshold_s6 r1 1
+[01:59:16] fan_cmd c1_threshold_s6 r3 1
+[01:59:16] fan_cmd c1_threshold_s6 r6 1
+[01:59:21] fan_cmd c1_threshold_s6 r2 1
+[01:59:21] fan_cmd c1_threshold_s6 r4 1
+[01:59:21] fan_cmd c1_threshold_s6 r7 1
+[01:59:26] fan_cmd c1_threshold_s6 r8 1
+[01:59:31] fan c1_threshold_s6 r1 1
+[01:59:31] fan c1_threshold_s6 r3 1
+[01:59:31] fan c1_threshold_s6 r6 1
+[01:59:36] fan c1_threshold_s6 r2 1
+[01:59:36] fan c1_threshold_s6 r4 1
+[01:59:36] fan c1_threshold_s6 r7 1
+[01:59:41] fan c1_threshold_s6 r8 1
+[02:00:16] fan_cmd c1_threshold_s6 r8 0
+[02:00:31] fan c1_threshold_s6 r8 0
+[02:00:46] fan_cmd c1_threshold_s6 r4 0
+[02:00:56] fan_cmd c1_threshold_s6 r8 1
+[02:01:01] fan c1_threshold_s6 r4 0
+[02:01:11] fan c1_threshold_s6 r8 1
+[02:01:11] phase_end c1_threshold_s6  time
+[02:01:11] phase_start c1_threshold_rest
+[02:01:11] load c1_threshold_rest r1 0
+[02:01:11] load c1_threshold_rest r2 0
+[02:01:11] load c1_threshold_rest r3 0
+[02:01:11] load c1_threshold_rest r4 0
+[02:01:11] load c1_threshold_rest r5 0
+[02:01:11] load c1_threshold_rest r6 0
+[02:01:11] load c1_threshold_rest r7 0
+[02:01:11] load c1_threshold_rest r8 0
+[02:01:11] fan c1_threshold_rest r1 0
+[02:01:11] fan c1_threshold_rest r2 0
+[02:01:11] fan c1_threshold_rest r3 0
+[02:01:11] fan c1_threshold_rest r4 0
+[02:01:11] fan c1_threshold_rest r5 0
+[02:01:11] fan c1_threshold_rest r6 0
+[02:01:11] fan c1_threshold_rest r7 0
+[02:01:11] fan c1_threshold_rest r8 0
+[02:13:11] phase_end c1_threshold_rest  time
+[02:13:11] phase_start c1_proposed_s1
+[02:13:11] load c1_proposed_s1 r1 1
+[02:13:11] load c1_proposed_s1 r2 1
+[02:13:11] load c1_proposed_s1 r3 1
+[02:13:11] load c1_proposed_s1 r4 1
+[02:13:11] load c1_proposed_s1 r5 1
+[02:13:11] load c1_proposed_s1 r6 1
+[02:13:11] load c1_proposed_s1 r7 1
+[02:13:11] load c1_proposed_s1 r8 1
+[02:13:11] fan_mode c1_proposed_s1 r1 proposed
+[02:13:11] fan c1_proposed_s1 r1 0
+[02:13:11] fan_mode c1_proposed_s1 r2 proposed
+[02:13:11] fan c1_proposed_s1 r2 0
+[02:13:11] fan_mode c1_proposed_s1 r3 proposed
+[02:13:11] fan c1_proposed_s1 r3 0
+[02:13:11] fan_mode c1_proposed_s1 r4 proposed
+[02:13:11] fan c1_proposed_s1 r4 0
+[02:13:11] fan_mode c1_proposed_s1 r5 proposed
+[02:13:11] fan c1_proposed_s1 r5 0
+[02:13:11] fan_mode c1_proposed_s1 r6 proposed
+[02:13:11] fan c1_proposed_s1 r6 0
+[02:13:11] fan_mode c1_proposed_s1 r7 proposed
+[02:13:11] fan c1_proposed_s1 r7 0
+[02:13:11] fan_mode c1_proposed_s1 r8 proposed
+[02:13:11] fan c1_proposed_s1 r8 0
+[02:15:11] phase_end c1_proposed_s1  time
+[02:15:11] phase_start c1_proposed_s2
+[02:15:11] load c1_proposed_s2 r1 4
+[02:15:11] load c1_proposed_s2 r2 4
+[02:15:11] load c1_proposed_s2 r3 4
+[02:15:11] load c1_proposed_s2 r4 4
+[02:15:11] load c1_proposed_s2 r5 4
+[02:15:11] load c1_proposed_s2 r6 4
+[02:15:11] load c1_proposed_s2 r7 4
+[02:15:11] load c1_proposed_s2 r8 4
+[02:15:16] fan_cmd c1_proposed_s2 r1 1
+[02:15:16] fan_cmd c1_proposed_s2 r3 1
+[02:15:16] fan_cmd c1_proposed_s2 r4 1
+[02:15:16] fan_cmd c1_proposed_s2 r5 1
+[02:15:16] fan_cmd c1_proposed_s2 r6 1
+[02:15:16] fan_cmd c1_proposed_s2 r7 1
+[02:15:21] fan_cmd c1_proposed_s2 r2 1
+[02:15:21] fan_cmd c1_proposed_s2 r8 1
+[02:15:31] fan c1_proposed_s2 r1 1
+[02:15:31] fan c1_proposed_s2 r3 1
+[02:15:31] fan c1_proposed_s2 r4 1
+[02:15:31] fan c1_proposed_s2 r5 1
+[02:15:31] fan c1_proposed_s2 r6 1
+[02:15:31] fan c1_proposed_s2 r7 1
+[02:15:36] fan c1_proposed_s2 r2 1
+[02:15:36] fan c1_proposed_s2 r8 1
+[02:16:01] fan_cmd c1_proposed_s2 r8 0
+[02:16:16] fan c1_proposed_s2 r8 0
+[02:16:26] fan_cmd c1_proposed_s2 r8 1
+[02:16:31] fan_cmd c1_proposed_s2 r4 0
+[02:16:41] fan c1_proposed_s2 r8 1
+[02:16:46] fan_cmd c1_proposed_s2 r4 1
+[02:16:46] fan c1_proposed_s2 r4 0
+[02:16:56] fan_cmd c1_proposed_s2 r8 0
+[02:17:01] fan c1_proposed_s2 r4 1
+[02:17:11] fan c1_proposed_s2 r8 0
+[02:17:21] fan_cmd c1_proposed_s2 r4 0
+[02:17:21] fan_cmd c1_proposed_s2 r8 1
+[02:17:36] fan c1_proposed_s2 r4 0
+[02:17:36] fan c1_proposed_s2 r8 1
+[02:17:46] fan_cmd c1_proposed_s2 r4 1
+[02:17:51] fan_cmd c1_proposed_s2 r8 0
+[02:18:01] fan c1_proposed_s2 r4 1
+[02:18:06] fan c1_proposed_s2 r8 0
+[02:18:16] fan_cmd c1_proposed_s2 r4 0
+[02:18:21] fan_cmd c1_proposed_s2 r8 1
+[02:18:31] fan c1_proposed_s2 r4 0
+[02:18:36] fan_cmd c1_proposed_s2 r3 0
+[02:18:36] fan c1_proposed_s2 r8 1
+[02:18:41] fan_cmd c1_proposed_s2 r4 1
+[02:18:46] fan_cmd c1_proposed_s2 r3 1
+[02:18:51] fan_cmd c1_proposed_s2 r8 0
+[02:18:51] fan c1_proposed_s2 r3 0
+[02:18:56] fan c1_proposed_s2 r4 1
+[02:19:01] fan c1_proposed_s2 r3 1
+[02:19:06] fan c1_proposed_s2 r8 0
+[02:19:16] fan_cmd c1_proposed_s2 r4 0
+[02:19:16] fan_cmd c1_proposed_s2 r8 1
+[02:19:31] fan c1_proposed_s2 r4 0
+[02:19:31] fan c1_proposed_s2 r8 1
+[02:19:41] fan_cmd c1_proposed_s2 r4 1
+[02:19:46] fan_cmd c1_proposed_s2 r8 0
+[02:19:56] fan c1_proposed_s2 r4 1
+[02:20:01] fan_cmd c1_proposed_s2 r3 0
+[02:20:01] fan c1_proposed_s2 r8 0
+[02:20:06] fan_cmd c1_proposed_s2 r3 1
+[02:20:11] fan_cmd c1_proposed_s2 r4 0
+[02:20:16] fan_cmd c1_proposed_s2 r8 1
+[02:20:16] fan c1_proposed_s2 r3 0
+[02:20:21] fan c1_proposed_s2 r3 1
+[02:20:26] fan c1_proposed_s2 r4 0
+[02:20:31] fan c1_proposed_s2 r8 1
+[02:20:36] fan_cmd c1_proposed_s2 r4 1
+[02:20:46] fan_cmd c1_proposed_s2 r3 0
+[02:20:46] fan_cmd c1_proposed_s2 r8 0
+[02:20:51] fan c1_proposed_s2 r4 1
+[02:20:56] fan_cmd c1_proposed_s2 r3 1
+[02:21:01] fan c1_proposed_s2 r3 0
+[02:21:01] fan c1_proposed_s2 r8 0
+[02:21:11] fan_cmd c1_proposed_s2 r4 0
+[02:21:11] fan c1_proposed_s2 r3 1
+[02:21:11] phase_end c1_proposed_s2  time
+[02:21:11] phase_start c1_proposed_s3
+[02:21:11] load c1_proposed_s3 r1 0
+[02:21:11] load c1_proposed_s3 r2 0
+[02:21:11] load c1_proposed_s3 r3 0
+[02:21:11] load c1_proposed_s3 r4 0
+[02:21:11] load c1_proposed_s3 r5 0
+[02:21:11] load c1_proposed_s3 r6 0
+[02:21:11] load c1_proposed_s3 r7 0
+[02:21:11] load c1_proposed_s3 r8 0
+[02:21:16] fan_cmd c1_proposed_s3 r1 0
+[02:21:16] fan_cmd c1_proposed_s3 r2 0
+[02:21:16] fan_cmd c1_proposed_s3 r6 0
+[02:21:16] fan_cmd c1_proposed_s3 r7 0
+[02:21:21] fan_cmd c1_proposed_s3 r5 0
+[02:21:26] fan_cmd c1_proposed_s3 r3 0
+[02:21:26] fan c1_proposed_s3 r4 0
+[02:21:31] fan c1_proposed_s3 r1 0
+[02:21:31] fan c1_proposed_s3 r2 0
+[02:21:31] fan c1_proposed_s3 r6 0
+[02:21:31] fan c1_proposed_s3 r7 0
+[02:21:36] fan c1_proposed_s3 r5 0
+[02:21:41] fan c1_proposed_s3 r3 0
+[02:24:11] phase_end c1_proposed_s3  time
+[02:24:11] phase_start c1_proposed_s4
+[02:24:11] load c1_proposed_s4 r1 4
+[02:24:11] load c1_proposed_s4 r2 4
+[02:24:11] load c1_proposed_s4 r3 4
+[02:24:11] load c1_proposed_s4 r4 4
+[02:24:11] load c1_proposed_s4 r5 4
+[02:24:11] load c1_proposed_s4 r6 4
+[02:24:11] load c1_proposed_s4 r7 4
+[02:24:11] load c1_proposed_s4 r8 4
+[02:24:21] fan_cmd c1_proposed_s4 r1 1
+[02:24:21] fan_cmd c1_proposed_s4 r4 1
+[02:24:21] fan_cmd c1_proposed_s4 r5 1
+[02:24:21] fan_cmd c1_proposed_s4 r6 1
+[02:24:21] fan_cmd c1_proposed_s4 r7 1
+[02:24:26] fan_cmd c1_proposed_s4 r2 1
+[02:24:26] fan_cmd c1_proposed_s4 r3 1
+[02:24:26] fan_cmd c1_proposed_s4 r8 1
+[02:24:36] fan c1_proposed_s4 r1 1
+[02:24:36] fan c1_proposed_s4 r4 1
+[02:24:36] fan c1_proposed_s4 r5 1
+[02:24:36] fan c1_proposed_s4 r6 1
+[02:24:36] fan c1_proposed_s4 r7 1
+[02:24:41] fan c1_proposed_s4 r2 1
+[02:24:41] fan c1_proposed_s4 r3 1
+[02:24:41] fan c1_proposed_s4 r8 1
+[02:25:01] fan_cmd c1_proposed_s4 r8 0
+[02:25:16] fan c1_proposed_s4 r8 0
+[02:25:26] fan_cmd c1_proposed_s4 r4 0
+[02:25:26] fan_cmd c1_proposed_s4 r8 1
+[02:25:41] fan c1_proposed_s4 r4 0
+[02:25:41] fan c1_proposed_s4 r8 1
+[02:25:51] fan_cmd c1_proposed_s4 r4 1
+[02:25:56] fan_cmd c1_proposed_s4 r8 0
+[02:26:06] fan c1_proposed_s4 r4 1
+[02:23:16] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:23:26] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:23:36] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:23:46] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:23:56] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:24:06] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:24:16] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:24:26] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:24:36] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:24:46] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:24:56] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:25:06] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:25:16] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:25:26] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:25:36] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:25:46] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:25:56] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:26:06] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:26:16] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:26:26] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:26:36] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:26:46] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:26:56] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:27:06] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:27:16] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:27:26] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:27:36] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:27:46] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:27:56] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:28:06] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:28:16] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:28:26] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:28:36] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:28:46] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:28:56] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:29:06] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:29:16] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:29:26] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:29:36] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:29:46] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:29:56] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:30:06] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:30:16] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:30:26] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:30:36] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:30:46] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:30:56] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:31:06] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:31:16] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:31:26] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:31:36] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:31:46] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:31:56] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:32:06] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:32:16] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:32:26] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:32:36] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:32:46] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:32:56] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:33:06] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:33:16] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:33:26] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:33:36] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:33:46] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:33:56] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:34:06] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:34:16] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:34:26] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:34:36] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:34:46] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:34:56] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:35:06] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:35:16] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:35:26] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:35:36] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:35:46] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:35:56] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:36:06] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:36:16] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:36:26] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:36:36] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:36:46] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:36:56] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:37:06] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:37:16] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:37:26] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:37:36] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:37:46] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:37:56] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:38:06] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:38:16] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:38:26] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:38:36] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:38:46] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:38:56] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:39:06] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:39:16] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:39:26] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:39:36] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:39:46] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:39:56] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:40:06] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:40:16] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:40:26] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:40:36] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:40:46] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:40:56] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:41:06] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:41:16] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:41:26] last seen  raspi1:0s raspi2:1s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:41:36] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:41:46] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:41:56] last seen  raspi1:0s raspi2:1s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:42:06] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:42:16] last seen  raspi1:0s raspi2:1s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:42:26] last seen  raspi1:0s raspi2:1s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:42:36] last seen  raspi1:0s raspi2:1s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:42:46] last seen  raspi1:0s raspi2:1s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:42:56] last seen  raspi1:0s raspi2:1s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:43:06] last seen  raspi1:0s raspi2:1s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:43:16] last seen  raspi1:0s raspi2:1s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:43:26] last seen  raspi1:0s raspi2:1s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:43:36] last seen  raspi1:0s raspi2:1s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:43:46] last seen  raspi1:0s raspi2:1s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:43:56] last seen  raspi1:0s raspi2:1s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:44:06] last seen  raspi1:0s raspi2:1s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:44:16] last seen  raspi1:0s raspi2:1s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:44:26] last seen  raspi1:0s raspi2:1s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:44:36] last seen  raspi1:0s raspi2:1s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:44:46] last seen  raspi1:0s raspi2:1s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:44:56] last seen  raspi1:0s raspi2:1s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:45:06] last seen  raspi1:0s raspi2:1s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:45:16] last seen  raspi1:0s raspi2:1s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:45:26] last seen  raspi1:0s raspi2:1s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:45:36] last seen  raspi1:0s raspi2:1s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:45:46] last seen  raspi1:0s raspi2:1s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:45:56] last seen  raspi1:0s raspi2:1s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:46:06] last seen  raspi1:0s raspi2:1s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:46:16] last seen  raspi1:0s raspi2:1s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:46:26] last seen  raspi1:0s raspi2:1s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:46:36] last seen  raspi1:0s raspi2:1s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:46:46] last seen  raspi1:0s raspi2:1s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:46:56] last seen  raspi1:0s raspi2:1s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:47:06] last seen  raspi1:0s raspi2:1s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:47:16] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:47:26] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:47:36] last seen  raspi1:0s raspi2:1s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:47:46] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:47:56] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:48:06] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:48:16] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:48:26] last seen  raspi1:0s raspi2:1s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:48:36] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:48:46] last seen  raspi1:0s raspi2:1s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:48:56] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:49:06] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:49:16] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:49:26] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:49:36] last seen  raspi1:0s raspi2:1s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:49:46] last seen  raspi1:0s raspi2:1s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:49:56] last seen  raspi1:0s raspi2:1s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:50:06] last seen  raspi1:0s raspi2:1s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:26:11] fan c1_proposed_s4 r8 0
+[02:26:16] fan_cmd c1_proposed_s4 r3 0
+[02:26:21] fan_cmd c1_proposed_s4 r4 0
+[02:26:26] fan_cmd c1_proposed_s4 r3 1
+[02:26:26] fan_cmd c1_proposed_s4 r8 1
+[02:26:31] fan c1_proposed_s4 r3 0
+[02:26:36] fan c1_proposed_s4 r4 0
+[02:26:41] fan c1_proposed_s4 r3 1
+[02:26:41] fan c1_proposed_s4 r8 1
+[02:26:46] fan_cmd c1_proposed_s4 r4 1
+[02:26:56] fan_cmd c1_proposed_s4 r8 0
+[02:27:01] fan c1_proposed_s4 r4 1
+[02:27:11] fan c1_proposed_s4 r8 0
+[02:27:16] fan_cmd c1_proposed_s4 r3 0
+[02:27:21] fan_cmd c1_proposed_s4 r4 0
+[02:27:26] fan_cmd c1_proposed_s4 r3 1
+[02:27:26] fan_cmd c1_proposed_s4 r8 1
+[02:27:31] fan c1_proposed_s4 r3 0
+[02:27:36] fan c1_proposed_s4 r4 0
+[02:27:41] fan c1_proposed_s4 r3 1
+[02:27:41] fan c1_proposed_s4 r8 1
+[02:27:46] fan_cmd c1_proposed_s4 r4 1
+[02:27:56] fan_cmd c1_proposed_s4 r8 0
+[02:28:01] fan c1_proposed_s4 r4 1
+[02:28:11] fan_cmd c1_proposed_s4 r3 0
+[02:28:11] fan c1_proposed_s4 r8 0
+[02:28:21] fan_cmd c1_proposed_s4 r3 1
+[02:28:21] fan_cmd c1_proposed_s4 r4 0
+[02:28:26] fan_cmd c1_proposed_s4 r8 1
+[02:28:26] fan c1_proposed_s4 r3 0
+[02:28:36] fan c1_proposed_s4 r3 1
+[02:28:36] fan c1_proposed_s4 r4 0
+[02:28:41] fan c1_proposed_s4 r8 1
+[02:28:46] fan_cmd c1_proposed_s4 r4 1
+[02:28:56] fan_cmd c1_proposed_s4 r8 0
+[02:29:01] fan c1_proposed_s4 r4 1
+[02:29:06] fan_cmd c1_proposed_s4 r3 0
+[02:29:11] fan c1_proposed_s4 r8 0
+[02:29:11] phase_end c1_proposed_s4  time
+[02:29:11] phase_start c1_proposed_s5
+[02:29:11] load c1_proposed_s5 r1 2
+[02:29:11] load c1_proposed_s5 r2 2
+[02:29:11] load c1_proposed_s5 r3 2
+[02:29:11] load c1_proposed_s5 r4 2
+[02:29:11] load c1_proposed_s5 r5 2
+[02:29:11] load c1_proposed_s5 r6 2
+[02:29:11] load c1_proposed_s5 r7 2
+[02:29:11] load c1_proposed_s5 r8 2
+[02:29:16] fan_cmd c1_proposed_s5 r1 0
+[02:29:16] fan_cmd c1_proposed_s5 r2 0
+[02:29:16] fan_cmd c1_proposed_s5 r4 0
+[02:29:16] fan_cmd c1_proposed_s5 r7 0
+[02:29:21] fan_cmd c1_proposed_s5 r6 0
+[02:29:21] fan c1_proposed_s5 r3 0
+[02:29:31] fan c1_proposed_s5 r1 0
+[02:29:31] fan c1_proposed_s5 r2 0
+[02:29:31] fan c1_proposed_s5 r4 0
+[02:29:31] fan c1_proposed_s5 r7 0
+[02:29:36] fan c1_proposed_s5 r6 0
+[02:30:36] fan_cmd c1_proposed_s5 r6 1
+[02:30:51] fan c1_proposed_s5 r6 1
+[02:31:06] fan_cmd c1_proposed_s5 r6 0
+[02:31:11] phase_end c1_proposed_s5  time
+[02:31:11] phase_start c1_proposed_s6
+[02:31:11] load c1_proposed_s6 r1 4
+[02:31:11] load c1_proposed_s6 r2 4
+[02:31:11] load c1_proposed_s6 r3 4
+[02:31:11] load c1_proposed_s6 r4 4
+[02:31:11] load c1_proposed_s6 r5 4
+[02:31:11] load c1_proposed_s6 r6 4
+[02:31:11] load c1_proposed_s6 r7 4
+[02:31:11] load c1_proposed_s6 r8 4
+[02:31:16] fan_cmd c1_proposed_s6 r1 1
+[02:31:16] fan_cmd c1_proposed_s6 r3 1
+[02:31:16] fan_cmd c1_proposed_s6 r4 1
+[02:31:16] fan_cmd c1_proposed_s6 r6 1
+[02:31:16] fan_cmd c1_proposed_s6 r7 1
+[02:31:21] fan_cmd c1_proposed_s6 r2 1
+[02:31:21] fan_cmd c1_proposed_s6 r8 1
+[02:31:21] fan c1_proposed_s6 r6 0
+[02:31:31] fan c1_proposed_s6 r1 1
+[02:31:31] fan c1_proposed_s6 r3 1
+[02:31:31] fan c1_proposed_s6 r4 1
+[02:31:31] fan c1_proposed_s6 r6 1
+[02:31:31] fan c1_proposed_s6 r7 1
+[02:31:36] fan c1_proposed_s6 r2 1
+[02:31:36] fan c1_proposed_s6 r8 1
+[02:32:01] fan_cmd c1_proposed_s6 r8 0
+[02:32:16] fan c1_proposed_s6 r8 0
+[02:32:26] fan_cmd c1_proposed_s6 r4 0
+[02:32:26] fan_cmd c1_proposed_s6 r8 1
+[02:32:41] fan c1_proposed_s6 r4 0
+[02:32:41] fan c1_proposed_s6 r8 1
+[02:32:46] fan_cmd c1_proposed_s6 r4 1
+[02:32:56] fan_cmd c1_proposed_s6 r8 0
+[02:33:01] fan c1_proposed_s6 r4 1
+[02:33:11] fan c1_proposed_s6 r8 0
+[02:33:12] phase_end c1_proposed_s6  time
+[02:33:12] phase_start c1_proposed_rest
+[02:33:12] load c1_proposed_rest r1 0
+[02:33:12] load c1_proposed_rest r2 0
+[02:33:12] load c1_proposed_rest r3 0
+[02:33:12] load c1_proposed_rest r4 0
+[02:33:12] load c1_proposed_rest r5 0
+[02:33:12] load c1_proposed_rest r6 0
+[02:33:12] load c1_proposed_rest r7 0
+[02:33:12] load c1_proposed_rest r8 0
+[02:33:12] fan c1_proposed_rest r1 0
+[02:33:12] fan c1_proposed_rest r2 0
+[02:33:12] fan c1_proposed_rest r3 0
+[02:33:12] fan c1_proposed_rest r4 0
+[02:33:12] fan c1_proposed_rest r5 0
+[02:33:12] fan c1_proposed_rest r6 0
+[02:33:12] fan c1_proposed_rest r7 0
+[02:33:12] fan c1_proposed_rest r8 0
+[02:45:12] phase_end c1_proposed_rest  time
+[02:45:12] phase_start c2_threshold_s1
+[02:45:12] load c2_threshold_s1 r1 1
+[02:45:12] load c2_threshold_s1 r2 1
+[02:45:12] load c2_threshold_s1 r3 1
+[02:45:12] load c2_threshold_s1 r4 1
+[02:45:12] load c2_threshold_s1 r5 1
+[02:45:12] load c2_threshold_s1 r6 1
+[02:45:12] load c2_threshold_s1 r7 1
+[02:45:12] load c2_threshold_s1 r8 1
+[02:45:12] fan_mode c2_threshold_s1 r1 threshold
+[02:45:12] fan c2_threshold_s1 r1 0
+[02:45:12] fan_mode c2_threshold_s1 r2 threshold
+[02:45:12] fan c2_threshold_s1 r2 0
+[02:45:12] fan_mode c2_threshold_s1 r3 threshold
+[02:45:12] fan c2_threshold_s1 r3 0
+[02:45:12] fan_mode c2_threshold_s1 r4 threshold
+[02:45:12] fan c2_threshold_s1 r4 0
+[02:45:12] fan_mode c2_threshold_s1 r5 threshold
+[02:45:12] fan c2_threshold_s1 r5 0
+[02:45:12] fan_mode c2_threshold_s1 r6 threshold
+[02:45:12] fan c2_threshold_s1 r6 0
+[02:45:12] fan_mode c2_threshold_s1 r7 threshold
+[02:45:12] fan c2_threshold_s1 r7 0
+[02:45:12] fan_mode c2_threshold_s1 r8 threshold
+[02:45:12] fan c2_threshold_s1 r8 0
+[02:47:12] phase_end c2_threshold_s1  time
+[02:47:12] phase_start c2_threshold_s2
+[02:47:12] load c2_threshold_s2 r1 4
+[02:47:12] load c2_threshold_s2 r2 4
+[02:47:12] load c2_threshold_s2 r3 4
+[02:47:12] load c2_threshold_s2 r4 4
+[02:47:12] load c2_threshold_s2 r5 4
+[02:47:12] load c2_threshold_s2 r6 4
+[02:47:12] load c2_threshold_s2 r7 4
+[02:47:12] load c2_threshold_s2 r8 4
+[02:47:16] fan_cmd c2_threshold_s2 r6 1
+[02:47:21] fan_cmd c2_threshold_s2 r1 1
+[02:47:21] fan_cmd c2_threshold_s2 r3 1
+[02:47:21] fan_cmd c2_threshold_s2 r4 1
+[02:47:21] fan_cmd c2_threshold_s2 r5 1
+[02:47:21] fan_cmd c2_threshold_s2 r7 1
+[02:47:26] fan_cmd c2_threshold_s2 r2 1
+[02:47:31] fan_cmd c2_threshold_s2 r8 1
+[02:47:31] fan c2_threshold_s2 r6 1
+[02:47:36] fan c2_threshold_s2 r1 1
+[02:47:36] fan c2_threshold_s2 r3 1
+[02:47:36] fan c2_threshold_s2 r4 1
+[02:47:36] fan c2_threshold_s2 r5 1
+[02:47:36] fan c2_threshold_s2 r7 1
+[02:47:41] fan c2_threshold_s2 r2 1
+[02:47:46] fan c2_threshold_s2 r8 1
+[02:48:21] fan_cmd c2_threshold_s2 r8 0
+[02:48:36] fan c2_threshold_s2 r8 0
+[02:49:01] fan_cmd c2_threshold_s2 r4 0
+[02:49:01] fan_cmd c2_threshold_s2 r8 1
+[02:49:16] fan c2_threshold_s2 r4 0
+[02:49:16] fan c2_threshold_s2 r8 1
+[02:49:36] fan_cmd c2_threshold_s2 r4 1
+[02:49:41] fan_cmd c2_threshold_s2 r8 0
+[02:49:51] fan c2_threshold_s2 r4 1
+[02:49:56] fan c2_threshold_s2 r8 0
+[02:50:21] fan_cmd c2_threshold_s2 r8 1
+[02:50:26] fan_cmd c2_threshold_s2 r4 0
+[02:50:36] fan c2_threshold_s2 r8 1
+[02:50:41] fan c2_threshold_s2 r4 0
+[02:50:56] fan_cmd c2_threshold_s2 r4 1
+[02:51:06] fan_cmd c2_threshold_s2 r8 0
+[02:51:11] fan c2_threshold_s2 r4 1
+[02:51:21] fan c2_threshold_s2 r8 0
+[02:51:31] fan_cmd c2_threshold_s2 r3 0
+[02:51:46] fan_cmd c2_threshold_s2 r4 0
+[02:51:46] fan c2_threshold_s2 r3 0
+[02:51:51] fan_cmd c2_threshold_s2 r8 1
+[02:52:01] fan_cmd c2_threshold_s2 r3 1
+[02:52:01] fan c2_threshold_s2 r4 0
+[02:52:06] fan c2_threshold_s2 r8 1
+[02:52:16] fan c2_threshold_s2 r3 1
+[02:52:21] fan_cmd c2_threshold_s2 r4 1
+[02:52:31] fan_cmd c2_threshold_s2 r8 0
+[02:52:36] fan c2_threshold_s2 r4 1
+[02:52:46] fan c2_threshold_s2 r8 0
+[02:53:11] fan_cmd c2_threshold_s2 r4 0
+[02:53:12] phase_end c2_threshold_s2  time
+[02:53:12] phase_start c2_threshold_s3
+[02:53:12] load c2_threshold_s3 r1 0
+[02:53:12] load c2_threshold_s3 r2 0
+[02:53:12] load c2_threshold_s3 r3 0
+[02:53:12] load c2_threshold_s3 r4 0
+[02:53:12] load c2_threshold_s3 r5 0
+[02:53:12] load c2_threshold_s3 r6 0
+[02:53:12] load c2_threshold_s3 r7 0
+[02:53:12] load c2_threshold_s3 r8 0
+[02:53:16] fan_cmd c2_threshold_s3 r1 0
+[02:53:16] fan_cmd c2_threshold_s3 r2 0
+[02:53:16] fan_cmd c2_threshold_s3 r3 0
+[02:53:16] fan_cmd c2_threshold_s3 r7 0
+[02:53:21] fan_cmd c2_threshold_s3 r6 0
+[02:53:26] fan c2_threshold_s3 r4 0
+[02:53:31] fan c2_threshold_s3 r1 0
+[02:53:31] fan c2_threshold_s3 r2 0
+[02:53:31] fan c2_threshold_s3 r3 0
+[02:50:16] last seen  raspi1:0s raspi2:1s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:50:26] last seen  raspi1:0s raspi2:1s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:50:36] last seen  raspi1:0s raspi2:1s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:50:46] last seen  raspi1:0s raspi2:1s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:50:56] last seen  raspi1:0s raspi2:1s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:51:06] last seen  raspi1:0s raspi2:1s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:51:16] last seen  raspi1:0s raspi2:1s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:51:26] last seen  raspi1:0s raspi2:1s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:51:36] last seen  raspi1:0s raspi2:1s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:51:46] last seen  raspi1:0s raspi2:1s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:51:56] last seen  raspi1:0s raspi2:1s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:52:06] last seen  raspi1:0s raspi2:1s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:52:16] last seen  raspi1:0s raspi2:1s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:52:26] last seen  raspi1:0s raspi2:1s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:52:36] last seen  raspi1:0s raspi2:1s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:52:46] last seen  raspi1:0s raspi2:1s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:52:56] last seen  raspi1:0s raspi2:1s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:53:06] last seen  raspi1:0s raspi2:1s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:53:16] last seen  raspi1:0s raspi2:1s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:53:26] last seen  raspi1:0s raspi2:1s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:53:36] last seen  raspi1:0s raspi2:1s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:53:46] last seen  raspi1:0s raspi2:1s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:53:56] last seen  raspi1:0s raspi2:1s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:54:06] last seen  raspi1:0s raspi2:1s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:54:16] last seen  raspi1:0s raspi2:1s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:54:26] last seen  raspi1:0s raspi2:1s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:54:36] last seen  raspi1:0s raspi2:1s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:54:46] last seen  raspi1:0s raspi2:1s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:54:56] last seen  raspi1:0s raspi2:1s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:55:06] last seen  raspi1:0s raspi2:1s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:55:16] last seen  raspi1:0s raspi2:1s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:55:26] last seen  raspi1:0s raspi2:1s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:55:36] last seen  raspi1:0s raspi2:1s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:55:46] last seen  raspi1:0s raspi2:1s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:55:56] last seen  raspi1:0s raspi2:1s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:56:06] last seen  raspi1:0s raspi2:1s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:56:16] last seen  raspi1:0s raspi2:1s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:56:26] last seen  raspi1:0s raspi2:1s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:56:36] last seen  raspi1:0s raspi2:1s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:56:46] last seen  raspi1:0s raspi2:1s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:56:56] last seen  raspi1:0s raspi2:1s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:57:06] last seen  raspi1:0s raspi2:1s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:57:16] last seen  raspi1:0s raspi2:1s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:57:26] last seen  raspi1:0s raspi2:1s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:57:36] last seen  raspi1:0s raspi2:1s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:57:46] last seen  raspi1:0s raspi2:1s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:57:56] last seen  raspi1:0s raspi2:1s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:58:06] last seen  raspi1:0s raspi2:1s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:58:16] last seen  raspi1:0s raspi2:1s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:58:26] last seen  raspi1:0s raspi2:1s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:58:36] last seen  raspi1:0s raspi2:1s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:58:46] last seen  raspi1:0s raspi2:1s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:58:56] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:59:06] last seen  raspi1:0s raspi2:1s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:59:16] last seen  raspi1:0s raspi2:1s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:59:26] last seen  raspi1:0s raspi2:1s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:59:36] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:59:46] last seen  raspi1:0s raspi2:1s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[02:59:56] last seen  raspi1:0s raspi2:1s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[03:00:06] last seen  raspi1:0s raspi2:1s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[03:00:16] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[03:00:26] last seen  raspi1:0s raspi2:1s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[03:00:36] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[03:00:46] last seen  raspi1:0s raspi2:1s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[03:00:56] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[03:01:06] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[03:01:16] last seen  raspi1:0s raspi2:1s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:0s
+[03:01:26] last seen  raspi1:0s raspi2:1s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:0s
+[03:01:36] last seen  raspi1:0s raspi2:1s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:0s
+[03:01:46] last seen  raspi1:0s raspi2:1s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:0s
+[03:01:56] last seen  raspi1:0s raspi2:1s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:0s
+[03:02:06] last seen  raspi1:0s raspi2:1s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:0s
+[03:02:16] last seen  raspi1:0s raspi2:1s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:0s
+[03:02:26] last seen  raspi1:0s raspi2:1s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:0s
+[03:02:36] last seen  raspi1:0s raspi2:1s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:0s
+[03:02:46] last seen  raspi1:0s raspi2:1s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:0s
+[03:02:56] last seen  raspi1:0s raspi2:1s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:0s
+[03:03:06] last seen  raspi1:0s raspi2:1s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:0s
+[03:03:16] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[03:03:26] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[03:03:36] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[03:03:46] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:0s
+[03:03:56] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[03:04:06] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[03:04:16] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:0s
+[03:04:26] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[03:04:36] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:1s
+[03:04:46] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:0s
+[03:04:56] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:0s
+[03:05:06] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:0s
+[03:05:16] last seen  raspi1:0s raspi2:1s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:0s
+[03:05:26] last seen  raspi1:0s raspi2:1s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:0s
+[03:05:36] last seen  raspi1:0s raspi2:1s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:0s
+[03:05:46] last seen  raspi1:0s raspi2:1s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:0s
+[03:05:56] last seen  raspi1:0s raspi2:1s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:0s
+[03:06:06] last seen  raspi1:0s raspi2:1s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:0s
+[03:06:16] last seen  raspi1:0s raspi2:1s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:0s
+[03:06:26] last seen  raspi1:0s raspi2:1s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:0s
+[03:06:36] last seen  raspi1:0s raspi2:1s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:0s
+[03:06:46] last seen  raspi1:0s raspi2:1s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:0s
+[03:06:56] last seen  raspi1:0s raspi2:1s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:0s
+[03:07:06] last seen  raspi1:0s raspi2:1s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:0s
+[03:07:16] last seen  raspi1:0s raspi2:1s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:0s
+[03:07:26] last seen  raspi1:0s raspi2:1s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:0s
+[03:07:36] last seen  raspi1:0s raspi2:1s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:0s
+[03:07:46] last seen  raspi1:0s raspi2:1s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:0s
+[03:07:56] last seen  raspi1:0s raspi2:1s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:0s
+[03:08:06] last seen  raspi1:0s raspi2:1s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:0s
+[03:08:16] last seen  raspi1:0s raspi2:1s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:0s
+[03:08:26] last seen  raspi1:0s raspi2:1s raspi3:1s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:0s
+[03:08:36] last seen  raspi1:0s raspi2:1s raspi3:1s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:0s
+[03:08:46] last seen  raspi1:0s raspi2:1s raspi3:1s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:0s
+[03:08:56] last seen  raspi1:0s raspi2:1s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:0s
+[03:09:06] last seen  raspi1:0s raspi2:1s raspi3:1s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:0s
+[03:09:16] last seen  raspi1:0s raspi2:1s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:0s
+[03:09:26] last seen  raspi1:0s raspi2:1s raspi3:1s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:0s
+[03:09:36] last seen  raspi1:0s raspi2:1s raspi3:1s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:0s
+[03:09:46] last seen  raspi1:0s raspi2:1s raspi3:1s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:0s
+[03:09:56] last seen  raspi1:0s raspi2:1s raspi3:1s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:0s
+[03:10:06] last seen  raspi1:0s raspi2:1s raspi3:1s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:0s
+[03:10:16] last seen  raspi1:0s raspi2:1s raspi3:1s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:0s
+[03:10:26] last seen  raspi1:0s raspi2:1s raspi3:1s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:0s
+[03:10:36] last seen  raspi1:0s raspi2:1s raspi3:1s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:0s
+[03:10:46] last seen  raspi1:0s raspi2:0s raspi3:1s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:0s
+[03:10:56] last seen  raspi1:0s raspi2:1s raspi3:1s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:0s
+[03:11:06] last seen  raspi1:0s raspi2:0s raspi3:1s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:0s
+[03:11:16] last seen  raspi1:0s raspi2:1s raspi3:1s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:0s
+[03:11:26] last seen  raspi1:0s raspi2:1s raspi3:1s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:0s
+[03:11:36] last seen  raspi1:0s raspi2:1s raspi3:1s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:0s
+[03:11:46] last seen  raspi1:0s raspi2:1s raspi3:1s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:0s
+[03:11:56] last seen  raspi1:0s raspi2:1s raspi3:1s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:0s
+[03:12:06] last seen  raspi1:0s raspi2:1s raspi3:1s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:0s
+[03:12:16] last seen  raspi1:0s raspi2:1s raspi3:1s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:0s
+[03:12:26] last seen  raspi1:0s raspi2:1s raspi3:1s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:0s
+[03:12:36] last seen  raspi1:0s raspi2:1s raspi3:1s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:0s
+[03:12:46] last seen  raspi1:0s raspi2:1s raspi3:1s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:0s
+[03:12:56] last seen  raspi1:0s raspi2:1s raspi3:1s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:0s
+[03:13:06] last seen  raspi1:0s raspi2:1s raspi3:1s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:0s
+[03:13:16] last seen  raspi1:0s raspi2:1s raspi3:1s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:0s
+[03:13:26] last seen  raspi1:0s raspi2:1s raspi3:1s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:0s
+[03:13:36] last seen  raspi1:0s raspi2:1s raspi3:1s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:0s
+[03:13:46] last seen  raspi1:0s raspi2:1s raspi3:1s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:0s
+[03:13:56] last seen  raspi1:0s raspi2:1s raspi3:1s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:0s
+[03:14:06] last seen  raspi1:0s raspi2:1s raspi3:1s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:0s
+[03:14:16] last seen  raspi1:0s raspi2:1s raspi3:1s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:0s
+[03:14:26] last seen  raspi1:0s raspi2:1s raspi3:1s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:0s
+[03:14:36] last seen  raspi1:0s raspi2:1s raspi3:1s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:0s
+[03:14:46] last seen  raspi1:0s raspi2:1s raspi3:1s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:0s
+[03:14:56] last seen  raspi1:0s raspi2:1s raspi3:1s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:0s
+[03:15:06] last seen  raspi1:0s raspi2:1s raspi3:1s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:0s
+[03:15:16] last seen  raspi1:0s raspi2:1s raspi3:1s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:0s
+[03:15:26] last seen  raspi1:0s raspi2:1s raspi3:1s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:0s
+[03:15:36] last seen  raspi1:0s raspi2:1s raspi3:1s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:0s
+[03:15:46] last seen  raspi1:0s raspi2:1s raspi3:1s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:0s
+[03:15:56] last seen  raspi1:0s raspi2:1s raspi3:1s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:0s
+[03:16:06] last seen  raspi1:1s raspi2:1s raspi3:1s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:0s
+[03:16:16] last seen  raspi1:1s raspi2:1s raspi3:1s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:0s
+[03:16:26] last seen  raspi1:1s raspi2:1s raspi3:1s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:0s
+[03:16:36] last seen  raspi1:1s raspi2:1s raspi3:1s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:0s
+[03:16:46] last seen  raspi1:1s raspi2:1s raspi3:1s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:0s
+[03:16:56] last seen  raspi1:1s raspi2:1s raspi3:1s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:0s
+[03:17:06] last seen  raspi1:1s raspi2:1s raspi3:1s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:0s
+[02:53:31] fan c2_threshold_s3 r7 0
+[02:53:36] fan c2_threshold_s3 r6 0
+[02:53:56] fan_cmd c2_threshold_s3 r5 0
+[02:54:11] fan c2_threshold_s3 r5 0
+[02:56:12] phase_end c2_threshold_s3  time
+[02:56:12] phase_start c2_threshold_s4
+[02:56:12] load c2_threshold_s4 r1 4
+[02:56:12] load c2_threshold_s4 r2 4
+[02:56:12] load c2_threshold_s4 r3 4
+[02:56:12] load c2_threshold_s4 r4 4
+[02:56:12] load c2_threshold_s4 r5 4
+[02:56:12] load c2_threshold_s4 r6 4
+[02:56:12] load c2_threshold_s4 r7 4
+[02:56:12] load c2_threshold_s4 r8 4
+[02:56:21] fan_cmd c2_threshold_s4 r5 1
+[02:56:26] fan_cmd c2_threshold_s4 r6 1
+[02:56:31] fan_cmd c2_threshold_s4 r1 1
+[02:56:31] fan_cmd c2_threshold_s4 r3 1
+[02:56:31] fan_cmd c2_threshold_s4 r7 1
+[02:56:36] fan_cmd c2_threshold_s4 r2 1
+[02:56:36] fan_cmd c2_threshold_s4 r4 1
+[02:56:36] fan c2_threshold_s4 r5 1
+[02:56:41] fan_cmd c2_threshold_s4 r8 1
+[02:56:41] fan c2_threshold_s4 r6 1
+[02:56:46] fan c2_threshold_s4 r1 1
+[02:56:46] fan c2_threshold_s4 r3 1
+[02:56:46] fan c2_threshold_s4 r7 1
+[02:56:51] fan c2_threshold_s4 r2 1
+[02:56:51] fan c2_threshold_s4 r4 1
+[02:56:56] fan c2_threshold_s4 r8 1
+[02:57:26] fan_cmd c2_threshold_s4 r8 0
+[02:57:41] fan c2_threshold_s4 r8 0
+[02:58:01] fan_cmd c2_threshold_s4 r4 0
+[02:58:06] fan_cmd c2_threshold_s4 r8 1
+[02:58:16] fan c2_threshold_s4 r4 0
+[02:58:21] fan c2_threshold_s4 r8 1
+[02:58:36] fan_cmd c2_threshold_s4 r4 1
+[02:58:51] fan_cmd c2_threshold_s4 r8 0
+[02:58:51] fan c2_threshold_s4 r4 1
+[02:59:06] fan c2_threshold_s4 r8 0
+[02:59:11] fan_cmd c2_threshold_s4 r3 0
+[02:59:26] fan c2_threshold_s4 r3 0
+[02:59:31] fan_cmd c2_threshold_s4 r4 0
+[02:59:36] fan_cmd c2_threshold_s4 r8 1
+[02:59:41] fan_cmd c2_threshold_s4 r3 1
+[02:59:46] fan c2_threshold_s4 r4 0
+[02:59:51] fan c2_threshold_s4 r8 1
+[02:59:56] fan c2_threshold_s4 r3 1
+[03:00:06] fan_cmd c2_threshold_s4 r2 0
+[03:00:06] fan_cmd c2_threshold_s4 r4 1
+[03:00:11] fan_cmd c2_threshold_s4 r7 0
+[03:00:16] fan_cmd c2_threshold_s4 r8 0
+[03:00:21] fan c2_threshold_s4 r2 0
+[03:00:21] fan c2_threshold_s4 r4 1
+[03:00:26] fan c2_threshold_s4 r7 0
+[03:00:31] fan c2_threshold_s4 r8 0
+[03:00:36] fan_cmd c2_threshold_s4 r1 0
+[03:00:41] fan_cmd c2_threshold_s4 r2 1
+[03:00:41] fan_cmd c2_threshold_s4 r7 1
+[03:00:51] fan c2_threshold_s4 r1 0
+[03:00:56] fan c2_threshold_s4 r2 1
+[03:00:56] fan c2_threshold_s4 r7 1
+[03:01:01] fan_cmd c2_threshold_s4 r3 0
+[03:01:01] fan_cmd c2_threshold_s4 r4 0
+[03:01:01] fan_cmd c2_threshold_s4 r8 1
+[03:01:06] fan_cmd c2_threshold_s4 r1 1
+[03:01:12] phase_end c2_threshold_s4  time
+[03:01:12] phase_start c2_threshold_s5
+[03:01:12] load c2_threshold_s5 r1 2
+[03:01:12] load c2_threshold_s5 r2 2
+[03:01:12] load c2_threshold_s5 r3 2
+[03:01:12] load c2_threshold_s5 r4 2
+[03:01:12] load c2_threshold_s5 r5 2
+[03:01:12] load c2_threshold_s5 r6 2
+[03:01:12] load c2_threshold_s5 r7 2
+[03:01:12] load c2_threshold_s5 r8 2
+[03:01:16] fan c2_threshold_s5 r3 0
+[03:01:16] fan c2_threshold_s5 r4 0
+[03:01:16] fan c2_threshold_s5 r8 1
+[03:01:21] fan_cmd c2_threshold_s5 r2 0
+[03:01:21] fan_cmd c2_threshold_s5 r6 0
+[03:01:21] fan_cmd c2_threshold_s5 r7 0
+[03:01:21] fan c2_threshold_s5 r1 1
+[03:01:31] fan_cmd c2_threshold_s5 r8 0
+[03:01:36] fan_cmd c2_threshold_s5 r1 0
+[03:01:36] fan c2_threshold_s5 r2 0
+[03:01:36] fan c2_threshold_s5 r6 0
+[03:01:36] fan c2_threshold_s5 r7 0
+[03:01:46] fan c2_threshold_s5 r8 0
+[03:01:51] fan c2_threshold_s5 r1 0
+[03:03:01] fan_cmd c2_threshold_s5 r6 1
+[03:03:12] phase_end c2_threshold_s5  time
+[03:03:12] phase_start c2_threshold_s6
+[03:03:12] load c2_threshold_s6 r1 4
+[03:03:12] load c2_threshold_s6 r2 4
+[03:03:12] load c2_threshold_s6 r3 4
+[03:03:12] load c2_threshold_s6 r4 4
+[03:03:12] load c2_threshold_s6 r5 4
+[03:03:12] load c2_threshold_s6 r6 4
+[03:03:12] load c2_threshold_s6 r7 4
+[03:03:12] load c2_threshold_s6 r8 4
+[03:03:16] fan c2_threshold_s6 r6 1
+[03:03:21] fan_cmd c2_threshold_s6 r1 1
+[03:03:21] fan_cmd c2_threshold_s6 r2 1
+[03:03:21] fan_cmd c2_threshold_s6 r3 1
+[03:03:21] fan_cmd c2_threshold_s6 r4 1
+[03:03:21] fan_cmd c2_threshold_s6 r7 1
+[03:03:26] fan_cmd c2_threshold_s6 r8 1
+[03:03:36] fan c2_threshold_s6 r1 1
+[03:03:36] fan c2_threshold_s6 r2 1
+[03:03:36] fan c2_threshold_s6 r3 1
+[03:03:36] fan c2_threshold_s6 r4 1
+[03:03:36] fan c2_threshold_s6 r7 1
+[03:03:41] fan c2_threshold_s6 r8 1
+[03:04:16] fan_cmd c2_threshold_s6 r8 0
+[03:04:31] fan c2_threshold_s6 r8 0
+[03:04:51] fan_cmd c2_threshold_s6 r4 0
+[03:04:56] fan_cmd c2_threshold_s6 r8 1
+[03:05:06] fan c2_threshold_s6 r4 0
+[03:05:11] fan c2_threshold_s6 r8 1
+[03:05:12] phase_end c2_threshold_s6  time
+[03:05:12] phase_start c2_threshold_rest
+[03:05:12] load c2_threshold_rest r1 0
+[03:05:12] load c2_threshold_rest r2 0
+[03:05:12] load c2_threshold_rest r3 0
+[03:05:12] load c2_threshold_rest r4 0
+[03:05:12] load c2_threshold_rest r5 0
+[03:05:12] load c2_threshold_rest r6 0
+[03:05:12] load c2_threshold_rest r7 0
+[03:05:12] load c2_threshold_rest r8 0
+[03:05:12] fan c2_threshold_rest r1 0
+[03:05:12] fan c2_threshold_rest r2 0
+[03:05:12] fan c2_threshold_rest r3 0
+[03:05:12] fan c2_threshold_rest r4 0
+[03:05:12] fan c2_threshold_rest r5 0
+[03:05:12] fan c2_threshold_rest r6 0
+[03:05:12] fan c2_threshold_rest r7 0
+[03:05:12] fan c2_threshold_rest r8 0
+[03:17:12] phase_end c2_threshold_rest  time
+[03:17:12] phase_start c2_proposed_s1
+[03:17:12] load c2_proposed_s1 r1 1
+[03:17:12] load c2_proposed_s1 r2 1
+[03:17:12] load c2_proposed_s1 r3 1
+[03:17:12] load c2_proposed_s1 r4 1
+[03:17:12] load c2_proposed_s1 r5 1
+[03:17:12] load c2_proposed_s1 r6 1
+[03:17:12] load c2_proposed_s1 r7 1
+[03:17:12] load c2_proposed_s1 r8 1
+[03:17:12] fan_mode c2_proposed_s1 r1 proposed
+[03:17:12] fan c2_proposed_s1 r1 0
+[03:17:12] fan_mode c2_proposed_s1 r2 proposed
+[03:17:12] fan c2_proposed_s1 r2 0
+[03:17:12] fan_mode c2_proposed_s1 r3 proposed
+[03:17:12] fan c2_proposed_s1 r3 0
+[03:17:12] fan_mode c2_proposed_s1 r4 proposed
+[03:17:12] fan c2_proposed_s1 r4 0
+[03:17:12] fan_mode c2_proposed_s1 r5 proposed
+[03:17:12] fan c2_proposed_s1 r5 0
+[03:17:12] fan_mode c2_proposed_s1 r6 proposed
+[03:17:12] fan c2_proposed_s1 r6 0
+[03:17:12] fan_mode c2_proposed_s1 r7 proposed
+[03:17:12] fan c2_proposed_s1 r7 0
+[03:17:12] fan_mode c2_proposed_s1 r8 proposed
+[03:17:12] fan c2_proposed_s1 r8 0
+[03:19:12] phase_end c2_proposed_s1  time
+[03:19:12] phase_start c2_proposed_s2
+[03:19:12] load c2_proposed_s2 r1 4
+[03:19:12] load c2_proposed_s2 r2 4
+[03:19:12] load c2_proposed_s2 r3 4
+[03:19:12] load c2_proposed_s2 r4 4
+[03:19:12] load c2_proposed_s2 r5 4
+[03:19:12] load c2_proposed_s2 r6 4
+[03:19:12] load c2_proposed_s2 r7 4
+[03:19:12] load c2_proposed_s2 r8 4
+[03:19:16] fan_cmd c2_proposed_s2 r1 1
+[03:19:16] fan_cmd c2_proposed_s2 r6 1
+[03:19:21] fan_cmd c2_proposed_s2 r2 1
+[03:19:21] fan_cmd c2_proposed_s2 r3 1
+[03:19:21] fan_cmd c2_proposed_s2 r4 1
+[03:19:21] fan_cmd c2_proposed_s2 r5 1
+[03:19:21] fan_cmd c2_proposed_s2 r7 1
+[03:19:21] fan_cmd c2_proposed_s2 r8 1
+[03:19:31] fan c2_proposed_s2 r1 1
+[03:19:31] fan c2_proposed_s2 r6 1
+[03:19:36] fan c2_proposed_s2 r2 1
+[03:19:36] fan c2_proposed_s2 r3 1
+[03:19:36] fan c2_proposed_s2 r4 1
+[03:19:36] fan c2_proposed_s2 r5 1
+[03:19:36] fan c2_proposed_s2 r7 1
+[03:19:36] fan c2_proposed_s2 r8 1
+[03:20:01] fan_cmd c2_proposed_s2 r8 0
+[03:20:16] fan c2_proposed_s2 r8 0
+[03:20:26] fan_cmd c2_proposed_s2 r8 1
+[03:20:36] fan_cmd c2_proposed_s2 r4 0
+[03:20:41] fan c2_proposed_s2 r8 1
+[03:20:51] fan_cmd c2_proposed_s2 r4 1
+[03:20:51] fan c2_proposed_s2 r4 0
+[03:20:56] fan_cmd c2_proposed_s2 r8 0
+[03:21:06] fan c2_proposed_s2 r4 1
+[03:21:11] fan c2_proposed_s2 r8 0
+[03:21:21] fan_cmd c2_proposed_s2 r8 1
+[03:21:26] fan_cmd c2_proposed_s2 r4 0
+[03:21:36] fan c2_proposed_s2 r8 1
+[03:21:41] fan c2_proposed_s2 r4 0
+[03:21:46] fan_cmd c2_proposed_s2 r4 1
+[03:21:51] fan_cmd c2_proposed_s2 r8 0
+[03:22:01] fan c2_proposed_s2 r4 1
+[03:22:06] fan c2_proposed_s2 r8 0
+[03:22:21] fan_cmd c2_proposed_s2 r4 0
+[03:22:21] fan_cmd c2_proposed_s2 r8 1
+[03:22:26] fan_cmd c2_proposed_s2 r3 0
+[03:22:36] fan_cmd c2_proposed_s2 r3 1
+[03:22:36] fan c2_proposed_s2 r4 0
+[03:22:36] fan c2_proposed_s2 r8 1
+[03:22:41] fan c2_proposed_s2 r3 0
+[03:22:46] fan_cmd c2_proposed_s2 r4 1
+[03:17:16] last seen  raspi1:1s raspi2:1s raspi3:1s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:0s
+[03:17:26] last seen  raspi1:1s raspi2:1s raspi3:1s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:0s
+[03:17:36] last seen  raspi1:1s raspi2:1s raspi3:1s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:0s
+[03:17:46] last seen  raspi1:1s raspi2:1s raspi3:1s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:0s
+[03:17:56] last seen  raspi1:1s raspi2:1s raspi3:1s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:0s
+[03:18:06] last seen  raspi1:1s raspi2:1s raspi3:1s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:0s
+[03:18:16] last seen  raspi1:1s raspi2:1s raspi3:1s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:0s
+[03:18:26] last seen  raspi1:1s raspi2:1s raspi3:1s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:0s
+[03:18:36] last seen  raspi1:1s raspi2:1s raspi3:1s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:0s
+[03:18:46] last seen  raspi1:1s raspi2:1s raspi3:1s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:0s
+[03:18:56] last seen  raspi1:1s raspi2:1s raspi3:1s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:0s
+[03:19:06] last seen  raspi1:1s raspi2:1s raspi3:1s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:0s
+[03:19:16] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:0s
+[03:19:26] last seen  raspi1:0s raspi2:0s raspi3:1s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:0s
+[03:19:36] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:0s
+[03:19:46] last seen  raspi1:0s raspi2:0s raspi3:1s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:0s
+[03:19:56] last seen  raspi1:0s raspi2:0s raspi3:1s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:0s
+[03:20:06] last seen  raspi1:0s raspi2:0s raspi3:1s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:0s
+[03:20:16] last seen  raspi1:0s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:0s
+[03:20:26] last seen  raspi1:0s raspi2:0s raspi3:1s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:0s
+[03:20:36] last seen  raspi1:0s raspi2:0s raspi3:1s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:0s
+[03:20:46] last seen  raspi1:1s raspi2:0s raspi3:1s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:0s
+[03:20:56] last seen  raspi1:1s raspi2:0s raspi3:1s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:0s
+[03:21:06] last seen  raspi1:1s raspi2:0s raspi3:1s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:0s
+[03:21:16] last seen  raspi1:1s raspi2:0s raspi3:1s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:0s
+[03:21:26] last seen  raspi1:1s raspi2:0s raspi3:1s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:0s
+[03:21:36] last seen  raspi1:1s raspi2:0s raspi3:1s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:0s
+[03:21:46] last seen  raspi1:0s raspi2:0s raspi3:1s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:0s
+[03:21:56] last seen  raspi1:1s raspi2:0s raspi3:0s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:0s
+[03:22:06] last seen  raspi1:1s raspi2:0s raspi3:1s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:0s
+[03:22:16] last seen  raspi1:0s raspi2:0s raspi3:1s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:0s
+[03:22:26] last seen  raspi1:1s raspi2:0s raspi3:1s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:0s
+[03:22:36] last seen  raspi1:1s raspi2:0s raspi3:1s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:0s
+[03:22:46] last seen  raspi1:1s raspi2:0s raspi3:1s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:0s
+[03:22:56] last seen  raspi1:1s raspi2:0s raspi3:1s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:0s
+[03:23:06] last seen  raspi1:1s raspi2:0s raspi3:1s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:0s
+[03:23:16] last seen  raspi1:1s raspi2:0s raspi3:1s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:0s
+[03:23:26] last seen  raspi1:1s raspi2:0s raspi3:1s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:0s
+[03:23:36] last seen  raspi1:1s raspi2:0s raspi3:1s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:0s
+[03:23:46] last seen  raspi1:1s raspi2:0s raspi3:1s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:0s
+[03:23:56] last seen  raspi1:1s raspi2:0s raspi3:1s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:0s
+[03:24:06] last seen  raspi1:1s raspi2:0s raspi3:1s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:0s
+[03:24:16] last seen  raspi1:1s raspi2:0s raspi3:1s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:0s
+[03:24:26] last seen  raspi1:1s raspi2:0s raspi3:1s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:0s
+[03:24:36] last seen  raspi1:1s raspi2:0s raspi3:1s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:0s
+[03:24:46] last seen  raspi1:1s raspi2:0s raspi3:1s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:0s
+[03:24:56] last seen  raspi1:1s raspi2:0s raspi3:1s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:0s
+[03:25:06] last seen  raspi1:1s raspi2:0s raspi3:1s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:0s
+[03:25:16] last seen  raspi1:1s raspi2:1s raspi3:1s raspi4:0s raspi5:0s raspi6:0s raspi7:0s raspi8:0s
+[03:25:26] last seen  raspi1:1s raspi2:1s raspi3:1s raspi4:0s raspi5:0s raspi6:0s raspi7:0s raspi8:0s
+[03:25:36] last seen  raspi1:1s raspi2:1s raspi3:1s raspi4:0s raspi5:0s raspi6:0s raspi7:0s raspi8:0s
+[03:25:46] last seen  raspi1:1s raspi2:1s raspi3:1s raspi4:0s raspi5:0s raspi6:0s raspi7:0s raspi8:0s
+[03:25:56] last seen  raspi1:1s raspi2:1s raspi3:1s raspi4:0s raspi5:0s raspi6:0s raspi7:0s raspi8:0s
+[03:26:06] last seen  raspi1:1s raspi2:1s raspi3:1s raspi4:0s raspi5:0s raspi6:0s raspi7:0s raspi8:0s
+[03:26:16] last seen  raspi1:1s raspi2:1s raspi3:1s raspi4:0s raspi5:0s raspi6:0s raspi7:0s raspi8:0s
+[03:26:26] last seen  raspi1:1s raspi2:1s raspi3:1s raspi4:0s raspi5:0s raspi6:0s raspi7:0s raspi8:0s
+[03:26:36] last seen  raspi1:1s raspi2:1s raspi3:1s raspi4:0s raspi5:0s raspi6:0s raspi7:0s raspi8:0s
+[03:26:46] last seen  raspi1:1s raspi2:1s raspi3:1s raspi4:0s raspi5:0s raspi6:0s raspi7:0s raspi8:0s
+[03:26:56] last seen  raspi1:1s raspi2:1s raspi3:1s raspi4:0s raspi5:0s raspi6:0s raspi7:0s raspi8:0s
+[03:27:06] last seen  raspi1:1s raspi2:1s raspi3:1s raspi4:0s raspi5:0s raspi6:0s raspi7:0s raspi8:0s
+[03:27:16] last seen  raspi1:1s raspi2:1s raspi3:1s raspi4:0s raspi5:0s raspi6:0s raspi7:0s raspi8:0s
+[03:27:26] last seen  raspi1:1s raspi2:1s raspi3:1s raspi4:0s raspi5:0s raspi6:0s raspi7:0s raspi8:0s
+[03:27:36] last seen  raspi1:1s raspi2:1s raspi3:1s raspi4:0s raspi5:0s raspi6:0s raspi7:0s raspi8:0s
+[03:27:46] last seen  raspi1:1s raspi2:1s raspi3:1s raspi4:0s raspi5:0s raspi6:0s raspi7:0s raspi8:0s
+[03:27:56] last seen  raspi1:1s raspi2:1s raspi3:1s raspi4:0s raspi5:0s raspi6:0s raspi7:0s raspi8:0s
+[03:28:06] last seen  raspi1:1s raspi2:1s raspi3:1s raspi4:0s raspi5:0s raspi6:0s raspi7:0s raspi8:0s
+[03:28:16] last seen  raspi1:1s raspi2:1s raspi3:1s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:0s
+[03:28:26] last seen  raspi1:1s raspi2:1s raspi3:1s raspi4:0s raspi5:0s raspi6:0s raspi7:0s raspi8:0s
+[03:28:36] last seen  raspi1:1s raspi2:1s raspi3:1s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:0s
+[03:28:46] last seen  raspi1:1s raspi2:1s raspi3:1s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:0s
+[03:28:56] last seen  raspi1:1s raspi2:1s raspi3:1s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:0s
+[03:29:06] last seen  raspi1:1s raspi2:1s raspi3:1s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:0s
+[03:29:16] last seen  raspi1:1s raspi2:1s raspi3:1s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:0s
+[03:29:26] last seen  raspi1:1s raspi2:1s raspi3:1s raspi4:0s raspi5:0s raspi6:0s raspi7:0s raspi8:0s
+[03:29:36] last seen  raspi1:1s raspi2:1s raspi3:1s raspi4:0s raspi5:0s raspi6:0s raspi7:0s raspi8:0s
+[03:29:46] last seen  raspi1:1s raspi2:0s raspi3:1s raspi4:0s raspi5:0s raspi6:0s raspi7:0s raspi8:0s
+[03:29:56] last seen  raspi1:1s raspi2:1s raspi3:1s raspi4:0s raspi5:0s raspi6:0s raspi7:0s raspi8:0s
+[03:30:06] last seen  raspi1:1s raspi2:1s raspi3:1s raspi4:0s raspi5:0s raspi6:0s raspi7:0s raspi8:0s
+[03:30:16] last seen  raspi1:1s raspi2:0s raspi3:1s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:0s
+[03:30:26] last seen  raspi1:1s raspi2:1s raspi3:1s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:0s
+[03:30:36] last seen  raspi1:1s raspi2:1s raspi3:1s raspi4:0s raspi5:0s raspi6:0s raspi7:1s raspi8:0s
+[03:30:46] last seen  raspi1:1s raspi2:1s raspi3:1s raspi4:0s raspi5:0s raspi6:0s raspi7:0s raspi8:0s
+[03:30:56] last seen  raspi1:1s raspi2:1s raspi3:1s raspi4:0s raspi5:0s raspi6:0s raspi7:0s raspi8:0s
+[03:31:06] last seen  raspi1:1s raspi2:1s raspi3:1s raspi4:0s raspi5:0s raspi6:0s raspi7:0s raspi8:0s
+[03:31:16] last seen  raspi1:1s raspi2:1s raspi3:1s raspi4:0s raspi5:0s raspi6:0s raspi7:0s raspi8:0s
+[03:31:26] last seen  raspi1:1s raspi2:1s raspi3:1s raspi4:0s raspi5:0s raspi6:0s raspi7:0s raspi8:0s
+[03:31:36] last seen  raspi1:1s raspi2:1s raspi3:1s raspi4:0s raspi5:0s raspi6:0s raspi7:0s raspi8:0s
+[03:31:46] last seen  raspi1:1s raspi2:1s raspi3:1s raspi4:0s raspi5:0s raspi6:0s raspi7:0s raspi8:0s
+[03:31:56] last seen  raspi1:1s raspi2:1s raspi3:1s raspi4:0s raspi5:0s raspi6:0s raspi7:0s raspi8:0s
+[03:32:06] last seen  raspi1:1s raspi2:1s raspi3:1s raspi4:0s raspi5:0s raspi6:0s raspi7:0s raspi8:0s
+[03:32:16] last seen  raspi1:1s raspi2:1s raspi3:1s raspi4:0s raspi5:0s raspi6:0s raspi7:0s raspi8:0s
+[03:32:26] last seen  raspi1:1s raspi2:1s raspi3:1s raspi4:0s raspi5:0s raspi6:0s raspi7:0s raspi8:0s
+[03:32:36] last seen  raspi1:1s raspi2:1s raspi3:1s raspi4:0s raspi5:0s raspi6:0s raspi7:0s raspi8:0s
+[03:32:46] last seen  raspi1:1s raspi2:1s raspi3:1s raspi4:0s raspi5:0s raspi6:0s raspi7:0s raspi8:0s
+[03:32:56] last seen  raspi1:1s raspi2:1s raspi3:1s raspi4:0s raspi5:0s raspi6:0s raspi7:0s raspi8:0s
+[03:33:06] last seen  raspi1:1s raspi2:1s raspi3:1s raspi4:0s raspi5:0s raspi6:0s raspi7:0s raspi8:0s
+[03:33:16] last seen  raspi1:1s raspi2:1s raspi3:1s raspi4:0s raspi5:0s raspi6:0s raspi7:0s raspi8:0s
+[03:33:26] last seen  raspi1:1s raspi2:1s raspi3:1s raspi4:0s raspi5:0s raspi6:0s raspi7:0s raspi8:0s
+[03:33:36] last seen  raspi1:1s raspi2:1s raspi3:1s raspi4:0s raspi5:0s raspi6:0s raspi7:0s raspi8:0s
+[03:33:46] last seen  raspi1:1s raspi2:1s raspi3:1s raspi4:0s raspi5:0s raspi6:0s raspi7:0s raspi8:0s
+[03:33:56] last seen  raspi1:1s raspi2:1s raspi3:1s raspi4:0s raspi5:0s raspi6:0s raspi7:0s raspi8:0s
+[03:34:06] last seen  raspi1:1s raspi2:1s raspi3:1s raspi4:0s raspi5:0s raspi6:0s raspi7:0s raspi8:0s
+[03:34:16] last seen  raspi1:1s raspi2:1s raspi3:1s raspi4:0s raspi5:0s raspi6:0s raspi7:0s raspi8:0s
+[03:34:26] last seen  raspi1:1s raspi2:1s raspi3:1s raspi4:0s raspi5:0s raspi6:0s raspi7:0s raspi8:0s
+[03:34:36] last seen  raspi1:1s raspi2:1s raspi3:1s raspi4:0s raspi5:0s raspi6:0s raspi7:0s raspi8:0s
+[03:34:46] last seen  raspi1:1s raspi2:1s raspi3:1s raspi4:0s raspi5:0s raspi6:0s raspi7:0s raspi8:0s
+[03:34:56] last seen  raspi1:1s raspi2:1s raspi3:1s raspi4:0s raspi5:0s raspi6:0s raspi7:0s raspi8:0s
+[03:35:06] last seen  raspi1:1s raspi2:1s raspi3:1s raspi4:0s raspi5:0s raspi6:0s raspi7:0s raspi8:0s
+[03:35:16] last seen  raspi1:1s raspi2:1s raspi3:1s raspi4:0s raspi5:0s raspi6:0s raspi7:0s raspi8:0s
+[03:35:26] last seen  raspi1:1s raspi2:1s raspi3:1s raspi4:0s raspi5:0s raspi6:0s raspi7:0s raspi8:0s
+[03:35:36] last seen  raspi1:1s raspi2:1s raspi3:1s raspi4:0s raspi5:0s raspi6:0s raspi7:0s raspi8:0s
+[03:35:46] last seen  raspi1:1s raspi2:1s raspi3:1s raspi4:0s raspi5:0s raspi6:0s raspi7:0s raspi8:0s
+[03:35:56] last seen  raspi1:1s raspi2:1s raspi3:1s raspi4:0s raspi5:0s raspi6:0s raspi7:0s raspi8:0s
+[03:36:06] last seen  raspi1:1s raspi2:1s raspi3:1s raspi4:0s raspi5:0s raspi6:0s raspi7:0s raspi8:0s
+[03:36:16] last seen  raspi1:1s raspi2:1s raspi3:1s raspi4:0s raspi5:0s raspi6:0s raspi7:0s raspi8:0s
+[03:36:26] last seen  raspi1:1s raspi2:1s raspi3:1s raspi4:0s raspi5:0s raspi6:0s raspi7:0s raspi8:0s
+[03:36:36] last seen  raspi1:1s raspi2:1s raspi3:1s raspi4:0s raspi5:0s raspi6:0s raspi7:0s raspi8:0s
+[03:36:46] last seen  raspi1:1s raspi2:1s raspi3:1s raspi4:0s raspi5:0s raspi6:0s raspi7:0s raspi8:0s
+[03:36:56] last seen  raspi1:1s raspi2:1s raspi3:1s raspi4:0s raspi5:0s raspi6:0s raspi7:0s raspi8:0s
+[03:37:06] last seen  raspi1:1s raspi2:1s raspi3:1s raspi4:0s raspi5:0s raspi6:0s raspi7:0s raspi8:0s
+[03:37:16] last seen  raspi1:1s raspi2:1s raspi3:1s raspi4:0s raspi5:0s raspi6:0s raspi7:0s raspi8:0s
+[03:37:26] last seen  raspi1:1s raspi2:1s raspi3:1s raspi4:0s raspi5:0s raspi6:0s raspi7:0s raspi8:0s
+[03:37:36] last seen  raspi1:1s raspi2:1s raspi3:1s raspi4:0s raspi5:0s raspi6:0s raspi7:0s raspi8:0s
+[03:37:46] last seen  raspi1:1s raspi2:1s raspi3:1s raspi4:0s raspi5:0s raspi6:0s raspi7:0s raspi8:0s
+[03:37:56] last seen  raspi1:1s raspi2:1s raspi3:1s raspi4:0s raspi5:0s raspi6:0s raspi7:0s raspi8:0s
+[03:38:06] last seen  raspi1:1s raspi2:1s raspi3:1s raspi4:0s raspi5:0s raspi6:0s raspi7:0s raspi8:0s
+[03:38:16] last seen  raspi1:1s raspi2:1s raspi3:1s raspi4:0s raspi5:0s raspi6:0s raspi7:0s raspi8:0s
+[03:38:26] last seen  raspi1:1s raspi2:1s raspi3:1s raspi4:0s raspi5:0s raspi6:0s raspi7:0s raspi8:0s
+[03:38:36] last seen  raspi1:1s raspi2:1s raspi3:1s raspi4:0s raspi5:0s raspi6:0s raspi7:0s raspi8:0s
+[03:38:46] last seen  raspi1:1s raspi2:1s raspi3:1s raspi4:0s raspi5:0s raspi6:0s raspi7:0s raspi8:0s
+[03:38:56] last seen  raspi1:1s raspi2:1s raspi3:1s raspi4:0s raspi5:0s raspi6:0s raspi7:0s raspi8:0s
+[03:39:06] last seen  raspi1:1s raspi2:1s raspi3:1s raspi4:0s raspi5:0s raspi6:0s raspi7:0s raspi8:0s
+[03:39:16] last seen  raspi1:1s raspi2:1s raspi3:1s raspi4:0s raspi5:0s raspi6:0s raspi7:0s raspi8:0s
+[03:39:26] last seen  raspi1:1s raspi2:1s raspi3:1s raspi4:0s raspi5:0s raspi6:0s raspi7:0s raspi8:0s
+[03:39:36] last seen  raspi1:1s raspi2:1s raspi3:1s raspi4:0s raspi5:0s raspi6:0s raspi7:0s raspi8:0s
+[03:39:46] last seen  raspi1:1s raspi2:1s raspi3:1s raspi4:0s raspi5:0s raspi6:0s raspi7:0s raspi8:0s
+[03:39:56] last seen  raspi1:1s raspi2:1s raspi3:1s raspi4:0s raspi5:0s raspi6:0s raspi7:0s raspi8:0s
+[03:40:06] last seen  raspi1:1s raspi2:1s raspi3:1s raspi4:0s raspi5:0s raspi6:0s raspi7:0s raspi8:0s
+[03:40:16] last seen  raspi1:1s raspi2:1s raspi3:1s raspi4:0s raspi5:0s raspi6:0s raspi7:0s raspi8:0s
+[03:40:26] last seen  raspi1:1s raspi2:1s raspi3:1s raspi4:0s raspi5:0s raspi6:0s raspi7:0s raspi8:0s
+[03:40:36] last seen  raspi1:1s raspi2:1s raspi3:1s raspi4:0s raspi5:0s raspi6:0s raspi7:0s raspi8:0s
+[03:40:46] last seen  raspi1:1s raspi2:1s raspi3:1s raspi4:0s raspi5:0s raspi6:0s raspi7:0s raspi8:0s
+[03:40:56] last seen  raspi1:1s raspi2:1s raspi3:1s raspi4:0s raspi5:0s raspi6:0s raspi7:0s raspi8:0s
+[03:41:06] last seen  raspi1:1s raspi2:1s raspi3:1s raspi4:0s raspi5:0s raspi6:0s raspi7:0s raspi8:0s
+[03:41:16] last seen  raspi1:1s raspi2:1s raspi3:1s raspi4:0s raspi5:0s raspi6:0s raspi7:0s raspi8:0s
+[03:41:26] last seen  raspi1:1s raspi2:1s raspi3:1s raspi4:0s raspi5:0s raspi6:0s raspi7:0s raspi8:0s
+[03:41:36] last seen  raspi1:1s raspi2:1s raspi3:1s raspi4:0s raspi5:0s raspi6:0s raspi7:0s raspi8:0s
+[03:41:46] last seen  raspi1:1s raspi2:1s raspi3:1s raspi4:0s raspi5:0s raspi6:0s raspi7:0s raspi8:0s
+[03:41:56] last seen  raspi1:1s raspi2:1s raspi3:1s raspi4:0s raspi5:0s raspi6:0s raspi7:0s raspi8:0s
+[03:42:06] last seen  raspi1:1s raspi2:1s raspi3:1s raspi4:0s raspi5:0s raspi6:0s raspi7:0s raspi8:0s
+[03:42:16] last seen  raspi1:1s raspi2:1s raspi3:1s raspi4:0s raspi5:0s raspi6:0s raspi7:0s raspi8:0s
+[03:42:26] last seen  raspi1:1s raspi2:1s raspi3:1s raspi4:0s raspi5:0s raspi6:0s raspi7:0s raspi8:0s
+[03:42:36] last seen  raspi1:1s raspi2:1s raspi3:1s raspi4:0s raspi5:0s raspi6:0s raspi7:0s raspi8:0s
+[03:42:46] last seen  raspi1:1s raspi2:1s raspi3:1s raspi4:0s raspi5:0s raspi6:0s raspi7:0s raspi8:0s
+[03:42:56] last seen  raspi1:1s raspi2:1s raspi3:1s raspi4:0s raspi5:0s raspi6:0s raspi7:0s raspi8:0s
+[03:43:06] last seen  raspi1:1s raspi2:1s raspi3:1s raspi4:0s raspi5:0s raspi6:0s raspi7:0s raspi8:0s
+[03:43:16] last seen  raspi1:1s raspi2:1s raspi3:1s raspi4:0s raspi5:0s raspi6:0s raspi7:0s raspi8:0s
+[03:43:26] last seen  raspi1:1s raspi2:1s raspi3:1s raspi4:0s raspi5:0s raspi6:0s raspi7:0s raspi8:0s
+[03:43:36] last seen  raspi1:1s raspi2:1s raspi3:1s raspi4:0s raspi5:0s raspi6:0s raspi7:0s raspi8:0s
+[03:43:46] last seen  raspi1:1s raspi2:1s raspi3:1s raspi4:0s raspi5:0s raspi6:0s raspi7:0s raspi8:0s
+[03:43:56] last seen  raspi1:1s raspi2:1s raspi3:1s raspi4:0s raspi5:0s raspi6:0s raspi7:0s raspi8:0s
+[03:44:06] last seen  raspi1:1s raspi2:1s raspi3:1s raspi4:0s raspi5:0s raspi6:0s raspi7:0s raspi8:0s
+[03:22:51] fan_cmd c2_proposed_s2 r8 0
+[03:22:51] fan c2_proposed_s2 r3 1
+[03:23:01] fan c2_proposed_s2 r4 1
+[03:23:06] fan c2_proposed_s2 r8 0
+[03:23:16] fan_cmd c2_proposed_s2 r4 0
+[03:23:21] fan_cmd c2_proposed_s2 r8 1
+[03:23:26] fan_cmd c2_proposed_s2 r3 0
+[03:23:31] fan_cmd c2_proposed_s2 r3 1
+[03:23:31] fan c2_proposed_s2 r4 0
+[03:23:36] fan c2_proposed_s2 r8 1
+[03:23:41] fan_cmd c2_proposed_s2 r4 1
+[03:23:41] fan c2_proposed_s2 r3 0
+[03:23:46] fan c2_proposed_s2 r3 1
+[03:23:51] fan_cmd c2_proposed_s2 r8 0
+[03:23:56] fan c2_proposed_s2 r4 1
+[03:24:06] fan c2_proposed_s2 r8 0
+[03:24:11] fan_cmd c2_proposed_s2 r3 0
+[03:24:11] fan_cmd c2_proposed_s2 r4 0
+[03:24:21] fan_cmd c2_proposed_s2 r3 1
+[03:24:21] fan_cmd c2_proposed_s2 r8 1
+[03:24:26] fan c2_proposed_s2 r3 0
+[03:24:26] fan c2_proposed_s2 r4 0
+[03:24:36] fan_cmd c2_proposed_s2 r4 1
+[03:24:36] fan c2_proposed_s2 r3 1
+[03:24:36] fan c2_proposed_s2 r8 1
+[03:24:51] fan_cmd c2_proposed_s2 r8 0
+[03:24:51] fan c2_proposed_s2 r4 1
+[03:25:01] fan_cmd c2_proposed_s2 r3 0
+[03:25:06] fan c2_proposed_s2 r8 0
+[03:25:11] fan_cmd c2_proposed_s2 r3 1
+[03:25:11] fan_cmd c2_proposed_s2 r4 0
+[03:25:12] phase_end c2_proposed_s2  time
+[03:25:12] phase_start c2_proposed_s3
+[03:25:12] load c2_proposed_s3 r1 0
+[03:25:12] load c2_proposed_s3 r2 0
+[03:25:12] load c2_proposed_s3 r3 0
+[03:25:12] load c2_proposed_s3 r4 0
+[03:25:12] load c2_proposed_s3 r5 0
+[03:25:12] load c2_proposed_s3 r6 0
+[03:25:12] load c2_proposed_s3 r7 0
+[03:25:12] load c2_proposed_s3 r8 0
+[03:25:16] fan_cmd c2_proposed_s3 r1 0
+[03:25:16] fan_cmd c2_proposed_s3 r2 0
+[03:25:16] fan_cmd c2_proposed_s3 r6 0
+[03:25:16] fan_cmd c2_proposed_s3 r7 0
+[03:25:16] fan c2_proposed_s3 r3 0
+[03:25:26] fan_cmd c2_proposed_s3 r5 0
+[03:25:26] fan c2_proposed_s3 r3 1
+[03:25:26] fan c2_proposed_s3 r4 0
+[03:25:31] fan c2_proposed_s3 r1 0
+[03:25:31] fan c2_proposed_s3 r2 0
+[03:25:31] fan c2_proposed_s3 r6 0
+[03:25:31] fan c2_proposed_s3 r7 0
+[03:25:41] fan_cmd c2_proposed_s3 r3 0
+[03:25:41] fan c2_proposed_s3 r5 0
+[03:25:56] fan c2_proposed_s3 r3 0
+[03:28:12] phase_end c2_proposed_s3  time
+[03:28:12] phase_start c2_proposed_s4
+[03:28:12] load c2_proposed_s4 r1 4
+[03:28:12] load c2_proposed_s4 r2 4
+[03:28:12] load c2_proposed_s4 r3 4
+[03:28:12] load c2_proposed_s4 r4 4
+[03:28:12] load c2_proposed_s4 r5 4
+[03:28:12] load c2_proposed_s4 r6 4
+[03:28:12] load c2_proposed_s4 r7 4
+[03:28:12] load c2_proposed_s4 r8 4
+[03:28:21] fan_cmd c2_proposed_s4 r1 1
+[03:28:21] fan_cmd c2_proposed_s4 r4 1
+[03:28:21] fan_cmd c2_proposed_s4 r5 1
+[03:28:21] fan_cmd c2_proposed_s4 r6 1
+[03:28:21] fan_cmd c2_proposed_s4 r7 1
+[03:28:26] fan_cmd c2_proposed_s4 r2 1
+[03:28:26] fan_cmd c2_proposed_s4 r3 1
+[03:28:26] fan_cmd c2_proposed_s4 r8 1
+[03:28:36] fan c2_proposed_s4 r1 1
+[03:28:36] fan c2_proposed_s4 r4 1
+[03:28:36] fan c2_proposed_s4 r5 1
+[03:28:36] fan c2_proposed_s4 r6 1
+[03:28:36] fan c2_proposed_s4 r7 1
+[03:28:41] fan c2_proposed_s4 r2 1
+[03:28:41] fan c2_proposed_s4 r3 1
+[03:28:41] fan c2_proposed_s4 r8 1
+[03:28:56] fan_cmd c2_proposed_s4 r8 0
+[03:29:11] fan c2_proposed_s4 r8 0
+[03:29:21] fan_cmd c2_proposed_s4 r4 0
+[03:29:21] fan_cmd c2_proposed_s4 r8 1
+[03:29:36] fan c2_proposed_s4 r4 0
+[03:29:36] fan c2_proposed_s4 r8 1
+[03:29:46] fan_cmd c2_proposed_s4 r4 1
+[03:29:51] fan_cmd c2_proposed_s4 r8 0
+[03:29:56] fan_cmd c2_proposed_s4 r3 0
+[03:30:01] fan_cmd c2_proposed_s4 r3 1
+[03:30:01] fan c2_proposed_s4 r4 1
+[03:30:06] fan c2_proposed_s4 r8 0
+[03:30:11] fan c2_proposed_s4 r3 0
+[03:30:16] fan_cmd c2_proposed_s4 r4 0
+[03:30:16] fan c2_proposed_s4 r3 1
+[03:30:21] fan_cmd c2_proposed_s4 r8 1
+[03:30:31] fan c2_proposed_s4 r4 0
+[03:30:36] fan_cmd c2_proposed_s4 r3 0
+[03:30:36] fan c2_proposed_s4 r8 1
+[03:30:41] fan_cmd c2_proposed_s4 r4 1
+[03:30:46] fan_cmd c2_proposed_s4 r3 1
+[03:30:51] fan_cmd c2_proposed_s4 r8 0
+[03:30:51] fan c2_proposed_s4 r3 0
+[03:30:56] fan c2_proposed_s4 r4 1
+[03:31:01] fan c2_proposed_s4 r3 1
+[03:31:06] fan c2_proposed_s4 r8 0
+[03:31:16] fan_cmd c2_proposed_s4 r4 0
+[03:31:21] fan_cmd c2_proposed_s4 r8 1
+[03:31:31] fan_cmd c2_proposed_s4 r3 0
+[03:31:31] fan c2_proposed_s4 r4 0
+[03:31:36] fan c2_proposed_s4 r8 1
+[03:31:41] fan_cmd c2_proposed_s4 r3 1
+[03:31:41] fan_cmd c2_proposed_s4 r4 1
+[03:31:46] fan c2_proposed_s4 r3 0
+[03:31:51] fan_cmd c2_proposed_s4 r8 0
+[03:31:56] fan c2_proposed_s4 r3 1
+[03:31:56] fan c2_proposed_s4 r4 1
+[03:32:06] fan c2_proposed_s4 r8 0
+[03:32:16] fan_cmd c2_proposed_s4 r3 0
+[03:32:16] fan_cmd c2_proposed_s4 r4 0
+[03:32:21] fan_cmd c2_proposed_s4 r8 1
+[03:32:26] fan_cmd c2_proposed_s4 r3 1
+[03:32:31] fan c2_proposed_s4 r3 0
+[03:32:31] fan c2_proposed_s4 r4 0
+[03:32:36] fan c2_proposed_s4 r8 1
+[03:32:41] fan_cmd c2_proposed_s4 r4 1
+[03:32:41] fan c2_proposed_s4 r3 1
+[03:32:51] fan_cmd c2_proposed_s4 r8 0
+[03:32:56] fan c2_proposed_s4 r4 1
+[03:33:06] fan_cmd c2_proposed_s4 r3 0
+[03:33:06] fan c2_proposed_s4 r8 0
+[03:33:11] fan_cmd c2_proposed_s4 r3 1
+[03:33:11] fan_cmd c2_proposed_s4 r4 0
+[03:33:12] phase_end c2_proposed_s4  time
+[03:33:12] phase_start c2_proposed_s5
+[03:33:12] load c2_proposed_s5 r1 2
+[03:33:12] load c2_proposed_s5 r2 2
+[03:33:12] load c2_proposed_s5 r3 2
+[03:33:12] load c2_proposed_s5 r4 2
+[03:33:12] load c2_proposed_s5 r5 2
+[03:33:12] load c2_proposed_s5 r6 2
+[03:33:12] load c2_proposed_s5 r7 2
+[03:33:12] load c2_proposed_s5 r8 2
+[03:33:16] fan_cmd c2_proposed_s5 r1 0
+[03:33:16] fan_cmd c2_proposed_s5 r2 0
+[03:33:16] fan_cmd c2_proposed_s5 r7 0
+[03:33:21] fan_cmd c2_proposed_s5 r6 0
+[03:33:21] fan c2_proposed_s5 r3 0
+[03:33:26] fan c2_proposed_s5 r3 1
+[03:33:26] fan c2_proposed_s5 r4 0
+[03:33:31] fan c2_proposed_s5 r1 0
+[03:33:31] fan c2_proposed_s5 r2 0
+[03:33:31] fan c2_proposed_s5 r7 0
+[03:33:36] fan c2_proposed_s5 r6 0
+[03:33:41] fan_cmd c2_proposed_s5 r3 0
+[03:33:56] fan c2_proposed_s5 r3 0
+[03:34:41] fan_cmd c2_proposed_s5 r6 1
+[03:34:56] fan c2_proposed_s5 r6 1
+[03:35:11] fan_cmd c2_proposed_s5 r6 0
+[03:35:12] phase_end c2_proposed_s5  time
+[03:35:12] phase_start c2_proposed_s6
+[03:35:12] load c2_proposed_s6 r1 4
+[03:35:12] load c2_proposed_s6 r2 4
+[03:35:12] load c2_proposed_s6 r3 4
+[03:35:12] load c2_proposed_s6 r4 4
+[03:35:12] load c2_proposed_s6 r5 4
+[03:35:12] load c2_proposed_s6 r6 4
+[03:35:12] load c2_proposed_s6 r7 4
+[03:35:12] load c2_proposed_s6 r8 4
+[03:35:16] fan_cmd c2_proposed_s6 r7 1
+[03:35:21] fan_cmd c2_proposed_s6 r1 1
+[03:35:21] fan_cmd c2_proposed_s6 r2 1
+[03:35:21] fan_cmd c2_proposed_s6 r3 1
+[03:35:21] fan_cmd c2_proposed_s6 r4 1
+[03:35:21] fan_cmd c2_proposed_s6 r6 1
+[03:35:21] fan_cmd c2_proposed_s6 r8 1
+[03:35:26] fan c2_proposed_s6 r6 0
+[03:35:31] fan c2_proposed_s6 r7 1
+[03:35:36] fan c2_proposed_s6 r1 1
+[03:35:36] fan c2_proposed_s6 r2 1
+[03:35:36] fan c2_proposed_s6 r3 1
+[03:35:36] fan c2_proposed_s6 r4 1
+[03:35:36] fan c2_proposed_s6 r6 1
+[03:35:36] fan c2_proposed_s6 r8 1
+[03:36:01] fan_cmd c2_proposed_s6 r8 0
+[03:36:16] fan c2_proposed_s6 r8 0
+[03:36:26] fan_cmd c2_proposed_s6 r4 0
+[03:36:26] fan_cmd c2_proposed_s6 r8 1
+[03:36:41] fan c2_proposed_s6 r4 0
+[03:36:41] fan c2_proposed_s6 r8 1
+[03:36:51] fan_cmd c2_proposed_s6 r4 1
+[03:36:56] fan_cmd c2_proposed_s6 r8 0
+[03:37:06] fan c2_proposed_s6 r4 1
+[03:37:11] fan_cmd c2_proposed_s6 r3 0
+[03:37:11] fan c2_proposed_s6 r8 0
+[03:37:12] phase_end c2_proposed_s6  time
+[03:37:12] phase_start c2_proposed_rest
+[03:37:12] load c2_proposed_rest r1 0
+[03:37:12] load c2_proposed_rest r2 0
+[03:37:12] load c2_proposed_rest r3 0
+[03:37:12] load c2_proposed_rest r4 0
+[03:37:12] load c2_proposed_rest r5 0
+[03:37:12] load c2_proposed_rest r6 0
+[03:37:12] load c2_proposed_rest r7 0
+[03:37:12] load c2_proposed_rest r8 0
+[03:37:12] fan c2_proposed_rest r1 0
+[03:37:12] fan c2_proposed_rest r2 0
+[03:37:12] fan c2_proposed_rest r3 0
+[03:37:12] fan c2_proposed_rest r4 0
+[03:37:12] fan c2_proposed_rest r5 0
+[03:37:12] fan c2_proposed_rest r6 0
+[03:37:12] fan c2_proposed_rest r7 0
+[03:37:12] fan c2_proposed_rest r8 0
+[03:49:13] phase_end c2_proposed_rest  time
+[03:49:13] load end r1 0
+[03:49:13] load end r2 0
+[03:49:13] load end r3 0
+[03:49:13] load end r4 0
+[03:49:13] load end r5 0
+[03:49:13] load end r6 0
+[03:49:13] load end r7 0
+[03:49:13] load end r8 0
+[03:44:16] last seen  raspi1:1s raspi2:1s raspi3:1s raspi4:0s raspi5:0s raspi6:0s raspi7:0s raspi8:0s
+[03:44:26] last seen  raspi1:1s raspi2:1s raspi3:1s raspi4:0s raspi5:0s raspi6:0s raspi7:0s raspi8:0s
+[03:44:36] last seen  raspi1:1s raspi2:1s raspi3:1s raspi4:0s raspi5:0s raspi6:0s raspi7:0s raspi8:0s
+[03:44:46] last seen  raspi1:1s raspi2:1s raspi3:1s raspi4:0s raspi5:0s raspi6:0s raspi7:0s raspi8:0s
+[03:44:56] last seen  raspi1:1s raspi2:1s raspi3:1s raspi4:0s raspi5:0s raspi6:0s raspi7:0s raspi8:0s
+[03:45:06] last seen  raspi1:1s raspi2:1s raspi3:1s raspi4:0s raspi5:0s raspi6:0s raspi7:0s raspi8:0s
+[03:45:16] last seen  raspi1:1s raspi2:1s raspi3:1s raspi4:0s raspi5:0s raspi6:0s raspi7:0s raspi8:0s
+[03:45:26] last seen  raspi1:1s raspi2:1s raspi3:1s raspi4:0s raspi5:0s raspi6:0s raspi7:0s raspi8:0s
+[03:45:36] last seen  raspi1:1s raspi2:1s raspi3:1s raspi4:0s raspi5:0s raspi6:0s raspi7:0s raspi8:0s
+[03:45:46] last seen  raspi1:1s raspi2:1s raspi3:1s raspi4:0s raspi5:0s raspi6:0s raspi7:0s raspi8:0s
+[03:45:56] last seen  raspi1:1s raspi2:1s raspi3:1s raspi4:0s raspi5:0s raspi6:0s raspi7:0s raspi8:0s
+[03:46:06] last seen  raspi1:1s raspi2:1s raspi3:1s raspi4:0s raspi5:0s raspi6:0s raspi7:0s raspi8:0s
+[03:46:16] last seen  raspi1:1s raspi2:1s raspi3:1s raspi4:0s raspi5:0s raspi6:0s raspi7:0s raspi8:0s
+[03:46:26] last seen  raspi1:1s raspi2:1s raspi3:1s raspi4:0s raspi5:0s raspi6:0s raspi7:0s raspi8:0s
+[03:46:36] last seen  raspi1:1s raspi2:1s raspi3:1s raspi4:0s raspi5:0s raspi6:0s raspi7:0s raspi8:0s
+[03:46:46] last seen  raspi1:1s raspi2:1s raspi3:1s raspi4:0s raspi5:0s raspi6:0s raspi7:0s raspi8:0s
+[03:46:56] last seen  raspi1:1s raspi2:1s raspi3:1s raspi4:0s raspi5:0s raspi6:0s raspi7:0s raspi8:0s
+[03:47:06] last seen  raspi1:1s raspi2:1s raspi3:1s raspi4:0s raspi5:0s raspi6:0s raspi7:0s raspi8:0s
+[03:47:16] last seen  raspi1:1s raspi2:1s raspi3:1s raspi4:0s raspi5:0s raspi6:0s raspi7:0s raspi8:0s
+[03:47:26] last seen  raspi1:1s raspi2:1s raspi3:1s raspi4:0s raspi5:0s raspi6:0s raspi7:0s raspi8:0s
+[03:47:36] last seen  raspi1:1s raspi2:1s raspi3:1s raspi4:0s raspi5:0s raspi6:0s raspi7:0s raspi8:0s
+[03:47:46] last seen  raspi1:1s raspi2:1s raspi3:1s raspi4:0s raspi5:0s raspi6:0s raspi7:0s raspi8:0s
+[03:47:56] last seen  raspi1:1s raspi2:1s raspi3:1s raspi4:0s raspi5:0s raspi6:0s raspi7:0s raspi8:0s
+[03:48:06] last seen  raspi1:1s raspi2:1s raspi3:1s raspi4:0s raspi5:0s raspi6:0s raspi7:0s raspi8:0s
+[03:48:16] last seen  raspi1:1s raspi2:1s raspi3:1s raspi4:0s raspi5:0s raspi6:0s raspi7:0s raspi8:0s
+[03:48:26] last seen  raspi1:1s raspi2:1s raspi3:1s raspi4:0s raspi5:0s raspi6:0s raspi7:0s raspi8:0s
+[03:48:36] last seen  raspi1:1s raspi2:1s raspi3:1s raspi4:0s raspi5:0s raspi6:0s raspi7:0s raspi8:0s
+[03:48:46] last seen  raspi1:1s raspi2:1s raspi3:1s raspi4:0s raspi5:0s raspi6:0s raspi7:0s raspi8:0s
+[03:48:56] last seen  raspi1:1s raspi2:1s raspi3:1s raspi4:0s raspi5:0s raspi6:0s raspi7:0s raspi8:0s
+[03:49:06] last seen  raspi1:1s raspi2:1s raspi3:1s raspi4:0s raspi5:0s raspi6:0s raspi7:0s raspi8:0s
+logging 4 meters to experiments/20261127_delay_sweep/d15/raw/ambient.csv
+
+[03:49:13] fan end r1 0
+[03:49:13] fan end r2 0
+[03:49:13] fan end r3 0
+[03:49:13] fan end r4 0
+[03:49:13] fan end r5 0
+[03:49:13] fan end r6 0
+[03:49:13] fan end r7 0
+[03:49:13] fan end r8 0
+[03:49:13] end
+[03:49:17] agent_stop end r1 inactive
+[03:49:21] agent_stop end r2 inactive
+[03:49:25] agent_stop end r3 inactive
+[03:49:30] agent_stop end r4 inactive
+[03:49:34] agent_stop end r5 inactive
+[03:49:38] agent_stop end r6 inactive
+[03:49:42] agent_stop end r7 inactive
+[03:49:46] agent_stop end r8 inactive

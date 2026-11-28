@@ -1,0 +1,11 @@
+# box_control 第 2 部(方式ごと、2 巡 × 8 台)
+            duty  duty_min  duty_max  over80_s  max_temp  failsafe_s  min_clock  clock_low_s  clock_loss_pct  clock_loss_max  switches     n
+cond                                                                                                                                        
+threshold  0.568     0.351     0.776  1861.984    86.185    1643.998    600.117     1646.001           1.528          12.408    14.125  16.0
+proposed   0.578     0.359     0.742  1862.008    85.698    1589.994    600.117     1589.997           1.530          12.354    16.812  16.0
+
+巡ごとのファン稼働率(8 台の平均)
+round          1      2
+cond                   
+proposed   0.577  0.579
+threshold  0.569  0.567

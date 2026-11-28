@@ -1,0 +1,130 @@
+findfont: Font family 'Hiragino Sans' not found.
+findfont: Font family 'Hiragino Sans' not found.
+/home/laur/edge-thermal-control/scripts/analyze_box_control.py:89: UserWarning: Glyph 25552 (\N{CJK UNIFIED IDEOGRAPH-63D0}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(pad=0.2)
+/home/laur/edge-thermal-control/scripts/analyze_box_control.py:89: UserWarning: Glyph 26696 (\N{CJK UNIFIED IDEOGRAPH-6848}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(pad=0.2)
+findfont: Font family 'Hiragino Sans' not found.
+findfont: Font family 'Hiragino Sans' not found.
+/home/laur/edge-thermal-control/scripts/analyze_box_control.py:89: UserWarning: Glyph 12375 (\N{HIRAGANA LETTER SI}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(pad=0.2)
+/home/laur/edge-thermal-control/scripts/analyze_box_control.py:89: UserWarning: Glyph 12365 (\N{HIRAGANA LETTER KI}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(pad=0.2)
+/home/laur/edge-thermal-control/scripts/analyze_box_control.py:89: UserWarning: Glyph 12356 (\N{HIRAGANA LETTER I}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(pad=0.2)
+/home/laur/edge-thermal-control/scripts/analyze_box_control.py:89: UserWarning: Glyph 20516 (\N{CJK UNIFIED IDEOGRAPH-5024}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(pad=0.2)
+findfont: Font family 'Hiragino Sans' not found.
+findfont: Font family 'Hiragino Sans' not found.
+findfont: Font family 'Hiragino Sans' not found.
+findfont: Font family 'Hiragino Sans' not found.
+findfont: Font family 'Hiragino Sans' not found.
+findfont: Font family 'Hiragino Sans' not found.
+findfont: Font family 'Hiragino Sans' not found.
+findfont: Font family 'Hiragino Sans' not found.
+findfont: Font family 'Hiragino Sans' not found.
+findfont: Font family 'Hiragino Sans' not found.
+findfont: Font family 'Hiragino Sans' not found.
+/home/laur/edge-thermal-control/scripts/analyze_box_control.py:89: UserWarning: Glyph 12501 (\N{KATAKANA LETTER HU}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(pad=0.2)
+/home/laur/edge-thermal-control/scripts/analyze_box_control.py:89: UserWarning: Glyph 12449 (\N{KATAKANA LETTER SMALL A}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(pad=0.2)
+/home/laur/edge-thermal-control/scripts/analyze_box_control.py:89: UserWarning: Glyph 12531 (\N{KATAKANA LETTER N}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(pad=0.2)
+/home/laur/edge-thermal-control/scripts/analyze_box_control.py:89: UserWarning: Glyph 31292 (\N{CJK UNIFIED IDEOGRAPH-7A3C}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(pad=0.2)
+/home/laur/edge-thermal-control/scripts/analyze_box_control.py:89: UserWarning: Glyph 20685 (\N{CJK UNIFIED IDEOGRAPH-50CD}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(pad=0.2)
+/home/laur/edge-thermal-control/scripts/analyze_box_control.py:89: UserWarning: Glyph 29575 (\N{CJK UNIFIED IDEOGRAPH-7387}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(pad=0.2)
+findfont: Font family 'Hiragino Sans' not found.
+findfont: Font family 'Hiragino Sans' not found.
+findfont: Font family 'Hiragino Sans' not found.
+findfont: Font family 'Hiragino Sans' not found.
+findfont: Font family 'Hiragino Sans' not found.
+findfont: Font family 'Hiragino Sans' not found.
+findfont: Font family 'Hiragino Sans' not found.
+findfont: Font family 'Hiragino Sans' not found.
+/home/laur/edge-thermal-control/scripts/analyze_box_control.py:90: UserWarning: Glyph 25552 (\N{CJK UNIFIED IDEOGRAPH-63D0}) missing from font(s) DejaVu Sans.
+  fig.savefig(out / "fig_control.png", dpi=300)  # レジュメの図 thesis/figures/fig_res_fan.png は上書きしない
+/home/laur/edge-thermal-control/scripts/analyze_box_control.py:90: UserWarning: Glyph 26696 (\N{CJK UNIFIED IDEOGRAPH-6848}) missing from font(s) DejaVu Sans.
+  fig.savefig(out / "fig_control.png", dpi=300)  # レジュメの図 thesis/figures/fig_res_fan.png は上書きしない
+findfont: Font family 'Hiragino Sans' not found.
+findfont: Font family 'Hiragino Sans' not found.
+/home/laur/edge-thermal-control/scripts/analyze_box_control.py:90: UserWarning: Glyph 12375 (\N{HIRAGANA LETTER SI}) missing from font(s) DejaVu Sans.
+  fig.savefig(out / "fig_control.png", dpi=300)  # レジュメの図 thesis/figures/fig_res_fan.png は上書きしない
+/home/laur/edge-thermal-control/scripts/analyze_box_control.py:90: UserWarning: Glyph 12365 (\N{HIRAGANA LETTER KI}) missing from font(s) DejaVu Sans.
+  fig.savefig(out / "fig_control.png", dpi=300)  # レジュメの図 thesis/figures/fig_res_fan.png は上書きしない
+/home/laur/edge-thermal-control/scripts/analyze_box_control.py:90: UserWarning: Glyph 12356 (\N{HIRAGANA LETTER I}) missing from font(s) DejaVu Sans.
+  fig.savefig(out / "fig_control.png", dpi=300)  # レジュメの図 thesis/figures/fig_res_fan.png は上書きしない
+/home/laur/edge-thermal-control/scripts/analyze_box_control.py:90: UserWarning: Glyph 20516 (\N{CJK UNIFIED IDEOGRAPH-5024}) missing from font(s) DejaVu Sans.
+  fig.savefig(out / "fig_control.png", dpi=300)  # レジュメの図 thesis/figures/fig_res_fan.png は上書きしない
+findfont: Font family 'Hiragino Sans' not found.
+findfont: Font family 'Hiragino Sans' not found.
+findfont: Font family 'Hiragino Sans' not found.
+findfont: Font family 'Hiragino Sans' not found.
+findfont: Font family 'Hiragino Sans' not found.
+findfont: Font family 'Hiragino Sans' not found.
+findfont: Font family 'Hiragino Sans' not found.
+findfont: Font family 'Hiragino Sans' not found.
+findfont: Font family 'Hiragino Sans' not found.
+findfont: Font family 'Hiragino Sans' not found.
+findfont: Font family 'Hiragino Sans' not found.
+/home/laur/edge-thermal-control/scripts/analyze_box_control.py:90: UserWarning: Glyph 12501 (\N{KATAKANA LETTER HU}) missing from font(s) DejaVu Sans.
+  fig.savefig(out / "fig_control.png", dpi=300)  # レジュメの図 thesis/figures/fig_res_fan.png は上書きしない
+/home/laur/edge-thermal-control/scripts/analyze_box_control.py:90: UserWarning: Glyph 12449 (\N{KATAKANA LETTER SMALL A}) missing from font(s) DejaVu Sans.
+  fig.savefig(out / "fig_control.png", dpi=300)  # レジュメの図 thesis/figures/fig_res_fan.png は上書きしない
+/home/laur/edge-thermal-control/scripts/analyze_box_control.py:90: UserWarning: Glyph 12531 (\N{KATAKANA LETTER N}) missing from font(s) DejaVu Sans.
+  fig.savefig(out / "fig_control.png", dpi=300)  # レジュメの図 thesis/figures/fig_res_fan.png は上書きしない
+/home/laur/edge-thermal-control/scripts/analyze_box_control.py:90: UserWarning: Glyph 31292 (\N{CJK UNIFIED IDEOGRAPH-7A3C}) missing from font(s) DejaVu Sans.
+  fig.savefig(out / "fig_control.png", dpi=300)  # レジュメの図 thesis/figures/fig_res_fan.png は上書きしない
+/home/laur/edge-thermal-control/scripts/analyze_box_control.py:90: UserWarning: Glyph 20685 (\N{CJK UNIFIED IDEOGRAPH-50CD}) missing from font(s) DejaVu Sans.
+  fig.savefig(out / "fig_control.png", dpi=300)  # レジュメの図 thesis/figures/fig_res_fan.png は上書きしない
+/home/laur/edge-thermal-control/scripts/analyze_box_control.py:90: UserWarning: Glyph 29575 (\N{CJK UNIFIED IDEOGRAPH-7387}) missing from font(s) DejaVu Sans.
+  fig.savefig(out / "fig_control.png", dpi=300)  # レジュメの図 thesis/figures/fig_res_fan.png は上書きしない
+findfont: Font family 'Hiragino Sans' not found.
+findfont: Font family 'Hiragino Sans' not found.
+findfont: Font family 'Hiragino Sans' not found.
+findfont: Font family 'Hiragino Sans' not found.
+findfont: Font family 'Hiragino Sans' not found.
+findfont: Font family 'Hiragino Sans' not found.
+findfont: Font family 'Hiragino Sans' not found.
+findfont: Font family 'Hiragino Sans' not found.
+findfont: Font family 'Hiragino Sans' not found.
+findfont: Font family 'Hiragino Sans' not found.
+findfont: Font family 'Hiragino Sans' not found.
+findfont: Font family 'Hiragino Sans' not found.
+findfont: Font family 'Hiragino Sans' not found.
+findfont: Font family 'Hiragino Sans' not found.
+findfont: Font family 'Hiragino Sans' not found.
+findfont: Font family 'Hiragino Sans' not found.
+findfont: Font family 'Hiragino Sans' not found.
+findfont: Font family 'Hiragino Sans' not found.
+findfont: Font family 'Hiragino Sans' not found.
+findfont: Font family 'Hiragino Sans' not found.
+findfont: Font family 'Hiragino Sans' not found.
+findfont: Font family 'Hiragino Sans' not found.
+findfont: Font family 'Hiragino Sans' not found.
+findfont: Font family 'Hiragino Sans' not found.
+findfont: Font family 'Hiragino Sans' not found.
+findfont: Font family 'Hiragino Sans' not found.
+findfont: Font family 'Hiragino Sans' not found.
+# box_control 第 2 部(方式ごと、2 巡 × 8 台)
+        duty  duty_min  duty_max  over80_s  max_temp  failsafe_s  min_clock  clock_low_s  clock_loss_pct  clock_loss_max  switches     n
+cond                                                                                                                                    
+pd6    0.672     0.589     0.809  2908.987    86.185    1908.027    600.117     1905.039           1.739          14.801    32.625  16.0
+pd3    0.652     0.540     0.803  3370.973    86.185    2076.980    600.117     2091.998           1.846          15.529    42.250  16.0
+th65   0.752     0.598     0.946  2417.004    86.672    1746.959    600.117     1755.004           1.665          13.619    15.625  16.0
+pd0p5  0.618     0.435     0.793  3683.999    86.672    2163.999    600.117     2115.987           1.825          14.056    55.625  16.0
+th75   0.604     0.373     0.824  4283.038    86.185    2285.984    600.117     2254.003           1.907          15.080    63.500  16.0
+th70   0.681     0.538     0.924  3344.993    86.672    1962.992    600.117     1949.978           1.865          15.027    39.500  16.0
+
+巡ごとのファン稼働率(8 台の平均)
+round      1      2
+cond               
+pd0p5  0.610  0.627
+pd3    0.640  0.664
+pd6    0.658  0.686
+th65   0.739  0.765
+th70   0.673  0.689
+th75   0.600  0.608
