@@ -73,26 +73,27 @@ def run(make, U, L):
             duty.append(f.mean()); over += (T>80).sum()*dt
     return float(np.mean(duty))*100, over
 
-out = {}
-for pn, pat in (("一気", STEP), ("徐々", RAMP)):
-    U = seq(pat)
-    for L in (30, 60):
-        m = int((30+L)/dt); pr = rise_prob(U, m)
-        fixed = [(dl,)+run(lambda h, dl=dl: controller_from_dict("proposed", P["nodes"][h], ControlConfig(fan_delay_s=L, delta_margin=dl)), U, L)
-                 for dl in (0, 0.5, 1, 2, 3, 4, 6, 8, 10)]
-        risk = [(e,)+run(lambda h, e=e: RiskCtrl(P["nodes"][h], L, e, pr), U, L) for e in (0.005, 0.01, 0.02, 0.05, 0.1, 0.2, 0.3, 0.5)]
-        fd = sorted((d_, o) for _, d_, o in fixed)
-        xs, ys = [a for a,_ in fd], [b for _,b in fd]
-        ratios=[]
-        for e, d_, o in risk:
-            if xs[0] <= d_ <= xs[-1]:
-                ref = float(np.interp(d_, xs, ys))
-                if ref >= 30: ratios.append(o/ref)
-        med = float(np.median(ratios)) if ratios else float("nan")
-        verdict = "良い" if med <= 0.7 else "良くない" if med >= 1.0 else "はっきりしない"
-        print(f"== {pn} 遅れ{L} p={pr:.2f}")
-        print("  固定δ:", "  ".join(f"{a}:{b:.0f}%/{c:.0f}s" for a,b,c in fixed))
-        print("  リスク:", "  ".join(f"{a}:{b:.0f}%/{c:.0f}s" for a,b,c in risk))
-        print(f"  比 {[round(r,2) for r in ratios]} 中央値 {med:.2f} → {verdict}")
-        out[f"{pn}|{L}"] = dict(p=pr, fixed=fixed, risk=risk, ratios=ratios, med=med, verdict=verdict)
-json.dump(out, open(sys.argv[1], "w"), ensure_ascii=False)
+if __name__ == "__main__":
+    out = {}
+    for pn, pat in (("一気", STEP), ("徐々", RAMP)):
+        U = seq(pat)
+        for L in (30, 60):
+            m = int((30+L)/dt); pr = rise_prob(U, m)
+            fixed = [(dl,)+run(lambda h, dl=dl: controller_from_dict("proposed", P["nodes"][h], ControlConfig(fan_delay_s=L, delta_margin=dl)), U, L)
+                     for dl in (0, 0.5, 1, 2, 3, 4, 6, 8, 10)]
+            risk = [(e,)+run(lambda h, e=e: RiskCtrl(P["nodes"][h], L, e, pr), U, L) for e in (0.005, 0.01, 0.02, 0.05, 0.1, 0.2, 0.3, 0.5)]
+            fd = sorted((d_, o) for _, d_, o in fixed)
+            xs, ys = [a for a,_ in fd], [b for _,b in fd]
+            ratios=[]
+            for e, d_, o in risk:
+                if xs[0] <= d_ <= xs[-1]:
+                    ref = float(np.interp(d_, xs, ys))
+                    if ref >= 30: ratios.append(o/ref)
+            med = float(np.median(ratios)) if ratios else float("nan")
+            verdict = "良い" if med <= 0.7 else "良くない" if med >= 1.0 else "はっきりしない"
+            print(f"== {pn} 遅れ{L} p={pr:.2f}")
+            print("  固定δ:", "  ".join(f"{a}:{b:.0f}%/{c:.0f}s" for a,b,c in fixed))
+            print("  リスク:", "  ".join(f"{a}:{b:.0f}%/{c:.0f}s" for a,b,c in risk))
+            print(f"  比 {[round(r,2) for r in ratios]} 中央値 {med:.2f} → {verdict}")
+            out[f"{pn}|{L}"] = dict(p=pr, fixed=fixed, risk=risk, ratios=ratios, med=med, verdict=verdict)
+    json.dump(out, open(sys.argv[1], "w"), ensure_ascii=False)
